@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Contains os2loop_taxonomy.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function os2loop_taxonomy_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the os2loop_taxonomy module.
+    case 'help.page.os2loop_taxonomy':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('OS2Loop taxonomy') . '</p>';
+      return $output;
+
+    default:
+  }
+}

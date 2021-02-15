@@ -1,0 +1,15 @@
+services:
+  os2loop_taxonomy_fixtures.profession_fixture:
+    class: Drupal\os2loop_taxonomy_fixtures\Fixture\ProfessionFixture
+    tags:
+      - { name: content_fixture }
+
+  os2loop_taxonomy_fixtures.subject_fixture:
+    class: Drupal\os2loop_taxonomy_fixtures\Fixture\SubjectFixture
+    tags:
+      - { name: content_fixture }
+
+  os2loop_taxonomy_fixtures.tag_fixture:
+    class: Drupal\os2loop_taxonomy_fixtures\Fixture\TagFixture
+    tags:
+      - { name: content_fixture }
