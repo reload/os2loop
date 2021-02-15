@@ -1,14 +1,14 @@
-uuid: 903ec959-9065-4ddf-aad2-42f11e2caf59
+uuid: b783cb11-4b7f-4a49-97bd-d07966f124dc
 name: OS2Loop
 mail: admin@example.com
 slogan: ''
 page:
   403: ''
   404: ''
-  front: /node
+  front: /user/login
 admin_compact_mode: false
 weight_select_max: 100
 langcode: en
 default_langcode: en
 _core:
-  default_config_hash: yTxtFqBHnEWxQswuWvkjE8mKw2t8oKuCL1q8KnfHuGE
+  default_config_hash: yXadRE77Va-G6dxhd2kPYapAvbnSvTF6hO4oXiOEynI
