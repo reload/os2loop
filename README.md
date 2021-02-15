@@ -44,3 +44,10 @@ echo "http://127.0.0.1:8887"
 # Get admin sign in url
 symfony php vendor/bin/drush --uri=http://127.0.0.1:8887 user:login
 ```
+
+## Coding standards
+
+```sh
+composer check-coding-standards
+composer apply-coding-standards
+```
