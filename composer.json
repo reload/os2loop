@@ -8,15 +8,23 @@
         "docs": "https://www.drupal.org/docs/user_guide/en/index.html",
         "chat": "https://www.drupal.org/node/314178"
     },
-    "repositories": [
-        {
+    "repositories": {
+        "drupal": {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
+        },
+        "os2loop/os2loop_fixtures": {
+            "type": "path",
+            "url": "web/profiles/custom/os2loop/modules/os2loop_fixtures",
+            "options": {
+                "symlink": false
+            }
         }
-    ],
+    },
     "require": {
         "composer/installers": "^1.9",
         "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
+        "drupal/better_formats": "1.x-dev",
         "drupal/coder": "^8.3",
         "drupal/core-composer-scaffold": "^9.1",
         "drupal/core-project-message": "^9.1",
@@ -41,7 +49,7 @@
     "conflict": {
         "drupal/drupal": "*"
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {
         "sort-packages": true
@@ -102,5 +110,8 @@
                 "      composer remove drupal/core-project-message"
             ]
         }
+    },
+    "require-dev": {
+        "os2loop/os2loop_fixtures": "dev-feature/LOOP-731-page"
     }
 }
