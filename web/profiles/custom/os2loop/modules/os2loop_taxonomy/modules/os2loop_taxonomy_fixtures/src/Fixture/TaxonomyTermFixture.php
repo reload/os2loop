@@ -104,7 +104,7 @@ abstract class TaxonomyTermFixture extends AbstractFixture implements FixtureGro
     if (NULL !== $parent) {
       $term->parent = $parent->id();
     }
-    $this->setReference(static::$vocabularyId . $name, $term);
+    $this->setReference(static::$vocabularyId . ':' . $name, $term);
     $term->save();
 
     return $term;
