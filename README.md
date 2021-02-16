@@ -24,7 +24,7 @@ EOF
 ```
 
 ```sh
-composer install --no-dev --classmap-authoritative
+composer install --no-dev --optimize-autoloader
 vendor/bin/drush --yes site:install os2loop --existing-config
 ```
 
@@ -57,7 +57,7 @@ symfony php vendor/bin/drush --uri=https://127.0.0.1:8000 user:login
 ## Updates
 
 ```sh
-composer install --no-dev --classmap-authoritative
+composer install --no-dev --optimize-autoloader
 vendor/bin/drush --yes updatedb
 vendor/bin/drush --yes config:import
 vendor/bin/drush --yes cache:rebuild
