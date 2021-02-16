@@ -184,7 +184,8 @@
 # ------------------------------------------------------------------------------
 
 # We want all custom site settings in settings.local.php
-!/web/sites/*/settings*.php
+/web/sites/*/settings.local.php
+!/web/sites/*/settings.php
 
 # Ignore PhpStorm
 .idea
