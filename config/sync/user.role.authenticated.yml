@@ -15,3 +15,5 @@ permissions:
   - 'use text format os2loop_post'
   - 'use text format os2loop_post_comment_plain_text'
   - 'use text format os2loop_post_comment_rich_text'
+  - 'use text format os2loop_question_plain_text'
+  - 'use text format os2loop_question_rich_text'
