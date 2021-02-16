@@ -1,0 +1,24 @@
+uuid: cead16e8-a174-4da5-88c0-5ee3df2480e9
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.os2loop_page.field_os2loop_page_content
+    - field.field.node.os2loop_page.field_os2loop_page_image
+    - node.type.os2loop_page
+  module:
+    - user
+id: node.os2loop_page.teaser
+targetEntityType: node
+bundle: os2loop_page
+mode: teaser
+content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_os2loop_page_content: true
+  field_os2loop_page_image: true

@@ -25,7 +25,7 @@ EOF
 
 ```sh
 composer install --no-dev --classmap-authoritative
-vendor/bin/drush --yes site:install minimal --existing-config
+vendor/bin/drush --yes site:install os2loop --existing-config
 ```
 
 ### Development
@@ -33,7 +33,7 @@ vendor/bin/drush --yes site:install minimal --existing-config
 ```sh
 docker-compose up --detach
 docker-compose exec phpfpm composer install
-docker-compose exec phpfpm vendor/bin/drush --yes site:install minimal --existing-config
+docker-compose exec phpfpm vendor/bin/drush --yes site:install os2loop --existing-config
 # Get the site url
 echo "http://$(docker-compose port nginx 80)"
 # Get admin sign in url
@@ -45,7 +45,7 @@ docker-compose exec phpfpm vendor/bin/drush --yes --uri="http://$(docker-compose
 ```sh
 docker-compose up --detach
 symfony composer install
-symfony php vendor/bin/drush --yes site:install minimal --existing-config
+symfony php vendor/bin/drush --yes site:install os2loop --existing-config
 # Start the server
 symfony local:server:start --port=8000 --daemon
 # Get the site url
