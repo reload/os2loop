@@ -4,6 +4,8 @@ os2loop is built in Drupal 9.
 
 ## Installation
 
+### Production
+
 Create local settings file with database connection:
 
 ```sh
@@ -22,27 +24,43 @@ EOF
 ```
 
 ```sh
-docker-compose up -ds
+composer install --no-dev --classmap-authoritative
+vendor/bin/drush --yes site:install minimal --existing-config
+```
+
+### Development
+
+```sh
+docker-compose up --detach
 docker-compose exec phpfpm composer install
-docker-compose exec phpfpm vendor/bin/drush --yes site:install minimal --config-dir=../config/sync
+docker-compose exec phpfpm vendor/bin/drush --yes site:install minimal --existing-config
 # Get the site url
 echo "http://$(docker-compose port nginx 80)"
 # Get admin sign in url
 docker-compose exec phpfpm vendor/bin/drush --yes --uri="http://$(docker-compose port nginx 80)" user:login
 ```
 
-### Using `symfony` binary
+#### Using `symfony` binary
 
 ```sh
-docker-compose up -d
+docker-compose up --detach
 symfony composer install
-symfony php vendor/bin/drush --yes site:install minimal --config-dir=../config/sync
+symfony php vendor/bin/drush --yes site:install minimal --existing-config
 # Start the server
-symfony local:server:start --port=8887 --daemon --allow-http
+symfony local:server:start --port=8000 --daemon
 # Get the site url
-echo "http://127.0.0.1:8887"
+echo "http://127.0.0.1:8000"
 # Get admin sign in url
-symfony php vendor/bin/drush --uri=http://127.0.0.1:8887 user:login
+symfony php vendor/bin/drush --uri=https://127.0.0.1:8000 user:login
+```
+
+## Updates
+
+```sh
+composer install --no-dev --classmap-authoritative
+vendor/bin/drush --yes updatedb
+vendor/bin/drush --yes config:import
+vendor/bin/drush --yes cache:rebuild
 ```
 
 ## Coding standards
