@@ -20,12 +20,9 @@ services:
       - MYSQL_PASSWORD=db
       - MYSQL_DATABASE=db
       #- ENCRYPT=1 # Uncomment to enable database encryption.
-    # @see https://symfony.com/doc/current/setup/symfony_server.html#docker-integration
-    labels:
-      com.symfony.server.service-prefix: 'DATABASE'
 
   phpfpm:
-    image: itkdev/php7.4-fpm:latest
+    image: itkdev/php7.2-fpm:latest
     networks:
       - app
     environment:
@@ -80,4 +77,3 @@ services:
 # Drush cache volume to persist cache between runs.
 volumes:
   drush-cache:
-
