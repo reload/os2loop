@@ -17,8 +17,27 @@ class ProfessionFixture extends TaxonomyTermFixture {
    * {@inheritdoc}
    */
   protected static $terms = [
-    'user',
-    'editor',
+    'Administrativ medarbejder',
+    'Andet',
+    'Borgerkonsulent',
+    'Diætist',
+    'Elev/studerende',
+    'Ergoterapeut',
+    'Frivilligkoordinator',
+    'Fysioterapeut',
+    'Husassistent',
+    'IT-koordinator',
+    'Konsulent',
+    'Leder',
+    'Social- og sundhedsassistent',
+    'Social- og sundhedshjælper',
+    'Sundhedskonsulent',
+    'Sygehjælper',
+    'Sygeplejerske',
+    'Teamleder',
+    'Teknisk servicemedarbejder/pedel/håndværker',
+    'Visitator/Borgerkonsulent',
+    'Økonomaer/køkkenassistent/Ernæringsassistent',
   ];
 
 }

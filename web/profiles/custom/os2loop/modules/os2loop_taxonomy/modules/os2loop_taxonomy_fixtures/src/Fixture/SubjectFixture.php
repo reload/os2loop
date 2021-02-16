@@ -17,18 +17,21 @@ class SubjectFixture extends TaxonomyTermFixture {
    * {@inheritdoc}
    */
   protected static $terms = [
-    'food' => NULL,
-    'it' => [
-      'test' => NULL,
-      'develop' => NULL,
-    ],
-    'a' => [
-      'aa' => NULL,
-      'aaa' => [
-        'x' => NULL,
-        'y' => NULL,
-      ],
-    ],
+    'Diverse',
+    'Dokumentation',
+    'Forebyggende',
+    'Forløb & Genoptræning',
+    'Funktionsvurdering',
+    'Kommunikation',
+    'Magtanvendelse',
+    'Medicin',
+    'Mobil (HH2 + HH3)',
+    'Opgradering',
+    'Opsætning af system (brugerprofil / indstillinger)',
+    'Overblik',
+    'Planlægning (Booking, Disponering)',
+    'Sagsbehandling',
+    'Stamdata / oplysninger',
   ];
 
 }
