@@ -112,6 +112,6 @@
         }
     },
     "require-dev": {
-        "os2loop/os2loop_fixtures": "dev-feature/LOOP-731-page"
+        "os2loop/os2loop_fixtures": "*"
     }
 }
