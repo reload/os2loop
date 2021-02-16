@@ -1,0 +1,9 @@
+/bin
+vendor/
+.idea
+
+# Ignore private files
+private-files/
+
+# Ignore VS-code 
+.vscode
