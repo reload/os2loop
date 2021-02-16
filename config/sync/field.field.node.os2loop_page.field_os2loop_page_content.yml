@@ -1,9 +1,9 @@
-uuid: 2dfc8b18-d684-40d8-b12b-74f53f994828
+uuid: 6bb76dea-71c6-4e47-bd67-d8d8b05ff4a3
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.body
+    - field.storage.node.field_os2loop_page_content
     - node.type.os2loop_page
   module:
     - better_formats
@@ -18,17 +18,17 @@ third_party_settings:
       formats:
         os2loop_page:
           weight: '0'
-id: node.os2loop_page.body
-field_name: body
+id: node.os2loop_page.field_os2loop_page_content
+field_name: field_os2loop_page_content
 entity_type: node
 bundle: os2loop_page
-label: Body
+label: Content
 description: ''
-required: false
-translatable: true
+required: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  display_summary: true
+  display_summary: false
   required_summary: false
 field_type: text_with_summary
