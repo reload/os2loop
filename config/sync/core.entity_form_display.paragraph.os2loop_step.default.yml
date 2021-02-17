@@ -1,0 +1,36 @@
+uuid: d2d65cde-3a11-470b-bdfe-d0b0e2c23476
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.os2loop_step.field_os2loop_step_image
+    - field.field.paragraph.os2loop_step.field_os2loop_step_text
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.os2loop_step
+  module:
+    - image
+    - text
+id: paragraph.os2loop_step.default
+targetEntityType: paragraph
+bundle: os2loop_step
+mode: default
+content:
+  field_os2loop_step_image:
+    weight: 0
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_os2loop_step_text:
+    weight: 1
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+hidden:
+  created: true
+  status: true

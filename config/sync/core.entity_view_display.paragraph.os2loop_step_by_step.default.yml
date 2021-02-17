@@ -1,0 +1,24 @@
+uuid: c5cf535a-ce95-4a03-be76-6f70257c58d2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.os2loop_step_by_step.field_os2loop_sts_steps
+    - paragraphs.paragraphs_type.os2loop_step_by_step
+  module:
+    - entity_reference_revisions
+id: paragraph.os2loop_step_by_step.default
+targetEntityType: paragraph
+bundle: os2loop_step_by_step
+mode: default
+content:
+  field_os2loop_sts_steps:
+    type: entity_reference_revisions_entity_view
+    weight: 0
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+hidden: {  }

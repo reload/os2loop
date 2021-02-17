@@ -1,0 +1,40 @@
+uuid: 2bc0e856-a1b4-4612-91b3-4299e21339ea
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_os2loop_sts_steps
+    - paragraphs.paragraphs_type.os2loop_step
+    - paragraphs.paragraphs_type.os2loop_step_by_step
+  module:
+    - entity_reference_revisions
+id: paragraph.os2loop_step_by_step.field_os2loop_sts_steps
+field_name: field_os2loop_sts_steps
+entity_type: paragraph
+bundle: os2loop_step_by_step
+label: Steps
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      os2loop_step: os2loop_step
+    target_bundles_drag_drop:
+      os2loop_highlighted_content:
+        weight: 6
+        enabled: false
+      os2loop_step:
+        enabled: true
+        weight: 7
+      os2loop_step_by_step:
+        weight: 5
+        enabled: false
+      os2loop_text_and_image:
+        weight: 8
+        enabled: false
+field_type: entity_reference_revisions

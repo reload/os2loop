@@ -1,0 +1,19 @@
+uuid: 7f909171-7483-4818-9be7-c934508b5cf8
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+    - text
+id: paragraph.field_os2loop_step_text
+field_name: field_os2loop_step_text
+entity_type: paragraph
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

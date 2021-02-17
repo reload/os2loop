@@ -1,0 +1,33 @@
+uuid: d09bb0b3-81b2-4c45-b18c-ff87dc801a13
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.os2loop_step.field_os2loop_step_image
+    - field.field.paragraph.os2loop_step.field_os2loop_step_text
+    - paragraphs.paragraphs_type.os2loop_step
+  module:
+    - image
+    - text
+id: paragraph.os2loop_step.default
+targetEntityType: paragraph
+bundle: os2loop_step
+mode: default
+content:
+  field_os2loop_step_image:
+    weight: 0
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  field_os2loop_step_text:
+    weight: 1
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+hidden: {  }
