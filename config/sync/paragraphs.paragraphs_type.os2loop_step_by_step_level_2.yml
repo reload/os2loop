@@ -1,0 +1,10 @@
+uuid: 025911f6-31af-440c-a7ad-f0ac6dd5c4f7
+langcode: en
+status: true
+dependencies: {  }
+id: os2loop_step_by_step_level_2
+label: 'Step by step level 2'
+icon_uuid: null
+icon_default: null
+description: 'A step by step contains an unlimited amount of steps.'
+behavior_plugins: {  }
