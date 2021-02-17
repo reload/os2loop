@@ -1,0 +1,30 @@
+uuid: e20c10e8-5f5d-4a89-9e83-f1d563a9970b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.os2loop_highlighted_content.field_os2loop_hc_text
+    - field.field.paragraph.os2loop_highlighted_content.field_os2loop_hc_title
+    - paragraphs.paragraphs_type.os2loop_highlighted_content
+  module:
+    - text
+id: paragraph.os2loop_highlighted_content.default
+targetEntityType: paragraph
+bundle: os2loop_highlighted_content
+mode: default
+content:
+  field_os2loop_hc_text:
+    weight: 0
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_os2loop_hc_title:
+    weight: 1
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+hidden: {  }
