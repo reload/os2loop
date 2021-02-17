@@ -1,0 +1,19 @@
+uuid: 97dc8e28-ee9e-4ed1-80df-6219f4ffed34
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+    - text
+id: paragraph.field_os2loop_text_and_image_tex
+field_name: field_os2loop_text_and_image_tex
+entity_type: paragraph
+type: text_with_summary
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

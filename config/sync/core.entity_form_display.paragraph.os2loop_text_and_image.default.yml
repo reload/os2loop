@@ -1,0 +1,38 @@
+uuid: c9624de4-cddd-4dba-858a-64a492e8828a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.os2loop_text_and_image.field_os2loop_text_and_image_ima
+    - field.field.paragraph.os2loop_text_and_image.field_os2loop_text_and_image_tex
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.os2loop_text_and_image
+  module:
+    - image
+    - text
+id: paragraph.os2loop_text_and_image.default
+targetEntityType: paragraph
+bundle: os2loop_text_and_image
+mode: default
+content:
+  field_os2loop_text_and_image_ima:
+    weight: 0
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_os2loop_text_and_image_tex:
+    weight: 1
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+    type: text_textarea_with_summary
+    region: content
+hidden:
+  created: true
+  status: true
