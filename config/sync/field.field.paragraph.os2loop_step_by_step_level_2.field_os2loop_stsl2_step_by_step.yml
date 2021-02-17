@@ -1,0 +1,46 @@
+uuid: c599bd25-732f-490b-9627-5bd7ac57aad6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_os2loop_stsl2_step_by_step
+    - paragraphs.paragraphs_type.os2loop_step_by_step_level_2
+    - paragraphs.paragraphs_type.os2loop_step_by_step_level_3
+  module:
+    - entity_reference_revisions
+id: paragraph.os2loop_step_by_step_level_2.field_os2loop_stsl2_step_by_step
+field_name: field_os2loop_stsl2_step_by_step
+entity_type: paragraph
+bundle: os2loop_step_by_step_level_2
+label: 'Step by step'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      os2loop_step_by_step_level_3: os2loop_step_by_step_level_3
+    target_bundles_drag_drop:
+      os2loop_highlighted_content:
+        weight: 7
+        enabled: false
+      os2loop_step:
+        weight: 8
+        enabled: false
+      os2loop_step_by_step:
+        weight: 9
+        enabled: false
+      os2loop_step_by_step_level_2:
+        weight: 10
+        enabled: false
+      os2loop_step_by_step_level_3:
+        enabled: true
+        weight: 11
+      os2loop_text_and_image:
+        weight: 12
+        enabled: false
+field_type: entity_reference_revisions

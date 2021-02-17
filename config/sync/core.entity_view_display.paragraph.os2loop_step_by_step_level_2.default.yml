@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.os2loop_step_by_step_level_2.field_os2loop_stsl2_step_by_step
     - field.field.paragraph.os2loop_step_by_step_level_2.field_os2loop_stsl2_steps
     - paragraphs.paragraphs_type.os2loop_step_by_step_level_2
   module:
@@ -12,6 +13,15 @@ targetEntityType: paragraph
 bundle: os2loop_step_by_step_level_2
 mode: default
 content:
+  field_os2loop_stsl2_step_by_step:
+    type: entity_reference_revisions_entity_view
+    weight: 1
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
   field_os2loop_stsl2_steps:
     type: entity_reference_revisions_entity_view
     weight: 0

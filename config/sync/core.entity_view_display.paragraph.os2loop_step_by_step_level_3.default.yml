@@ -1,0 +1,24 @@
+uuid: e83fe030-4616-43e2-9b7d-6ea852f5459c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.os2loop_step_by_step_level_3.field_os2loop_stsl3_steps
+    - paragraphs.paragraphs_type.os2loop_step_by_step_level_3
+  module:
+    - entity_reference_revisions
+id: paragraph.os2loop_step_by_step_level_3.default
+targetEntityType: paragraph
+bundle: os2loop_step_by_step_level_3
+mode: default
+content:
+  field_os2loop_stsl3_steps:
+    type: entity_reference_revisions_entity_view
+    weight: 0
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+hidden: {  }
