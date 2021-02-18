@@ -8,11 +8,13 @@ dependencies:
     - field.field.node.os2loop_question.field_os2loop_question_content
     - field.field.node.os2loop_question.field_os2loop_question_file
     - field.field.node.os2loop_question.field_os2loop_shared_profession
+    - field.field.node.os2loop_question.field_os2loop_shared_rev_date
     - field.field.node.os2loop_question.field_os2loop_shared_subject
     - field.field.node.os2loop_question.field_os2loop_shared_tags
     - node.type.os2loop_question
   module:
     - comment
+    - datetime
     - file
     - text
     - user
@@ -53,6 +55,15 @@ content:
     type: entity_reference_label
     region: content
     weight: 2
+  field_os2loop_shared_rev_date:
+    weight: 7
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
   field_os2loop_shared_subject:
     label: above
     settings:

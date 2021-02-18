@@ -6,10 +6,12 @@ dependencies:
     - field.field.node.os2loop_external.field_os2loop_external_descripti
     - field.field.node.os2loop_external.field_os2loop_external_url
     - field.field.node.os2loop_external.field_os2loop_shared_profession
+    - field.field.node.os2loop_external.field_os2loop_shared_rev_date
     - field.field.node.os2loop_external.field_os2loop_shared_subject
     - field.field.node.os2loop_external.field_os2loop_shared_tags
     - node.type.os2loop_external
   module:
+    - datetime
     - link
     - text
 id: node.os2loop_external.default
@@ -48,6 +50,12 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: entity_reference_autocomplete
+    region: content
+  field_os2loop_shared_rev_date:
+    weight: 127
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
     region: content
   field_os2loop_shared_subject:
     weight: 124

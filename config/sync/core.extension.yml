@@ -3,6 +3,7 @@ module:
   breakpoint: 0
   ckeditor: 0
   comment: 0
+  datetime: 0
   dblog: 0
   dynamic_page_cache: 0
   editor: 0

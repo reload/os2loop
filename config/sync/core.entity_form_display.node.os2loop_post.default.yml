@@ -7,11 +7,13 @@ dependencies:
     - field.field.node.os2loop_post.field_os2loop_post_content
     - field.field.node.os2loop_post.field_os2loop_post_file
     - field.field.node.os2loop_post.field_os2loop_shared_profession
+    - field.field.node.os2loop_post.field_os2loop_shared_rev_date
     - field.field.node.os2loop_post.field_os2loop_shared_subject
     - field.field.node.os2loop_post.field_os2loop_shared_tags
     - node.type.os2loop_post
   module:
     - comment
+    - datetime
     - file
     - text
 id: node.os2loop_post.default
@@ -55,6 +57,12 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: entity_reference_autocomplete
+    region: content
+  field_os2loop_shared_rev_date:
+    weight: 26
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
     region: content
   field_os2loop_shared_subject:
     weight: 7

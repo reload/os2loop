@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.os2loop_question.field_os2loop_question_content
     - field.field.node.os2loop_question.field_os2loop_question_file
     - field.field.node.os2loop_question.field_os2loop_shared_profession
+    - field.field.node.os2loop_question.field_os2loop_shared_rev_date
     - field.field.node.os2loop_question.field_os2loop_shared_subject
     - field.field.node.os2loop_question.field_os2loop_shared_tags
     - node.type.os2loop_question
@@ -28,5 +29,6 @@ hidden:
   field_os2loop_question_content: true
   field_os2loop_question_file: true
   field_os2loop_shared_profession: true
+  field_os2loop_shared_rev_date: true
   field_os2loop_shared_subject: true
   field_os2loop_shared_tags: true
