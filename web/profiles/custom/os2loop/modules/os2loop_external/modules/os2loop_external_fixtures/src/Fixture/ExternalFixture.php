@@ -33,14 +33,14 @@ BODY,
       'field_os2loop_external_url' => [
         'uri' => 'https://google.com/',
       ],
-      'field_os2loop_external_subject' => [
+      'field_os2loop_shared_subject' => [
         'target_id' => $this->getReference('os2loop_subject:Diverse')->id(),
       ],
-      'field_os2loop_external_tags' => [
+      'field_os2loop_shared_tags' => [
         ['target_id' => $this->getReference('os2loop_tag:test')->id()],
         ['target_id' => $this->getReference('os2loop_tag:Udredning')->id()],
       ],
-      'field_os2loop_external_professio' => [
+      'field_os2loop_shared_profession' => [
         'target_id' => $this->getReference('os2loop_profession:Andet')->id(),
       ],
     ]);
