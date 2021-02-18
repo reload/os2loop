@@ -1,26 +1,26 @@
-uuid: 4dd71c87-d03f-4101-aa97-4f1aefdfb06f
+uuid: bbaed76f-b98d-4725-b3a1-e366ad7ab49f
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_os2loop_external_professio
+    - field.storage.node.field_os2loop_shared_subject
     - node.type.os2loop_external
-    - taxonomy.vocabulary.os2loop_profession
-id: node.os2loop_external.field_os2loop_external_professio
-field_name: field_os2loop_external_professio
+    - taxonomy.vocabulary.os2loop_subject
+id: node.os2loop_external.field_os2loop_shared_subject
+field_name: field_os2loop_shared_subject
 entity_type: node
 bundle: os2loop_external
-label: Profession
+label: Subject
 description: ''
-required: false
-translatable: false
+required: true
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      os2loop_profession: os2loop_profession
+      os2loop_subject: os2loop_subject
     sort:
       field: name
       direction: asc

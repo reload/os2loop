@@ -4,10 +4,10 @@ status: true
 dependencies:
   config:
     - field.field.node.os2loop_external.field_os2loop_external_descripti
-    - field.field.node.os2loop_external.field_os2loop_external_professio
-    - field.field.node.os2loop_external.field_os2loop_external_subject
-    - field.field.node.os2loop_external.field_os2loop_external_tags
     - field.field.node.os2loop_external.field_os2loop_external_url
+    - field.field.node.os2loop_external.field_os2loop_shared_profession
+    - field.field.node.os2loop_external.field_os2loop_shared_subject
+    - field.field.node.os2loop_external.field_os2loop_shared_tags
     - node.type.os2loop_external
   module:
     - link
@@ -31,7 +31,15 @@ content:
     third_party_settings: {  }
     type: text_textarea
     region: content
-  field_os2loop_external_professio:
+  field_os2loop_external_url:
+    weight: 123
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_os2loop_shared_profession:
     weight: 126
     settings:
       match_operator: CONTAINS
@@ -41,7 +49,7 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
-  field_os2loop_external_subject:
+  field_os2loop_shared_subject:
     weight: 124
     settings:
       match_operator: CONTAINS
@@ -51,7 +59,7 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
-  field_os2loop_external_tags:
+  field_os2loop_shared_tags:
     weight: 125
     settings:
       match_operator: CONTAINS
@@ -59,15 +67,7 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: entity_reference_autocomplete_tags
-    region: content
-  field_os2loop_external_url:
-    weight: 123
-    settings:
-      placeholder_url: ''
-      placeholder_title: ''
-    third_party_settings: {  }
-    type: link_default
+    type: entity_reference_autocomplete
     region: content
   promote:
     type: boolean_checkbox
