@@ -6,9 +6,9 @@ dependencies:
     - field.field.node.os2loop_post.field_os2loop_post_comments
     - field.field.node.os2loop_post.field_os2loop_post_content
     - field.field.node.os2loop_post.field_os2loop_post_file
-    - field.field.node.os2loop_post.field_os2loop_post_professio
-    - field.field.node.os2loop_post.field_os2loop_post_subject
-    - field.field.node.os2loop_post.field_os2loop_post_tags
+    - field.field.node.os2loop_post.field_os2loop_shared_profession
+    - field.field.node.os2loop_post.field_os2loop_shared_subject
+    - field.field.node.os2loop_post.field_os2loop_shared_tags
     - node.type.os2loop_post
   module:
     - comment
@@ -26,7 +26,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_os2loop_post_comments:
-    weight: 26
+    weight: 11
     settings: {  }
     third_party_settings: {  }
     type: comment_default
@@ -46,7 +46,7 @@ content:
     third_party_settings: {  }
     type: file_generic
     region: content
-  field_os2loop_post_professio:
+  field_os2loop_shared_profession:
     weight: 9
     settings:
       match_operator: CONTAINS
@@ -56,7 +56,7 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
-  field_os2loop_post_subject:
+  field_os2loop_shared_subject:
     weight: 7
     settings:
       match_operator: CONTAINS
@@ -66,7 +66,7 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
-  field_os2loop_post_tags:
+  field_os2loop_shared_tags:
     weight: 8
     settings:
       match_operator: CONTAINS
