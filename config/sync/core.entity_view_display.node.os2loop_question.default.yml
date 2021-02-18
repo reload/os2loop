@@ -3,12 +3,13 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_display.comment.os2loop_question_answer.default
     - field.field.node.os2loop_question.field_os2loop_question_answers
     - field.field.node.os2loop_question.field_os2loop_question_content
     - field.field.node.os2loop_question.field_os2loop_question_file
-    - field.field.node.os2loop_question.field_os2loop_question_professio
-    - field.field.node.os2loop_question.field_os2loop_question_subject
-    - field.field.node.os2loop_question.field_os2loop_question_tags
+    - field.field.node.os2loop_question.field_os2loop_shared_profession
+    - field.field.node.os2loop_question.field_os2loop_shared_subject
+    - field.field.node.os2loop_question.field_os2loop_shared_tags
     - node.type.os2loop_question
   module:
     - comment
@@ -44,24 +45,23 @@ content:
     third_party_settings: {  }
     type: file_default
     region: content
-  field_os2loop_question_professio:
-    weight: 4
+  field_os2loop_shared_profession:
     label: above
     settings:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
     region: content
-  field_os2loop_question_subject:
     weight: 2
+  field_os2loop_shared_subject:
     label: above
     settings:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
     region: content
-  field_os2loop_question_tags:
     weight: 3
+  field_os2loop_shared_tags:
     label: above
     settings:
       link: true

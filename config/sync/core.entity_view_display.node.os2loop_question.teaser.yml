@@ -7,9 +7,9 @@ dependencies:
     - field.field.node.os2loop_question.field_os2loop_question_answers
     - field.field.node.os2loop_question.field_os2loop_question_content
     - field.field.node.os2loop_question.field_os2loop_question_file
-    - field.field.node.os2loop_question.field_os2loop_question_professio
-    - field.field.node.os2loop_question.field_os2loop_question_subject
-    - field.field.node.os2loop_question.field_os2loop_question_tags
+    - field.field.node.os2loop_question.field_os2loop_shared_profession
+    - field.field.node.os2loop_question.field_os2loop_shared_subject
+    - field.field.node.os2loop_question.field_os2loop_shared_tags
     - node.type.os2loop_question
   module:
     - user
@@ -27,6 +27,6 @@ hidden:
   field_os2loop_question_answers: true
   field_os2loop_question_content: true
   field_os2loop_question_file: true
-  field_os2loop_question_professio: true
-  field_os2loop_question_subject: true
-  field_os2loop_question_tags: true
+  field_os2loop_shared_profession: true
+  field_os2loop_shared_subject: true
+  field_os2loop_shared_tags: true

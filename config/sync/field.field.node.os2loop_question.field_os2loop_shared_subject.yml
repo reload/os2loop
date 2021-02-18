@@ -1,13 +1,13 @@
-uuid: ac4a657c-5c61-48ed-81a1-3db897799248
+uuid: 04f12450-d8ea-4c8d-a826-bee1a329f836
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_os2loop_question_subject
+    - field.storage.node.field_os2loop_shared_subject
     - node.type.os2loop_question
     - taxonomy.vocabulary.os2loop_subject
-id: node.os2loop_question.field_os2loop_question_subject
-field_name: field_os2loop_question_subject
+id: node.os2loop_question.field_os2loop_shared_subject
+field_name: field_os2loop_shared_subject
 entity_type: node
 bundle: os2loop_question
 label: Subject

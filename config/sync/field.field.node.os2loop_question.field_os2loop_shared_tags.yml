@@ -1,18 +1,18 @@
-uuid: 3c62168a-817e-415f-a1bf-314a30f43bbd
+uuid: 19b9ea6f-bf90-4bb1-a731-86b05e20b89b
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_os2loop_question_professio
+    - field.storage.node.field_os2loop_shared_tags
     - node.type.os2loop_question
-    - taxonomy.vocabulary.os2loop_profession
-id: node.os2loop_question.field_os2loop_question_professio
-field_name: field_os2loop_question_professio
+    - taxonomy.vocabulary.os2loop_tag
+id: node.os2loop_question.field_os2loop_shared_tags
+field_name: field_os2loop_shared_tags
 entity_type: node
 bundle: os2loop_question
-label: Profession
+label: Tags
 description: ''
-required: true
+required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
@@ -20,10 +20,10 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      os2loop_profession: os2loop_profession
+      os2loop_tag: os2loop_tag
     sort:
       field: name
       direction: asc
-    auto_create: false
+    auto_create: true
     auto_create_bundle: ''
 field_type: entity_reference
