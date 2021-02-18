@@ -3,15 +3,18 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_display.comment.os2loop_post_comment.default
     - field.field.node.os2loop_post.field_os2loop_post_comments
     - field.field.node.os2loop_post.field_os2loop_post_content
     - field.field.node.os2loop_post.field_os2loop_post_file
-    - field.field.node.os2loop_post.field_os2loop_post_professio
-    - field.field.node.os2loop_post.field_os2loop_post_subject
-    - field.field.node.os2loop_post.field_os2loop_post_tags
+    - field.field.node.os2loop_post.field_os2loop_shared_profession
+    - field.field.node.os2loop_post.field_os2loop_shared_rev_date
+    - field.field.node.os2loop_post.field_os2loop_shared_subject
+    - field.field.node.os2loop_post.field_os2loop_shared_tags
     - node.type.os2loop_post
   module:
     - comment
+    - datetime
     - file
     - text
     - user
@@ -44,7 +47,7 @@ content:
     third_party_settings: {  }
     type: file_default
     region: content
-  field_os2loop_post_professio:
+  field_os2loop_shared_profession:
     weight: 4
     label: above
     settings:
@@ -52,7 +55,16 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
-  field_os2loop_post_subject:
+  field_os2loop_shared_rev_date:
+    weight: 7
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_os2loop_shared_subject:
     weight: 2
     label: above
     settings:
@@ -60,7 +72,7 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
-  field_os2loop_post_tags:
+  field_os2loop_shared_tags:
     weight: 3
     label: above
     settings:

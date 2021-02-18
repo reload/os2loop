@@ -3,6 +3,7 @@ module:
   breakpoint: 0
   ckeditor: 0
   comment: 0
+  datetime: 0
   dblog: 0
   dynamic_page_cache: 0
   editor: 0
@@ -16,6 +17,7 @@ module:
   os2loop_page: 0
   os2loop_post: 0
   os2loop_question: 0
+  os2loop_shared: 0
   os2loop_taxonomy: 0
   page_cache: 0
   path_alias: 0

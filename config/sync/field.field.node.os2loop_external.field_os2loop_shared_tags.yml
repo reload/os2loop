@@ -1,19 +1,19 @@
-uuid: 58f69070-e8fd-49a6-a74b-461bec08e0c7
+uuid: 816be3f8-b190-4b05-88e5-197b0154cab2
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_os2loop_external_tags
+    - field.storage.node.field_os2loop_shared_tags
     - node.type.os2loop_external
     - taxonomy.vocabulary.os2loop_tag
-id: node.os2loop_external.field_os2loop_external_tags
-field_name: field_os2loop_external_tags
+id: node.os2loop_external.field_os2loop_shared_tags
+field_name: field_os2loop_shared_tags
 entity_type: node
 bundle: os2loop_external
 label: Tags
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

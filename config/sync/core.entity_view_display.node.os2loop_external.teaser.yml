@@ -5,10 +5,11 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.os2loop_external.field_os2loop_external_descripti
-    - field.field.node.os2loop_external.field_os2loop_external_professio
-    - field.field.node.os2loop_external.field_os2loop_external_subject
-    - field.field.node.os2loop_external.field_os2loop_external_tags
     - field.field.node.os2loop_external.field_os2loop_external_url
+    - field.field.node.os2loop_external.field_os2loop_shared_profession
+    - field.field.node.os2loop_external.field_os2loop_shared_rev_date
+    - field.field.node.os2loop_external.field_os2loop_shared_subject
+    - field.field.node.os2loop_external.field_os2loop_shared_tags
     - node.type.os2loop_external
   module:
     - user
@@ -24,7 +25,8 @@ content:
     region: content
 hidden:
   field_os2loop_external_descripti: true
-  field_os2loop_external_professio: true
-  field_os2loop_external_subject: true
-  field_os2loop_external_tags: true
   field_os2loop_external_url: true
+  field_os2loop_shared_profession: true
+  field_os2loop_shared_rev_date: true
+  field_os2loop_shared_subject: true
+  field_os2loop_shared_tags: true

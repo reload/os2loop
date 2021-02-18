@@ -1,12 +1,12 @@
-uuid: 89f82391-7865-408d-84d0-aaeb0d8a7f3e
+uuid: 98ada347-c359-4095-833d-c8d21dc15cbc
 langcode: en
 status: true
 dependencies:
   module:
     - node
     - taxonomy
-id: node.field_os2loop_post_subject
-field_name: field_os2loop_post_subject
+id: node.field_os2loop_shared_profession
+field_name: field_os2loop_shared_profession
 entity_type: node
 type: entity_reference
 settings:

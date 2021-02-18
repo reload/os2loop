@@ -1,19 +1,19 @@
-uuid: d960fae5-a4de-41c8-804b-c7929c2ae8bc
+uuid: aaa2e605-f610-4759-9e91-7a9c9a3e3cfc
 langcode: en
 status: true
 dependencies:
   module:
     - node
     - taxonomy
-id: node.field_os2loop_external_tags
-field_name: field_os2loop_external_tags
+id: node.field_os2loop_shared_subject
+field_name: field_os2loop_shared_subject
 entity_type: node
 type: entity_reference
 settings:
   target_type: taxonomy_term
 module: core
 locked: false
-cardinality: -1
+cardinality: 1
 translatable: true
 indexes: {  }
 persist_with_no_fields: false

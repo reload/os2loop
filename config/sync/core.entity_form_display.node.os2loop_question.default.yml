@@ -6,12 +6,14 @@ dependencies:
     - field.field.node.os2loop_question.field_os2loop_question_answers
     - field.field.node.os2loop_question.field_os2loop_question_content
     - field.field.node.os2loop_question.field_os2loop_question_file
-    - field.field.node.os2loop_question.field_os2loop_question_professio
-    - field.field.node.os2loop_question.field_os2loop_question_subject
-    - field.field.node.os2loop_question.field_os2loop_question_tags
+    - field.field.node.os2loop_question.field_os2loop_shared_profession
+    - field.field.node.os2loop_question.field_os2loop_shared_rev_date
+    - field.field.node.os2loop_question.field_os2loop_shared_subject
+    - field.field.node.os2loop_question.field_os2loop_shared_tags
     - node.type.os2loop_question
   module:
     - comment
+    - datetime
     - file
     - text
 id: node.os2loop_question.default
@@ -46,8 +48,7 @@ content:
     third_party_settings: {  }
     type: file_generic
     region: content
-  field_os2loop_question_professio:
-    weight: 9
+  field_os2loop_shared_profession:
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -56,8 +57,14 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
-  field_os2loop_question_subject:
     weight: 7
+  field_os2loop_shared_rev_date:
+    weight: 27
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_os2loop_shared_subject:
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -66,8 +73,8 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
-  field_os2loop_question_tags:
     weight: 8
+  field_os2loop_shared_tags:
     settings:
       match_operator: CONTAINS
       match_limit: 10

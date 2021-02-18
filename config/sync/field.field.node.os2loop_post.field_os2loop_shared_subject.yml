@@ -1,19 +1,19 @@
-uuid: ac4a657c-5c61-48ed-81a1-3db897799248
+uuid: 76ba260a-98a5-481c-b18f-75f89f481753
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_os2loop_question_subject
-    - node.type.os2loop_question
+    - field.storage.node.field_os2loop_shared_subject
+    - node.type.os2loop_post
     - taxonomy.vocabulary.os2loop_subject
-id: node.os2loop_question.field_os2loop_question_subject
-field_name: field_os2loop_question_subject
+id: node.os2loop_post.field_os2loop_shared_subject
+field_name: field_os2loop_shared_subject
 entity_type: node
-bundle: os2loop_question
+bundle: os2loop_post
 label: Subject
 description: ''
 required: true
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

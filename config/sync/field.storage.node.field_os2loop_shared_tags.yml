@@ -1,12 +1,12 @@
-uuid: 79c1dcb9-9864-4ea1-a9ef-68d5e3bf557e
+uuid: a2a59eac-fb0d-41e6-91a0-553762f9eeb9
 langcode: en
 status: true
 dependencies:
   module:
     - node
     - taxonomy
-id: node.field_os2loop_post_tags
-field_name: field_os2loop_post_tags
+id: node.field_os2loop_shared_tags
+field_name: field_os2loop_shared_tags
 entity_type: node
 type: entity_reference
 settings:

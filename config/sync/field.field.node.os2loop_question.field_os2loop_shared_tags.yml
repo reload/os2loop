@@ -1,15 +1,15 @@
-uuid: f5d01834-9923-417c-9a60-cfde4824de82
+uuid: 19b9ea6f-bf90-4bb1-a731-86b05e20b89b
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_os2loop_post_tags
-    - node.type.os2loop_post
+    - field.storage.node.field_os2loop_shared_tags
+    - node.type.os2loop_question
     - taxonomy.vocabulary.os2loop_tag
-id: node.os2loop_post.field_os2loop_post_tags
-field_name: field_os2loop_post_tags
+id: node.os2loop_question.field_os2loop_shared_tags
+field_name: field_os2loop_shared_tags
 entity_type: node
-bundle: os2loop_post
+bundle: os2loop_question
 label: Tags
 description: ''
 required: false
