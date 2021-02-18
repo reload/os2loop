@@ -1,0 +1,11 @@
+uuid: 6628164c-4eb4-4485-a56f-1f41702ae869
+langcode: en
+status: true
+dependencies: {  }
+name: 'Document collection'
+type: os2loop_document_collection
+description: 'A document collection is a content type with paragraphs and a collection of documents connected.'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: true
