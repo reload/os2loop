@@ -1,0 +1,24 @@
+uuid: 8a2d46a5-b806-4b3e-8a77-58b79526c26a
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.os2loop_document._field_os2loop_document_author
+    - field.field.node.os2loop_document.field_os2loop_document_content
+    - node.type.os2loop_document
+  module:
+    - user
+id: node.os2loop_document.teaser
+targetEntityType: node
+bundle: os2loop_document
+mode: teaser
+content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  _field_os2loop_document_author: true
+  field_os2loop_document_content: true

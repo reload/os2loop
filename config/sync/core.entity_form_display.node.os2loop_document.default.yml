@@ -1,0 +1,81 @@
+uuid: d18aa58d-d605-40bb-9d97-fa04e67f7c0b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.os2loop_document._field_os2loop_document_author
+    - field.field.node.os2loop_document.field_os2loop_document_content
+    - node.type.os2loop_document
+  module:
+    - paragraphs
+id: node.os2loop_document.default
+targetEntityType: node
+bundle: os2loop_document
+mode: default
+content:
+  _field_os2loop_document_author:
+    weight: 7
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  created:
+    type: datetime_timestamp
+    weight: 15
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_os2loop_document_content:
+    type: entity_reference_paragraphs
+    weight: 101
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  promote:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 20
+    region: content
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 100
+    region: content
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 25
+    region: content
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 10
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+      match_limit: 10
+    region: content
+    third_party_settings: {  }
+hidden: {  }

@@ -1,11 +1,10 @@
-uuid: 2466cd1c-575f-495f-9071-49ac907149cd
+uuid: 7e35169b-89ba-410d-97fd-20719df75f14
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.paragraph.field_os2loop_sts_step_by_step
     - paragraphs.paragraphs_type.os2loop_step_by_step
-    - paragraphs.paragraphs_type.os2loop_step_by_step_level_2
   module:
     - entity_reference_revisions
 id: paragraph.os2loop_step_by_step.field_os2loop_sts_step_by_step
@@ -23,21 +22,18 @@ settings:
   handler_settings:
     negate: 0
     target_bundles:
-      os2loop_step_by_step_level_2: os2loop_step_by_step_level_2
+      os2loop_step_by_step: os2loop_step_by_step
     target_bundles_drag_drop:
       os2loop_highlighted_content:
-        weight: 6
+        weight: 5
         enabled: false
       os2loop_step:
-        weight: 7
+        weight: 6
         enabled: false
       os2loop_step_by_step:
-        weight: 8
-        enabled: false
-      os2loop_step_by_step_level_2:
         enabled: true
-        weight: 9
+        weight: 7
       os2loop_text_and_image:
-        weight: 10
+        weight: 8
         enabled: false
 field_type: entity_reference_revisions

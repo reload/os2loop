@@ -1,0 +1,23 @@
+uuid: fce18e15-32d5-4707-9243-61e002183990
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.os2loop_document_collection
+  module:
+    - text
+id: node.os2loop_document_collection.body
+field_name: body
+entity_type: node
+bundle: os2loop_document_collection
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+field_type: text_with_summary

@@ -1,0 +1,21 @@
+uuid: 6ec7315d-c986-4413-b31c-27e47f75af6a
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node._field_os2loop_document_author
+field_name: _field_os2loop_document_author
+entity_type: node
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

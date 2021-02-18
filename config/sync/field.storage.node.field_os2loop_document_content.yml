@@ -1,13 +1,14 @@
-uuid: 13c825c5-1d89-4e0d-9913-622560172772
+uuid: bd517c7f-cae1-43cc-810e-132ce8be719c
 langcode: en
 status: true
 dependencies:
   module:
     - entity_reference_revisions
+    - node
     - paragraphs
-id: paragraph.field_os2loop_stsl2_steps
-field_name: field_os2loop_stsl2_steps
-entity_type: paragraph
+id: node.field_os2loop_document_content
+field_name: field_os2loop_document_content
+entity_type: node
 type: entity_reference_revisions
 settings:
   target_type: paragraph

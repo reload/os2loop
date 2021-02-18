@@ -1,0 +1,39 @@
+uuid: d62d557f-bdc0-4987-81a8-5d7916f9d1c0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.os2loop_document._field_os2loop_document_author
+    - field.field.node.os2loop_document.field_os2loop_document_content
+    - node.type.os2loop_document
+  module:
+    - entity_reference_revisions
+    - user
+id: node.os2loop_document.default
+targetEntityType: node
+bundle: os2loop_document
+mode: default
+content:
+  _field_os2loop_document_author:
+    weight: 102
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_os2loop_document_content:
+    type: entity_reference_revisions_entity_view
+    weight: 101
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }
