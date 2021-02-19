@@ -1,8 +1,0 @@
-uuid: d07d6f35-a275-430a-85b9-b3bb0e9a11ca
-langcode: en
-status: true
-dependencies: {  }
-id: loop-documents-collection-69
-label: null
-description: 'Content menu for document collection asf (/node/69)'
-locked: false
