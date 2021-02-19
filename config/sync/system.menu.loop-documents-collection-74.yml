@@ -1,0 +1,8 @@
+uuid: 73a95fb3-61e3-4bc3-8b0d-43ff6e66669b
+langcode: en
+status: true
+dependencies: {  }
+id: loop-documents-collection-74
+label: 'Document collection menu: sdfsdf'
+description: 'Content menu for document collection sdfsdf (/node/74)'
+locked: false

@@ -1,0 +1,57 @@
+uuid: 6760a242-fd8f-4daf-af9b-f05dd5448ac3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.os2loop_documents_document_colle.os2loop_documents_dc_content
+    - field.field.node.os2loop_documents_document_colle.os2loop_documents_dc_profession
+    - field.field.node.os2loop_documents_document_colle.os2loop_documents_dc_subjects
+    - field.field.node.os2loop_documents_document_colle.os2loop_documents_dc_tags
+    - node.type.os2loop_documents_document_colle
+  module:
+    - entity_reference_revisions
+    - user
+id: node.os2loop_documents_document_colle.default
+targetEntityType: node
+bundle: os2loop_documents_document_colle
+mode: default
+content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  os2loop_documents_dc_content:
+    type: entity_reference_revisions_entity_view
+    weight: 104
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  os2loop_documents_dc_profession:
+    weight: 103
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  os2loop_documents_dc_subjects:
+    weight: 102
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  os2loop_documents_dc_tags:
+    weight: 101
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+hidden: {  }

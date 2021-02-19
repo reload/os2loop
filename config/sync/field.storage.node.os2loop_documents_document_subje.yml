@@ -1,0 +1,20 @@
+uuid: d16465c0-5269-41e2-a72b-c0ea739cd792
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.os2loop_documents_document_subje
+field_name: os2loop_documents_document_subje
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

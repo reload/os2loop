@@ -1,0 +1,8 @@
+uuid: 7bab7a3a-6860-4cbe-985b-dcd9fca0d1f2
+langcode: en
+status: true
+dependencies: {  }
+id: loop-documents-collection-68
+label: null
+description: 'Content menu for document collection Dokumentsamling (/node/68)'
+locked: false

@@ -1,0 +1,29 @@
+uuid: 363a20e5-adc8-44bb-8aee-a99121296704
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.os2loop_documents_document_profe
+    - node.type.os2loop_documents_document
+    - taxonomy.vocabulary.os2loop_profession
+id: node.os2loop_documents_document.os2loop_documents_document_profe
+field_name: os2loop_documents_document_profe
+entity_type: node
+bundle: os2loop_documents_document
+label: Profession
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      os2loop_profession: os2loop_profession
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

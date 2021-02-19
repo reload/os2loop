@@ -7,6 +7,7 @@
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 use Drupal\node\Entity\Node;
 use Drupal\menu_link_content\Entity\MenuLinkContent;
@@ -33,7 +34,7 @@ function os2loop_documents_help($route_name, RouteMatchInterface $route_match) {
 function os2loop_documents_form_node_form_alter(&$form, &$form_state, $form_id) {
   $node = $form_state->getformObject()->getEntity();
   if (isset($node)) {
-    if ($node->getType() === 'os2loop_document_collection') {
+    if ($node->getType() === 'os2loop_documents_document_colle') {
       $menu_name = os2loop_documents_get_menu_name($node);
       $form['field_loop_documents_contents'][LANGUAGE_NONE][0]['value']['#value'] = $menu_name;
       $form['field_loop_documents_contents']['#type'] = 'hidden';
@@ -67,7 +68,7 @@ function os2loop_documents_form_node_form_alter(&$form, &$form_state, $form_id) 
           '#type' => 'entity_autocomplete',
           '#target_type' => 'node',
           '#selection_settings' => [
-            'target_bundles' => ['os2loop_document'],
+            'target_bundles' => ['os2loop_documents_document'],
           ],
           '#prefix' => '<div id="loop-documents-menu-document-options">',
           '#suffix' => '</div>',
@@ -129,10 +130,10 @@ function os2loop_documents_render_collection_menu($menu) {
  *
  * @param array $form
  *   The form.
- * @param array $form_state
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
  *   The form state.
  */
-function os2loop_documents_add_document_callback(array $form, array $form_state) {
+function os2loop_documents_add_document_callback(array $form, FormStateInterface $form_state) {
   $commands = [];
   $node = $form_state->getformObject()->getEntity();
   $menu_name = os2loop_documents_get_menu_name($node);
@@ -166,7 +167,7 @@ function os2loop_documents_add_document_callback(array $form, array $form_state)
  * Implements hook_node_insert().
  */
 function os2loop_documents_node_insert($node) {
-  if ($node->getType() === "os2loop_document_collection") {
+  if ($node->getType() === "os2loop_documents_document_colle") {
     os2loop_documents_create_collection_menu($node);
   }
 }
@@ -234,8 +235,7 @@ function os2loop_documents_create_collection_menu($node) {
     ->getStorage('menu')
     ->create([
       'id' => $menu_name,
-      'menu_label' => $menu_name,
-      'title' => t('Document collection menu: @collection_title', ['@collection_title' => $node->getTitle()]),
+      'label' => t('Document collection menu: @collection_title', ['@collection_title' => $node->getTitle()]),
       'description' => 'Content menu for document collection ' . $node->getTitle() . ' (/node/' . $node->id() . ')',
     ])
     ->save();

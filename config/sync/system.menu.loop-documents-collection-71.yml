@@ -1,0 +1,8 @@
+uuid: 3913fc50-c7d4-45dd-b480-a6d08a7955d3
+langcode: en
+status: true
+dependencies: {  }
+id: loop-documents-collection-71
+label: null
+description: 'Content menu for document collection asdasdf (/node/71)'
+locked: false

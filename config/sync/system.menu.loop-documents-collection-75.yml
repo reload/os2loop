@@ -1,0 +1,8 @@
+uuid: 2638858e-ce74-4798-84b0-4f7f022c3ab5
+langcode: en
+status: true
+dependencies: {  }
+id: loop-documents-collection-75
+label: 'Document collection menu: hej'
+description: 'Content menu for document collection hej (/node/75)'
+locked: false

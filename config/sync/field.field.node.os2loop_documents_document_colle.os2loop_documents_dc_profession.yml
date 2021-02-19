@@ -1,0 +1,29 @@
+uuid: 7e23e64c-08aa-4185-8078-fe8320ef6424
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.os2loop_documents_dc_profession
+    - node.type.os2loop_documents_document_colle
+    - taxonomy.vocabulary.os2loop_profession
+id: node.os2loop_documents_document_colle.os2loop_documents_dc_profession
+field_name: os2loop_documents_dc_profession
+entity_type: node
+bundle: os2loop_documents_document_colle
+label: Profession
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      os2loop_profession: os2loop_profession
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

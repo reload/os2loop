@@ -1,0 +1,8 @@
+uuid: 2eb51922-d03c-489c-b5a6-adc8f9b4ece2
+langcode: en
+status: true
+dependencies: {  }
+id: loop-documents-collection-73
+label: loop-documents-collection-73
+description: 'Content menu for document collection Dokumentsamling (/node/73)'
+locked: false

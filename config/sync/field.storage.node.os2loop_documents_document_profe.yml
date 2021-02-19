@@ -1,0 +1,20 @@
+uuid: b21287b3-b58e-4ea5-aa7e-a4cd9a20121e
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.os2loop_documents_document_profe
+field_name: os2loop_documents_document_profe
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
