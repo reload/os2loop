@@ -14,7 +14,6 @@ module:
   filter: 0
   image: 0
   link: 0
-  node: 0
   os2loop_external: 0
   menu_link_content: 0
   menu_ui: 0
