@@ -32,30 +32,6 @@ function os2loop_documents_help($route_name, RouteMatchInterface $route_match) {
 }
 
 /**
- * Render header or footer for printing a collection.
- *
- * @param int $collection_id
- *   The collection id.
- * @param string $view_mode
- *   The view mode (header|footer).
- */
-// function _loop_documents_print($collection_id, $view_mode) {
-//   $collection = node_load($collection_id);
-//   if ($collection && $collection->type === 'loop_documents_collection'
-//       && in_array($view_mode, ['header', 'footer'])) {
-//     $image = file_load(variable_get('loop_documents_' . $view_mode . '_image', 0));
-//     print theme('loop_documents_collection_print_' . $view_mode, [
-//       'collection' => $collection,
-//       'image' => $image,
-//       'view_mode' => $view_mode,
-//     ]);
-//     exit;
-//   }
-
-//   drupal_not_found();
-// }
-
-/**
  * Implements hook_form_BASE_FORM_ID_alter().
  */
 function os2loop_documents_form_node_form_alter(&$form, &$form_state, $form_id) {
@@ -100,7 +76,7 @@ function os2loop_documents_form_node_form_alter(&$form, &$form_state, $form_id) 
           '#prefix' => '<div id="loop-documents-menu-document-options">',
           '#suffix' => '</div>',
         ];
-        
+
         $form['field_loop_documents_menu_display']['add_document']['actions']['submit'] = [
           '#type' => 'submit',
           '#submit' => ['os2loop_documents_add_document_callback'],
@@ -134,8 +110,6 @@ function os2loop_documents_form_node_form_alter(&$form, &$form_state, $form_id) 
   }
 }
 
-
-
 /**
  * Render a collection menu.
  *
@@ -162,7 +136,7 @@ function os2loop_documents_render_collection_menu($menu) {
  * @param array $form_state
  *   The form state.
  */
-function os2loop_documents_add_document_callback($form, $form_state) {
+function os2loop_documents_add_document_callback(array $form, array $form_state) {
   $commands = [];
   $node = $form_state->getformObject()->getEntity();
   $menu_name = os2loop_documents_get_menu_name($node);
@@ -172,7 +146,7 @@ function os2loop_documents_add_document_callback($form, $form_state) {
   if (!empty($document_id)) {
     $target_node = Node::load($document_id);
   }
-  
+
   if ($node && $menu && $target_node) {
     // Get current highest weight at first level in menu.
     $weight = max(array_map(function ($link) {
@@ -283,4 +257,3 @@ function os2loop_documents_get_menu_name($node) {
   $nid = $node->id();
   return isset($nid) ? 'loop-documents-collection-' . $node->id() : NULL;
 }
-
