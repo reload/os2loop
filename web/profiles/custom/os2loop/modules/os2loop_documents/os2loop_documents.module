@@ -11,6 +11,9 @@
 // include_once 'loop_documents.entity_print.inc';.
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Url;
+use Drupal\node\Entity\Node;
+use Drupal\menu_link_content\Entity\MenuLinkContent;
 
 /**
  * Implements hook_help().
@@ -29,48 +32,6 @@ function os2loop_documents_help($route_name, RouteMatchInterface $route_match) {
 }
 
 /**
- * Implements hook_menu().
- */
-function loop_documents_menu() {
-  $items = [];
-
-  $items['admin/config/content/loop_documents'] = [
-    'title' => 'Loop documents settings',
-    'description' => 'Settings for the Loop documents module',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => ['loop_documents_admin_form'],
-    'access arguments' => ['administer loop_documents settings'],
-    'type' => MENU_NORMAL_ITEM,
-  ];
-
-  $items['loop_documents/autocomplete/loop_documents_collection/%'] = [
-    'title' => 'Autocomplete for getting documents to add to a collection',
-    'page callback' => '_loop_documents_autocomplete_documents',
-    'page arguments' => [3],
-    'access callback' => TRUE,
-    'type' => MENU_CALLBACK,
-  ];
-
-  $items['loop_documents/print/node/%/header'] = [
-    'title' => '',
-    'page callback' => '_loop_documents_print',
-    'page arguments' => [3, 4],
-    'access callback' => TRUE,
-    'type' => MENU_CALLBACK,
-  ];
-
-  $items['loop_documents/print/node/%/footer'] = [
-    'title' => '',
-    'page callback' => '_loop_documents_print',
-    'page arguments' => [3, 4],
-    'access callback' => TRUE,
-    'type' => MENU_CALLBACK,
-  ];
-
-  return $items;
-}
-
-/**
  * Render header or footer for printing a collection.
  *
  * @param int $collection_id
@@ -78,21 +39,21 @@ function loop_documents_menu() {
  * @param string $view_mode
  *   The view mode (header|footer).
  */
-function _loop_documents_print($collection_id, $view_mode) {
-  $collection = node_load($collection_id);
-  if ($collection && $collection->type === 'loop_documents_collection'
-      && in_array($view_mode, ['header', 'footer'])) {
-    $image = file_load(variable_get('loop_documents_' . $view_mode . '_image', 0));
-    print theme('loop_documents_collection_print_' . $view_mode, [
-      'collection' => $collection,
-      'image' => $image,
-      'view_mode' => $view_mode,
-    ]);
-    exit;
-  }
+// function _loop_documents_print($collection_id, $view_mode) {
+//   $collection = node_load($collection_id);
+//   if ($collection && $collection->type === 'loop_documents_collection'
+//       && in_array($view_mode, ['header', 'footer'])) {
+//     $image = file_load(variable_get('loop_documents_' . $view_mode . '_image', 0));
+//     print theme('loop_documents_collection_print_' . $view_mode, [
+//       'collection' => $collection,
+//       'image' => $image,
+//       'view_mode' => $view_mode,
+//     ]);
+//     exit;
+//   }
 
-  drupal_not_found();
-}
+//   drupal_not_found();
+// }
 
 /**
  * Implements hook_form_BASE_FORM_ID_alter().
@@ -101,9 +62,9 @@ function os2loop_documents_form_node_form_alter(&$form, &$form_state, $form_id) 
   $node = $form_state->getformObject()->getEntity();
   if (isset($node)) {
     if ($node->getType() === 'os2loop_document_collection') {
-      $form['field_loop_documents_contents'][LANGUAGE_NONE][0]['value']['#value'] = loop_documents_get_menu_name($node);
+      $menu_name = os2loop_documents_get_menu_name($node);
+      $form['field_loop_documents_contents'][LANGUAGE_NONE][0]['value']['#value'] = $menu_name;
       $form['field_loop_documents_contents']['#type'] = 'hidden';
-      $menu_name = loop_documents_get_menu_name($node);
       if (isset($menu_name)) {
         $menu_tree = \Drupal::menuTree();
         $parameters = $menu_tree->getCurrentRouteMenuTreeParameters($menu_name);
@@ -116,7 +77,7 @@ function os2loop_documents_form_node_form_alter(&$form, &$form_state, $form_id) 
           '#title' => t('Collection content'),
           '#weight' => $form['field_loop_documents_contents']['#weight'],
           'menu_display' => [
-            '#markup' => loop_documents_render_collection_menu($menu),
+            '#markup' => os2loop_documents_render_collection_menu($menu),
             '#prefix' => '<div id="loop-documents-menu-display">',
             '#suffix' => '</div>',
           ],
@@ -131,27 +92,29 @@ function os2loop_documents_form_node_form_alter(&$form, &$form_state, $form_id) 
         ];
 
         $form['field_loop_documents_menu_display']['add_document']['document'] = [
-          '#type' => 'textfield',
-          '#autocomplete_path' => 'loop_documents/autocomplete/loop_documents_collection/' . $node->nid,
+          '#type' => 'entity_autocomplete',
+          '#target_type' => 'node',
+          '#selection_settings' => [
+            'target_bundles' => ['os2loop_document'],
+          ],
           '#prefix' => '<div id="loop-documents-menu-document-options">',
           '#suffix' => '</div>',
         ];
-
-        $form['field_loop_documents_menu_display']['add_document']['actions'] = [
+        
+        $form['field_loop_documents_menu_display']['add_document']['actions']['submit'] = [
           '#type' => 'submit',
+          '#submit' => ['os2loop_documents_add_document_callback'],
           '#value' => t('Add document'),
-          '#ajax' => [
-            'callback' => 'loop_documents_add_document_callback',
-            'event' => 'click',
-          ],
-          '#weight' => 2,
         ];
 
         $form['field_loop_documents_menu_display']['edit_menu'] = [
-          '#markup' => l(t('Edit menu'), 'admin/structure/menu/manage/' . $menu['menu_name'], ['attributes' => ['target' => 'loop_documents_menu']]),
+          '#url' => Url::fromRoute('entity.menu.edit_form', ['menu' => $menu_name]),
           '#prefix' => '<div class="loop-documents-edit-menu">',
+          '#markup' => "",
           '#suffix' => '</div>',
           '#weight' => -1,
+          '#title' => t('Edit menu'),
+          '#type' => 'link',
         ];
       }
     }
@@ -171,93 +134,7 @@ function os2loop_documents_form_node_form_alter(&$form, &$form_state, $form_id) 
   }
 }
 
-/**
- * Autocomplete callback.
- */
-function _loop_documents_autocomplete_documents($collection_id, $query) {
-  $options = [];
 
-  $collection = node_load($collection_id);
-  if ($collection) {
-    $menu = menu_load(loop_documents_get_menu_name($collection));
-    if ($menu) {
-      $menu_paths = array_map(function ($link) {
-        return $link['link_path'];
-      }, menu_load_links($menu));
-
-      $document_ids = [];
-      $condition = db_or();
-      $condition->condition('title', '%' . $query . '%', 'LIKE');
-      $result = db_select('node', 'n')
-        ->fields('n', ['nid'])
-        ->condition('type', 'loop_documents_document')
-        ->condition($condition)
-        ->orderBy('title')
-        ->execute();
-      foreach ($result as $row) {
-        $document_ids[] = $row->nid;
-      }
-
-      $documents = node_load_multiple($document_ids);
-
-      // Filter out documents already in the menu.
-      $documents = array_filter($documents, function ($document) use ($menu_paths) {
-        return !in_array('node/' . $document->nid, $menu_paths);
-      });
-
-      if (empty($documents)) {
-        $options[''] = t('No documents found');
-      }
-      else {
-        foreach ($documents as $document) {
-          $options[$document->title . ' (node/' . $document->nid . ')'] = $document->title . ' (node/' . $document->nid . ')';
-        }
-      }
-    }
-  }
-
-  drupal_json_output($options);
-}
-
-/**
- * Get all documents (as select options) that are not yet part of a menu.
- *
- * @param array $menu
- *   The menu.
- *
- * @return array
- *   The select options.
- */
-function loop_documents_get_document_options(array $menu) {
-  $options = [];
-
-  $menu_paths = array_map(function ($link) {
-    return $link['link_path'];
-  }, menu_load_links($menu));
-  $documents = node_load_multiple([], ['type' => 'loop_documents_document']);
-  // Filter out documents already in the menu.
-  $documents = array_filter($documents, function ($document) use ($menu_paths) {
-    return !in_array('node/' . $document->nid, $menu_paths);
-  });
-
-  if (!empty($documents)) {
-    $options[''] = '';
-    foreach ($documents as $document) {
-      $options['node/' . $document->nid] = $document->title;
-    }
-  }
-
-  return $options;
-}
-
-/**
- * Add custom css to form.
- */
-function loop_documents_after_build($form, &$form_state) {
-  drupal_add_css(drupal_get_path('module', 'loop_documents') . '/css/loop-documents.css');
-
-  return $form;
-}
 
 /**
  * Render a collection menu.
@@ -265,11 +142,10 @@ function loop_documents_after_build($form, &$form_state) {
  * @param array|null $menu
  *   The menu.
  */
-function loop_documents_render_collection_menu($menu) {
+function os2loop_documents_render_collection_menu($menu) {
   $content = '';
   if ($menu) {
-    $menu_tree = menu_tree($menu['menu_name']);
-    $content = empty($menu_tree) ? t('No documents added yet') : render($menu_tree);
+    $content = empty($menu) ? t('No documents added yet') : render($menu);
   }
   else {
     $content = t('Save collection to create menu');
@@ -286,52 +162,34 @@ function loop_documents_render_collection_menu($menu) {
  * @param array $form_state
  *   The form state.
  */
-function loop_documents_add_document_callback(array $form, array $form_state) {
+function os2loop_documents_add_document_callback($form, $form_state) {
   $commands = [];
-
-  $node = $form['#node'];
-  $menu = menu_load(loop_documents_get_menu_name($node));
+  $node = $form_state->getformObject()->getEntity();
+  $menu_name = os2loop_documents_get_menu_name($node);
+  $menu = os2loop_load_menu($menu_name);
   $target_node = NULL;
-
-  if (!empty($form_state['values']['document']) && preg_match('@node/(?<nid>[0-9]+)@', $form_state['values']['document'], $matches)) {
-    $target_node = node_load($matches['nid']);
+  $document_id = $form_state->getValue('document');
+  if (!empty($document_id)) {
+    $target_node = Node::load($document_id);
   }
-
+  
   if ($node && $menu && $target_node) {
     // Get current highest weight at first level in menu.
-    $menu_links = menu_load_links($menu['menu_name']);
     $weight = max(array_map(function ($link) {
-      return $link['depth'] == 1 ? $link['weight'] : 0;
-    }, $menu_links));
+      return $link["original_link"]->getWeight();
+    }, $menu["#items"]));
 
-    $menu_link = [
-      'link_path' => 'node/' . $target_node->nid,
-      'link_title' => $target_node->title,
+    MenuLinkContent::create([
+      'title' => $target_node->label(),
+      'link' => [['uri' => 'entity:node/' . $target_node->id()]],
+      'menu_name' => $menu_name,
+      'weight' => $weight,
       'expanded' => TRUE,
-      'menu_name' => $menu['menu_name'],
-      'weight' => $weight + 1,
-    ];
-    menu_link_save($menu_link);
-
-    // Reload menu.
-    $menu = menu_load(loop_documents_get_menu_name($node));
-    $commands[] = ajax_command_html("#loop-documents-menu-display", loop_documents_render_collection_menu($menu));
-    $commands[] = [
-      'command' => 'loop_documents_setValue',
-      'arguments' => [
-        'selector' => '#loop-documents-menu-document-options input[type="text"]',
-        'value' => '',
-      ],
-    ];
+    ])->save();
   }
   else {
     $commands[] = ajax_command_alert(t('Error adding document to collection'));
   }
-
-  return [
-    '#type' => 'ajax',
-    '#commands' => $commands,
-  ];
 }
 
 /**
@@ -339,7 +197,7 @@ function loop_documents_add_document_callback(array $form, array $form_state) {
  */
 function os2loop_documents_node_insert($node) {
   if ($node->getType() === "os2loop_document_collection") {
-    loop_documents_create_collection_menu($node);
+    os2loop_documents_create_collection_menu($node);
   }
 }
 
@@ -348,7 +206,7 @@ function os2loop_documents_node_insert($node) {
  */
 function os2loop_documents_entity_update(EntityInterface $entity) {
   if ($node->type === 'loop_documents_collection') {
-    loop_documents_create_collection_menu($node);
+    os2loop_documents_create_collection_menu($node);
   }
   elseif ($node->type === 'loop_documents_document') {
     // Fetch entries that qualify for being the menu item.
@@ -379,19 +237,17 @@ function os2loop_documents_entity_update(EntityInterface $entity) {
 }
 
 /**
+ * Loads a menu if it exists.
  *
+ * @param object $menu_name
+ *   The menu name.
  */
-function load_menu($menu_name) {
+function os2loop_load_menu($menu_name) {
   $menu_tree = \Drupal::menuTree();
   $parameters = $menu_tree->getCurrentRouteMenuTreeParameters($menu_name);
   $tree = $menu_tree->load($menu_name, $parameters);
-  if (!!$tree) {
-    $menu = $menu_tree->build($tree);
-    return $menu;
-  }
-  else {
-    return NULL;
-  }
+  $menu = $menu_tree->build($tree);
+  return $menu;
 }
 
 /**
@@ -400,20 +256,19 @@ function load_menu($menu_name) {
  * @param object $node
  *   The document collection node.
  */
-function loop_documents_create_collection_menu($node) {
-  $menu_name = loop_documents_get_menu_name($node);
-  $menu = load_menu($menu_name);
-  if (!$menu) {
-    \Drupal::entityTypeManager()
-      ->getStorage('menu')
-      ->create([
-        'id' => $menu_name,
-        'menu_label' => $menu_name,
-        'title' => t('Document collection menu: @collection_title', ['@collection_title' => $node->getTitle()]),
-        'description' => 'Content menu for document collection ' . $node->getTitle() . ' (/node/' . $node->id() . ')',
-      ])
-      ->save();
-  }
+function os2loop_documents_create_collection_menu($node) {
+  $menu_name = os2loop_documents_get_menu_name($node);
+  $menu = os2loop_load_menu($menu_name);
+
+  \Drupal::entityTypeManager()
+    ->getStorage('menu')
+    ->create([
+      'id' => $menu_name,
+      'menu_label' => $menu_name,
+      'title' => t('Document collection menu: @collection_title', ['@collection_title' => $node->getTitle()]),
+      'description' => 'Content menu for document collection ' . $node->getTitle() . ' (/node/' . $node->id() . ')',
+    ])
+    ->save();
 
   return $menu;
 }
@@ -421,7 +276,7 @@ function loop_documents_create_collection_menu($node) {
 /**
  * Get collection menu name.
  */
-function loop_documents_get_menu_name($node) {
+function os2loop_documents_get_menu_name($node) {
   if (is_numeric($node)) {
     $node = node_load($node);
   }
@@ -429,633 +284,3 @@ function loop_documents_get_menu_name($node) {
   return isset($nid) ? 'loop-documents-collection-' . $node->id() : NULL;
 }
 
-/**
- * Implements hook_wysiwyg_editor_settings_alter().
- */
-function loop_documents_wysiwyg_editor_settings_alter(&$settings, $context) {
-  $profile = $context['profile'];
-  if ($profile->format === 'loop_documents' && $profile->editor === 'ckeditor') {
-    $settings['contentsCss'] = '/' . drupal_get_path('module', 'loop_documents') . '/ckeditor/styles/loop_documents.css';
-    $settings['customConfig'] = '/' . drupal_get_path('module', 'loop_documents') . '/ckeditor/config/loop_documents.js';
-  }
-}
-
-/**
- * Implements hook_preprocess_node().
- */
-function loop_documents_preprocess_node(&$variables) {
-  if (!isset($variables['node'])) {
-    return;
-  }
-
-  $node = $variables['node'];
-
-  if (!in_array($node->type, [
-    'loop_documents_collection',
-    'loop_documents_document',
-  ])) {
-    return;
-  }
-
-  drupal_add_js(drupal_get_path('module', 'loop_documents') . '/js/loop_documents.js');
-
-  // Add template suggestion for view mode.
-  $variables['theme_hook_suggestions'][] = 'node__' . $node->type . '__' . $variables['view_mode'];
-
-  if (!in_array($variables['view_mode'], ['full', 'pdf', 'print'])) {
-    return;
-  }
-
-  loop_documents_add_collection_data($node, $variables);
-}
-
-/**
- * Add collection template variables.
- *
- * @param object $node
- *   The node.
- * @param array $variables
- *   The variables.
- */
-function loop_documents_add_collection_data($node, array &$variables) {
-  global $user;
-
-  $collection_id = NULL;
-  if ($node->type === 'loop_documents_collection') {
-    $collection_id = $node->nid;
-  }
-  else {
-    $parameters = drupal_get_query_parameters();
-    if (!empty($parameters['collection'])) {
-      $collection_id = intval($parameters['collection']);
-    }
-  }
-
-  if (!$collection_id) {
-    $menus = loop_documents_get_menus($node);
-
-    // Get collections ids (numeric indexes in $menus).
-    $collection_ids = array_filter(array_keys($menus), 'is_numeric');
-    if (count($collection_ids) === 1) {
-      $collection_id = array_pop($collection_ids);
-    }
-  }
-
-  if ($collection_id) {
-    $menu_name = loop_documents_get_menu_name($collection_id);
-    if ($menu_name) {
-      $view_mode = isset($variables['view_mode']) ? $variables['view_mode'] : NULL;
-
-      // Render menu tree.
-      // Don't render menu tree with only  a single item in print/pdf view.
-      if (!loop_documents_is_print_view($view_mode) || count(menu_load_links($menu_name)) > 1) {
-        $menu = menu_tree($menu_name);
-        if ($menu) {
-          if (loop_documents_is_print_view($view_mode)) {
-            // Add local urls (with fragment ids) to menu.
-            loop_documents_process_menu($menu, function (&$item) {
-              if (!isset($item['#localized_options'])) {
-                $item['#localized_options'] = [];
-              }
-              // We want to generate menu links with fragments ids only.
-              // This is done by emptying '#href' and marking the link as
-              // being 'external'.
-              $item['#localized_options'] += [
-                'fragment' => $item['#href'],
-                'external' => TRUE,
-              ];
-              $item['#href'] = '';
-            });
-          }
-          else {
-            // Add query with collection id to menu item links.
-            $query = [
-              'collection' => $collection_id,
-            ];
-            loop_documents_process_menu($menu, function (&$item) use ($query) {
-              if (!isset($item['#localized_options'])) {
-                $item['#localized_options'] = [];
-              }
-              $item['#localized_options'] += ['query' => $query];
-            });
-          }
-          $variables['loop_documents_menu'] = $menu;
-        }
-      }
-
-      $collection = node_load($collection_id);
-      if ($collection) {
-        $variables['loop_documents_collection'] = $collection;
-        if (node_access('update', $collection, $user) === TRUE) {
-          $menu['loop_documents_collection_edit_url'] = 'node/' . $collection->nid . '/edit';
-        }
-        $variables['loop_documents_collection_print_url'] = 'entityprint/node/' . $collection->nid;
-      }
-    }
-  }
-  else {
-    $variables['loop_documents_collections'] = $menus;
-  }
-}
-
-/**
- * Get a menu of all nodes pointing to a menu containing a given node.
- *
- * @param object $node
- *   The node.
- *
- * @return array
- *   The menu.
- */
-function loop_documents_get_menus($node) {
-  $menus = [
-    '#sorted' => TRUE,
-    '#theme_wrappers' => [
-      'menu_tree__loop_documents_document' . $node->nid,
-    ],
-  ];
-
-  $query = db_query('select menu_name from menu_links where link_path = :link_path', ['link_path' => 'node/' . $node->nid]);
-  $nids = array_map(function ($name) {
-    return preg_match('/^loop-documents-collection-(?<id>[0-9]+)$/', $name, $matches) ? $matches['id'] : 0;
-  }, $query->fetchCol());
-  $roots = node_load_multiple($nids);
-  foreach ($roots as $root) {
-    $menu_name = loop_documents_get_menu_name($root);
-    $menus[$root->nid] = [
-      '#theme' => 'menu_link__' . str_replace('-', '_', $menu_name),
-      '#attributes' => [],
-      '#title' => $root->title,
-      '#href' => 'node/' . $node->nid,
-      '#localized_options' => [
-        'query' => [
-          'collection' => $root->nid,
-        ],
-      ],
-      '#below' => [],
-    ];
-  }
-
-  return $menus;
-}
-
-/**
- * Process all menu items in a menu tree.
- *
- * @param array $menu
- *   The menu tree.
- * @param callable $callable
- *   The callable.
- */
-function loop_documents_process_menu(array &$menu, callable $callable) {
-  foreach ($menu as &$item) {
-    if (isset($item['#href'])) {
-      loop_documents_process_menu_item($item, $callable);
-    }
-  }
-}
-
-/**
- * Process a menu item in a menu tree.
- *
- * @param array $item
- *   The menu item.
- * @param callable $callable
- *   The callable.
- */
-function loop_documents_process_menu_item(array &$item, callable $callable) {
-  if (isset($item['#href'])) {
-    $callable($item);
-  }
-  if (isset($item['#below'])) {
-    loop_documents_process_menu($item['#below'], $callable);
-  }
-}
-
-/**
- * Decide if a view mode is a print/pdf view.
- *
- * @param string $view_mode
- *   The view mode.
- *
- * @return bool
- *   True iff the view mode as a print mode.
- */
-function loop_documents_is_print_view($view_mode) {
-  return in_array($view_mode, ['pdf', 'print']);
-}
-
-/*
- * Print stuff.
- */
-
-/**
- * Implements hook_node_view().
- */
-function loop_documents_node_view($node, $view_mode = 'full', $langcode = NULL) {
-  if ($node->type == 'loop_documents_collection') {
-    if (loop_documents_is_print_view($view_mode)) {
-      $query = drupal_get_query_parameters();
-      $menu_name = loop_documents_get_menu_name($node);
-      if ($menu_name) {
-        $menu = menu_tree($menu_name);
-
-        $children = loop_documents_menu_to_render_array($menu, $view_mode);
-
-        if (!empty($children)) {
-          $node->content['documents'] = $children
-            + [
-              '#prefix' => '<div class="loop-documents--documents">',
-              '#suffix' => '</div>',
-              '#weight' => 1000,
-            ];
-        }
-      }
-    }
-  }
-}
-
-/**
- * Convert a menu to render array with page content.
- */
-function loop_documents_menu_to_render_array(array $menu, $view_mode) {
-  $content = [];
-
-  foreach ($menu as $item) {
-    if (isset($item['#href'])) {
-      $item = loop_documents_menu_item_to_render_array($item, $view_mode);
-      if ($item) {
-        $content[] = $item;
-      }
-    }
-  }
-
-  return $content;
-}
-
-/**
- * Convert a menu item to a render array for rendering page content.
- */
-function loop_documents_menu_item_to_render_array(array $item, $view_mode) {
-  if (isset($item['#href']) && preg_match('@^node/(?<nid>[0-9]+)$@', $item['#href'], $matches)) {
-    $id = $item['#href'];
-
-    $content = [
-      $id => node_view(node_load($matches['nid']), $view_mode)
-      + [
-        '#prefix' => '<article id="' . $id . '">',
-        '#suffix' => '</article>',
-      ],
-    ];
-
-    if (!empty($item['#below'])) {
-      $items = loop_documents_menu_to_render_array($item['#below'], $view_mode);
-      if (!empty($items)) {
-        $content[$id]['children'] = $items + [
-          '#prefix' => '<section class="loop-documents--children">',
-          '#suffix' => '</section>',
-        ];
-      }
-    }
-
-    return $content;
-  }
-
-  return NULL;
-}
-
-/**
- * Get options for wkhtmltopdf.
- */
-function loop_documents_get_wkhtmltopdf_options($replace_tokens = FALSE, $node = NULL) {
-  // https://www.drupal.org/node/390482#drupal7tokenslist
-  $default_options = [
-    'page-size' => 'A4',
-    'title' => '[node:title] – [current-date:custom:Y-m-d]',
-    'margin-top' => 30,
-    'margin-right' => 20,
-    'margin-bottom' => 30,
-    'margin-left' => 20,
-    'header-html' => '[site:url]/loop_documents/print/node/[node:nid]/header',
-    'footer-html' => '[site:url]/loop_documents/print/node/[node:nid]/footer',
-  ];
-
-  $options = $default_options;
-  $pairs = explode(PHP_EOL, variable_get('loop_documents_wkhtmltopdf_options', ''));
-  foreach ($pairs as $pair) {
-    $pair = trim(preg_replace('/#.*/', '', trim($pair)));
-    if (preg_match('/^(?<name>[^#:]+)\s*:\s*(?<value>.+)/', $pair, $matches)) {
-      $options[$matches['name']] = $matches['value'];
-    }
-  }
-
-  if ($replace_tokens) {
-    $options = array_map(function (&$value) use ($node) {
-      global $user;
-
-      $data = [
-        'user' => $user,
-        'node' => $node,
-      ];
-
-      return token_replace($value, $data, ['sanitize' => FALSE]);
-    }, $options);
-  }
-
-  return $options;
-}
-
-/**
- * Implements hook_theme().
- */
-function loop_documents_theme($existing, $type, $theme, $path) {
-  return [
-    'node__loop_documents_collection' => [
-      'render element' => 'content',
-      'base hook' => 'node',
-      'template' => 'node--loop-documents-collection',
-      'path' => drupal_get_path('module', 'loop_documents') . '/templates',
-    ],
-    'loop_documents_collection_metadata' => [
-      'variables' => [
-        'collection' => NULL,
-      ],
-      'template' => 'templates/loop-documents-collection-metadata',
-    ],
-    'loop_documents_collection_print_header' => [
-      'variables' => [
-        'collection' => NULL,
-        'image' => NULL,
-        'view_mode' => NULL,
-      ],
-      'template' => 'templates/loop-documents-collection-print-header',
-    ],
-    'loop_documents_collection_print_footer' => [
-      'variables' => [
-        'collection' => NULL,
-        'image' => NULL,
-        'view_mode' => NULL,
-      ],
-      'template' => 'templates/loop-documents-collection-print-footer',
-    ],
-
-    'node__loop_documents_document' => [
-      'render element' => 'content',
-      'base hook' => 'node',
-      'template' => 'node--loop-documents-document',
-      'path' => drupal_get_path('module', 'loop_documents') . '/templates',
-    ],
-    'loop_documents_document_metadata' => [
-      'variables' => [
-        'document' => NULL,
-      ],
-      'template' => 'templates/loop-documents-document-metadata',
-    ],
-
-    'loop_documents_navigation' => [
-      'variables' => [
-        'node' => NULL,
-        'loop_documents_menu' => NULL,
-        'loop_documents_collection' => NULL,
-        'loop_documents_collection_edit_url' => NULL,
-        'loop_documents_collection_print_url' => NULL,
-        'loop_documents_collections' => NULL,
-      ],
-      'template' => 'templates/loop-documents-navigation',
-    ],
-  ];
-}
-
-/**
- * Implements hook_block_info().
- */
-function loop_documents_block_info() {
-  return [
-    'loop_documents_navigation' => [
-      'info' => t('Loop documents navigation'),
-    ],
-  ];
-}
-
-/**
- * Implements hook_block_view().
- */
-function loop_documents_block_view($delta = '') {
-  $block = [];
-
-  switch ($delta) {
-    case 'loop_documents_navigation':
-      if ($node = menu_get_object()) {
-        $block['content'] = [
-          '#theme' => 'loop_documents_navigation',
-          '#node' => $node,
-        ];
-        $variables = [];
-        loop_documents_add_collection_data($node, $variables);
-        foreach ($variables as $key => $value) {
-          $block['content']['#' . $key] = $value;
-        }
-      }
-      break;
-  }
-
-  return $block;
-}
-
-/**
- * Implements hook_page_alter().
- */
-function loop_documents_page_alter(&$page) {
-  global $language;
-  // Add current language to the JS settings.
-  drupal_add_js(
-    [
-      'loop_documents' => [
-        'language' => $language->language,
-      ],
-    ],
-    ['type' => 'setting']
-  );
-}
-
-/**
- * Implements hook_wysiwyg_plugin().
- */
-function loop_documents_wysiwyg_plugin($editor, $version) {
-  if ($editor === 'ckeditor') {
-    return [
-      'drupal_proofread' => [
-        'path' => drupal_get_path('module', 'loop_documents') . '/ckeditor/plugins/proofread',
-        'filename' => 'plugin.js',
-        'load' => TRUE,
-        'buttons' => ['Proofread' => t('Proofread')],
-      ],
-    ];
-  }
-}
-
-/**
- * Reset wysiwyg profiles and text formats to default state.
- */
-function loop_documents_reset_editor_configuration() {
-  // Wysiwyg profiles.
-  $profiles['loop_documents'] = [
-    'format' => 'loop_documents',
-    'editor' => 'ckeditor',
-    'settings' => [
-      'buttons' => [
-        'default' => [
-          'Format' => 1,
-          'Bold' => 1,
-          'BulletedList' => 1,
-          'NumberedList' => 1,
-          'Outdent' => 1,
-          'Indent' => 1,
-          'Undo' => 1,
-          'Redo' => 1,
-          'Link' => 1,
-          'Unlink' => 1,
-          'PasteFromWord' => 1,
-          'RemoveFormat' => 1,
-        ],
-        'drupal_path' => [
-          'Link' => 1,
-        ],
-        'drupal' => [
-          'media' => 1,
-        ],
-      ],
-      'theme' => '',
-      'language' => 'en',
-      'toolbarLocation' => 'top',
-      'resize_enabled' => 1,
-      'default_toolbar_grouping' => 1,
-      'simple_source_formatting' => 0,
-      'acf_mode' => 0,
-      'acf_allowed_content' => '',
-      'css_setting' => 'theme',
-      'css_theme' => '',
-      'css_path' => '',
-      'stylesSet' => '',
-      'block_formats' => 'p,h2,h3',
-      'forcePasteAsPlainText' => 0,
-      'pasteFromWordNumberedHeadingToList' => 0,
-      'pasteFromWordPromptCleanup' => 0,
-      'pasteFromWordRemoveFontStyles' => 1,
-      'pasteFromWordRemoveStyles' => 1,
-    ],
-    'preferences' => [
-      'default' => 1,
-      'user_choose' => 0,
-      'show_toggle' => 0,
-      'add_to_summaries' => 1,
-      'version' => '4.5.3.6c70c82',
-    ],
-    'name' => 'formatloop_documents',
-  ];
-
-  _loop_documents_wysiwyg_rebuild($profiles);
-
-  // Text formats.
-  $formats['loop_documents'] = [
-    'format' => 'loop_documents',
-    'name' => 'Loop documents',
-    'cache' => 1,
-    'status' => 1,
-    'weight' => 0,
-    'filters' => [
-      'ckeditor_link_filter' => [
-        'weight' => 0,
-        'status' => 1,
-        'settings' => [],
-      ],
-      'media_filter' => [
-        'weight' => 2,
-        'status' => 1,
-        'settings' => [],
-      ],
-    ],
-  ];
-
-  foreach ($formats as $format) {
-    filter_format_save((object) $format);
-  }
-}
-
-/**
- * Rebuild wysiwyg profiles.
- *
- * This is lifted from wysiwyg_features_rebuild.
- *
- * @see wysiwyg_features_rebuild
- */
-function _loop_documents_wysiwyg_rebuild(array $defaults) {
-  foreach ($defaults as $profile) {
-    $profile = is_object($profile) ? (array) $profile : $profile;
-    if (empty($profile['settings']['_profile_preferences'])) {
-      if (!empty($profile['preferences'])) {
-        $settings = &$profile['preferences'];
-      }
-      else {
-        // Importing an older profile, move state to its own section.
-        $settings = &$profile['settings'];
-      }
-
-      $preferences = [
-        'add_to_summaries' => (!empty($settings['add_to_summaries']) ? $settings['add_to_summaries'] : FALSE),
-        'default' => $settings['default'],
-        'show_toggle' => $settings['show_toggle'],
-        'user_choose' => $settings['user_choose'],
-        'version' => (!empty($settings['version']) ? $settings['version'] : NULL),
-      ];
-      unset($settings['add_to_summaries'],
-        $settings['default'],
-        $settings['show_toggle'],
-        $settings['user_choose'],
-        $settings['version'],
-        $profile['preferences']
-      );
-
-      if (!empty($settings['library'])) {
-        $preferences['library'] = $settings['library'];
-        unset($settings['library']);
-      }
-
-      $editor = wysiwyg_get_editor($profile['editor']);
-      if (empty($preferences['version']) && !empty($editor['installed'])) {
-        $preferences['version'] = $editor['installed version'];
-      }
-
-      $profile['settings']['_profile_preferences'] = $preferences;
-    }
-
-    db_merge('wysiwyg')
-      ->key(['format' => $profile['format']])
-      ->fields([
-        'editor' => $profile['editor'],
-        'settings' => serialize($profile['settings']),
-      ])
-      ->execute();
-    // Clear the editing caches.
-    if (module_exists('ctools')) {
-      ctools_include('object-cache');
-      ctools_object_cache_clear_all('wysiwyg_profile', 'format' . $profile['format']);
-    }
-    cache_clear_all('wysiwyg_profile:format' . $profile['format'], 'cache');
-  }
-  wysiwyg_profile_cache_clear();
-}
-
-/**
- * Implements hook_media_browser_plugins_alter().
- */
-function loop_documents_media_browser_plugins_alter(&$plugins) {
-  global $user;
-
-  $library_plugin_id = 'media_default--media_browser_1';
-
-  // Only administrators should be allowed to use the media library.
-  if (!(user_access('administrator') || in_array('administrator', $user->roles, TRUE))) {
-    unset($plugins[$library_plugin_id]);
-  }
-}
