@@ -30,7 +30,7 @@ class PostFixture extends AbstractFixture implements DependentFixtureInterface, 
         'value' => <<<'BODY'
 This is the very first post!
 BODY,
-        'format' => 'os2loop_post_rich_text',
+        'format' => 'os2loop_post',
       ],
       'field_os2loop_shared_subject' => [
         'target_id' => $this->getReference('os2loop_subject:Diverse')->id(),
