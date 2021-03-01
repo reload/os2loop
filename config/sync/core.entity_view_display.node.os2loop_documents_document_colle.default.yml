@@ -9,7 +9,7 @@ dependencies:
     - field.field.node.os2loop_documents_document_colle.os2loop_documents_dc_content
     - node.type.os2loop_documents_document_colle
   module:
-    - entity_reference_revisions
+    - text
     - user
 id: node.os2loop_documents_document_colle.default
 targetEntityType: node
@@ -46,12 +46,10 @@ content:
     third_party_settings: {  }
     region: content
   os2loop_documents_dc_content:
-    type: entity_reference_revisions_entity_view
-    weight: 104
+    weight: 108
     label: above
-    settings:
-      view_mode: default
-      link: ''
+    settings: {  }
     third_party_settings: {  }
+    type: text_default
     region: content
 hidden: {  }

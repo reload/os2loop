@@ -6,7 +6,45 @@ dependencies:
     - field.storage.paragraph.os2loop_documents_hc_content
     - paragraphs.paragraphs_type.os2loop_documents_highlighted_co
   module:
+    - better_formats
     - text
+third_party_settings:
+  better_formats:
+    allowed_formats_toggle: 0
+    allowed_formats:
+      os2loop_question_answer_plain_text: os2loop_question_answer_plain_text
+      os2loop_question_answer_rich_text: os2loop_question_answer_rich_text
+      os2loop_post_comment_plain_text: os2loop_post_comment_plain_text
+      os2loop_post_comment_rich_text: os2loop_post_comment_rich_text
+      os2loop_documents_rich_text: os2loop_documents_rich_text
+      os2loop_external: os2loop_external
+      os2loop_page: os2loop_page
+      os2loop_post: os2loop_post
+      os2loop_question_plain_text: os2loop_question_plain_text
+      os2loop_question_rich_text: os2loop_question_rich_text
+    default_order_toggle: 0
+    default_order_wrapper:
+      formats:
+        os2loop_question_answer_plain_text:
+          weight: '0'
+        os2loop_question_answer_rich_text:
+          weight: '0'
+        os2loop_post_comment_plain_text:
+          weight: '0'
+        os2loop_post_comment_rich_text:
+          weight: '0'
+        os2loop_documents_rich_text:
+          weight: '0'
+        os2loop_external:
+          weight: '0'
+        os2loop_page:
+          weight: '0'
+        os2loop_post:
+          weight: '0'
+        os2loop_question_plain_text:
+          weight: '0'
+        os2loop_question_rich_text:
+          weight: '0'
 id: paragraph.os2loop_documents_highlighted_co.os2loop_documents_hc_content
 field_name: os2loop_documents_hc_content
 entity_type: paragraph

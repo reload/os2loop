@@ -9,7 +9,7 @@ dependencies:
     - field.field.node.os2loop_documents_document_colle.os2loop_documents_dc_content
     - node.type.os2loop_documents_document_colle
   module:
-    - paragraphs
+    - text
 id: node.os2loop_documents_document_colle.default
 targetEntityType: node
 bundle: os2loop_documents_document_colle
@@ -52,16 +52,12 @@ content:
     type: entity_reference_autocomplete
     region: content
   os2loop_documents_dc_content:
-    type: entity_reference_paragraphs
-    weight: 124
+    weight: 128
     settings:
-      title: Paragraph
-      title_plural: Paragraphs
-      edit_mode: open
-      add_mode: dropdown
-      form_display_mode: default
-      default_paragraph_type: ''
+      rows: 5
+      placeholder: ''
     third_party_settings: {  }
+    type: text_textarea
     region: content
   promote:
     type: boolean_checkbox

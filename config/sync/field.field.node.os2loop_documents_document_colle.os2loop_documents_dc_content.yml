@@ -1,15 +1,50 @@
-uuid: 54187ba0-14ab-4411-87d7-4b1b68220803
+uuid: fb2fd588-35bf-45c3-8103-55383a453476
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.os2loop_documents_dc_content
     - node.type.os2loop_documents_document_colle
-    - paragraphs.paragraphs_type.os2loop_documents_highlighted_co
-    - paragraphs.paragraphs_type.os2loop_documents_step
-    - paragraphs.paragraphs_type.os2loop_documents_text_and_image
   module:
-    - entity_reference_revisions
+    - better_formats
+    - text
+third_party_settings:
+  better_formats:
+    allowed_formats_toggle: 0
+    allowed_formats:
+      os2loop_question_answer_plain_text: os2loop_question_answer_plain_text
+      os2loop_question_answer_rich_text: os2loop_question_answer_rich_text
+      os2loop_post_comment_plain_text: os2loop_post_comment_plain_text
+      os2loop_post_comment_rich_text: os2loop_post_comment_rich_text
+      os2loop_documents_rich_text: os2loop_documents_rich_text
+      os2loop_external: os2loop_external
+      os2loop_page: os2loop_page
+      os2loop_post: os2loop_post
+      os2loop_question_plain_text: os2loop_question_plain_text
+      os2loop_question_rich_text: os2loop_question_rich_text
+    default_order_toggle: 0
+    default_order_wrapper:
+      formats:
+        os2loop_question_answer_plain_text:
+          weight: '0'
+        os2loop_question_answer_rich_text:
+          weight: '0'
+        os2loop_post_comment_plain_text:
+          weight: '0'
+        os2loop_post_comment_rich_text:
+          weight: '0'
+        os2loop_documents_rich_text:
+          weight: '0'
+        os2loop_external:
+          weight: '0'
+        os2loop_page:
+          weight: '0'
+        os2loop_post:
+          weight: '0'
+        os2loop_question_plain_text:
+          weight: '0'
+        os2loop_question_rich_text:
+          weight: '0'
 id: node.os2loop_documents_document_colle.os2loop_documents_dc_content
 field_name: os2loop_documents_dc_content
 entity_type: node
@@ -20,25 +55,5 @@ required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
-settings:
-  handler: 'default:paragraph'
-  handler_settings:
-    negate: 0
-    target_bundles:
-      os2loop_documents_highlighted_co: os2loop_documents_highlighted_co
-      os2loop_documents_step: os2loop_documents_step
-      os2loop_documents_text_and_image: os2loop_documents_text_and_image
-    target_bundles_drag_drop:
-      os2loop_documents_highlighted_co:
-        enabled: true
-        weight: 5
-      os2loop_documents_step:
-        enabled: true
-        weight: 6
-      os2loop_documents_step_by_step:
-        weight: 7
-        enabled: false
-      os2loop_documents_text_and_image:
-        enabled: true
-        weight: 8
-field_type: entity_reference_revisions
+settings: {  }
+field_type: text_long
