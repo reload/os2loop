@@ -1,0 +1,87 @@
+uuid: e9ce8c07-994e-4d35-88b4-f4065ac9611b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_os2loop_page_content
+    - field.storage.node.field_os2loop_post_content
+    - field.storage.node.field_os2loop_question_content
+    - field.storage.node.field_os2loop_shared_subject
+    - search_api.server.os2loop_search_db_server
+  module:
+    - node
+    - search_api
+id: os2loop_search_db_index
+name: 'os2loop search db index'
+description: ''
+read_only: false
+field_settings:
+  field_os2loop_page_content:
+    label: Content
+    datasource_id: 'entity:node'
+    property_path: field_os2loop_page_content
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_os2loop_page_content
+  field_os2loop_post_content:
+    label: Content
+    datasource_id: 'entity:node'
+    property_path: field_os2loop_post_content
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_os2loop_post_content
+  field_os2loop_question_content:
+    label: Content
+    datasource_id: 'entity:node'
+    property_path: field_os2loop_question_content
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_os2loop_question_content
+  field_os2loop_shared_subject:
+    label: Subject
+    datasource_id: 'entity:node'
+    property_path: field_os2loop_shared_subject
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_os2loop_shared_subject
+  title:
+    label: Title
+    datasource_id: 'entity:node'
+    property_path: title
+    type: text
+    boost: !!float 2
+    dependencies:
+      module:
+        - node
+  type:
+    label: 'Content type'
+    datasource_id: 'entity:node'
+    property_path: type
+    type: string
+    dependencies:
+      module:
+        - node
+datasource_settings:
+  'entity:node':
+    bundles:
+      default: true
+      selected: {  }
+    languages:
+      default: true
+      selected: {  }
+processor_settings:
+  add_url: {  }
+  aggregated_field: {  }
+  language_with_fallback: {  }
+  rendered_item: {  }
+tracker_settings:
+  default:
+    indexing_order: fifo
+options:
+  index_directly: true
+  cron_limit: 50
+server: os2loop_search_db_server
