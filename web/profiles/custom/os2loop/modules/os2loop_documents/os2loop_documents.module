@@ -9,8 +9,6 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
-use Drupal\node\Entity\Node;
-use Drupal\menu_link_content\Entity\MenuLinkContent;
 
 /**
  * Implements hook_help().
@@ -134,34 +132,6 @@ function os2loop_documents_render_collection_menu($menu) {
  *   The form state.
  */
 function os2loop_documents_add_document_callback(array $form, FormStateInterface $form_state) {
-  // @todo make this stuff work
-  $commands = [];
-  $node = $form_state->getformObject()->getEntity();
-  $menu_name = os2loop_documents_get_menu_name($node);
-  $menu = os2loop_load_menu($menu_name);
-  $target_node = NULL;
-  $document_id = $form_state->getValue('document');
-  if (!empty($document_id)) {
-    $target_node = Node::load($document_id);
-  }
-
-  if ($node && $menu && $target_node) {
-    // Get current highest weight at first level in menu.
-    $weight = max(array_map(function ($link) {
-      return $link["original_link"]->getWeight();
-    }, $menu["#items"]));
-
-    MenuLinkContent::create([
-      'title' => $target_node->label(),
-      'link' => [['uri' => 'entity:node/' . $target_node->id()]],
-      'menu_name' => $menu_name,
-      'weight' => $weight,
-      'expanded' => TRUE,
-    ])->save();
-  }
-  else {
-    $commands[] = ajax_command_alert(t('Error adding document to collection'));
-  }
 }
 
 /**
