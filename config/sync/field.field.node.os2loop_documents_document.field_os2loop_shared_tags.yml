@@ -1,19 +1,19 @@
-uuid: 4dfc887f-345c-4646-9bd5-499046a412a0
+uuid: bcf6c6a3-a8f9-4b8a-9b46-2ab85d3e289c
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.os2loop_documents_dc_tags
-    - node.type.os2loop_documents_document_colle
+    - field.storage.node.field_os2loop_shared_tags
+    - node.type.os2loop_documents_document
     - taxonomy.vocabulary.os2loop_tag
-id: node.os2loop_documents_document_colle.os2loop_documents_dc_tags
-field_name: os2loop_documents_dc_tags
+id: node.os2loop_documents_document.field_os2loop_shared_tags
+field_name: field_os2loop_shared_tags
 entity_type: node
-bundle: os2loop_documents_document_colle
+bundle: os2loop_documents_document
 label: Tags
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

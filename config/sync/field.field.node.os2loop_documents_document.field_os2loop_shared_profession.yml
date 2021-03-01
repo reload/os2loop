@@ -1,19 +1,19 @@
-uuid: 7e23e64c-08aa-4185-8078-fe8320ef6424
+uuid: 7df9f563-eef3-423c-8f6f-22af470dcb4a
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.os2loop_documents_dc_profession
-    - node.type.os2loop_documents_document_colle
+    - field.storage.node.field_os2loop_shared_profession
+    - node.type.os2loop_documents_document
     - taxonomy.vocabulary.os2loop_profession
-id: node.os2loop_documents_document_colle.os2loop_documents_dc_profession
-field_name: os2loop_documents_dc_profession
+id: node.os2loop_documents_document.field_os2loop_shared_profession
+field_name: field_os2loop_shared_profession
 entity_type: node
-bundle: os2loop_documents_document_colle
+bundle: os2loop_documents_document
 label: Profession
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

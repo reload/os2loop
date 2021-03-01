@@ -3,10 +3,10 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.os2loop_documents_document_colle.field_os2loop_shared_profession
+    - field.field.node.os2loop_documents_document_colle.field_os2loop_shared_subject
+    - field.field.node.os2loop_documents_document_colle.field_os2loop_shared_tags
     - field.field.node.os2loop_documents_document_colle.os2loop_documents_dc_content
-    - field.field.node.os2loop_documents_document_colle.os2loop_documents_dc_profession
-    - field.field.node.os2loop_documents_document_colle.os2loop_documents_dc_subjects
-    - field.field.node.os2loop_documents_document_colle.os2loop_documents_dc_tags
     - node.type.os2loop_documents_document_colle
   module:
     - paragraphs
@@ -21,6 +21,36 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_os2loop_shared_profession:
+    weight: 125
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_os2loop_shared_subject:
+    weight: 126
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_os2loop_shared_tags:
+    weight: 127
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   os2loop_documents_dc_content:
     type: entity_reference_paragraphs
     weight: 124
@@ -32,36 +62,6 @@ content:
       form_display_mode: default
       default_paragraph_type: ''
     third_party_settings: {  }
-    region: content
-  os2loop_documents_dc_profession:
-    weight: 123
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
-  os2loop_documents_dc_subjects:
-    weight: 122
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
-  os2loop_documents_dc_tags:
-    weight: 121
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
     region: content
   promote:
     type: boolean_checkbox
