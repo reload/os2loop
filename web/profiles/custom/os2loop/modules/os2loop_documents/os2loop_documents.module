@@ -1,0 +1,226 @@
+<?php
+
+/**
+ * @file
+ * Code for the Loop documents feature.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_help().
+ */
+function os2loop_documents_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the os2loop_documents module.
+    case 'help.documents.os2loop_documents':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('OS2Loop documents') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function os2loop_documents_form_node_form_alter(&$form, &$form_state, $form_id) {
+  $node = $form_state->getformObject()->getEntity();
+  if (isset($node)) {
+    if ($node->getType() === 'os2loop_documents_document_colle') {
+      $menu_name = os2loop_documents_get_menu_name($node);
+      $form['field_loop_documents_contents'][LANGUAGE_NONE][0]['value']['#value'] = $menu_name;
+      $form['field_loop_documents_contents']['#type'] = 'hidden';
+      if (isset($menu_name)) {
+        $menu_tree = \Drupal::menuTree();
+        $parameters = $menu_tree->getCurrentRouteMenuTreeParameters($menu_name);
+        $tree = $menu_tree->load($menu_name, $parameters);
+        $menu = $menu_tree->build($tree);
+
+        $form['field_loop_documents_menu_display'] = [
+          '#type' => 'fieldset',
+          '#attributes' => ['class' => ['loop-documents-collection-content']],
+          '#title' => t('Collection content'),
+          '#weight' => $form['field_loop_documents_contents']['#weight'],
+          'menu_display' => [
+            '#markup' => os2loop_documents_render_collection_menu($menu),
+            '#prefix' => '<div id="loop-documents-menu-display">',
+            '#suffix' => '</div>',
+          ],
+        ];
+
+        $form['field_loop_documents_menu_display']['add_document'] = [
+          '#type' => 'container',
+          '#attributes' => ['class' => ['container-inline']],
+          '#weight' => 100,
+          '#prefix' => '<div id="loop-documents-add-document">',
+          '#suffix' => '</div>',
+        ];
+
+        $form['field_loop_documents_menu_display']['add_document']['document'] = [
+          '#type' => 'entity_autocomplete',
+          '#target_type' => 'node',
+          '#selection_settings' => [
+            'target_bundles' => ['os2loop_documents_document'],
+          ],
+          '#prefix' => '<div id="loop-documents-menu-document-options">',
+          '#suffix' => '</div>',
+        ];
+
+        $form['field_loop_documents_menu_display']['add_document']['actions']['submit'] = [
+          '#type' => 'submit',
+          '#submit' => ['os2loop_documents_add_document_callback'],
+          '#value' => t('Add document'),
+        ];
+
+        $form['field_loop_documents_menu_display']['edit_menu'] = [
+          '#url' => Url::fromRoute('entity.menu.edit_form', ['menu' => $menu_name]),
+          '#prefix' => '<div class="loop-documents-edit-menu">',
+          '#markup' => "",
+          '#suffix' => '</div>',
+          '#weight' => -1,
+          '#title' => t('Edit menu'),
+          '#type' => 'link',
+        ];
+      }
+    }
+
+    if (in_array($node->type, [
+      'loop_documents_collection', 'loop_documents_document',
+    ])) {
+      if (isset($form['body'])) {
+        // Remove text format selector.
+        $language = $form['body']['#language'];
+        $form['body'][$language]['0']['#format'] = 'loop_documents';
+      }
+      $form['#attached']['css'][] = drupal_get_path('module', 'loop_documents') . '/css/loop_documents.admin.css';
+      $form['#attached']['js'][] = drupal_get_path('module', 'loop_documents') . '/js/loop_documents.admin.js';
+      $form['#after_build'][] = 'loop_documents_after_build';
+    }
+  }
+}
+
+/**
+ * Render a collection menu.
+ *
+ * @param array|null $menu
+ *   The menu.
+ */
+function os2loop_documents_render_collection_menu($menu) {
+  $content = '';
+  if ($menu) {
+    $content = empty($menu) ? t('No documents added yet') : render($menu);
+  }
+  else {
+    $content = t('Save collection to create menu');
+  }
+
+  return '<div class="loop-documents-collection-menu">' . $content . '</div>';
+}
+
+/**
+ * Ajax callback to add a document to a collection menu.
+ *
+ * @param array $form
+ *   The form.
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ *   The form state.
+ */
+function os2loop_documents_add_document_callback(array $form, FormStateInterface $form_state) {
+}
+
+/**
+ * Implements hook_node_insert().
+ */
+function os2loop_documents_node_insert($node) {
+  if ($node->getType() === "os2loop_documents_document_colle") {
+    os2loop_documents_create_collection_menu($node);
+  }
+}
+
+/**
+ * Implements hook_node_update().
+ */
+function os2loop_documents_entity_update(EntityInterface $entity) {
+  if ($node->type === 'loop_documents_collection') {
+    os2loop_documents_create_collection_menu($node);
+  }
+  elseif ($node->type === 'loop_documents_document') {
+    // Fetch entries that qualify for being the menu item.
+    $result = db_select('menu_links', 'm')
+      ->fields('m', ['link_path', 'router_path', 'mlid'])
+      ->condition('router_path', 'node/%', '=')
+      ->execute()
+      ->fetchAll();
+
+    // Look for the actual menu item. Alter the menu item.
+    foreach ($result as $value) {
+      $link_path_arr = explode("/", $value->link_path);
+      if ($node->nid == $link_path_arr[1]) {
+        $menu_link = menu_link_load($value->mlid);
+
+        // Use menu link title if one is provided, else use node title.
+        if (empty($node->menu['link_title'])) {
+          $menu_link['link_title'] = $node->title;
+        }
+        else {
+          $menu_link['link_title'] = $node->menu['link_title'];
+        }
+
+        menu_link_save($menu_link);
+      }
+    }
+  }
+}
+
+/**
+ * Loads a menu if it exists.
+ *
+ * @param object $menu_name
+ *   The menu name.
+ */
+function os2loop_load_menu($menu_name) {
+  $menu_tree = \Drupal::menuTree();
+  $parameters = $menu_tree->getCurrentRouteMenuTreeParameters($menu_name);
+  $tree = $menu_tree->load($menu_name, $parameters);
+  $menu = $menu_tree->build($tree);
+  return $menu;
+}
+
+/**
+ * Create a collection menu if it does not exist.
+ *
+ * @param object $node
+ *   The document collection node.
+ */
+function os2loop_documents_create_collection_menu($node) {
+  $menu_name = os2loop_documents_get_menu_name($node);
+  $menu = os2loop_load_menu($menu_name);
+
+  \Drupal::entityTypeManager()
+    ->getStorage('menu')
+    ->create([
+      'id' => $menu_name,
+      'label' => t('Document collection menu: @collection_title', ['@collection_title' => $node->getTitle()]),
+      'description' => 'Content menu for document collection ' . $node->getTitle() . ' (/node/' . $node->id() . ')',
+    ])
+    ->save();
+
+  return $menu;
+}
+
+/**
+ * Get collection menu name.
+ */
+function os2loop_documents_get_menu_name($node) {
+  if (is_numeric($node)) {
+    $node = node_load($node);
+  }
+  $nid = $node->id();
+  return isset($nid) ? 'loop-documents-collection-' . $node->id() : NULL;
+}

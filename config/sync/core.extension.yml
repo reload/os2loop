@@ -7,12 +7,17 @@ module:
   dblog: 0
   dynamic_page_cache: 0
   editor: 0
+  entity_reference_revisions: 0
   field: 0
+  field_ui: 0
   file: 0
   filter: 0
   image: 0
   link: 0
+  menu_link_content: 0
+  menu_ui: 0
   node: 0
+  os2loop_documents: 0
   os2loop_external: 0
   os2loop_page: 0
   os2loop_post: 0
@@ -28,6 +33,7 @@ module:
   update: 0
   user: 0
   views: 0
+  paragraphs: 11
   better_formats: 100
   os2loop: 1000
 theme:
