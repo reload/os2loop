@@ -3,9 +3,10 @@
   <description>The coding standard.</description>
 
   <file>web/profiles/custom/os2loop/</file>
+  <file>web/themes/custom/os2loop_theme/</file>
 
   <!-- Exclude generated files -->
-
+  <exclude-pattern>web/themes/custom/os2loop_theme/node_modules/*</exclude-pattern>
   <!-- Show progress of the run -->
   <arg value="p"/>
 
