@@ -4,13 +4,13 @@ status: true
 dependencies:
   config:
     - core.entity_view_display.comment.os2loop_question_answer.default
-    - field.field.node.os2loop_question.field_os2loop_question_answers
-    - field.field.node.os2loop_question.field_os2loop_question_content
-    - field.field.node.os2loop_question.field_os2loop_question_file
-    - field.field.node.os2loop_question.field_os2loop_shared_profession
-    - field.field.node.os2loop_question.field_os2loop_shared_rev_date
-    - field.field.node.os2loop_question.field_os2loop_shared_subject
-    - field.field.node.os2loop_question.field_os2loop_shared_tags
+    - field.field.node.os2loop_question.os2loop_question_answers
+    - field.field.node.os2loop_question.os2loop_question_content
+    - field.field.node.os2loop_question.os2loop_question_file
+    - field.field.node.os2loop_question.os2loop_shared_profession
+    - field.field.node.os2loop_question.os2loop_shared_rev_date
+    - field.field.node.os2loop_question.os2loop_shared_subject
+    - field.field.node.os2loop_question.os2loop_shared_tags
     - node.type.os2loop_question
   module:
     - comment
@@ -23,7 +23,12 @@ targetEntityType: node
 bundle: os2loop_question
 mode: default
 content:
-  field_os2loop_question_answers:
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  os2loop_question_answers:
     weight: 6
     label: above
     settings:
@@ -32,14 +37,14 @@ content:
     third_party_settings: {  }
     type: comment_default
     region: content
-  field_os2loop_question_content:
+  os2loop_question_content:
     weight: 1
     label: above
     settings: {  }
     third_party_settings: {  }
     type: text_default
     region: content
-  field_os2loop_question_file:
+  os2loop_question_file:
     weight: 5
     label: above
     settings:
@@ -47,7 +52,7 @@ content:
     third_party_settings: {  }
     type: file_default
     region: content
-  field_os2loop_shared_profession:
+  os2loop_shared_profession:
     label: above
     settings:
       link: true
@@ -55,7 +60,7 @@ content:
     type: entity_reference_label
     region: content
     weight: 2
-  field_os2loop_shared_rev_date:
+  os2loop_shared_rev_date:
     weight: 7
     label: above
     settings:
@@ -64,7 +69,7 @@ content:
     third_party_settings: {  }
     type: datetime_default
     region: content
-  field_os2loop_shared_subject:
+  os2loop_shared_subject:
     label: above
     settings:
       link: true
@@ -72,16 +77,11 @@ content:
     type: entity_reference_label
     region: content
     weight: 3
-  field_os2loop_shared_tags:
+  os2loop_shared_tags:
     label: above
     settings:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
     region: content
-  links:
-    weight: 0
-    region: content
-    settings: {  }
-    third_party_settings: {  }
 hidden: {  }

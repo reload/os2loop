@@ -22,9 +22,9 @@ class CommentFixture extends AbstractFixture implements DependentFixtureInterfac
       'comment_type' => 'os2loop_post_comment',
       'entity_type' => 'node',
       'entity_id' => $this->getReference('os2loop_post:the-first-post')->id(),
-      'field_name' => 'field_os2loop_post_comments',
+      'field_name' => 'os2loop_post_comments',
       'status' => Comment::PUBLISHED,
-      'field_os2loop_post_comment' => [
+      'os2loop_post_comment' => [
         'value' => <<<'BODY'
 This is really good news!
 BODY,
@@ -38,9 +38,9 @@ BODY,
       'comment_type' => 'os2loop_post_comment',
       'entity_type' => 'node',
       'entity_id' => $this->getReference('os2loop_post:the-first-post')->id(),
-      'field_name' => 'field_os2loop_post_comments',
+      'field_name' => 'os2loop_post_comments',
       'status' => Comment::PUBLISHED,
-      'field_os2loop_post_comment' => [
+      'os2loop_post_comment' => [
         'value' => <<<'BODY'
 Yeah, I agree <strong>strongly</strong>!
 BODY,
@@ -54,9 +54,9 @@ BODY,
       'entity_type' => 'node',
       'entity_id' => $this->getReference('os2loop_post:the-first-post')->id(),
       'pid' => $this->getReference('comment:the-first-comment')->id(),
-      'field_name' => 'field_os2loop_post_comments',
+      'field_name' => 'os2loop_post_comments',
       'status' => Comment::PUBLISHED,
-      'field_os2loop_post_comment' => [
+      'os2loop_post_comment' => [
         'value' => <<<'BODY'
 Nah, I've had better news …
 BODY,
