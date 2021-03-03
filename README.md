@@ -82,5 +82,6 @@ docker run --volume ${PWD}:/app --workdir /app node:latest yarn coding-standards
 ## Build assets
 
 ```sh
+docker run --volume ${PWD}:/app --workdir /app node:latest yarn install
 docker run -v ${PWD}:/app itkdev/yarn:latest encore dev
 ```
