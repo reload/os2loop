@@ -20,6 +20,11 @@ targetEntityType: node
 bundle: os2loop_external
 mode: default
 content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   os2loop_external_descripti:
     weight: 102
     label: above
@@ -71,10 +76,5 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
-    region: content
-  links:
-    weight: 100
-    settings: {  }
-    third_party_settings: {  }
     region: content
 hidden: {  }

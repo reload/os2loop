@@ -32,7 +32,7 @@ function os2loop_documents_help($route_name, RouteMatchInterface $route_match) {
 function os2loop_documents_form_node_form_alter(&$form, &$form_state, $form_id) {
   $node = $form_state->getformObject()->getEntity();
   if (isset($node)) {
-    if ($node->getType() === 'os2loop_documents_document_colle') {
+    if ($node->getType() === 'os2loop_documents_collection') {
       $menu_name = os2loop_documents_get_menu_name($node);
       $form['field_loop_documents_contents'][LANGUAGE_NONE][0]['value']['#value'] = $menu_name;
       $form['field_loop_documents_contents']['#type'] = 'hidden';
@@ -138,7 +138,7 @@ function os2loop_documents_add_document_callback(array $form, FormStateInterface
  * Implements hook_node_insert().
  */
 function os2loop_documents_node_insert($node) {
-  if ($node->getType() === "os2loop_documents_document_colle") {
+  if ($node->getType() === "os2loop_documents_collection") {
     os2loop_documents_create_collection_menu($node);
   }
 }

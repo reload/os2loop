@@ -17,6 +17,28 @@ targetEntityType: node
 bundle: os2loop_documents_document
 mode: default
 content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  os2loop_documents_document_autho:
+    weight: 102
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  os2loop_documents_document_conte:
+    type: entity_reference_revisions_entity_view
+    weight: 101
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
   os2loop_shared_profession:
     weight: 105
     label: above
@@ -40,27 +62,5 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
-    region: content
-  links:
-    weight: 100
-    settings: {  }
-    third_party_settings: {  }
-    region: content
-  os2loop_documents_document_autho:
-    weight: 102
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
-  os2loop_documents_document_conte:
-    type: entity_reference_revisions_entity_view
-    weight: 101
-    label: above
-    settings:
-      view_mode: default
-      link: ''
-    third_party_settings: {  }
     region: content
 hidden: {  }

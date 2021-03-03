@@ -23,6 +23,11 @@ targetEntityType: node
 bundle: os2loop_post
 mode: default
 content:
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   os2loop_post_comments:
     weight: 6
     label: above
@@ -80,9 +85,4 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
-  links:
-    weight: 0
-    region: content
-    settings: {  }
-    third_party_settings: {  }
 hidden: {  }

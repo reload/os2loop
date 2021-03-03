@@ -23,6 +23,11 @@ targetEntityType: node
 bundle: os2loop_question
 mode: default
 content:
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   os2loop_question_answers:
     weight: 6
     label: above
@@ -79,9 +84,4 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
-  links:
-    weight: 0
-    region: content
-    settings: {  }
-    third_party_settings: {  }
 hidden: {  }

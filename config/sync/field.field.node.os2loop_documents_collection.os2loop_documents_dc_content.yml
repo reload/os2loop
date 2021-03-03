@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.storage.node.os2loop_documents_dc_content
-    - node.type.os2loop_documents_document_colle
+    - node.type.os2loop_documents_collection
   module:
     - better_formats
     - text
@@ -45,10 +45,10 @@ third_party_settings:
           weight: '0'
         os2loop_question_rich_text:
           weight: '0'
-id: node.os2loop_documents_document_colle.os2loop_documents_dc_content
+id: node.os2loop_documents_collection.os2loop_documents_dc_content
 field_name: os2loop_documents_dc_content
 entity_type: node
-bundle: os2loop_documents_document_colle
+bundle: os2loop_documents_collection
 label: Content
 description: ''
 required: false

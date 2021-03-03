@@ -12,16 +12,16 @@ targetEntityType: comment
 bundle: os2loop_question_answer
 mode: default
 content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   os2loop_question_answer:
     weight: 101
     label: above
     settings: {  }
     third_party_settings: {  }
     type: text_default
-    region: content
-  links:
-    weight: 100
-    settings: {  }
-    third_party_settings: {  }
     region: content
 hidden: {  }

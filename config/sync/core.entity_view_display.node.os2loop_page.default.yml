@@ -15,6 +15,11 @@ targetEntityType: node
 bundle: os2loop_page
 mode: default
 content:
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   os2loop_page_content:
     weight: 1
     label: above
@@ -31,9 +36,4 @@ content:
     third_party_settings: {  }
     type: image
     region: content
-  links:
-    weight: 0
-    region: content
-    settings: {  }
-    third_party_settings: {  }
 hidden: {  }
