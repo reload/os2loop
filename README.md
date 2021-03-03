@@ -57,6 +57,21 @@ echo "http://127.0.0.1:8000"
 symfony php vendor/bin/drush --uri=https://127.0.0.1:8000 user:login
 ```
 
+### Fixtures
+
+We have fixtures for all content types.
+
+To load all content type fixtures, run:
+
+```sh
+# Find and enable all fixtures modules
+vendor/bin/drush --yes pm:enable $(find web/profiles/custom/os2loop/modules/ -type f -name 'os2loop_*_fixtures.info.yml' -exec basename -s .info.yml {} \;)
+# Load the fixtures
+vendor/bin/drush --yes content-fixtures:load
+# Uninstall all fixtures modules
+vendor/bin/drush --yes pm:uninstall content_fixtures
+```
+
 ## Updates
 
 ```sh
