@@ -46,7 +46,7 @@ class ConfigCommands extends DrushCommands {
   }
 
   /**
-   * Drush command that renames config.
+   * Rename config.
    *
    * @param string $search
    *   The value being searched for.
@@ -108,7 +108,7 @@ class ConfigCommands extends DrushCommands {
   }
 
   /**
-   * Drush command that adds module dependencies on config.
+   * Add module dependencies in config.
    *
    * @param array $modules
    *   The module names.
@@ -174,7 +174,7 @@ class ConfigCommands extends DrushCommands {
   }
 
   /**
-   * Drush command that moves config info config/install folder in a module.
+   * Move config info config/install folder in a module.
    *
    * @param array $modules
    *   The module names.
