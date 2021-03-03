@@ -22,3 +22,4 @@ content:
 hidden:
   os2loop_page_content: true
   os2loop_page_image: true
+  search_api_excerpt: true

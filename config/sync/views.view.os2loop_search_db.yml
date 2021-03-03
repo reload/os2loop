@@ -72,10 +72,10 @@ display:
               os2loop_post: search_result
               os2loop_question: search_result
       fields:
-        field_os2loop_page_content:
+        os2loop_page_content:
           table: search_api_index_os2loop_search_db_index
-          field: field_os2loop_page_content
-          id: field_os2loop_page_content
+          field: os2loop_page_content
+          id: os2loop_page_content
           entity_type: null
           entity_field: null
           plugin_id: search_api_field

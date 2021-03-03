@@ -13,7 +13,7 @@ url_alias: os2loop_search_db_subject
 weight: 0
 min_count: 1
 show_only_one_result: false
-field_identifier: field_os2loop_shared_subject
+field_identifier: os2loop_shared_subject
 facet_source_id: 'search_api:views_page__os2loop_search_db__page_1'
 widget:
   type: checkbox

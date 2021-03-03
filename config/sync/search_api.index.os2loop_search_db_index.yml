@@ -6,10 +6,10 @@ dependencies:
     - node
     - search_api
   config:
-    - field.storage.node.field_os2loop_external_descripti
-    - field.storage.node.field_os2loop_post_content
-    - field.storage.node.field_os2loop_question_content
-    - field.storage.node.field_os2loop_shared_subject
+    - field.storage.node.os2loop_external_descripti
+    - field.storage.node.os2loop_post_content
+    - field.storage.node.os2loop_question_content
+    - field.storage.node.os2loop_shared_subject
     - search_api.server.os2loop_search_db_server
 id: os2loop_search_db_index
 name: Index
@@ -32,38 +32,38 @@ field_settings:
     dependencies:
       module:
         - node
-  field_os2loop_external_descripti:
+  os2loop_external_descripti:
     label: Description
     datasource_id: 'entity:node'
-    property_path: field_os2loop_external_descripti
+    property_path: os2loop_external_descripti
     type: text
     dependencies:
       config:
-        - field.storage.node.field_os2loop_external_descripti
-  field_os2loop_post_content:
+        - field.storage.node.os2loop_external_descripti
+  os2loop_post_content:
     label: Content
     datasource_id: 'entity:node'
-    property_path: field_os2loop_post_content
+    property_path: os2loop_post_content
     type: text
     dependencies:
       config:
-        - field.storage.node.field_os2loop_post_content
-  field_os2loop_question_content:
+        - field.storage.node.os2loop_post_content
+  os2loop_question_content:
     label: Content
     datasource_id: 'entity:node'
-    property_path: field_os2loop_question_content
+    property_path: os2loop_question_content
     type: text
     dependencies:
       config:
-        - field.storage.node.field_os2loop_question_content
-  field_os2loop_shared_subject:
+        - field.storage.node.os2loop_question_content
+  os2loop_shared_subject:
     label: Subject
     datasource_id: 'entity:node'
-    property_path: field_os2loop_shared_subject
+    property_path: os2loop_shared_subject
     type: integer
     dependencies:
       config:
-        - field.storage.node.field_os2loop_shared_subject
+        - field.storage.node.os2loop_shared_subject
   title:
     label: Title
     datasource_id: 'entity:node'
