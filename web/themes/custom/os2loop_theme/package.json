@@ -1,4 +1,13 @@
 {
+  "name": "os2loop",
+  "version": "1.0.0",
+  "license": "GPL",
+  "description": "Drupal theme for os2loop",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/os2loop/os2loop"
+  },
   "devDependencies": {
     "@symfony/webpack-encore": "^1.1.2",
     "sass": "^1.32.8",
