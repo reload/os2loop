@@ -24,23 +24,23 @@ class ExternalFixture extends AbstractFixture implements DependentFixtureInterfa
     $external = Node::create([
       'type' => 'os2loop_external',
       'title' => 'The first external',
-      'field_os2loop_external_descripti' => [
+      'os2loop_external_descripti' => [
         'value' => <<<'BODY'
 This external resource is really worth reading.
 BODY,
         'format' => 'os2loop_external',
       ],
-      'field_os2loop_external_url' => [
+      'os2loop_external_url' => [
         'uri' => 'https://google.com/',
       ],
-      'field_os2loop_shared_subject' => [
+      'os2loop_shared_subject' => [
         'target_id' => $this->getReference('os2loop_subject:Diverse')->id(),
       ],
-      'field_os2loop_shared_tags' => [
+      'os2loop_shared_tags' => [
         ['target_id' => $this->getReference('os2loop_tag:test')->id()],
         ['target_id' => $this->getReference('os2loop_tag:Udredning')->id()],
       ],
-      'field_os2loop_shared_profession' => [
+      'os2loop_shared_profession' => [
         'target_id' => $this->getReference('os2loop_profession:Andet')->id(),
       ],
     ]);

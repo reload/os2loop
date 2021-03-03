@@ -22,13 +22,13 @@ class PageFixture extends AbstractFixture implements DependentFixtureInterface, 
     $page = Node::create([
       'type' => 'os2loop_page',
       'title' => 'The first page',
-      'field_os2loop_page_content' => [
+      'os2loop_page_content' => [
         'value' => <<<'BODY'
 This is the very first page!
 BODY,
         'format' => 'os2loop_page',
       ],
-      'field_os2loop_page_image' => [
+      'os2loop_page_image' => [
         'target_id' => $this->getReference('file:image-001.jpg')->id(),
         'alt' => 'This is an image',
       ],

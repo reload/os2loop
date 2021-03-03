@@ -22,9 +22,9 @@ class AnswerFixture extends AbstractFixture implements DependentFixtureInterface
       'comment_type' => 'os2loop_question_answer',
       'entity_type' => 'node',
       'entity_id' => $this->getReference('os2loop_question:the-first-question')->id(),
-      'field_name' => 'field_os2loop_question_answers',
+      'field_name' => 'os2loop_question_answers',
       'status' => Comment::PUBLISHED,
-      'field_os2loop_question_answer' => [
+      'os2loop_question_answer' => [
         'value' => <<<'BODY'
 This is the first answer: Just do it!
 BODY,
@@ -38,9 +38,9 @@ BODY,
       'comment_type' => 'os2loop_question_answer',
       'entity_type' => 'node',
       'entity_id' => $this->getReference('os2loop_question:the-first-question')->id(),
-      'field_name' => 'field_os2loop_question_answers',
+      'field_name' => 'os2loop_question_answers',
       'status' => Comment::PUBLISHED,
-      'field_os2loop_question_answer' => [
+      'os2loop_question_answer' => [
         'value' => <<<'BODY'
 This is an even better answer: <strong>Don't</strong> do it!
 BODY,
@@ -54,9 +54,9 @@ BODY,
       'entity_type' => 'node',
       'entity_id' => $this->getReference('os2loop_question:the-first-question')->id(),
       'pid' => $this->getReference('comment:the-first-comment')->id(),
-      'field_name' => 'field_os2loop_question_answers',
+      'field_name' => 'os2loop_question_answers',
       'status' => Comment::PUBLISHED,
-      'field_os2loop_question_answer' => [
+      'os2loop_question_answer' => [
         'value' => <<<'BODY'
 No! The first answer is still the best.
 BODY,

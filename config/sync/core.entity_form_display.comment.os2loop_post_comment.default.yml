@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - comment.type.os2loop_post_comment
-    - field.field.comment.os2loop_post_comment.field_os2loop_post_comment
+    - field.field.comment.os2loop_post_comment.os2loop_post_comment
   module:
     - text
 id: comment.os2loop_post_comment.default
@@ -17,7 +17,7 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: content
-  field_os2loop_post_comment:
+  os2loop_post_comment:
     weight: 12
     settings:
       rows: 5

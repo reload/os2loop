@@ -3,9 +3,9 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.os2loop_documents_document_colle.field_os2loop_shared_profession
-    - field.field.node.os2loop_documents_document_colle.field_os2loop_shared_subject
-    - field.field.node.os2loop_documents_document_colle.field_os2loop_shared_tags
+    - field.field.node.os2loop_documents_document_colle.os2loop_shared_profession
+    - field.field.node.os2loop_documents_document_colle.os2loop_shared_subject
+    - field.field.node.os2loop_documents_document_colle.os2loop_shared_tags
     - field.field.node.os2loop_documents_document_colle.os2loop_documents_dc_content
     - node.type.os2loop_documents_document_colle
   module:
@@ -21,7 +21,7 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_os2loop_shared_profession:
+  os2loop_shared_profession:
     weight: 125
     settings:
       match_operator: CONTAINS
@@ -31,7 +31,7 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
-  field_os2loop_shared_subject:
+  os2loop_shared_subject:
     weight: 126
     settings:
       match_operator: CONTAINS
@@ -41,7 +41,7 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
-  field_os2loop_shared_tags:
+  os2loop_shared_tags:
     weight: 127
     settings:
       match_operator: CONTAINS

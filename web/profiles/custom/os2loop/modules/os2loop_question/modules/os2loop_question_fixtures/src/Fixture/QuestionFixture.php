@@ -26,23 +26,23 @@ class QuestionFixture extends AbstractFixture implements DependentFixtureInterfa
       'type' => 'os2loop_question',
       'title' => 'The first question',
       'status' => Node::PUBLISHED,
-      'field_os2loop_question_content' => [
+      'os2loop_question_content' => [
         'value' => <<<'BODY'
 This is the very first question!
 BODY,
         'format' => 'os2loop_question_rich_text',
       ],
-      'field_os2loop_shared_subject' => [
+      'os2loop_shared_subject' => [
         'target_id' => $this->getReference('os2loop_subject:Diverse')->id(),
       ],
-      'field_os2loop_shared_tags' => [
+      'os2loop_shared_tags' => [
         ['target_id' => $this->getReference('os2loop_tag:test')->id()],
         ['target_id' => $this->getReference('os2loop_tag:Udredning')->id()],
       ],
-      'field_os2loop_shared_profession' => [
+      'os2loop_shared_profession' => [
         'target_id' => $this->getReference('os2loop_profession:Andet')->id(),
       ],
-      'field_os2loop_question_file' => [
+      'os2loop_question_file' => [
         'target_id' => $this->getReference('file:image-001.jpg')->id(),
         'description' => 'See this image!',
       ],
@@ -53,7 +53,7 @@ BODY,
     $question = Node::create([
       'type' => 'os2loop_question',
       'title' => 'Another question',
-      'field_os2loop_question_content' => [
+      'os2loop_question_content' => [
         'value' => <<<'BODY'
 This is another question …
 BODY,
