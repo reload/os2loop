@@ -1,0 +1,23 @@
+uuid: a240f31e-8761-457e-9b0c-07764e4c3350
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.os2loop_search_db_content_type
+  module:
+    - facets
+  theme:
+    - claro
+id: contenttype
+theme: claro
+region: pre_content
+weight: -2
+provider: null
+plugin: 'facet_block:os2loop_search_db_content_type'
+settings:
+  id: 'facet_block:os2loop_search_db_content_type'
+  label: 'Content type'
+  provider: facets
+  label_display: visible
+  block_id: contenttype
+visibility: {  }

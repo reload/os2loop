@@ -1,0 +1,23 @@
+uuid: 8e55ed76-92cd-4959-8662-f15f55ddf988
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.os2loop_search_db
+  module:
+    - views
+  theme:
+    - claro
+id: exposedformos2loop_search_dbpage_1
+theme: claro
+region: pre_content
+weight: -3
+provider: null
+plugin: 'views_exposed_filter_block:os2loop_search_db-page_1'
+settings:
+  id: 'views_exposed_filter_block:os2loop_search_db-page_1'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+visibility: {  }
