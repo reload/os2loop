@@ -2,28 +2,44 @@ uuid: e9ce8c07-994e-4d35-88b4-f4065ac9611b
 langcode: en
 status: true
 dependencies:
+  module:
+    - node
+    - search_api
   config:
-    - field.storage.node.field_os2loop_page_content
+    - field.storage.node.field_os2loop_external_descripti
     - field.storage.node.field_os2loop_post_content
     - field.storage.node.field_os2loop_question_content
     - field.storage.node.field_os2loop_shared_subject
     - search_api.server.os2loop_search_db_server
-  module:
-    - node
-    - search_api
 id: os2loop_search_db_index
-name: 'os2loop search db index'
+name: Index
 description: ''
 read_only: false
 field_settings:
-  field_os2loop_page_content:
-    label: Content
+  changed:
+    label: Changed
     datasource_id: 'entity:node'
-    property_path: field_os2loop_page_content
+    property_path: changed
+    type: date
+    dependencies:
+      module:
+        - node
+  created:
+    label: 'Authored on'
+    datasource_id: 'entity:node'
+    property_path: created
+    type: date
+    dependencies:
+      module:
+        - node
+  field_os2loop_external_descripti:
+    label: Description
+    datasource_id: 'entity:node'
+    property_path: field_os2loop_external_descripti
     type: text
     dependencies:
       config:
-        - field.storage.node.field_os2loop_page_content
+        - field.storage.node.field_os2loop_external_descripti
   field_os2loop_post_content:
     label: Content
     datasource_id: 'entity:node'
@@ -69,7 +85,8 @@ datasource_settings:
   'entity:node':
     bundles:
       default: true
-      selected: {  }
+      selected:
+        - os2loop_page
     languages:
       default: true
       selected: {  }
@@ -78,6 +95,12 @@ processor_settings:
   aggregated_field: {  }
   language_with_fallback: {  }
   rendered_item: {  }
+  type_boost:
+    boosts:
+      'entity:node':
+        datasource_boost: !!float 1
+    weights:
+      preprocess_index: 0
 tracker_settings:
   default:
     indexing_order: fifo

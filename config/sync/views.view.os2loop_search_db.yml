@@ -3,11 +3,9 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_os2loop_page_content
     - search_api.index.os2loop_search_db_index
   module:
     - search_api
-    - text
 id: os2loop_search_db
 label: 'os2loop search db'
 module: views
@@ -204,6 +202,30 @@ display:
           expose:
             label: Relevance
           plugin_id: search_api
+        changed:
+          id: changed
+          table: search_api_index_os2loop_search_db_index
+          field: changed
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: true
+          expose:
+            label: Changed
+          plugin_id: search_api
+        title:
+          id: title
+          table: search_api_index_os2loop_search_db_index
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: true
+          expose:
+            label: Title
+          plugin_id: search_api
       title: Search
       header: {  }
       footer: {  }
@@ -225,7 +247,6 @@ display:
     cache_metadata:
       max-age: -1
       contexts:
-        - 'languages:language_content'
         - 'languages:language_interface'
         - url
         - url.query_args
@@ -233,7 +254,6 @@ display:
         - 'url.query_args:sort_order'
         - 'user.node_grants:view'
       tags:
-        - 'config:field.storage.node.field_os2loop_page_content'
         - 'config:search_api.index.os2loop_search_db_index'
   page_1:
     display_plugin: page
@@ -247,10 +267,10 @@ display:
         type: none
       defaults:
         cache: false
+      exposed_block: true
     cache_metadata:
       max-age: -1
       contexts:
-        - 'languages:language_content'
         - 'languages:language_interface'
         - url
         - url.query_args
@@ -258,5 +278,4 @@ display:
         - 'url.query_args:sort_order'
         - 'user.node_grants:view'
       tags:
-        - 'config:field.storage.node.field_os2loop_page_content'
         - 'config:search_api.index.os2loop_search_db_index'

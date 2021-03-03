@@ -5,6 +5,7 @@ dependencies:
   config:
     - search_api.index.os2loop_search_db_index
     - views.view.os2loop_search_db
+    - core.entity_view_mode.node.os2loop_search_db_search_autocomplete
   module:
     - views
     - search_api_autocomplete
@@ -12,10 +13,16 @@ id: os2loop_search_db
 label: 'os2loop search db'
 index_id: os2loop_search_db_index
 suggester_settings:
-  server:
+  live_results:
     fields: {  }
+    view_modes:
+      'entity:node':
+        os2loop_external: os2loop_search_db_search_autocomplete
+        os2loop_page: os2loop_search_db_search_autocomplete
+        os2loop_post: os2loop_search_db_search_autocomplete
+        os2loop_question: os2loop_search_db_search_autocomplete
 suggester_weights:
-  server: 0
+  live_results: 0
 suggester_limits: {  }
 search_settings:
   'views:os2loop_search_db':
