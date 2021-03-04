@@ -83,5 +83,5 @@ docker run --volume ${PWD}:/app --workdir /app node:latest yarn coding-standards
 
 ```sh
 docker run --volume ${PWD}:/app --workdir /app node:latest yarn install
-docker run -v ${PWD}:/app node:latest encore dev
-```
+docker run --volume ${PWD}:/app --workdir /app node:latest yarn encore dev
+ ```
