@@ -1,12 +1,12 @@
-uuid: 86e7a268-01ed-4f4a-8c95-ead5abf28a54
+uuid: 213fabff-319f-465d-8990-d5146761b5bc
 langcode: en
 status: true
 dependencies:
   module:
     - entity_reference_revisions
     - paragraphs
-id: paragraph.os2loop_documents_sbs_step
-field_name: os2loop_documents_sbs_step
+id: paragraph.os2loop_documents_steps
+field_name: os2loop_documents_steps
 entity_type: paragraph
 type: entity_reference_revisions
 settings:

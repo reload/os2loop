@@ -3,11 +3,11 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.os2loop_documents_document.os2loop_documents_document_autho
+    - field.field.node.os2loop_documents_document.os2loop_documents_document_conte
     - field.field.node.os2loop_documents_document.os2loop_shared_profession
     - field.field.node.os2loop_documents_document.os2loop_shared_subject
     - field.field.node.os2loop_documents_document.os2loop_shared_tags
-    - field.field.node.os2loop_documents_document.os2loop_documents_document_autho
-    - field.field.node.os2loop_documents_document.os2loop_documents_document_conte
     - node.type.os2loop_documents_document
   module:
     - paragraphs
@@ -37,9 +37,9 @@ content:
       title: Paragraph
       title_plural: Paragraphs
       edit_mode: open
-      add_mode: dropdown
+      add_mode: button
       form_display_mode: default
-      default_paragraph_type: ''
+      default_paragraph_type: _none
     third_party_settings: {  }
     region: content
   os2loop_shared_profession:
