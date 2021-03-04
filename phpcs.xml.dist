@@ -5,7 +5,8 @@
   <file>web/profiles/custom/os2loop/</file>
 
   <!-- Exclude generated files -->
-
+  <exclude-pattern>web/profiles/custom/os2loop/themes/os2loop_theme/node_modules/*</exclude-pattern>
+  <exclude-pattern>web/profiles/custom/os2loop/themes/os2loop_theme/build/*</exclude-pattern>
   <!-- Show progress of the run -->
   <arg value="p"/>
 

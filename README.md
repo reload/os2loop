@@ -93,3 +93,10 @@ docker run --volume ${PWD}:/app --workdir /app node:latest yarn install
 docker run --volume ${PWD}:/app --workdir /app node:latest yarn coding-standards-check
 docker run --volume ${PWD}:/app --workdir /app node:latest yarn coding-standards-apply
 ```
+
+## Build assets
+
+```sh
+docker run --volume ${PWD}:/app --workdir /app node:latest yarn install
+docker run --volume ${PWD}:/app --workdir /app node:latest yarn encore dev
+ ```

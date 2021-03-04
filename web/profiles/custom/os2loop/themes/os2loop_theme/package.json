@@ -1,0 +1,22 @@
+{
+  "name": "os2loop",
+  "version": "1.0.0",
+  "license": "GPL",
+  "description": "Drupal theme for os2loop",
+  "private": true,
+  "scripts": {
+    "build": "encore production --progress",
+    "watch": "encore dev --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/os2loop/os2loop"
+  },
+  "devDependencies": {
+    "@symfony/webpack-encore": "^1.1.2",
+    "sass": "^1.32.8",
+    "sass-loader": "^11.0.0",
+    "webpack-notifier": "^1.6.0",
+    "copy-webpack-plugin": "^7.0.0"
+  }
+}
