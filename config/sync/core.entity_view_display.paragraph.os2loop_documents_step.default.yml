@@ -5,8 +5,10 @@ dependencies:
   config:
     - field.field.paragraph.os2loop_documents_step.os2loop_documents_step_image
     - field.field.paragraph.os2loop_documents_step.os2loop_documents_step_text
+    - field.field.paragraph.os2loop_documents_step.os2loop_documents_steps
     - paragraphs.paragraphs_type.os2loop_documents_step
   module:
+    - entity_reference_revisions
     - image
     - text
 id: paragraph.os2loop_documents_step.default
@@ -29,5 +31,14 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: text_default
+    region: content
+  os2loop_documents_steps:
+    type: entity_reference_revisions_entity_view
+    weight: 2
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
     region: content
 hidden: {  }

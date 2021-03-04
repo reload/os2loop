@@ -11,7 +11,7 @@ id: paragraph.os2loop_documents_step.os2loop_documents_step_image
 field_name: os2loop_documents_step_image
 entity_type: paragraph
 bundle: os2loop_documents_step
-label: Step
+label: Image
 description: ''
 required: false
 translatable: false

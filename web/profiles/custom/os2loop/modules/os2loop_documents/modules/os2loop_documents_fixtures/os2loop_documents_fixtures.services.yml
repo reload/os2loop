@@ -1,0 +1,10 @@
+services:
+  os2loop_documents_fixtures.document_fixture:
+    class: Drupal\os2loop_documents_fixtures\Fixture\DocumentFixture
+    tags:
+      - { name: content_fixture }
+
+  os2loop_documents_fixtures.collection_fixture:
+    class: Drupal\os2loop_documents_fixtures\Fixture\CollectionFixture
+    tags:
+      - { name: content_fixture }
