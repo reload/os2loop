@@ -13,6 +13,11 @@ Each content type
   Page content type. See [Shared fields](#shared-fields) below for exceptions to
   this rule.
 
+### Exceptions that prove the rules
+
+* The `os2loop_document` and `os2loop_collection` content types are strongly
+  related and share a single module called `os2loop_documents`.
+
 ### Fields
 
 The machine name of a field on a content type is prefixed with the machine name
