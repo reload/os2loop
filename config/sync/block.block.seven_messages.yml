@@ -1,16 +1,16 @@
-uuid: 3c1b4479-65c1-418e-92d5-593884cc6cd0
+uuid: b4b60415-4db8-4a00-8790-77766add722e
 langcode: en
 status: true
 dependencies:
   module:
     - system
   theme:
-    - stark
+    - seven
 _core:
-  default_config_hash: 5MNdk3fpMKx_xxBTcz2T11DL4XEU1H5SgHl8BsYdFsA
-id: stark_messages
-theme: stark
-region: highlighted
+  default_config_hash: iIy-YIc9d9s1isAtTIKWDBKd6kd2r6LxoYz_-hkLJco
+id: seven_messages
+theme: seven
+region: header
 weight: 0
 provider: null
 plugin: system_messages_block
