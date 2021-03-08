@@ -1,5 +1,5 @@
 type: theme
-base theme: claro
+base theme: false
 name: 'os2loop'
 description: 'A theme for os2loop.'
 core_version_requirement: ^8 || ^9
