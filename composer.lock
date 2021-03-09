@@ -5,10 +5,14 @@
         "This file is @generated automatically"
     ],
 <<<<<<< HEAD
+<<<<<<< HEAD
     "content-hash": "5470dc7a098c4f9182dee04d1ad4a0fd",
 =======
     "content-hash": "ec1e13c93564c89173f96a6ab84df340",
 >>>>>>> LOOP-757: required twigcs
+=======
+    "content-hash": "0595ba78622819b9604c843583da7fad",
+>>>>>>> LOOP-757: required twigcs with --dev
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2187,51 +2191,6 @@
                 "vulnerability scanner"
             ],
             "time": "2021-03-03T11:56:26+00:00"
-        },
-        {
-            "name": "friendsoftwig/twigcs",
-            "version": "v5.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/friendsoftwig/twigcs.git",
-                "reference": "d85fa2a567eb2671186558f92c53e86cdd502c3b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/friendsoftwig/twigcs/zipball/d85fa2a567eb2671186558f92c53e86cdd502c3b",
-                "reference": "d85fa2a567eb2671186558f92c53e86cdd502c3b",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.2 || ^8.0",
-                "symfony/console": "^3.4 || ^4.3 || ^5.0",
-                "symfony/filesystem": "^3.4 || ^4.3 || ^5.0",
-                "symfony/finder": "^3.4 || ^4.3 || ^5.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^8.0 || ^9.0"
-            },
-            "bin": [
-                "bin/twigcs"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "FriendsOfTwig\\Twigcs\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Tristan Maindron",
-                    "email": "tmaindron@gmail.com"
-                }
-            ],
-            "description": "Checkstyle automation for Twig",
-            "time": "2021-02-04T13:46:25+00:00"
         },
         {
             "name": "grasmash/expander",
@@ -9859,6 +9818,7 @@
             "time": "2021-01-27T09:09:26+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "symfony/dom-crawler",
             "version": "v4.4.20",
             "source": {
@@ -9866,6 +9826,55 @@
                 "url": "https://github.com/symfony/dom-crawler.git",
                 "reference": "be133557f1b0e6672367325b508e65da5513a311"
             },
+=======
+            "name": "friendsoftwig/twigcs",
+            "version": "v5.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/friendsoftwig/twigcs.git",
+                "reference": "d85fa2a567eb2671186558f92c53e86cdd502c3b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/friendsoftwig/twigcs/zipball/d85fa2a567eb2671186558f92c53e86cdd502c3b",
+                "reference": "d85fa2a567eb2671186558f92c53e86cdd502c3b",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2 || ^8.0",
+                "symfony/console": "^3.4 || ^4.3 || ^5.0",
+                "symfony/filesystem": "^3.4 || ^4.3 || ^5.0",
+                "symfony/finder": "^3.4 || ^4.3 || ^5.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.0 || ^9.0"
+            },
+            "bin": [
+                "bin/twigcs"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "FriendsOfTwig\\Twigcs\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tristan Maindron",
+                    "email": "tmaindron@gmail.com"
+                }
+            ],
+            "description": "Checkstyle automation for Twig",
+            "time": "2021-02-04T13:46:25+00:00"
+        },
+        {
+            "name": "os2loop/os2loop_fixtures",
+            "version": "dev-main",
+>>>>>>> LOOP-757: required twigcs with --dev
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/be133557f1b0e6672367325b508e65da5513a311",
