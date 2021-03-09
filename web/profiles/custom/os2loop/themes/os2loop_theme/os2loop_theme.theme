@@ -9,7 +9,7 @@
  * Implements hook_form_alter().
  */
 function os2loop_theme_form_alter(&$form, $form_state, $form_id) {
-  // Removes the preview button from the comment form. 
+  // Removes the preview button from the comment form.
   if (strpos($form_id, 'comment_os2loop_post_comment_form') !== FALSE) {
     $form['actions']['preview']['#access'] = FALSE;
   }
