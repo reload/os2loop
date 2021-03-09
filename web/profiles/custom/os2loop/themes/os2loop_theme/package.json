@@ -20,6 +20,7 @@
     "webpack-notifier": "^1.6.0"
   },
   "dependencies": {
-    "bootstrap": "^4.6.0"
+    "bootstrap": "^4.6.0",
+    "bootstrap-icons": "^1.4.0"
   }
 }
