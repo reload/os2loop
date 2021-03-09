@@ -100,18 +100,14 @@
       </h2>
     {% endif %}
     {{ title_suffix }}
-
     <div{{ content_attributes }}>
       <h1>
       {{ label }}
       </h1>
-
-
       {{ content.os2loop_post_file }}
       {{ content.os2loop_post_content }}
       {{ content.os2loop_shared_tags }}
-     
     </div>
-  {{ content|without('os2loop_shared_tags', 'os2loop_post_content','os2loop_post_file','os2loop_shared_subject','os2loop_shared_profession')  }}
+  {{ content|without('os2loop_shared_tags', 'os2loop_post_content', 'os2loop_post_file', 'os2loop_shared_subject', 'os2loop_shared_profession') }}
   </div>
 </article>
