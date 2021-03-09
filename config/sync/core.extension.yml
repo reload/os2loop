@@ -36,7 +36,6 @@ module:
   better_formats: 100
   os2loop: 1000
 theme:
-  claro: 0
   os2loop_theme: 0
   seven: 0
   adminimal_theme: 0
