@@ -84,4 +84,5 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
+    weight: 4
 hidden: {  }
