@@ -1,6 +1,6 @@
 uuid: 3d67dbc0-4079-4f36-b7d7-8a84afb564a0
 langcode: en
-status: true
+status: false
 dependencies:
   theme:
     - os2loop_theme
@@ -8,8 +8,8 @@ _core:
   default_config_hash: gfXKmThltk6eewwrjAEaxVPxzPEVHV1UfNjjOUQ5A7g
 id: os2loop_theme_page_title
 theme: os2loop_theme
-region: header
-weight: -30
+region: content
+weight: 0
 provider: null
 plugin: page_title_block
 settings:

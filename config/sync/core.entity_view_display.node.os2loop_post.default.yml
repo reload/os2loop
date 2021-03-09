@@ -39,14 +39,14 @@ content:
     region: content
   os2loop_post_content:
     weight: 1
-    label: above
+    label: visually_hidden
     settings: {  }
     third_party_settings: {  }
     type: text_default
     region: content
   os2loop_post_file:
     weight: 5
-    label: above
+    label: visually_hidden
     settings:
       use_description_as_link_text: true
     third_party_settings: {  }
@@ -71,7 +71,7 @@ content:
     region: content
   os2loop_shared_subject:
     weight: 2
-    label: above
+    label: inline
     settings:
       link: true
     third_party_settings: {  }

@@ -19,7 +19,7 @@ content:
     region: content
   os2loop_post_comment:
     weight: 101
-    label: above
+    label: visually_hidden
     settings: {  }
     third_party_settings: {  }
     type: text_default
