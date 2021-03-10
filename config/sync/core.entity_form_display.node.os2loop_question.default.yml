@@ -83,6 +83,7 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete_tags
     region: content
+    weight: 9
   promote:
     type: boolean_checkbox
     settings:
