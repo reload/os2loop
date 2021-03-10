@@ -45,8 +45,12 @@
         "check-coding-standards/phpcs": [
             "vendor/bin/phpcs --standard=phpcs.xml.dist"
         ],
+        "check-coding-standards/twigcs": [
+            "twigcs web/profiles/custom/os2loop/themes/os2loop_theme/templates"
+        ],
         "check-coding-standards": [
-            "@check-coding-standards/phpcs"
+            "@check-coding-standards/phpcs",
+            "@check-coding-standards/twigcs"
         ],
         "apply-coding-standards/phpcs": [
             "vendor/bin/phpcbf --standard=phpcs.xml.dist"
