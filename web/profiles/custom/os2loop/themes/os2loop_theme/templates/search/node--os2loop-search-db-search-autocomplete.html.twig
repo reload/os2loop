@@ -1,2 +1,5 @@
-{#<span>{{ dump(elements|keys) }}</span>#}
-<span>zzz[[[{{ elements['#search_api_excerpt']|raw }}]]]</span>
+{% set node = elements['#node'] %}
+<span>
+  <span class="badge bg-light text-dark node-bundle node-bundle-{{ node.bundle }}">{{ node.bundle|t }}</span>
+  <span class="search_api_excerpt">{{ elements['#search_api_excerpt']|raw }}</span>
+</span>
