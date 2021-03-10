@@ -1,10 +1,13 @@
 @import 'bootstrap-icons/font/bootstrap-icons.css';
+$primary-color: #41ab51;
+$secondary-color: #f2f2f2;
+
 .bg-secondary-loop {
-    background-color: #f2f2f2;
+    background-color: $secondary-color;
 }
 
 .bg-navbar-loop {
-    background-color: #41ab51;
+    background-color: $primary-color;
 }
 
 .bi.bi-file-person {
