@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d83e83490c52e3fe96f44eee651205ce",
+    "content-hash": "16fa4e9523926a8f2c3a0b7b9c2fc624",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2122,6 +2122,36 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/paragraphs"
             }
+        },
+        {
+            "name": "drupal/theme_switcher",
+            "version": "dev-8.x-1.x",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/theme_switcher",
+                "reference": "67ea6910135dce3f26444e6222d1713f988a2841"
+            },
+            "require": {
+                "drupal/core": "^8.5 || ^9",
+                "php": ">=7.1"
+            },
+            "default-branch": true,
+            "type": "drupal-module",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Adrián Marín",
+                    "email": "amarincolas@gmail.com"
+                }
+            ],
+            "description": "Creates Theme Switcher Rules within a Drupal installation.",
+            "support": {
+                "issues": "http://drupal.org/project/issues/theme_switcher",
+                "source": "http://cgit.drupalcode.org/theme_switcher"
+            },
+            "time": "2020-12-29T15:42:43+00:00"
         },
         {
             "name": "drush/drush",
@@ -10461,7 +10491,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "drupal/better_formats": 20
+        "drupal/better_formats": 20,
+        "drupal/theme_switcher": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
