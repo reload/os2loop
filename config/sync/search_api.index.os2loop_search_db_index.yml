@@ -4,11 +4,19 @@ status: true
 dependencies:
   module:
     - node
+    - paragraphs
     - search_api
   config:
-    - field.storage.node.os2loop_external_descripti
+    - field.storage.node.os2loop_documents_dc_content
     - field.storage.node.os2loop_post_content
     - field.storage.node.os2loop_question_content
+    - field.storage.node.os2loop_documents_document_conte
+    - field.storage.paragraph.os2loop_documents_hc_content
+    - field.storage.paragraph.os2loop_documents_description
+    - field.storage.paragraph.os2loop_documents_step_text
+    - field.storage.paragraph.os2loop_documents_tai_text
+    - field.storage.paragraph.os2loop_documents_hc_title
+    - field.storage.node.os2loop_external_descripti
     - field.storage.node.os2loop_shared_subject
     - search_api.server.os2loop_search_db_server
 id: os2loop_search_db_index
@@ -32,6 +40,69 @@ field_settings:
     dependencies:
       module:
         - node
+  os2loop_documents_dc_content:
+    label: Content
+    datasource_id: 'entity:node'
+    property_path: os2loop_documents_dc_content
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.os2loop_documents_dc_content
+  os2loop_documents_description:
+    label: 'Content » Paragraph » Description'
+    datasource_id: 'entity:node'
+    property_path: 'os2loop_documents_document_conte:entity:os2loop_documents_description'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.os2loop_documents_document_conte
+        - field.storage.paragraph.os2loop_documents_description
+      module:
+        - paragraphs
+  os2loop_documents_hc_content:
+    label: 'Content » Paragraph » Content'
+    datasource_id: 'entity:node'
+    property_path: 'os2loop_documents_document_conte:entity:os2loop_documents_hc_content'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.os2loop_documents_document_conte
+        - field.storage.paragraph.os2loop_documents_hc_content
+      module:
+        - paragraphs
+  os2loop_documents_hc_title:
+    label: 'Content » Paragraph » Title'
+    datasource_id: 'entity:node'
+    property_path: 'os2loop_documents_document_conte:entity:os2loop_documents_hc_title'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.os2loop_documents_document_conte
+        - field.storage.paragraph.os2loop_documents_hc_title
+      module:
+        - paragraphs
+  os2loop_documents_step_text:
+    label: 'Content » Paragraph » Text'
+    datasource_id: 'entity:node'
+    property_path: 'os2loop_documents_document_conte:entity:os2loop_documents_step_text'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.os2loop_documents_document_conte
+        - field.storage.paragraph.os2loop_documents_step_text
+      module:
+        - paragraphs
+  os2loop_documents_tai_text:
+    label: 'Content » Paragraph » Text'
+    datasource_id: 'entity:node'
+    property_path: 'os2loop_documents_document_conte:entity:os2loop_documents_tai_text'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.os2loop_documents_document_conte
+        - field.storage.paragraph.os2loop_documents_tai_text
+      module:
+        - paragraphs
   os2loop_external_descripti:
     label: Description
     datasource_id: 'entity:node'
@@ -93,6 +164,16 @@ datasource_settings:
 processor_settings:
   add_url: {  }
   aggregated_field: {  }
+  highlight:
+    highlight: always
+    highlight_partial: true
+    excerpt: true
+    excerpt_length: 256
+    exclude_fields: {  }
+    prefix: '<strong>'
+    suffix: '</strong>'
+    weights:
+      postprocess_query: 0
   language_with_fallback: {  }
   rendered_item: {  }
   type_boost:

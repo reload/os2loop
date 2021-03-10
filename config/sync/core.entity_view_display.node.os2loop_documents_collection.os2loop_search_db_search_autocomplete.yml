@@ -1,8 +1,9 @@
-uuid: 6760a242-fd8f-4daf-af9b-f05dd5448ac3
+uuid: 04672924-06b5-4ca7-8d36-aa370e697c87
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.node.os2loop_search_db_search_autocomplete
     - field.field.node.os2loop_documents_collection.os2loop_documents_dc_content
     - field.field.node.os2loop_documents_collection.os2loop_shared_profession
     - field.field.node.os2loop_documents_collection.os2loop_shared_subject
@@ -11,46 +12,30 @@ dependencies:
   module:
     - text
     - user
-id: node.os2loop_documents_collection.default
+id: node.os2loop_documents_collection.os2loop_search_db_search_autocomplete
 targetEntityType: node
 bundle: os2loop_documents_collection
-mode: default
+mode: os2loop_search_db_search_autocomplete
 content:
   links:
-    weight: 100
+    weight: 0
     region: content
     settings: {  }
     third_party_settings: {  }
   os2loop_documents_dc_content:
-    weight: 108
-    label: visually_hidden
+    type: text_trimmed
+    weight: 2
+    region: content
+    label: above
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+  search_api_excerpt:
+    weight: 1
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: text_default
-    region: content
-  os2loop_shared_profession:
-    weight: 105
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
-  os2loop_shared_subject:
-    weight: 106
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
-  os2loop_shared_tags:
-    weight: 107
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
 hidden:
-  search_api_excerpt: true
+  os2loop_shared_profession: true
+  os2loop_shared_subject: true
+  os2loop_shared_tags: true
