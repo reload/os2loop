@@ -15,11 +15,10 @@
  */
 #}
 {% set classes = [
-    'nav-item',
-    'p-0',
-    'm-2',
+    "nav-link",
     is_active ? 'active'
   ]
 %}
 
-<li{{ attributes.addClass(classes) }}>{{ link }}</li>
+<li{{ attributes.addClass("nav-item") }}>{{ link(link["#title"], link["#url"], {'class': classes}) }}</li>
+
