@@ -31,18 +31,18 @@
         "drush/drush": "^10.4"
     },
     "scripts": {
-        "coding-standards-check/twigcs": [
-            "twigcs web/profiles/custom/os2loop/themes/os2loop_theme/templates"
-        ],
         "post-install-cmd": [
             "ln -sf ../../scripts/git/hooks/pre-commit .git/hooks/pre-commit"
         ],
         "check-coding-standards/phpcs": [
             "vendor/bin/phpcs --standard=phpcs.xml.dist"
         ],
+        "check-coding-standards/twigcs": [
+            "twigcs web/profiles/custom/os2loop/themes/os2loop_theme/templates"
+        ],
         "check-coding-standards": [
             "@check-coding-standards/phpcs",
-            "@coding-standards-check/twigcs"
+            "@check-coding-standards/twigcs"
         ],
         "apply-coding-standards/phpcs": [
             "vendor/bin/phpcbf --standard=phpcs.xml.dist"
