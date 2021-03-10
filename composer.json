@@ -11,7 +11,12 @@
     "repositories": {
         "drupal": {
             "type": "composer",
-            "url": "https://packages.drupal.org/8"
+            "url": "https://packages.drupal.org/8",
+            "canonical": false
+        },
+        "drupal/theme_switcher": {
+            "type": "vcs",
+            "url": "https://git.drupalcode.org/project/theme_switcher"
         },
         "os2loop/os2loop_fixtures": {
             "type": "path",
@@ -23,11 +28,14 @@
     },
     "require": {
         "composer/installers": "^1.9",
+        "drupal/adminimal_theme": "^1.6",
         "drupal/better_formats": "1.x-dev",
         "drupal/core-composer-scaffold": "^9.1",
         "drupal/core-project-message": "^9.1",
         "drupal/core-recommended": "^9.1",
+        "drupal/diff": "^1.0",
         "drupal/paragraphs": "^1.12",
+        "drupal/theme_switcher": "dev-8.x-1.x",
         "drush/drush": "^10.4"
     },
     "scripts": {
