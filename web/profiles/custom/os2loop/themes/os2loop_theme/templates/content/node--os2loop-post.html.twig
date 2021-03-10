@@ -74,6 +74,7 @@
   <div>
     {% if display_submitted %}
     <div class="d-flex justify-content-between">
+    {# Todo: test with actual user image #}
       {% if author_picture %}
         {{ author_picture }}
       {% else %}
@@ -85,7 +86,7 @@
           <div>{{ metadata }}</div>
         </div>
       </div>
-         <div class="col-md-3 rounded bg-secondary-loop">
+         <div class="col-md-3 rounded bg-secondary-loop pb-2 pt-2">
           <div> {{ date }}</div>
           {{ content.os2loop_shared_subject }}
           {{ content.os2loop_shared_profession }}
