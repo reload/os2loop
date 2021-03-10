@@ -1,16 +1,16 @@
 uuid: a240f31e-8761-457e-9b0c-07764e4c3350
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - facets.facet.os2loop_search_db_content_type
   module:
     - facets
   theme:
-    - claro
+    - os2loop_theme
 id: contenttype
-theme: claro
-region: pre_content
+theme: os2loop_theme
+region: header
 weight: -2
 provider: null
 plugin: 'facet_block:os2loop_search_db_content_type'
