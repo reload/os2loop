@@ -94,6 +94,19 @@ docker run --volume ${PWD}:/app --workdir /app node:latest yarn coding-standards
 docker run --volume ${PWD}:/app --workdir /app node:latest yarn coding-standards-apply
 ```
 
+### Twigcs
+
+To run only twigcs: 
+
+```sh
+composer coding-standards-check/twigcs
+```
+
+But this is also a part of 
+
+```sh
+composer check-coding-standards
+```
 ## Build assets
 
 ```sh
