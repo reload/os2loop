@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * The primary PHP file for the os2loop_theme theme.
+ */
+
+/**
+ * Site logo for menu.
+ */
+function os2loop_theme_preprocess(&$variables) {
+  $variables['logopath'] = file_url_transform_relative(file_create_url(theme_get_setting('logo.url')));
+};
