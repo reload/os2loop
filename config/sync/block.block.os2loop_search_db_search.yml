@@ -1,6 +1,6 @@
-uuid: 8e55ed76-92cd-4959-8662-f15f55ddf988
+uuid: a84b99f4-eb66-4503-bd99-145a79ea8dbe
 langcode: en
-status: false
+status: true
 dependencies:
   config:
     - views.view.os2loop_search_db
@@ -8,16 +8,16 @@ dependencies:
     - views
   theme:
     - os2loop_theme
-id: exposedformos2loop_search_dbpage_1
+id: os2loop_search_db_search
 theme: os2loop_theme
-region: header
-weight: -3
+region: content
+weight: -5
 provider: null
 plugin: 'views_exposed_filter_block:os2loop_search_db-page_1'
 settings:
   id: 'views_exposed_filter_block:os2loop_search_db-page_1'
   label: ''
   provider: views
-  label_display: '0'
+  label_display: visible
   views_label: ''
 visibility: {  }

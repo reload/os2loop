@@ -17,7 +17,9 @@ dependencies:
     - field.storage.paragraph.os2loop_documents_tai_text
     - field.storage.paragraph.os2loop_documents_hc_title
     - field.storage.node.os2loop_external_descripti
+    - field.storage.node.os2loop_shared_profession
     - field.storage.node.os2loop_shared_subject
+    - field.storage.node.os2loop_shared_tags
     - search_api.server.os2loop_search_db_server
 id: os2loop_search_db_index
 name: Index
@@ -127,6 +129,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.os2loop_question_content
+  os2loop_shared_profession:
+    label: Profession
+    datasource_id: 'entity:node'
+    property_path: os2loop_shared_profession
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.os2loop_shared_profession
   os2loop_shared_subject:
     label: Subject
     datasource_id: 'entity:node'
@@ -135,6 +145,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.os2loop_shared_subject
+  os2loop_shared_tags:
+    label: Tags
+    datasource_id: 'entity:node'
+    property_path: os2loop_shared_tags
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.os2loop_shared_tags
   title:
     label: Title
     datasource_id: 'entity:node'

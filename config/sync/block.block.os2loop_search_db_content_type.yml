@@ -1,4 +1,4 @@
-uuid: 3f391ba7-4840-4342-8f4c-0d0a47f63854
+uuid: ca3ea0af-93a9-4082-9033-5b56ae3b9478
 langcode: en
 status: true
 dependencies:
@@ -8,10 +8,10 @@ dependencies:
     - facets
   theme:
     - os2loop_theme
-id: contenttype_2
+id: os2loop_search_db_content_type
 theme: os2loop_theme
 region: content
-weight: -2
+weight: -4
 provider: null
 plugin: 'facet_block:os2loop_search_db_content_type'
 settings:
@@ -19,5 +19,5 @@ settings:
   label: 'Content type'
   provider: facets
   label_display: visible
-  block_id: contenttype_2
+  block_id: os2loop_search_db_content_type
 visibility: {  }

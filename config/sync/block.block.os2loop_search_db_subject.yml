@@ -1,4 +1,4 @@
-uuid: a95f527e-8cd5-4db9-aa59-d5fd69f523b5
+uuid: 12c97aa0-2f2c-48aa-8564-2d4334bb41ab
 langcode: en
 status: true
 dependencies:
@@ -8,10 +8,10 @@ dependencies:
     - facets
   theme:
     - os2loop_theme
-id: subject_2
+id: os2loop_search_db_subject
 theme: os2loop_theme
 region: content
-weight: -1
+weight: -3
 provider: null
 plugin: 'facet_block:os2loop_search_db_subject'
 settings:
@@ -19,5 +19,5 @@ settings:
   label: Subject
   provider: facets
   label_display: visible
-  block_id: subject_2
+  block_id: os2loop_search_db_subject
 visibility: {  }
