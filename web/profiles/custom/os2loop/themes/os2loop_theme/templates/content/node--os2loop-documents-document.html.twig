@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * Theme override to display a node.
+ * Default theme implementation to display a node.
  *
  * Available variables:
  * - node: The node entity with limited access to object properties and methods.
@@ -68,47 +68,43 @@
  * @todo Remove the id attribute (or make it a class), because if that gets
  *   rendered twice on a page this is invalid CSS for example: two lists
  *   in different view modes.
+ *
+ * @ingroup themeable
  */
 #}
 <article{{ attributes }}>
-  <div>
-    {% if display_submitted %}
-    <div class="d-flex justify-content-between">
-    {# Todo: test with actual user image #}
-      {% if author_picture %}
-        {{ author_picture }}
-      {% else %}
-        <i class="bi bi-file-person"></i>
-      {% endif %}
-      <div class="col-md">
-        <div{{ author_attributes }}>
-          <div>{{ author_name }}</div>
-          <div>{{ metadata }}</div>
-        </div>
-      </div>
-         <div class="col-md-3 rounded bg-secondary-loop pb-2 pt-2">
-          <div> {{ date }}</div>
-          {{ content.os2loop_shared_subject }}
-          {{ content.os2loop_shared_profession }}
-        </div>
-      </div>
-    </div>
-    {% endif %}
-    {{ title_prefix }}
-    {% if label and not page %}
-      <h2{{ title_attributes }}>
-        <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-      </h2>
-    {% endif %}
-    {{ title_suffix }}
-    <div{{ content_attributes }}>
-      <h1>
+  {{ title_prefix }}
+  {% if label  %}
+    <h1{{ title_attributes }}>
       {{ label }}
-      </h1>
-      {{ content.os2loop_post_file }}
-      {{ content.os2loop_post_content }}
-      {{ content.os2loop_shared_tags }}
+    </h1>
+  {% endif %}
+  {{ title_suffix }}
+
+  <div{{ content_attributes }}>
+  <div class="row">
+  <div class="col-md-9">
+    {{ content.os2loop_documents_document_conte }}
     </div>
-  {{ content|without('os2loop_shared_tags', 'os2loop_post_content', 'os2loop_post_file', 'os2loop_shared_subject', 'os2loop_shared_profession') }}
+    <div class="col-md-3">
+        <div class="rounded bg-secondary-loop p-2">
+          <div> {{ content.os2loop_shared_profession }}</div>
+          <div> {{ content.os2loop_shared_tags }}</div>
+          <div> {{ content.os2loop_shared_subject }}</div>
+          <div> {{ content.os2loop_documents_document_autho }}</div>
+        </div>
+        </div>
+        </div>
   </div>
+
+  {% if display_submitted %}
+    <footer>
+      {{ author_picture }}
+      <div{{ author_attributes }}>
+        {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
+        {{ metadata }}
+      </div>
+    </footer>
+  {% endif %}
+
 </article>

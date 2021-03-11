@@ -37,22 +37,30 @@
  * @see template_preprocess_field()
  */
 #}
-{% set classes = [
-    'field',
-    'field--name-' ~ field_name|clean_class,
-    'field--type-' ~ field_type|clean_class,
-    'field--label-' ~ label_display,
-  ]
-%}
 
-<div{{ attributes.addClass(classes) }}>
-{% if multiple %}
-    <div class="field__items">
-{% endif %}
-{% for item in items %}
-    <div{{ item.attributes.addClass('field__item badge badge-light border border-success') }}>{{ item.content }}</div>
-{% endfor %}
-{% if multiple %}
+{% if label_hidden %}
+  {% if multiple %}
+    <div{{ attributes }}>
+      {% for item in items %}
+        <div{{ item.attributes.addClass('field__item badge badge-light border border-success') }}>{{ item.content }}</div>
+      {% endfor %}
     </div>
+  {% else %}
+    {% for item in items %}
+      <div{{ item.attributes.addClass('field__item badge badge-light border border-success') }}>{{ item.content }}</div>
+    {% endfor %}
+  {% endif %}
+{% else %}
+  <div{{ attributes }}>
+    <div{{ title_attributes.addClass(title_classes) }}>{{ label }}</div>
+    {% if multiple %}
+      <div class="field__items">
+    {% endif %}
+    {% for item in items %}
+      <div{{ item.attributes.addClass('field__item badge badge-light border border-success') }}>{{ item.content }}</div>
+    {% endfor %}
+    {% if multiple %}
+      </div>
+    {% endif %}
+  </div>
 {% endif %}
-</div>

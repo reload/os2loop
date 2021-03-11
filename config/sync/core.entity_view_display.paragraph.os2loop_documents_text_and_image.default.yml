@@ -16,7 +16,7 @@ mode: default
 content:
   os2loop_documents_tai_image:
     weight: 1
-    label: above
+    label: visually_hidden
     settings:
       image_style: ''
       image_link: ''
@@ -25,7 +25,7 @@ content:
     region: content
   os2loop_documents_tai_text:
     weight: 0
-    label: above
+    label: visually_hidden
     settings: {  }
     third_party_settings: {  }
     type: text_default
