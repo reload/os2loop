@@ -67,8 +67,9 @@ display:
         options:
           view_modes:
             'entity:node':
+              os2loop_documents_collection: search_result
+              os2loop_documents_document: search_result
               os2loop_external: search_result
-              os2loop_page: search_result
               os2loop_post: search_result
               os2loop_question: search_result
       fields:
