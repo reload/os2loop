@@ -1,7 +1,7 @@
 {% set node = elements['#node'] %}
-<span>
+<div class="search-autocomplete search-autocomplete-{{ node.bundle }}">
+  <h2>{{ label }}</h2>
   <span class="badge bg-light text-dark node-bundle node-bundle-{{ node.bundle }}">{{ node.bundle|t }}</span>
   <span class="search_api_excerpt">{{ elements['#search_api_excerpt']|raw }}</span>
-  {# @todo Get just the subject name/markup #}
   <span class="subject">{{ elements['os2loop_shared_subject'] }}</span>
-</span>
+</div>

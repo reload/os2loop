@@ -9,6 +9,13 @@ libraries:
   - os2loop_theme/global-styling
   - os2loop_theme/global-scripts
 
+libraries-override:
+  # Remove default styling
+  search_api_autocomplete:
+    css:
+      theme:
+        css/search_api_autocomplete.css: false
+
 regions:
   header: Header
   content: Content
