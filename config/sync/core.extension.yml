@@ -8,6 +8,7 @@ module:
   dynamic_page_cache: 0
   editor: 0
   entity_reference_revisions: 0
+  facets: 0
   field: 0
   file: 0
   filter: 0
@@ -21,10 +22,15 @@ module:
   os2loop_page: 0
   os2loop_post: 0
   os2loop_question: 0
+  os2loop_search_db: 0
   os2loop_shared: 0
   os2loop_taxonomy: 0
   page_cache: 0
   path_alias: 0
+  search_api: 0
+  search_api_autocomplete: 0
+  search_api_db: 0
+  snowball_stemmer: 0
   system: 0
   taxonomy: 0
   text: 0

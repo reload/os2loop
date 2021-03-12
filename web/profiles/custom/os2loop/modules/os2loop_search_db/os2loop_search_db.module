@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * @file
+ * Contains os2loop_search_db.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function os2loop_search_db_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the os2loop_search_db module.
+    case 'help.page.os2loop_search_db':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('OS2Loop Search DB') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_search_api_autocomplete_suggestions_alter().
+ */
+function os2loop_search_db_search_api_autocomplete_suggestions_alter(array &$suggestions, array $alter_params) {
+  $helper = \Drupal::service('os2loop_search_db.search_api_autocomplete_helper');
+  $helper->alterSuggestions($suggestions, $alter_params);
+}

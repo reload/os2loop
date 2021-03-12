@@ -1,0 +1,3 @@
+services:
+  os2loop_search_db.search_api_autocomplete_helper:
+    class: Drupal\os2loop_search_db\Helper\SearchApiAutocompleteHelper

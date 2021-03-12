@@ -5,5 +5,5 @@ global-styling:
       build/app.css: {}
 global-scripts:
   version: 1.x
-  js: 
+  js:
     build/app.js: {  }
