@@ -23,7 +23,7 @@ content:
     region: content
   os2loop_documents_dc_content:
     weight: 108
-    label: above
+    label: visually_hidden
     settings: {  }
     third_party_settings: {  }
     type: text_default

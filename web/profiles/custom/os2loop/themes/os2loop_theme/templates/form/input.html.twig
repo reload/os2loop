@@ -13,6 +13,8 @@
 
 {% if attributes.hasClass('button') and not attributes.hasClass('field-add-more-submit') %}
   <input{{ attributes.addClass('btn btn-primary') }}/>
+{% elseif attributes['type'] == 'image' %}
+  <button {{ attributes.addClass('btn') }}><img src={{ attributes.src }}></button>
 {% else %}
   <input{{ attributes.addClass('form-control') }}/>
 {% endif %}
