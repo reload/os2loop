@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "16fa4e9523926a8f2c3a0b7b9c2fc624",
+    "content-hash": "aafebae900b3f5941150864db581dc56",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -8051,17 +8051,17 @@
         },
         {
             "name": "os2loop/os2loop_fixtures",
-            "version": "dev-feature/admin",
+            "version": "dev-feature/clean-up",
             "dist": {
                 "type": "path",
                 "url": "web/profiles/custom/os2loop/modules/os2loop_fixtures",
-                "reference": "29a6fdc67697079d3a91a54c33bc25a44916269c"
+                "reference": "e9d73a6cdece2c20186d250c1a61b6686ad31d31"
             },
             "require": {
                 "drupal/content_fixtures": "^2.0",
                 "php": ">=7.0.0"
             },
-            "type": "drupal-custom-module",
+            "type": "os2loop-custom-module",
             "license": [
                 "GPL-2.0+"
             ],
@@ -8073,7 +8073,6 @@
             ],
             "description": "OS2Loop Fixtures.",
             "transport-options": {
-                "symlink": false,
                 "relative": true
             }
         },

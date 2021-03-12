@@ -84,8 +84,8 @@ vendor/bin/drush --yes cache:rebuild
 ## Coding standards
 
 ```sh
-composer check-coding-standards
-composer apply-coding-standards
+composer coding-standards-check
+composer coding-standards-apply
 ```
 
 ```sh
@@ -96,17 +96,18 @@ docker run --volume ${PWD}:/app --workdir /app node:latest yarn coding-standards
 
 ### Twigcs
 
-To run only twigcs: 
+To run only twigcs:
 
 ```sh
 composer coding-standards-check/twigcs
 ```
 
-But this is also a part of 
+But this is also a part of
 
 ```sh
-composer check-coding-standards
+composer coding-standards-check
 ```
+
 ## Build assets
 
 ```sh

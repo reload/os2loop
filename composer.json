@@ -20,10 +20,7 @@
         },
         "os2loop/os2loop_fixtures": {
             "type": "path",
-            "url": "web/profiles/custom/os2loop/modules/os2loop_fixtures",
-            "options": {
-                "symlink": false
-            }
+            "url": "web/profiles/custom/os2loop/modules/os2loop_fixtures"
         }
     },
     "require": {
@@ -42,21 +39,21 @@
         "post-install-cmd": [
             "ln -sf ../../scripts/git/hooks/pre-commit .git/hooks/pre-commit"
         ],
-        "check-coding-standards/phpcs": [
+        "coding-standards-check/phpcs": [
             "vendor/bin/phpcs --standard=phpcs.xml.dist"
         ],
-        "check-coding-standards/twigcs": [
+        "coding-standards-check/twigcs": [
             "twigcs web/profiles/custom/os2loop/themes/os2loop_theme/templates"
         ],
-        "check-coding-standards": [
-            "@check-coding-standards/phpcs",
-            "@check-coding-standards/twigcs"
+        "coding-standards-check": [
+            "@coding-standards-check/phpcs",
+            "@coding-standards-check/twigcs"
         ],
-        "apply-coding-standards/phpcs": [
+        "coding-standards-apply/phpcs": [
             "vendor/bin/phpcbf --standard=phpcs.xml.dist"
         ],
-        "apply-coding-standards": [
-            "@apply-coding-standards/phpcs"
+        "coding-standards-apply": [
+            "@coding-standards-apply/phpcs"
         ]
     },
     "conflict": {
@@ -100,6 +97,9 @@
             ],
             "web/themes/custom/{$name}": [
                 "type:drupal-custom-theme"
+            ],
+            "web/profiles/custom/os2loop/modules": [
+                "type:os2loop-custom-module"
             ]
         },
         "drupal-core-project-message": {
