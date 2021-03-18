@@ -36,19 +36,15 @@
 
 {# Set nofollow to prevent search bots from crawling anonymous flag links #}
 {% set attributes = attributes.setAttribute('rel', 'nofollow') %}
-{{ upvotes }}
-{% if action == 'unflag' %}
 
 <div class="{{ classes|join(' ') }}">
   <a{{ attributes }}>
+  {{ upvotes }}
+  {% if action == 'unflag' %}
     <i class="bi bi-hand-thumbs-up-fill"></i>
+  {% else %}
+    <i class="bi bi-hand-thumbs-up"></i>
+  {% endif %}
   </a> {{ title }}
 </div>
-{% else %}
-    <div class="{{ classes|join(' ') }}">
-      <a{{ attributes }}>
-        <i class="bi bi-hand-thumbs-up"></i>
-      </a>{{ title }}
-    </div>
-{% endif %}
 {% endspaceless %}
