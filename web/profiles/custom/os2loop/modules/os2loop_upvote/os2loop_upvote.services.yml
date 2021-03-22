@@ -1,0 +1,3 @@
+services:
+  os2loop_upvote.flag_helper:
+    class: Drupal\os2loop_upvote\Helper\FlagHelper
