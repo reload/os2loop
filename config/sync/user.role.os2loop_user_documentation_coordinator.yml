@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies: {  }
 id: os2loop_user_documentation_coordinator
-label: 'documentation coordinator'
+label: 'Documentation coordinator'
 weight: 3
 is_admin: null
 permissions:

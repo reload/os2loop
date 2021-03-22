@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies: {  }
 id: os2loop_user_document_author
-label: 'document author'
+label: 'Document author'
 weight: 7
 is_admin: null
 permissions:

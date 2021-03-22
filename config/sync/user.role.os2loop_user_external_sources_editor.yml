@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies: {  }
 id: os2loop_user_external_sources_editor
-label: 'external sources editor'
+label: 'External sources editor'
 weight: 6
 is_admin: null
 permissions:

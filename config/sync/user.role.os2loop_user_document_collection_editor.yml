@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies: {  }
 id: os2loop_user_document_collection_editor
-label: 'document collection editor'
+label: 'Document collection editor'
 weight: 8
 is_admin: null
 permissions:

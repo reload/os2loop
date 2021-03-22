@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies: {  }
 id: os2loop_user_manager
-label: manager
+label: Manager
 weight: 4
 is_admin: null
 permissions:
