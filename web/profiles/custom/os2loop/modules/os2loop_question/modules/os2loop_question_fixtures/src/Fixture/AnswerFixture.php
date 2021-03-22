@@ -63,6 +63,7 @@ BODY,
         'format' => 'os2loop_question_answer_plain_text',
       ],
     ]);
+    $this->setReference('comment:answer-with-attitude', $comment);
     $comment->save();
   }
 

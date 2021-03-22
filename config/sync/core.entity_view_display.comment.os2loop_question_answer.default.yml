@@ -12,6 +12,16 @@ targetEntityType: comment
 bundle: os2loop_question_answer
 mode: default
 content:
+  flag_os2loop_upvote_correct_answer:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  flag_os2loop_upvote_upvote_button:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   links:
     weight: 100
     settings: {  }
@@ -24,8 +34,6 @@ content:
     third_party_settings: {  }
     type: text_default
     region: content
-hidden:
-  search_api_excerpt: true
   os2loop_upvote_flag_correct_answer:
     weight: 10
     settings: {  }
@@ -36,4 +44,5 @@ hidden:
     settings: {  }
     third_party_settings: {  }
     region: content
-hidden: {  }
+hidden:
+  search_api_excerpt: true
