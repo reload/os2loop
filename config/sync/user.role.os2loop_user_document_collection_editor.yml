@@ -1,0 +1,39 @@
+uuid: 5f7e89b7-d4f7-47e5-8da1-237f131660f9
+langcode: en
+status: true
+dependencies: {  }
+id: os2loop_user_document_collection_editor
+label: 'document collection editor'
+weight: 8
+is_admin: null
+permissions:
+  - 'access ckeditor link'
+  - 'access content overview'
+  - 'access media browser'
+  - 'access path admin'
+  - 'access path admin/content'
+  - 'administer menu'
+  - 'create files'
+  - 'create loop_documents_collection content'
+  - 'create loop_documents_document content'
+  - 'delete any image files'
+  - 'delete any loop_documents_collection content'
+  - 'delete any loop_documents_document content'
+  - 'download any image files'
+  - 'edit any image files'
+  - 'edit any loop_documents_collection content'
+  - 'edit any loop_documents_document content'
+  - 'edit own loop_documents_document content'
+  - 'menu view unpublished'
+  - 'publish any loop_documents_collection content'
+  - 'publish any loop_documents_document content'
+  - 'set revision date for content'
+  - 'unpublish any loop_documents_collection content'
+  - 'unpublish any loop_documents_document content'
+  - 'use media wysiwyg'
+  - 'use text format loop_documents'
+  - 'view admin path'
+  - 'view any unpublished loop_documents_collection content'
+  - 'view any unpublished loop_documents_document content'
+  - 'view document admin menu'
+  - 'view the administration theme'

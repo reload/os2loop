@@ -1,0 +1,23 @@
+uuid: 48b30557-0841-4c19-a16b-d83e06a1686a
+langcode: en
+status: true
+dependencies: {  }
+id: os2loop_user_document_author
+label: 'document author'
+weight: 7
+is_admin: null
+permissions:
+  - 'access ckeditor link'
+  - 'access content overview'
+  - 'access media browser'
+  - 'access path admin'
+  - 'access path admin/content'
+  - 'create files'
+  - 'create loop_documents_document content'
+  - 'download any image files'
+  - 'edit own loop_documents_document content'
+  - 'use media wysiwyg'
+  - 'use text format loop_documents'
+  - 'view admin path'
+  - 'view any unpublished loop_documents_document content'
+  - 'view the administration theme'

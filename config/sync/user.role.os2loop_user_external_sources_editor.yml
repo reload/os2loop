@@ -1,0 +1,19 @@
+uuid: 49c0d1ee-dd56-4816-918e-8dd8549656f1
+langcode: en
+status: true
+dependencies: {  }
+id: os2loop_user_external_sources_editor
+label: 'external sources editor'
+weight: 6
+is_admin: null
+permissions:
+  - 'access content overview'
+  - 'access path admin'
+  - 'access path admin/content'
+  - 'create external_sources content'
+  - 'delete any external_sources content'
+  - 'delete own external_sources content'
+  - 'edit any external_sources content'
+  - 'edit own external_sources content'
+  - 'view admin path'
+  - 'view the administration theme'
