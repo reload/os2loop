@@ -14,16 +14,16 @@ class FlagHelper {
    *
    * @var \Drupal\flag\FlagCountManager
    */
-  protected $flagService;
+  protected $flagCountManager;
 
   /**
    * Constructor.
    *
-   * @param \Drupal\flag\FlagCountManager $flag_counter_manager
+   * @param \Drupal\flag\FlagCountManager $flagCountManager
    *   The flag count manager.
    */
-  public function __construct(FlagCountManager $flag_counter_manager) {
-    $this->flagCounterManager = $flag_counter_manager;
+  public function __construct(FlagCountManager $flagCountManager) {
+    $this->flagCountManager = $flagCountManager;
   }
 
   /**
@@ -39,7 +39,7 @@ class FlagHelper {
     if (in_array($variables['field_name'], $field)) {
       foreach ($variables['comments'] as $comment) {
         if (isset($comment['#comment'])) {
-          $flag_counts = $this->flagCounterManager->getEntityFlagCounts($comment['#comment']);
+          $flag_counts = $this->flagCountManager->getEntityFlagCounts($comment['#comment']);
           if (isset($flag_counts['os2loop_upvote_correct_answer'])) {
             $top_comment = $comment;
           }
@@ -48,7 +48,7 @@ class FlagHelper {
               if (!isset($top_comment)) {
                 $top_comment = $comment;
               }
-              $top_comment_flag_counts = $this->flagCounterManager->getEntityFlagCounts($top_comment['#comment']);
+              $top_comment_flag_counts = $this->flagCountManager->getEntityFlagCounts($top_comment['#comment']);
               if (isset($top_comment_flag_counts['os2loop_upvote_upvote_button']) && intval($flag_counts['os2loop_upvote_upvote_button']) > intval($top_comment_flag_counts['os2loop_upvote_upvote_button'])) {
                 $top_comment = $comment;
               }
@@ -68,7 +68,7 @@ class FlagHelper {
    */
   public function preprocessFlag(array &$variables) {
     $comment = $variables['flaggable'];
-    $flag_counts = $this->flagCounterManager->getEntityFlagCounts($comment);
+    $flag_counts = $this->flagCountManager->getEntityFlagCounts($comment);
     if (isset($flag_counts['os2loop_upvote_upvote_button'])) {
       $variables['upvotes'] = intval($flag_counts['os2loop_upvote_upvote_button']);
     }
