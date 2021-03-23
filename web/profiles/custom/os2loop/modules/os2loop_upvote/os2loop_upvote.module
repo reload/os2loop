@@ -7,8 +7,6 @@
 
 /**
  * Implements hook_preprocess_flag().
- *
- * Use service to add number of upvotes to flag.
  */
 function os2loop_upvote_preprocess_flag(array &$variables) {
   Drupal::service('os2loop_upvote.flag_helper')->preprocessFlag($variables);
@@ -16,8 +14,6 @@ function os2loop_upvote_preprocess_flag(array &$variables) {
 
 /**
  * Implements hook_preprocess_field().
- *
- * Use service to find the top comment.
  */
 function os2loop_upvote_preprocess_field(array &$variables, $hook) {
   Drupal::service('os2loop_upvote.flag_helper')->preprocessField($variables);
@@ -25,8 +21,6 @@ function os2loop_upvote_preprocess_field(array &$variables, $hook) {
 
 /**
  * Implements hook_preprocess_comment().
- *
- * Add classes for styling.
  */
 function os2loop_upvote_preprocess_comment(array &$variables) {
   Drupal::service('os2loop_upvote.flag_helper')->preprocessComment($variables);

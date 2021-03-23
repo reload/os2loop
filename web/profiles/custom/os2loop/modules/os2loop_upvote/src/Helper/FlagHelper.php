@@ -19,14 +19,16 @@ class FlagHelper {
   /**
    * Constructor.
    *
-   * @param \Drupal\flag\FlagCountManager $flag_service
-   *   The flag service.
+   * @param \Drupal\flag\FlagCountManager $flag_counter_manager
+   *   The flag count manager.
    */
-  public function __construct(FlagCountManager $flag_service) {
-    $this->flagService = $flag_service;
+  public function __construct(FlagCountManager $flag_counter_manager) {
+    $this->flagCounterManager = $flag_counter_manager;
   }
 
   /**
+   * Implements hook_preprocess_field().
+   *
    * Find the top comment.
    *
    * If there is a comment marked as "correct answer", this is it.
@@ -37,7 +39,7 @@ class FlagHelper {
     if (in_array($variables['field_name'], $field)) {
       foreach ($variables['comments'] as $comment) {
         if (isset($comment['#comment'])) {
-          $flag_counts = $this->flagService->getEntityFlagCounts($comment['#comment']);
+          $flag_counts = $this->flagCounterManager->getEntityFlagCounts($comment['#comment']);
           if (isset($flag_counts['os2loop_upvote_correct_answer'])) {
             $top_comment = $comment;
           }
@@ -46,7 +48,7 @@ class FlagHelper {
               if (!isset($top_comment)) {
                 $top_comment = $comment;
               }
-              $top_comment_flag_counts = $this->flagService->getEntityFlagCounts($top_comment['#comment']);
+              $top_comment_flag_counts = $this->flagCounterManager->getEntityFlagCounts($top_comment['#comment']);
               if (isset($top_comment_flag_counts['os2loop_upvote_upvote_button']) && intval($flag_counts['os2loop_upvote_upvote_button']) > intval($top_comment_flag_counts['os2loop_upvote_upvote_button'])) {
                 $top_comment = $comment;
               }
@@ -60,11 +62,13 @@ class FlagHelper {
   }
 
   /**
+   * Implements hook_preprocess_flag().
+   *
    * Add number of upvotes to flag.
    */
   public function preprocessFlag(array &$variables) {
     $comment = $variables['flaggable'];
-    $flag_counts = $this->flagService->getEntityFlagCounts($comment);
+    $flag_counts = $this->flagCounterManager->getEntityFlagCounts($comment);
     if (isset($flag_counts['os2loop_upvote_upvote_button'])) {
       $variables['upvotes'] = intval($flag_counts['os2loop_upvote_upvote_button']);
     }
@@ -73,6 +77,8 @@ class FlagHelper {
   }
 
   /**
+   * Implements hook_preprocess_comment().
+   *
    * Add styling class to top comment.
    */
   public function preprocessComment(array &$variables) {
