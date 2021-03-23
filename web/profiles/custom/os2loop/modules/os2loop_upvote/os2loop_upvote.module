@@ -6,25 +6,28 @@
  */
 
 /**
+ * Implements hook_preprocess_flag().
+ *
  * Use service to add number of upvotes to flag.
  */
 function os2loop_upvote_preprocess_flag(array &$variables) {
-  \Drupal::service('os2loop_upvote.flag_helper')->flagCounts($variables);
+  Drupal::service('os2loop_upvote.flag_helper')->preprocessFlag($variables);
 }
 
 /**
+ * Implements hook_preprocess_field().
+ *
  * Use service to find the top comment.
  */
 function os2loop_upvote_preprocess_field(array &$variables, $hook) {
-  \Drupal::service('os2loop_upvote.flag_helper')->preprocessFlag($variables);
+  Drupal::service('os2loop_upvote.flag_helper')->preprocessField($variables);
 }
 
 /**
+ * Implements hook_preprocess_comment().
+ *
  * Add classes for styling.
  */
 function os2loop_upvote_preprocess_comment(array &$variables) {
-  if (isset($variables['elements']['#top'])) {
-    // @todo when styling change these classes to fit.
-    $variables['attributes'] += ['class' => ['top-comment']];
-  }
+  Drupal::service('os2loop_upvote.flag_helper')->preprocessComment($variables);
 }
