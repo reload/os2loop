@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @file
+ * The module file for os2loop_upvote.
+ */
+
+/**
+ * Implements hook_preprocess_flag().
+ */
+function os2loop_upvote_preprocess_flag(array &$variables) {
+  Drupal::service('os2loop_upvote.flag_helper')->preprocessFlag($variables);
+}
+
+/**
+ * Implements hook_preprocess_field().
+ */
+function os2loop_upvote_preprocess_field(array &$variables, $hook) {
+  Drupal::service('os2loop_upvote.flag_helper')->preprocessField($variables);
+}
+
+/**
+ * Implements hook_preprocess_comment().
+ */
+function os2loop_upvote_preprocess_comment(array &$variables) {
+  Drupal::service('os2loop_upvote.flag_helper')->preprocessComment($variables);
+}

@@ -1,0 +1,5 @@
+services:
+  os2loop_upvote_fixtures.upvote_fixture:
+    class: Drupal\os2loop_upvote_fixtures\Fixture\UpvoteFixture
+    tags:
+      - { name: content_fixture }

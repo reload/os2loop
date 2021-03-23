@@ -47,6 +47,7 @@ BODY,
         'format' => 'os2loop_post_comment_rich_text',
       ],
     ]);
+    $this->setReference('comment:strongly-agree', $comment);
     $comment->save();
 
     $comment = Comment::create([
@@ -63,6 +64,7 @@ BODY,
         'format' => 'os2loop_post_comment_plain_text',
       ],
     ]);
+    $this->setReference('comment:gloomy-comment', $comment);
     $comment->save();
   }
 

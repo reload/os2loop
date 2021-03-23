@@ -12,6 +12,16 @@ targetEntityType: comment
 bundle: os2loop_question_answer
 mode: default
 content:
+  flag_os2loop_upvote_correct_answer:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  flag_os2loop_upvote_upvote_button:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   links:
     weight: 100
     settings: {  }

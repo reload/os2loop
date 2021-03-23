@@ -13,6 +13,9 @@ $secondary-color: #f2f2f2;
 .bi.bi-file-person {
     font-size: 2em;
 }
+.top-comment {
+    border: 2px solid $primary-color;
+}
 
 @import 'bootstrap';
 @import './indented';

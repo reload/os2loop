@@ -82,9 +82,9 @@
         <div>{{ author }}</div>
         <div>metadata</div> {# Todo: here goes author metadata, like, "ergoter..terapøjd" #}
       </div>
-           <div class="col-md-3 rounded bg-secondary-loop pb-2 pt-2">
-          <div> {{ created }}</div>
-        </div>
+        <div class="col-md-3 rounded bg-secondary-loop pb-2 pt-2">
+        <div> {{ created }}</div>
+      </div>
     </div>
     {#
       Indicate the semantic relationship between parent and child comments for
@@ -100,5 +100,7 @@
       {{ content.os2loop_question_answer }}
     </div>
     {{ content.links }}
+    <div>{{ content.flag_os2loop_upvote_upvote_button }}</div>
+    <div>{{ content.flag_os2loop_upvote_correct_answer }}</div>
   </div>
 </article>
