@@ -1,6 +1,8 @@
 services:
   os2loop_documents.collection_helper:
     class: Drupal\os2loop_documents\Helper\CollectionHelper
+    arguments:
+      - '@entity_type.manager'
 
   os2loop_documents.form_helper:
     class: Drupal\os2loop_documents\Helper\FormHelper
@@ -16,3 +18,4 @@ services:
     class: Drupal\os2loop_documents\Helper\NodeHelper
     arguments:
       - '@os2loop_documents.collection_helper'
+      - '@request_stack'

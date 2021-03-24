@@ -72,6 +72,22 @@
  * @ingroup themeable
  */
 #}
+{% macro table_of_contents(items, collection) %}
+  {% if items %}
+    <ol>
+      {% for item in items %}
+        {% set document = item.document %}
+        <li>
+          <a href="{{ path('entity.node.canonical', {node: document.id, collection: collection.id}) }}" class="document-title">{{ document.title.value }}</a>
+          {% if item.children %}
+            {{ _self.table_of_contents(item.children) }}
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ol>
+  {% endif %}
+{% endmacro %}
+
 <article{{ attributes.addClass("container") }}>
   {{ title_prefix }}
   {% if label  %}
@@ -84,6 +100,12 @@
   <div{{ content_attributes }}>
   <div class="row">
     <div class="col-md-9">
+      {% if os2loop_documents_collection_tree|default(false) %}
+        <fieldset>
+          <legend>{{ 'Documents in collection'|trans }}</legend>
+          {{ _self.table_of_contents(os2loop_documents_collection_tree, node) }}
+        </fieldset>
+      {% endif %}
       {{ content.os2loop_documents_dc_content }}
       {{ content.os2loop_documents_collection_tree }}
     </div>
@@ -95,8 +117,8 @@
           <div> {{ content.os2loop_documents_document_autho }}</div>
           <div> {{ content.flag_os2loop_favourite }}</div>
         </div>
-        </div>
-        </div>
+      </div>
+    </div>
   </div>
 
 </article>

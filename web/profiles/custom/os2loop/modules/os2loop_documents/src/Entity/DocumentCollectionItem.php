@@ -24,7 +24,8 @@ use Drupal\node\NodeInterface;
  * )
  *
  * @method DocumentCollectionItem create
- * @property \Drupal\Core\Field\FieldItemList parent_id
+ * @property \Drupal\Core\Field\FieldItemList collection_id
+ * @property \Drupal\Core\Field\FieldItemList parent_document_id
  * @property \Drupal\Core\Field\FieldItemList document_id
  * @property \Drupal\Core\Field\FieldItemList weight
  */
@@ -117,7 +118,7 @@ class DocumentCollectionItem extends ContentEntityBase implements ContentEntityI
       ->setDescription(t('The ID of the Document node.'))
       ->setRequired(TRUE);
 
-    $fields['parent_id'] = BaseFieldDefinition::create('integer')
+    $fields['parent_document_id'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Parent document ID'))
       ->setDescription(t('The ID of the parent Document node.'));
 

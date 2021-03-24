@@ -2,6 +2,7 @@
 
 namespace Drupal\os2loop_documents\Helper;
 
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
 use Drupal\os2loop_documents\Entity\DocumentCollectionItem;
@@ -10,6 +11,19 @@ use Drupal\os2loop_documents\Entity\DocumentCollectionItem;
  * Collection helper.
  */
 class CollectionHelper {
+  /**
+   * The entity type manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  private $entityTypeManager;
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct(EntityTypeManagerInterface $entityTypeManager) {
+    $this->entityTypeManager = $entityTypeManager;
+  }
 
   /**
    * Load collection items from database.
@@ -24,14 +38,12 @@ class CollectionHelper {
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
   public function loadCollectionItems(NodeInterface $collection) {
-    $ids = \Drupal::entityTypeManager()
-      ->getStorage('os2loop_document_collection_item')
-      ->getQuery()
+    $ids = $this->getCollectionItemQuery()
       ->condition('collection_id', $collection->id())
       ->sort('weight')
       ->execute();
 
-    $items = array_map(DocumentCollectionItem::class . '::load', $ids ?: []);
+    $items = DocumentCollectionItem::loadMultiple($ids ?: []);
 
     return $this->buildTree($items);
   }
@@ -40,9 +52,7 @@ class CollectionHelper {
    * Update collection in database.
    */
   public function updateCollection(NodeInterface $node, array $data) {
-    $ids = \Drupal::entityTypeManager()
-      ->getStorage('os2loop_document_collection_item')
-      ->getQuery()
+    $ids = $this->getCollectionItemQuery()
       ->condition('collection_id', $node->id())
       ->execute();
     $items = DocumentCollectionItem::loadMultiple($ids);
@@ -54,7 +64,7 @@ class CollectionHelper {
       $item = DocumentCollectionItem::create([
         'collection_id' => $node->id(),
         'document_id' => $row['id'],
-        'parent_id' => $row['pid'],
+        'parent_document_id' => $row['pid'],
         'weight' => $row['weight'],
       ]);
       $item->save();
@@ -97,7 +107,7 @@ class CollectionHelper {
     $item = DocumentCollectionItem::create([
       'collection_id' => $collection->id(),
       'document_id' => $document->id(),
-      'parent_id' => $parent ? $parent->id() : 0,
+      'parent_document_id' => $parent ? $parent->id() : 0,
       'weight' => $weight + 1,
     ])->save();
   }
@@ -120,7 +130,7 @@ class CollectionHelper {
     // Delete document and any children.
     foreach ($items as $item) {
       if ((int) $document->id() === (int) $item->document_id->value
-        || (int) $document->id() === (int) $item->parent_id->value) {
+        || (int) $document->id() === (int) $item->parent_document_id->value) {
         $item->delete();
       }
     }
@@ -202,7 +212,7 @@ class CollectionHelper {
    */
   public function buildTree(array $items, array &$tree = [], $depth = 0, $parent = 0): array {
     $roots = array_filter($items, static function (DocumentCollectionItem $item) use ($parent) {
-      return $item->parent_id->value == $parent;
+      return $item->parent_document_id->value == $parent;
     });
 
     foreach ($roots as $root) {
@@ -253,8 +263,8 @@ class CollectionHelper {
         $this->treeItems[$collectionId] = [];
         $result = $this->loadCollectionItems(Node::load($collectionId));
         foreach ($result as $item) {
-          $this->treeChildren[$collectionId][$item->parent_id->value][] = $item->document_id->value;
-          $this->treeParents[$collectionId][$item->document_id->value][] = $item->parent_id->value;
+          $this->treeChildren[$collectionId][$item->parent_document_id->value][] = $item->document_id->value;
+          $this->treeParents[$collectionId][$item->document_id->value][] = $item->parent_document_id->value;
           $this->treeItems[$collectionId][$item->document_id->value] = $item;
         }
       }
@@ -329,6 +339,59 @@ class CollectionHelper {
   }
 
   /**
+   * Build document tree by setting children on document nodes.
+   *
+   * @param \Drupal\os2loop_documents\Entity\DocumentCollectionItem|array $items
+   *   The tree as a result from self::loadTree.
+   * @param \Drupal\os2loop_documents\Entity\DocumentCollectionItem|null $root
+   *   The root of the current tree.
+   *
+   * @return array|DocumentCollectionItem[]
+   *   The items with children.
+   */
+  public function buildDocumentTree(array $items, DocumentCollectionItem $root = NULL) {
+    if (NULL === $root) {
+      $nodeIds = array_map(static function (DocumentCollectionItem $item) {
+        return $item->document_id->value;
+      }, $items);
+      $documents = Node::loadMultiple($nodeIds);
+      foreach ($items as $item) {
+        $item->document = $documents[$item->document_id->value];
+      }
+    }
+    $children = array_filter($items, static function (DocumentCollectionItem $item) use ($root) {
+      return NULL === $root ? 0 === $item->depth : $root->document_id->value === $item->parent_document_id->value;
+    });
+    foreach ($children as $child) {
+      $this->buildDocumentTree($items, $child);
+    }
+    if (NULL !== $root) {
+      $root->children = $children;
+    }
+
+    return $children;
+  }
+
+  /**
+   * Load all collection containing a document.
+   *
+   * @param \Drupal\node\Entity\NodeInterface $document
+   *   The document.
+   */
+  public function loadCollections(NodeInterface $document) {
+    $ids = $this->getCollectionItemQuery()
+      ->condition('document_id', $document->id())
+      ->execute();
+    $items = DocumentCollectionItem::loadMultiple($ids);
+
+    $collectionIds = array_map(static function (DocumentCollectionItem $item) {
+      return $item->collection_id->value;
+    }, $items);
+
+    return Node::loadMultiple($collectionIds);
+  }
+
+  /**
    * Get descendants.
    *
    * @param int|array $root
@@ -383,6 +446,23 @@ class CollectionHelper {
    */
   private function getItemId($item) {
     return is_scalar($item) ? $item : ($item['id'] ?? NULL);
+  }
+
+  /**
+   * Get collection item query.
+   *
+   * @return \Drupal\Core\Entity\Query\QueryInterface
+   *   The query.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   *   An exception.
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   *   An exception.
+   */
+  private function getCollectionItemQuery() {
+    return $this->entityTypeManager
+      ->getStorage('os2loop_document_collection_item')
+      ->getQuery();
   }
 
 }

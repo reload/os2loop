@@ -102,7 +102,7 @@ class FormHelper {
           $data = array_map(static function ($item) {
             return [
               'id' => $item->document_id->value,
-              'pid' => $item->parent_id->value,
+              'pid' => $item->parent_document_id->value,
               'weight' => $item->weight->value,
             ];
           }, $collection);

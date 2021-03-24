@@ -72,6 +72,24 @@
  * @ingroup themeable
  */
 #}
+{% macro table_of_contents(items, collection, node) %}
+  {% if items %}
+    <ol>
+      {% for item in items %}
+        {% set document = item.document %}
+        <li>
+          <a href="{{ path('entity.node.canonical', {node: document.id, collection: collection.id}) }}"
+            {{ node.id == document.id ? 'class="active" aria-current="true"' }}
+          ><span class="document-title">{{ document.title.value }}</span></a>
+          {% if item.children %}
+            {{ _self.table_of_contents(item.children, collection, node) }}
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ol>
+  {% endif %}
+{% endmacro %}
+
 <article{{ attributes }}>
   <ul class="tabs nav" id="document-tabs" role="tablist">
     <li>
@@ -90,6 +108,25 @@
         </h1>
       {% endif %}
       {{ title_suffix }}
+
+      {% if os2loop_documents_collection_tree|default(false) %}
+        <fieldset>
+          <legend>{{ 'Documents in collection'|trans }}
+            <a href="{{ path('entity.node.canonical', {node: os2loop_documents_collection.id}) }}">{{ os2loop_documents_collection.title.value }}</a>
+          </legend>
+          {{ _self.table_of_contents(os2loop_documents_collection_tree, os2loop_documents_collection, node) }}
+        </fieldset>
+      {% elseif os2loop_documents_collections|default(false) %}
+        <fieldset>
+          <legend>{{ 'Document is part of these collections'|trans }}</legend>
+          <ol>
+            {% for collection in os2loop_documents_collections %}
+              <li><a href="{{ path('entity.node.canonical', {node: node.id, collection: collection.id}) }}">{{ collection.title.value }}</a></li>
+            {% endfor %}
+          </ol>
+        </fieldset>
+      {% endif %}
+
       <div{{ content_attributes }}>
         {{ content.os2loop_shared_subject }}
         {{ content.os2loop_documents_document_body }}
