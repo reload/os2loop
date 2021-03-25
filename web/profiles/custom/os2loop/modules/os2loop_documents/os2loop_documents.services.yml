@@ -19,3 +19,4 @@ services:
     arguments:
       - '@os2loop_documents.collection_helper'
       - '@request_stack'
+      - '@cache_tags.invalidator'

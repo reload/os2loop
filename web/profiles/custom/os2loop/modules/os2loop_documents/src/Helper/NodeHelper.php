@@ -2,6 +2,7 @@
 
 namespace Drupal\os2loop_documents\Helper;
 
+use Drupal\Core\Cache\CacheTagsInvalidatorInterface;
 use Drupal\node\NodeInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -27,18 +28,38 @@ class NodeHelper {
   private $requestStack;
 
   /**
+   * The cache tags invalidator.
+   *
+   * @var \Drupal\Core\Cache\CacheTagsInvalidatorInterface
+   */
+  private $cacheTagsInvalidator;
+
+  /**
    * Constructor.
    */
-  public function __construct(CollectionHelper $collectionHelper, RequestStack $requestStack) {
+  public function __construct(CollectionHelper $collectionHelper, RequestStack $requestStack, CacheTagsInvalidatorInterface $cacheTagsInvalidator) {
     $this->collectionHelper = $collectionHelper;
     $this->requestStack = $requestStack;
+    $this->cacheTagsInvalidator = $cacheTagsInvalidator;
   }
 
   /**
    * Implements hook_ENTITY_TYPE_update().
+   *
+   * Invalidates cache for documents and collections whose display depend on the
+   * node.
    */
   public function updateNode(NodeInterface $node) {
-    // @todo Clear collection cache when document is updated.
+    if (self::CONTENT_TYPE_COLLECTION === $node->getType()) {
+      $this->invalidateCollectionCache($node);
+    }
+    elseif (self::CONTENT_TYPE_DOCUMENT === $node->getType()) {
+      // Display of collections depends on the collection documents.
+      $collections = $this->collectionHelper->loadCollections($node);
+      foreach ($collections as $collection) {
+        $this->invalidateCollectionCache($collection);
+      }
+    }
   }
 
   /**
@@ -75,6 +96,28 @@ class NodeHelper {
       // caching (cf.
       // https://www.drupal.org/docs/drupal-apis/cache-api/cache-contexts).
       $variables['#cache']['contexts'][] = 'url.query_args:collection';
+    }
+  }
+
+  /**
+   * Invalidate cache for a collection.
+   *
+   * Display of collection documents depends on the collection so we need to
+   * invalidate cache for all documents in the collection.
+   *
+   * @param \Drupal\node\NodeInterface $collection
+   *   The collection.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   *   An exception.
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   *   An exception.
+   */
+  private function invalidateCollectionCache(NodeInterface $collection) {
+    $items = $this->collectionHelper->loadCollectionItems($collection);
+    foreach ($items as $item) {
+      $document = $item->getDocument();
+      $this->cacheTagsInvalidator->invalidateTags($document->getCacheTags());
     }
   }
 
