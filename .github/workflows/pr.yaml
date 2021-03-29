@@ -53,7 +53,7 @@ jobs:
           yarn coding-standards-check
 
   site-install-dev:
-    name: Install Drupal [dev] & Load Fixtures
+    name: [dev] Verify Drupal install and fixtures
     runs-on: ubuntu-latest
     services:
       mariadb:
@@ -97,6 +97,12 @@ jobs:
         run: |
           composer install
           vendor/bin/drush --yes site:install os2loop --existing-config
+      - name: Verify db schema
+        run: |
+          vendor/bin/drush updatedb:status
+      - name: Verify config sync
+        run: |
+          vendor/bin/drush config:status
       - name: Load fixtures
         run: |
           # Find and enable all fixtures modules
@@ -107,7 +113,7 @@ jobs:
           vendor/bin/drush --yes pm:uninstall content_fixtures
 
   site-install-prod:
-    name: Install Drupal [prod]
+    name: [prod] Verify Drupal install
     runs-on: ubuntu-latest
     services:
       mariadb:
@@ -151,6 +157,9 @@ jobs:
         run: |
           composer install --no-dev --optimize-autoloader
           vendor/bin/drush --yes site:install os2loop --existing-config
-      - name: Test db schema
+      - name: Verify db schema
         run: |
           vendor/bin/drush updatedb:status
+      - name: Verify config sync
+        run: |
+          vendor/bin/drush config:status
