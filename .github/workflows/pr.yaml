@@ -48,5 +48,48 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node }}
-      - run: yarn install
-      - run: yarn coding-standards-check
+      - run: |
+          yarn install
+          yarn coding-standards-check
+
+  site-install:
+    name: Drupal install test
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:latest
+        env:
+          MYSQL_USER: db
+          MYSQL_PASSWORD: db
+          MYSQL_DATABASE: db
+          MYSQL_ROOT_PASSWORD: db
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    steps:
+      - uses: actions/checkout@master
+      - name: Setup PHP, with composer and extensions
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.4
+          extensions: ctype, dom, iconv, json, zip, gd, soap
+          coverage: none
+          tools: composer:v2
+      - name: Write 'settings.local.php'
+        run: |
+          cat <<'EOF' > web/sites/default/settings.local.php
+          <?php
+          $databases['default']['default'] = [
+            'database' => getenv('DATABASE_DATABASE') ?: 'db',
+            'username' => getenv('DATABASE_USERNAME') ?: 'db',
+            'password' => getenv('DATABASE_PASSWORD') ?: 'db',
+            'host' => getenv('DATABASE_HOST') ?: 'mariadb',
+            'port' => getenv('DATABASE_PORT') ?: '',
+            'driver' => getenv('DATABASE_DRIVER') ?: 'mysql',
+            'prefix' => '',
+          ];
+          EOF
+      - name: Install Drupal with config
+        run: |
+          composer install --no-dev --optimize-autoloader
+          vendor/bin/drush --yes site:install os2loop --existing-config
