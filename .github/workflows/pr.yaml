@@ -80,12 +80,12 @@ jobs:
           cat <<'EOF' > web/sites/default/settings.local.php
           <?php
           $databases['default']['default'] = [
-            'database' => getenv('DATABASE_DATABASE') ?: 'db',
-            'username' => getenv('DATABASE_USERNAME') ?: 'db',
-            'password' => getenv('DATABASE_PASSWORD') ?: 'db',
-            'host' => getenv('DATABASE_HOST') ?: 'mariadb',
-            'port' => getenv('DATABASE_PORT') ?: '',
-            'driver' => getenv('DATABASE_DRIVER') ?: 'mysql',
+            'database' => 'db',
+            'username' => 'db',
+            'password' => 'db',
+            'host' => 'localhost',
+            'port' => '',
+            'driver' => 'mysql',
             'prefix' => '',
           ];
           EOF
