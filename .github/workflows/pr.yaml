@@ -93,8 +93,6 @@ jobs:
             'prefix' => '',
           ];
           EOF
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
       - name: Install Drupal with config
         run: |
           composer install --no-dev --optimize-autoloader
