@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * Theme override for a field.
+ * Default theme implementation for a field.
  *
  * To override output, copy the "field.html.twig" from the templates directory
  * to your theme's directory and customize it, just like customizing other
@@ -33,37 +33,23 @@
  * - field_type: The type of the field.
  * - label_display: The display settings for the label.
  *
- *
  * @see template_preprocess_field()
+ *
+ * @ingroup themeable
  */
 #}
-{% set title_classes = [
-    'os2loop-title'
+{% set classes = [
+    'os2loop-highlighted-content-field'
   ]
 %}
-{% if label_hidden %}
-  {% if multiple %}
-    <div{{ attributes }}>
-      {% for item in items %}
-        <div{{ item.attributes.addClass('shared-tags') }}>{{ item.content }}</div>
-      {% endfor %}
-    </div>
-  {% else %}
+{% if multiple %}
+<div{{ attributes.addClass(classes) }}>
     {% for item in items %}
-      <div{{ item.attributes.addClass('shared-tags') }}>{{ item.content }}</div>
+    <div{{ item.attributes }}>{{ item.content }}</div>
     {% endfor %}
-  {% endif %}
+</div>
 {% else %}
-  <div{{ attributes }}>
-    <div{{ title_attributes.addClass(title_classes) }}>{{ label }}</div>
-    {% if multiple %}
-      <div>
-    {% endif %}
-    {% for item in items %}
-      <span{{ item.attributes.addClass('shared-tags') }}>{{ item.content }}</span>
-    {% endfor %}
-    {% if multiple %}
-      </div>
-    {% endif %}
-  </div>
+{% for item in items %}
+    <div{{ attributes.addClass(classes) }}>{{ item.content }}</div>
+{% endfor %}
 {% endif %}

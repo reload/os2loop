@@ -40,7 +40,7 @@
 #}
 {% set classes = [
     'paragraph',
-    'alert alert-success',
+    'os2loop-highlighted-container',
     'paragraph--type--' ~ paragraph.bundle|clean_class,
     view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
     not paragraph.isPublished() ? 'paragraph--unpublished'
@@ -48,8 +48,7 @@
 %}
 {% block paragraph %}
   <div{{ attributes.addClass(classes) }} role="alert">
-    <h2 class="alert-heading">{{ content.os2loop_documents_hc_title }}</h2>
-    <hr />
-    <p>{{ content.os2loop_documents_hc_content }}</p>
+    <h2>{{ content.os2loop_documents_hc_title }}</h2>
+    {{ content.os2loop_documents_hc_content }}
   </div>
 {% endblock paragraph %}
