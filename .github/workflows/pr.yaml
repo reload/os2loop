@@ -91,20 +91,8 @@ jobs:
             'prefix' => '',
           ];
           EOF
-      - name: Echo 'settings.local.php'
-        run: |
-          echo
-          <?php
-          $databases['default']['default'] = [
-            'database' => 'db',
-            'username' => 'db',
-            'password' => 'db',
-            'host' => '127.0.0.1',
-            'port' => '${{ job.services.mysql.ports['3306'] }}',
-            'driver' => 'mysql',
-            'prefix' => '',
-          ];
-          EOF
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
       - name: Install Drupal with config
         run: |
           composer install --no-dev --optimize-autoloader
