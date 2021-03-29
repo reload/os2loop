@@ -1,0 +1,60 @@
+/**
+ * @file
+ * Basic styling for the tabs.
+ */
+
+.tabs {
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 50px;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+  background-color: $base-color;
+
+  .tab {
+    padding: 12px;
+    margin: 10px;
+  }
+
+  a {
+    color: $text-color;
+    text-decoration: none;
+  }
+
+  .icon-container {
+    display: flex;
+    position: absolute;
+    right: 0px;
+
+    .icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 30px;
+      height: 30px;
+      margin: 10px 10px 10px 0px;
+      font-size: 1.2em;
+      border-radius: 2px;
+      background-color: $primary-color;
+
+      i {
+        color: $white;
+      }
+    }
+  }
+
+  .active {
+    border-bottom: 3px solid $primary-color;
+  }
+}
+
+.tab-content {
+  margin: 15px;
+
+  h1 {
+    color: $text-color;
+    font-size: 2em;
+  }
+}

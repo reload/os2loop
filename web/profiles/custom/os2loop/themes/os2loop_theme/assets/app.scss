@@ -1,23 +1,61 @@
-@import 'bootstrap-icons/font/bootstrap-icons.css';
-$primary-color: #41ab51;
-$secondary-color: #f2f2f2;
+@import "bootstrap-icons/font/bootstrap-icons.css";
+@import "colors";
+
+body {
+  font-family: "Montserrat" !important;
+}
+
+.os2loop-title {
+  color: $field-title-color;
+  font-weight: bold;
+}
+
+.os2loop-title-inline {
+  color: $field-title-color;
+}
+
+.space {
+  margin: 20px 0;
+}
 
 .bg-secondary-loop {
-    background-color: $secondary-color;
+  background-color: $secondary-color;
+  padding: 2em 0;
+  border-radius: 3px;
 }
 
-.bg-navbar-loop {
-    background-color: $primary-color;
+.bg-primary {
+  background-color: $primary-color;
 }
 
-.bi.bi-file-person {
-    font-size: 2em;
-}
-.top-comment {
-    border: 2px solid $primary-color;
+i {
+  font-size: 1.2em;
 }
 
-@import 'bootstrap';
-@import './indented';
-@import './counter';
-@import './search_api_autocomplete';
+.shared-tags {
+  background-color: $primary-color;
+  border-radius: 15px;
+  margin-right: 5px;
+  padding: 3px 15px;
+  a {
+    color: black;
+  }
+}
+
+.about-document-container {
+  background-color: $base-color;
+  padding: 15px;
+}
+
+.os2loop-highlighted-content-field {
+  padding: 10px 0;
+}
+
+@import "bootstrap";
+@import "./comment";
+@import "./search_api_autocomplete";
+@import "./tabs";
+@import "./font";
+@import "./paragraphs/step-by-step";
+@import "./paragraphs/highlighted-content";
+@import "./paragraphs/text-and-image";
