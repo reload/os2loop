@@ -9,5 +9,8 @@
     "coding-standards-check": "yarn coding-standards-check/markdownlint",
     "coding-standards-apply/markdownlint": "markdownlint --fix README.md 'docs/**/*.md' 'web/profiles/custom/os2loop/**/*.md' --ignore 'web/profiles/custom/os2loop/**/node_modules/**/*.md'",
     "coding-standards-apply": "yarn coding-standards-apply/markdownlint"
+  },
+  "dependencies": {
+    "prettier": "^2.2.1"
   }
 }
