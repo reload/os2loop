@@ -53,7 +53,7 @@ jobs:
           yarn coding-standards-check
 
   site-install:
-    name: Drupal install test
+    name: Install Drupal & Load Fixtures
     runs-on: ubuntu-latest
     services:
       mariadb:
@@ -97,3 +97,11 @@ jobs:
         run: |
           composer install --no-dev --optimize-autoloader
           vendor/bin/drush --yes site:install os2loop --existing-config
+      - name: Load fixtures
+        run: |
+          # Find and enable all fixtures modules
+          vendor/bin/drush --yes pm:enable $(find web/profiles/custom/os2loop/modules/ -type f -name 'os2loop_*_fixtures.info.yml' -exec basename -s .info.yml {} \;)
+          # Load the fixtures
+          vendor/bin/drush --yes content-fixtures:load
+          # Uninstall all fixtures modules
+          vendor/bin/drush --yes pm:uninstall content_fixtures
