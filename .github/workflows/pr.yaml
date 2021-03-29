@@ -63,8 +63,6 @@ jobs:
           MYSQL_PASSWORD: db
           MYSQL_DATABASE: db
           MYSQL_ROOT_PASSWORD: db
-        ports:
-          - 3306:3306
         options:
           --health-cmd="mysqladmin ping"
           --health-interval=10s
@@ -87,7 +85,21 @@ jobs:
             'database' => 'db',
             'username' => 'db',
             'password' => 'db',
-            'host' => 'mariadb',
+            'host' => '127.0.0.1',
+            'port' => '${{ job.services.mysql.ports['3306'] }}',
+            'driver' => 'mysql',
+            'prefix' => '',
+          ];
+          EOF
+      - name: Echo 'settings.local.php'
+        run: |
+          echo
+          <?php
+          $databases['default']['default'] = [
+            'database' => 'db',
+            'username' => 'db',
+            'password' => 'db',
+            'host' => '127.0.0.1',
             'port' => '${{ job.services.mysql.ports['3306'] }}',
             'driver' => 'mysql',
             'prefix' => '',
