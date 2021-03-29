@@ -58,6 +58,8 @@ jobs:
     services:
       mariadb:
         image: mariadb:10.4
+        ports:
+          - 3306:3306
         env:
           MYSQL_USER: db
           MYSQL_PASSWORD: db
@@ -86,7 +88,7 @@ jobs:
             'username' => 'db',
             'password' => 'db',
             'host' => '127.0.0.1',
-            'port' => '${{ job.services.mysql.ports['3306'] }}',
+            'port' => '3306',
             'driver' => 'mysql',
             'prefix' => '',
           ];
