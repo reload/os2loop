@@ -72,55 +72,27 @@
  * @ingroup themeable
  */
 #}
-<article{{ attributes }}>
-	<ul class="tabs nav" id="document-tabs" role="tablist">
-		<li>
-			<a class="tab active" id="document-tab" data-toggle="tab" href="#document" role="tab" aria-controls="document" aria-selected="true">Document</a>
+<article{{ attributes.addClass("os2loop-content") }}>
+	<div class="icon-container">
+		<li class="icon edit">
+			<a href={{ edit_link }}>
+				<i class="bi bi-pencil-square"></i>
+			</a>
 		</li>
-		<li>
-			<a class="tab" id="about-document-tab" data-toggle="tab" href="#about-document" role="tab" aria-controls="about-document" aria-selected="false">About document</a>
+		<li class="icon delete">
+			<a href={{ delete_link }}>
+				<i class="bi bi-trash"></i>
+			</a>
 		</li>
-		<div class="icon-container">
-			<li class="icon edit">
-				<a href={{ edit_link }}>
-					<i class="bi bi-pencil-square"></i>
-				</a>
-			</li>
-			<li class="icon delete">
-				<a href={{ delete_link }}>
-					<i class="bi bi-trash"></i>
-				</a>
-			</li>
-		</div>
-	</ul>
-	<div class="tab-content" id="document-tabs-content">
-		<div class="tab-pane show active" id="document" role="tabpanel" aria-labelledby="document-tab">
-			{{ title_prefix }}
-			{% if label  %}
-				<h1{{ title_attributes }}>
-					{{ label }}
-				</h1>
-			{% endif %}
-			{{ title_suffix }}
-			<div{{ content_attributes }}>
-				{{ content.os2loop_shared_subject }}
-				{{ content.os2loop_documents_document_conte }}
-			</div>
-		</div>
-		<div class="tab-pane" id="about-document" role="tabpanel" aria-labelledby="about-document-tab">
-			{{ title_prefix }}
-			{% if label  %}
-				<h1{{ title_attributes }}>
-					Om dokumentet
-				</h1>
-			{% endif %}
-			{{ title_suffix }}
-			{{ content.os2loop_documents_document_autho }}
-			<div{{ content_attributes.addClass("bg-secondary-loop") }}>
-				{{ content.os2loop_shared_tags }}
-				{{ content.os2loop_shared_subject }}
-				{{ content.os2loop_shared_profession }}
-			</div>
-		</div>
+	</div>
+	{{ title_prefix }}
+	{% if label %}
+		<h1{{ title_attributes }}>
+			{{ label }}
+		</h1>
+	{% endif %}
+	{{ title_suffix }}
+	<div{{ content_attributes.addClass("bg-secondary-loop") }}>
+		{{ content }}
 	</div>
 </article>

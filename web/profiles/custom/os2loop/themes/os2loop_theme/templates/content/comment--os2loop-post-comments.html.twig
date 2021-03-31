@@ -66,40 +66,54 @@
  * @ingroup themeable
  */
 #}
-<article{{ attributes.addClass('js-comment') }}>
-  {#
-    Hide the "new" indicator by default, let a piece of JavaScript ask the
-    server which comments are new for the user. Rendering the final "new"
-    indicator here would break the render cache.
-  #}
-  <mark class="hidden" data-comment-timestamp="{{ new_indicator_timestamp }}"></mark>
-  <footer>
-    <div class="d-flex justify-content-between">
-    {# Todo: make if/else with actual user image #}
-      <i class="bi bi-file-person"></i>
-      <div class="col-md">
-        <div>{{ author }}</div>
-        <div>metadata</div> {# Todo: here goes author metadata, like, "ergoter..terapøjd" #}
-      </div>
-           <div class="col-md-3 bg-secondary-loop">
-          <div> {{ created }}</div>
-        </div>
-    </div>
-    {#
-      Indicate the semantic relationship between parent and child comments for
-      accessibility. The list is difficult to navigate in a screen reader
-      without this information.
-    #}
-    {% if parent %}
-      <p class="visually-hidden">{{ parent }}</p>
-    {% endif %}
-  </footer>
-  <div{{ content_attributes }}>
-    <div class="mb-3 mt-3">
-      {{ content.os2loop_post_comment }}
-    </div>
-    {{ content.links }}
-    <div>{{ content.flag_os2loop_upvote_upvote_button }}</div>
-    <div>{{ content.flag_os2loop_upvote_correct_answer }}</div>
-  </div>
+
+{% set background_class = [
+    attributes.hasClass('top-comment') ? 'top-comment-background',
+    not attributes.hasClass('top-comment') ? 'bg-secondary-loop',
+  ]
+%}
+
+<article{{ attributes.addClass('js-comment os2loop-comment') }}>
+	{#
+	    Hide the "new" indicator by default, let a piece of JavaScript ask the
+	    server which comments are new for the user. Rendering the final "new"
+	    indicator here would break the render cache.
+	  #}
+	<div class="d-flex align-items-center">
+		<div class="icon-container">
+			{{ content.flag_os2loop_upvote_upvote_button }}
+			{{ content.links }}
+		</div>
+		{{ title_prefix }}
+		{% if label %}
+			<h1{{ title_attributes }}>
+				{{ label }}
+			</h1>
+		{% endif %}
+		{{ title_suffix }}
+		<div class="user">
+			<i class="bi bi-file-person"></i>
+			{# TODO fix image #}
+			<div class="col-md">
+				<div>
+					{{ author }}
+					{{ created }}
+				</div>
+				<div>metadata</div>
+				{# TODO fix metadata #}
+			</div>
+		</div>
+	</div>
+	{#
+	    Indicate the semantic relationship between parent and child comments for
+	    accessibility. The list is difficult to navigate in a screen reader
+	    without this information.
+	  #}
+	<div{{ content_attributes.addClass(background_class) }}>
+		{% if parent %}
+			<p class="visually-hidden">{{ parent }}</p>
+		{% endif %}
+    {{ content.os2loop_post_comment }}
+		<div>{{ content.flag_os2loop_upvote_correct_answer }}</div>
+	</div>
 </article>

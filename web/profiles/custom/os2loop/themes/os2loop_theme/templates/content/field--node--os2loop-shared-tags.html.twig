@@ -38,12 +38,12 @@
  */
 #}
 {% set title_classes = [
-    'os2loop-title'
+    'os2loop-title-text'
   ]
 %}
 {% if label_hidden %}
   {% if multiple %}
-    <div{{ attributes }}>
+    <div{{ attributes.addClass('os2loop-title') }}>
       {% for item in items %}
         <div{{ item.attributes.addClass('shared-tags') }}>{{ item.content }}</div>
       {% endfor %}
@@ -54,7 +54,7 @@
     {% endfor %}
   {% endif %}
 {% else %}
-  <div{{ attributes }}>
+  <div{{ attributes.addClass('os2loop-title') }}>
     <div{{ title_attributes.addClass(title_classes) }}>{{ label }}</div>
     {% if multiple %}
       <div>

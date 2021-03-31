@@ -72,36 +72,38 @@
  * @ingroup themeable
  */
 #}
-<article{{ attributes.addClass("container") }}>
+<article{{ attributes.addClass("os2loop-content") }}>
+	<div class="icon-container">
+		<li class="icon edit">
+			<a href={{ edit_link }}>
+				<i class="bi bi-pencil-square"></i>
+			</a>
+		</li>
+		<li class="icon delete">
+			<a href={{ delete_link }}>
+				<i class="bi bi-trash"></i>
+			</a>
+		</li>
+	</div>
+	{{ title_prefix }}
+	{% if label %}
+		<h1{{ title_attributes }}>
+			{{ label }}
+		</h1>
+	{% endif %}
+	{{ title_suffix }}
+	<div class="user">
+		<i class="bi bi-file-person"></i>
+		{# TODO fix image #}
+		<div class="col-md">
+			<div>{{ author_name }}
+				{{ date }}</div>
+			<div>metadata</div>
+			{# TODO fix metadata #}
+		</div>
+	</div>
 
-    {{ title_prefix }}
-    {% if label %}
-        <h1{{ title_attributes }}>
-        {{ label }}
-        </h1>
-    {% endif %}
-    {{ title_suffix }}
-
-    <div class="row">
-        <div class="col-md-9">
-            <div class="d-flex justify-content-between">
-                <i class="bi bi-file-person"></i>
-                    {# TODO fix image #}
-                <div class="col-md">
-                    <div>{{ author_name }}</div>
-                    <div>metadata</div>
-                    {# TODO fix metadata #}
-                </div>
-            </div>
-            <div class="mt-5">
-                {{ content.os2loop_external_descripti }}
-                {{ content.os2loop_external_url }}
-            </div>
-        </div>
-        <div class="col-md-3 bg-secondary-loop">
-            {{ content.os2loop_shared_tags }}
-            {{ content.os2loop_shared_profession }}
-            {{ content.os2loop_shared_subject }}
-        </div>
-    </div>
+	<div{{ content_attributes.addClass("bg-secondary-loop") }}>
+		{{ content|without('os2loop_shared_profession', 'os2loop_shared_tags', 'os2loop_shared_subject') }}
+	</div>
 </article>

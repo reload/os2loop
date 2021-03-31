@@ -27,6 +27,8 @@
 
 {# Set the remaining Flag CSS classes. #}
 {% set classes = [
+    'icon',
+    'upvote',
     'flag',
     'flag-' ~ flag.id()|clean_class,
     'js-flag-' ~ flag.id()|clean_class ~ '-' ~ flaggable.id(),
@@ -37,14 +39,14 @@
 {# Set nofollow to prevent search bots from crawling anonymous flag links #}
 {% set attributes = attributes.setAttribute('rel', 'nofollow') %}
 
-<div class="{{ classes|join(' ') }}">
-  <a{{ attributes }}>
-  {{ upvotes }}
+<li class="{{ classes|join(' ') }}">
+  <a{{ attributes }} aria-label='{{ title }}'>
   {% if action == 'unflag' %}
     <i class="bi bi-hand-thumbs-up-fill"></i>
   {% else %}
     <i class="bi bi-hand-thumbs-up"></i>
   {% endif %}
-  </a> {{ title }}
-</div>
+  </a>
+  {{ upvotes }}
+</li>
 {% endspaceless %}
