@@ -40,20 +40,20 @@
 #}
 {% set title_classes = [
     label_display == 'visually_hidden' ? 'visually-hidden',
-    label_display == 'inline' ? 'os2loop-title-inline',
-    label_display != 'inline' ? 'os2loop-title',
+    label_display == 'inline' ? 'os2loop-title-text-inline',
+    label_display != 'inline' ? 'os2loop-title-text',
   ]
 %}
 {% if label_hidden %}
   {% if multiple %}
-    <div{{ attributes }}>
+    <div{{ attributes.addClass("os2loop-title") }}>
       {% for item in items %}
         <div{{ item.attributes }}>{{ item.content }}</div>
       {% endfor %}
     </div>
   {% else %}
     {% for item in items %}
-      <div{{ attributes }}>{{ item.content }}</div>
+      <div{{ attributes.addClass("os2loop-title") }}>{{ item.content }}</div>
     {% endfor %}
   {% endif %}
 {% elseif label_display == 'inline' %}
@@ -70,7 +70,7 @@
     {% endif %}
   </span>
 {% else %}
-  <div{{ attributes }}>
+  <div{{ attributes.addClass("os2loop-title") }}>
     <div{{ title_attributes.addClass(title_classes) }}>{{ label }}</div>
     {% if multiple %}
       <div>

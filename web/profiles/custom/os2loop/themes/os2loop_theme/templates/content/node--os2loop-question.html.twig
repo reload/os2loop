@@ -70,45 +70,48 @@
  *   in different view modes.
  */
 #}
-<article{{ attributes }} class="container">
-  <div>
-    {% if display_submitted %}
-    <div class="d-flex justify-content-between">
-    {# Todo: test with actual user image #}
+<article{{ attributes.addClass("os2loop-content") }}>
+	<div>
+		<div class="icon-container">
+		<li class="icon edit">
+			<a href={{ edit_link }}>
+				<i class="bi bi-pencil-square"></i>
+			</a>
+		</li>
+		<li class="icon delete">
+			<a href={{ delete_link }}>
+				<i class="bi bi-trash"></i>
+			</a>
+		</li>
+		</div>
+		{{ title_prefix }}
+		{% if label %}
+			<h1{{ title_attributes }}>
+				{{ label }}
+			</h1>
+		{% endif %}
+		{{ title_suffix }}
+		<div class="user">
       {% if author_picture %}
         {{ author_picture }}
       {% else %}
         <i class="bi bi-file-person"></i>
       {% endif %}
-      <div class="col-md">
-        <div{{ author_attributes }}>
-          <div>{{ author_name }}</div>
-          <div>{{ metadata }}</div>
-        </div>
-      </div>
-         <div class="col-md-3 bg-secondary-loop">
-          <div> {{ date }}</div>
-          {{ content.os2loop_shared_subject }}
-          {{ content.os2loop_shared_profession }}
-        </div>
-      </div>
-    </div>
-    {% endif %}
-    {{ title_prefix }}
-    {% if label and not page %}
-      <h2{{ title_attributes }}>
-        <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-      </h2>
-    {% endif %}
-    {{ title_suffix }}
-    <div{{ content_attributes }}>
-      <h1>
-      {{ label }}
-      </h1>
-      {{ content.os2loop_question_file }}
+			{# TODO fix image #}
+			<div class="col-md">
+				<div>{{ author_name }}
+					{{ date }}</div>
+				<div>metadata</div>
+				{# TODO fix metadata #}
+			</div>
+		</div>
+		<div{{ content_attributes.addClass('bg-secondary-loop') }}>
       {{ content.os2loop_question_content }}
-      {{ content.os2loop_shared_tags }}
-    </div>
-  {{ content|without('os2loop_shared_tags', 'os2loop_question_content', 'os2loop_question_file', 'os2loop_shared_subject', 'os2loop_shared_profession') }}
-  </div>
+			{{ content.os2loop_shared_tags }}
+			{{ content.os2loop_shared_subject }}
+			{{ content.os2loop_shared_profession }}
+      {{ content.os2loop_question_file }}
+		</div>
+		{{ content.os2loop_question_answers }}
+	</div>
 </article>

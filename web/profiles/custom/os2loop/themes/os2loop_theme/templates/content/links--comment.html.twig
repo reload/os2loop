@@ -34,17 +34,19 @@
  */
 #}
 {% if links -%}
-  <div class="d-flex justify-content-start">
-    {%- for item in links -%}
-      <div{{ item.attributes }} class="mr-3">
-        {%- if item.link -%}
-          {{ item.link }}
-        {%- elseif item.text_attributes -%}
-          <span{{ item.text_attributes }}>{{ item.text }}</span>
-        {%- else -%}
-          {{ item.text }}
-        {%- endif -%}
-      </div>
-    {%- endfor -%}
-    </div>
+		{%- for item in links -%}
+			<li{{ item.attributes }} class="icon {{ item.link['#title']|lower }}">
+				{%- if item.link -%}
+					<a href={{ item.link['#url'] }} aria-label={{ item.link['#title'] }}>
+						{% if item.link['#title']|lower == 'delete' %}
+							<i class="bi bi-trash"></i>
+						{% elseif item.link['#title']|lower == 'edit' %}
+							<i class="bi bi-pencil-square"></i>
+						{% elseif item.link['#title']|lower == 'reply' %}
+							<i class="bi bi-reply"></i>
+						{% endif %}
+					</a>
+				{%- endif -%}
+			</li>
+		{%- endfor -%}
 {%- endif %}

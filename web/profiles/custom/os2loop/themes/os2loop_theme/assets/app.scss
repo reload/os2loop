@@ -5,57 +5,55 @@ body {
   font-family: "Montserrat" !important;
 }
 
-.os2loop-title {
-  color: $field-title-color;
-  font-weight: bold;
-}
-
-.os2loop-title-inline {
-  color: $field-title-color;
-}
-
-.space {
-  margin: 20px 0;
-}
-
 .bg-secondary-loop {
-  background-color: $secondary-color;
-  padding: 2em 0;
+  background-color: $light-background;
+  padding: 2em;
   border-radius: 3px;
-}
-
-.bg-primary {
-  background-color: $primary-color;
+  margin-bottom: 2em;
 }
 
 i {
   font-size: 1.2em;
 }
 
-.shared-tags {
-  background-color: $primary-color;
-  border-radius: 15px;
-  margin-right: 5px;
-  padding: 3px 15px;
-  a {
-    color: black;
+.os2loop-content {
+  position: relative;
+
+  h1,
+  h2 {
+    color: $text-color;
+    font-size: 2em;
   }
 }
 
-.about-document-container {
-  background-color: $base-color;
-  padding: 15px;
+img {
+  max-width: 100%;
+  object-fit: contain;
+  height: auto;
 }
 
-.os2loop-highlighted-content-field {
-  padding: 10px 0;
+input {
+  &.button {
+    color: $black;
+    background-color: $secondary-color;
+    border-color: $dark-secondary-color;
+
+    &:hover {
+      color: $black;
+      background-color: $dark-secondary-color;
+      border-color: $dark-secondary-color;
+    }
+  }
 }
 
 @import "bootstrap";
 @import "./comment";
 @import "./search_api_autocomplete";
 @import "./tabs";
+@import "./fields";
 @import "./font";
+@import "./icons";
+@import "./tags";
 @import "./paragraphs/step-by-step";
 @import "./paragraphs/highlighted-content";
 @import "./paragraphs/text-and-image";
