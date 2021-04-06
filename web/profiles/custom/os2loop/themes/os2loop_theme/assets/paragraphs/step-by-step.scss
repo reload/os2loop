@@ -28,7 +28,7 @@
       border-radius: 50%;
       background-color: $primary-color;
       font-size: 1.2em;
-      font-family: "Montserrat";
+      font-family: $font-family-base;
       content: counters(item, ".") " ";
     }
   }
