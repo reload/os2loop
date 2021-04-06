@@ -38,13 +38,6 @@
 			<li{{ item.attributes }} class="icon {{ item.link['#title']|lower }}">
 				{%- if item.link -%}
 					<a href={{ item.link['#url'] }} aria-label={{ item.link['#title'] }}>
-						{% if item.link['#title']|lower == 'delete' %}
-							<i class="bi bi-trash"></i>
-						{% elseif item.link['#title']|lower == 'edit' %}
-							<i class="bi bi-pencil-square"></i>
-						{% elseif item.link['#title']|lower == 'reply' %}
-							<i class="bi bi-reply"></i>
-						{% endif %}
 					</a>
 				{%- endif -%}
 			</li>
