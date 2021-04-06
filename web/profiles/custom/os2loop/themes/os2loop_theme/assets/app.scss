@@ -1,15 +1,14 @@
+@import "bootstrap";
 @import "bootstrap-icons/font/bootstrap-icons.css";
 @import "colors";
 
-body {
-  font-family: "Montserrat" !important;
-}
+$font-family-base: "Montserrat";
 
 .bg-secondary-loop {
   background-color: $light-background;
-  padding: 2em;
+  padding: $spacer * 2;
   border-radius: 3px;
-  margin-bottom: 2em;
+  margin-bottom: $spacer * 2;
 }
 i {
   font-size: 1.2em;

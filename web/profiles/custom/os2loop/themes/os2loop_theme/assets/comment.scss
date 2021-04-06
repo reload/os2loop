@@ -22,8 +22,8 @@
 
   .top-comment-background {
     background-color: $primary-color;
-    padding: 2em;
-    margin-bottom: 2em;
+    padding: $spacer * 2;
+    margin-bottom: $spacer * 2;
     color: $black;
 
     a {
