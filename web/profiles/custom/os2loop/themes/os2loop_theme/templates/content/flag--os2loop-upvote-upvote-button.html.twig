@@ -32,7 +32,7 @@
     'flag',
     'flag-' ~ flag.id()|clean_class,
     'js-flag-' ~ flag.id()|clean_class ~ '-' ~ flaggable.id(),
-    action_class
+    action_class,
   ]
 %}
 
@@ -40,13 +40,7 @@
 {% set attributes = attributes.setAttribute('rel', 'nofollow') %}
 
 <li class="{{ classes|join(' ') }}">
-  <a{{ attributes }} aria-label='{{ title }}'>
-  {% if action == 'unflag' %}
-    <i class="bi bi-hand-thumbs-up-fill"></i>
-  {% else %}
-    <i class="bi bi-hand-thumbs-up"></i>
-  {% endif %}
-  </a>
+  <a{{ attributes }} aria-label='{{ title }}'></a>
   {{ upvotes }}
 </li>
 {% endspaceless %}
