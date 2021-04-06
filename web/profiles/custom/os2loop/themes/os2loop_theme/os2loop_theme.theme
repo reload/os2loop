@@ -5,8 +5,6 @@
  * The primary PHP file for the os2loop_theme theme.
  */
 
-use Drupal\Core\Url;
-
 /**
  * Site logo for menu.
  */
@@ -19,11 +17,10 @@ function os2loop_theme_preprocess(&$variables) {
  *
  * Add edit and deline links.
  */
-function os2loop_theme_preprocess_node(&$variables) {
-  $edit_url = Url::fromRoute('entity.node.edit_form', ['node' => $variables['node']->id()]);
-  $delete_url = Url::fromRoute('entity.node.delete_form', ['node' => $variables['node']->id()]);
-  $variables['edit_link'] = $edit_url;
-  $variables['delete_link'] = $delete_url;
+function os2loop_theme_preprocess_field(&$variables) {
+  if ($variables["element"]["#field_name"] === "os2loop_post_comments" || $variables["element"]["#field_name"] === "os2loop_question_answers") {
+    $variables['current_user_name'] = $variables['user']->getDisplayName();
+  }
 }
 
 /**
@@ -31,8 +28,7 @@ function os2loop_theme_preprocess_node(&$variables) {
  *
  * Add edit and deline links.
  */
-function os2loop_theme_preprocess_field(&$variables) {
-  if ($variables["element"]["#field_name"] === "os2loop_post_comments" || $variables["element"]["#field_name"] === "os2loop_question_answers") {
-    $variables['current_user_name'] = $variables['user']->getDisplayName();
-  }
+function os2loop_preprocess_menu_local_task(&$variables) {
+  $variables['attributes']['class'][] = strtolower($variables['element']['#link']['title']);
+  $variables['attributes']['aria-label'][] = strtolower($variables['element']['#link']['title']);
 }

@@ -1,8 +1,18 @@
+@mixin icon($content) {
+  a {
+    &::before {
+      color: $white;
+      font-size: 1.2em;
+      font-family: bootstrap-icons !important;
+      content: #{$content};
+    }
+  }
+}
+
 .icon-container {
   display: flex;
-  position: absolute;
-  right: 0px;
-  z-index: 10;
+  margin: 0;
+  padding: 0;
 
   .icon {
     display: flex;
@@ -10,13 +20,66 @@
     align-items: center;
     min-width: 35px;
     height: 35px;
-    margin-left: 5px;
+    margin: 0 5px 5px 0;
     font-size: 1em;
     border-radius: 2px;
     background-color: $icon-base-color;
-    padding: 3px;
     color: $white;
 
+    &.edit {
+      a {
+        &::before {
+          color: $white;
+          font-size: 1.2em;
+          font-family: bootstrap-icons !important;
+          content: "\f4ca";
+        }
+      }
+    }
+
+    &.reply {
+      a {
+        &::before {
+          color: $white;
+          font-size: 1.2em;
+          font-family: bootstrap-icons !important;
+          content: "\f51f";
+        }
+      }
+    }
+
+    &.delete {
+      a {
+        &::before {
+          color: $white;
+          font-size: 1.2em;
+          font-family: bootstrap-icons !important;
+          content: "\f5de";
+        }
+      }
+    }
+
+    &.revisions {
+      a {
+        &::before {
+          color: $white;
+          font-size: 1.2em;
+          font-family: bootstrap-icons !important;
+          content: "\f4b3";
+        }
+      }
+    }
+
+    &.view {
+      a {
+        &::before {
+          color: $white;
+          font-size: 1.2em;
+          font-family: bootstrap-icons !important;
+          content: "\f341";
+        }
+      }
+    }
     &:hover {
       background-color: $dark-icon-base-color;
     }
@@ -56,5 +119,9 @@
 .os2loop-comment {
   .icon-container {
     right: 2em;
+    display: flex;
+    position: absolute;
+    right: 0px;
+    z-index: 10;
   }
 }
