@@ -73,16 +73,16 @@
 <article{{ attributes.addClass("os2loop-content") }}>
 	<div>
 		<div class="icon-container">
-		<li class="icon edit">
-			<a href={{ edit_link }}>
-				<i class="bi bi-pencil-square"></i>
-			</a>
-		</li>
-		<li class="icon delete">
-			<a href={{ delete_link }}>
-				<i class="bi bi-trash"></i>
-			</a>
-		</li>
+			<li class="icon edit">
+				<a href={{ edit_link }}>
+					<i class="bi bi-pencil-square"></i>
+				</a>
+			</li>
+			<li class="icon delete">
+				<a href={{ delete_link }}>
+					<i class="bi bi-trash"></i>
+				</a>
+			</li>
 		</div>
 		{{ title_prefix }}
 		{% if label %}
@@ -92,11 +92,11 @@
 		{% endif %}
 		{{ title_suffix }}
 		<div class="user">
-      {% if author_picture %}
-        {{ author_picture }}
-      {% else %}
-        <i class="bi bi-file-person"></i>
-      {% endif %}
+			{% if author_picture %}
+				{{ author_picture }}
+			{% else %}
+				<i class="bi bi-file-person"></i>
+			{% endif %}
 			{# TODO fix image #}
 			<div class="col-md">
 				<div>{{ author_name }}
@@ -106,11 +106,11 @@
 			</div>
 		</div>
 		<div{{ content_attributes.addClass('bg-secondary-loop') }}>
-      {{ content.os2loop_question_content }}
+			{{ content.os2loop_question_content }}
 			{{ content.os2loop_shared_tags }}
 			{{ content.os2loop_shared_subject }}
 			{{ content.os2loop_shared_profession }}
-      {{ content.os2loop_question_file }}
+			{{ content.os2loop_question_file }}
 		</div>
 		{{ content.os2loop_question_answers }}
 	</div>
