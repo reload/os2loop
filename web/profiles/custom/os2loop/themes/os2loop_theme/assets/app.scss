@@ -1,23 +1,57 @@
-@import 'bootstrap-icons/font/bootstrap-icons.css';
-$primary-color: #41ab51;
-$secondary-color: #f2f2f2;
+@import "bootstrap";
+@import "bootstrap-icons/font/bootstrap-icons.css";
+@import "colors";
+
+$font-family-base: "Montserrat";
 
 .bg-secondary-loop {
-    background-color: $secondary-color;
+  background-color: $light-background;
+  padding: $spacer * 2;
+  border-radius: 3px;
+  margin-bottom: $spacer * 2;
+}
+i {
+  font-size: 1.2em;
 }
 
-.bg-navbar-loop {
-    background-color: $primary-color;
-}
+.os2loop-content {
+  position: relative;
 
-.bi.bi-file-person {
+  h1,
+  h2 {
+    color: $text-color;
     font-size: 2em;
-}
-.top-comment {
-    border: 2px solid $primary-color;
+  }
 }
 
-@import 'bootstrap';
-@import './indented';
-@import './counter';
-@import './search_api_autocomplete';
+img {
+  max-width: 100%;
+  object-fit: contain;
+  height: auto;
+}
+
+input {
+  &.button {
+    color: $black;
+    background-color: $secondary-color;
+    border-color: $dark-secondary-color;
+
+    &:hover {
+      color: $black;
+      background-color: $dark-secondary-color;
+      border-color: $dark-secondary-color;
+    }
+  }
+}
+
+@import "bootstrap";
+@import "./comment";
+@import "./search_api_autocomplete";
+@import "./tabs";
+@import "./fields";
+@import "./font";
+@import "./icons";
+@import "./tags";
+@import "./paragraphs/step-by-step";
+@import "./paragraphs/highlighted-content";
+@import "./paragraphs/text-and-image";

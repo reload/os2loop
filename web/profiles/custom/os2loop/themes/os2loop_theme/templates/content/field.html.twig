@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * Theme override for a field.
+ * Default theme implementation for a field.
  *
  * To override output, copy the "field.html.twig" from the templates directory
  * to your theme's directory and customize it, just like customizing other
@@ -33,34 +33,50 @@
  * - field_type: The type of the field.
  * - label_display: The display settings for the label.
  *
- *
  * @see template_preprocess_field()
+ *
+ * @ingroup themeable
  */
 #}
 {% set title_classes = [
-    'os2loop-title-text'
+    label_display == 'visually_hidden' ? 'visually-hidden',
+    label_display == 'inline' ? 'os2loop-title-text-inline',
+    label_display != 'inline' ? 'os2loop-title-text',
   ]
 %}
 {% if label_hidden %}
   {% if multiple %}
-    <div{{ attributes.addClass('os2loop-title') }}>
+    <div{{ attributes.addClass("os2loop-title") }}>
       {% for item in items %}
-        <div{{ item.attributes.addClass('shared-tags') }}>{{ item.content }}</div>
+        <div{{ item.attributes }}>{{ item.content }}</div>
       {% endfor %}
     </div>
   {% else %}
     {% for item in items %}
-      <div{{ item.attributes.addClass('shared-tags') }}>{{ item.content }}</div>
+      <div{{ attributes.addClass("os2loop-title") }}>{{ item.content }}</div>
     {% endfor %}
   {% endif %}
+{% elseif label_display == 'inline' %}
+  <span{{ attributes }}>
+    <span{{ title_attributes.addClass(title_classes) }}>{{ label }}:</span>
+    {% if multiple %}
+      <span>
+    {% endif %}
+    {% for item in items %}
+      <span{{ item.attributes }}>{{ item.content }}</span>
+    {% endfor %}
+    {% if multiple %}
+      </span>
+    {% endif %}
+  </span>
 {% else %}
-  <div{{ attributes.addClass('os2loop-title') }}>
+  <div{{ attributes.addClass("os2loop-title") }}>
     <div{{ title_attributes.addClass(title_classes) }}>{{ label }}</div>
     {% if multiple %}
       <div>
     {% endif %}
     {% for item in items %}
-      <span{{ item.attributes.addClass('shared-tags') }}>{{ item.content }}</span>
+      <div{{ item.attributes }}>{{ item.content }}</div>
     {% endfor %}
     {% if multiple %}
       </div>

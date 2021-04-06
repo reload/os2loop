@@ -57,6 +57,7 @@ class FlagHelper {
         }
       }
       $top_comment['#top'] = TRUE;
+      $top_comment['#comment_threaded'] = FALSE;
       array_unshift($variables['comments'], $top_comment);
     }
   }

@@ -72,29 +72,15 @@
  * @ingroup themeable
  */
 #}
-<article{{ attributes.addClass("container") }}>
-  {{ title_prefix }}
-  {% if label  %}
-    <h1{{ title_attributes }}>
-      {{ label }}
-    </h1>
-  {% endif %}
-  {{ title_suffix }}
-
-  <div{{ content_attributes }}>
-  <div class="row">
-  <div class="col-md-9">
-    {{ content.os2loop_documents_dc_content }}
-    </div>
-    <div class="col-md-3">
-        <div class="bg-secondary-loop">
-          <div> {{ content.os2loop_shared_profession }}</div>
-          <div> {{ content.os2loop_shared_tags }}</div>
-          <div> {{ content.os2loop_shared_subject }}</div>
-          <div> {{ content.os2loop_documents_document_autho }}</div>
-        </div>
-        </div>
-        </div>
-  </div>
-
+<article{{ attributes.addClass("os2loop-content") }}>
+	{{ title_prefix }}
+	{% if label %}
+		<h1{{ title_attributes }}>
+			{{ label }}
+		</h1>
+	{% endif %}
+	{{ title_suffix }}
+	<div{{ content_attributes.addClass("bg-secondary-loop") }}>
+		{{ content }}
+	</div>
 </article>

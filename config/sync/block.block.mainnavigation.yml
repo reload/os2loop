@@ -11,7 +11,7 @@ dependencies:
 id: mainnavigation
 theme: os2loop_theme
 region: header
-weight: -1
+weight: -7
 provider: null
 plugin: 'system_menu_block:main'
 settings:

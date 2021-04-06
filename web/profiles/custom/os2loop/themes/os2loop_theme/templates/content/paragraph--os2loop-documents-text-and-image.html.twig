@@ -39,25 +39,18 @@
  */
 #}
 {% set classes = [
+    'paragraph-text-and-image',
     'paragraph',
-    'counter',
-    'counter-wrapper-second-number',
-    'paragraph-step',
-    content.os2loop_documents_steps ? 'indented-step',
     'paragraph--type--' ~ paragraph.bundle|clean_class,
     view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
     not paragraph.isPublished() ? 'paragraph--unpublished'
   ]
 %}
-
 {% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
     {% block content %}
-        <li {{ attributes.addClass(classes) }}>
-        <div class="step">
-          {{ content.os2loop_documents_step_text }}
-          {{ content.os2loop_documents_step_image }}
-          </div>
-          <ol class="indented">{{ content.os2loop_documents_steps }}</ol>
-        </li>
+        {{ content.os2loop_documents_tai_image }}
+        {{ content.os2loop_documents_tai_text }}
     {% endblock %}
+  </div>
 {% endblock paragraph %}
