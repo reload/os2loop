@@ -10,7 +10,7 @@ dependencies:
   module:
     - node
     - user
-id: newest_content
+id: os2loop_section_page_newest_content
 label: 'Newest content'
 module: views
 description: ''

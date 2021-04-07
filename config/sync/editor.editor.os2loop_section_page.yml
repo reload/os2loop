@@ -3,10 +3,10 @@ langcode: en
 status: true
 dependencies:
   config:
-    - filter.format.os2loop_section
+    - filter.format.os2loop_section_page
   module:
     - ckeditor
-format: os2loop_section
+format: os2loop_section_page
 editor: ckeditor
 settings:
   toolbar:
