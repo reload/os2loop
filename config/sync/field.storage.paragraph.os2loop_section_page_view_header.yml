@@ -1,0 +1,21 @@
+uuid: 62a641c0-ae6f-434b-8dbf-e1571ca14890
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.os2loop_section_page_view_header
+field_name: os2loop_section_page_view_header
+entity_type: paragraph
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

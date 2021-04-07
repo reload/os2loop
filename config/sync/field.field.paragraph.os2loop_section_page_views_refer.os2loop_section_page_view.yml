@@ -1,0 +1,42 @@
+uuid: 316095df-830b-4e50-a87a-9ed68eee788f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.os2loop_section_page_view
+    - paragraphs.paragraphs_type.os2loop_section_page_views_refer
+  module:
+    - viewsreference
+id: paragraph.os2loop_section_page_views_refer.os2loop_section_page_view
+field_name: os2loop_section_page_view
+entity_type: paragraph
+bundle: os2loop_section_page_views_refer
+label: List
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:view'
+  handler_settings:
+    target_bundles: null
+    auto_create: 0
+  plugin_types:
+    block: block
+    default: 0
+    page: 0
+    feed: 0
+  preselect_views:
+    newest_content: os2loop_section_page_newest_content
+    comment: 0
+    comments_recent: 0
+    os2loop_search_db: 0
+    taxonomy_term: 0
+  enabled_settings:
+    argument: argument
+    limit: limit
+    offset: 0
+    pager: 0
+    title: 0
+field_type: viewsreference

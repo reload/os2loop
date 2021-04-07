@@ -1,0 +1,43 @@
+uuid: fe5a957e-1533-483e-8396-f5bb6a82fea0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.os2loop_section_page_paragraph
+    - node.type.os2loop_section_page
+    - paragraphs.paragraphs_type.os2loop_section_page_views_refer
+  module:
+    - entity_reference_revisions
+id: node.os2loop_section_page.os2loop_section_page_paragraph
+field_name: os2loop_section_page_paragraph
+entity_type: node
+bundle: os2loop_section_page
+label: Section
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      os2loop_section_page_views_refer: os2loop_section_page_views_refer
+    target_bundles_drag_drop:
+      os2loop_documents_highlighted_co:
+        weight: 6
+        enabled: false
+      os2loop_documents_step:
+        weight: 7
+        enabled: false
+      os2loop_documents_step_by_step:
+        weight: 8
+        enabled: false
+      os2loop_documents_text_and_image:
+        weight: 9
+        enabled: false
+      os2loop_section_page_views_refer:
+        enabled: true
+        weight: 10
+field_type: entity_reference_revisions

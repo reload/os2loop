@@ -1,0 +1,42 @@
+uuid: 86abbc66-e33a-4482-9ebf-129f66841866
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.os2loop_section_page
+  module:
+    - ckeditor
+format: os2loop_section_page
+editor: ckeditor
+settings:
+  toolbar:
+    rows:
+      -
+        -
+          name: Formatting
+          items:
+            - Bold
+            - Italic
+        -
+          name: Links
+          items:
+            - DrupalLink
+            - DrupalUnlink
+        -
+          name: Lists
+          items:
+            - BulletedList
+            - NumberedList
+  plugins:
+    language:
+      language_list: un
+    stylescombo:
+      styles: ''
+image_upload:
+  status: false
+  scheme: public
+  directory: inline-images
+  max_size: ''
+  max_dimensions:
+    width: null
+    height: null
