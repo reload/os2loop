@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - field.field.node.os2loop_section_page.os2loop_section_page_paragraph
     - node.type.os2loop_section_page
   module:
     - user
@@ -18,4 +19,5 @@ content:
     third_party_settings: {  }
     region: content
 hidden:
+  os2loop_section_page_paragraph: true
   search_api_excerpt: true

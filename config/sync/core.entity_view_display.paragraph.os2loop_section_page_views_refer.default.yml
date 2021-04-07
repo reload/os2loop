@@ -3,11 +3,41 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.os2loop_section_page_views_refer.os2loop_section_page_view
+    - field.field.paragraph.os2loop_section_page_views_refer.os2loop_section_page_view_header
+    - field.field.paragraph.os2loop_section_page_views_refer.os2loop_section_page_view_text
     - paragraphs.paragraphs_type.os2loop_section_page_views_refer
+  module:
+    - text
+    - viewsreference
 id: paragraph.os2loop_section_page_views_refer.default
 targetEntityType: paragraph
 bundle: os2loop_section_page_views_refer
 mode: default
-content: {  }
+content:
+  os2loop_section_page_view:
+    weight: 2
+    label: hidden
+    settings:
+      plugin_types:
+        - block
+    third_party_settings: {  }
+    type: viewsreference_formatter
+    region: content
+  os2loop_section_page_view_header:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  os2loop_section_page_view_text:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
 hidden:
   search_api_excerpt: true

@@ -3,7 +3,10 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.os2loop_section_page.os2loop_section_page_paragraph
     - node.type.os2loop_section_page
+  module:
+    - paragraphs
 id: node.os2loop_section_page.default
 targetEntityType: node
 bundle: os2loop_section_page
@@ -15,6 +18,18 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  os2loop_section_page_paragraph:
+    type: entity_reference_paragraphs
+    weight: 121
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
   promote:
     type: boolean_checkbox
     settings:

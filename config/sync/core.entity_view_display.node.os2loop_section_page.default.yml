@@ -3,8 +3,10 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.os2loop_section_page.os2loop_section_page_paragraph
     - node.type.os2loop_section_page
   module:
+    - entity_reference_revisions
     - user
 id: node.os2loop_section_page.default
 targetEntityType: node
@@ -14,6 +16,15 @@ content:
   links:
     weight: 100
     settings: {  }
+    third_party_settings: {  }
+    region: content
+  os2loop_section_page_paragraph:
+    type: entity_reference_revisions_entity_view
+    weight: 101
+    label: above
+    settings:
+      view_mode: default
+      link: ''
     third_party_settings: {  }
     region: content
 hidden:
