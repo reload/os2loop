@@ -1,0 +1,13 @@
+uuid: d9e9f8bf-f3e3-4c0a-876a-ba95aafa7f9f
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.os2loop_section_page_views_refer
+id: paragraph.os2loop_section_page_views_refer.default
+targetEntityType: paragraph
+bundle: os2loop_section_page_views_refer
+mode: default
+content: {  }
+hidden:
+  search_api_excerpt: true
