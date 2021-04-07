@@ -34,17 +34,12 @@
  */
 #}
 {% if links -%}
-  <div class="d-flex justify-content-start">
-    {%- for item in links -%}
-      <div{{ item.attributes }} class="mr-3">
-        {%- if item.link -%}
-          {{ item.link }}
-        {%- elseif item.text_attributes -%}
-          <span{{ item.text_attributes }}>{{ item.text }}</span>
-        {%- else -%}
-          {{ item.text }}
-        {%- endif -%}
-      </div>
-    {%- endfor -%}
-    </div>
+		{%- for item in links -%}
+			<li{{ item.attributes }} class="icon {{ item.link['#title']|lower }}">
+				{%- if item.link -%}
+					<a href={{ item.link['#url'] }} aria-label={{ item.link['#title'] }}>
+					</a>
+				{%- endif -%}
+			</li>
+		{%- endfor -%}
 {%- endif %}

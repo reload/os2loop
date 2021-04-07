@@ -37,27 +37,30 @@
  * @see template_preprocess_field()
  */
 #}
-
+{% set title_classes = [
+    'os2loop-title-text'
+  ]
+%}
 {% if label_hidden %}
   {% if multiple %}
-    <div{{ attributes }}>
+    <div{{ attributes.addClass('os2loop-title') }}>
       {% for item in items %}
-        <div{{ item.attributes.addClass('field__item badge badge-light border border-success') }}>{{ item.content }}</div>
+        <div{{ item.attributes.addClass('shared-tags') }}>{{ item.content }}</div>
       {% endfor %}
     </div>
   {% else %}
     {% for item in items %}
-      <div{{ item.attributes.addClass('field__item badge badge-light border border-success') }}>{{ item.content }}</div>
+      <div{{ item.attributes.addClass('shared-tags') }}>{{ item.content }}</div>
     {% endfor %}
   {% endif %}
 {% else %}
-  <div{{ attributes }}>
+  <div{{ attributes.addClass('os2loop-title') }}>
     <div{{ title_attributes.addClass(title_classes) }}>{{ label }}</div>
     {% if multiple %}
-      <div class="field__items">
+      <div>
     {% endif %}
     {% for item in items %}
-      <div{{ item.attributes.addClass('field__item badge badge-light border border-success') }}>{{ item.content }}</div>
+      <span{{ item.attributes.addClass('shared-tags') }}>{{ item.content }}</span>
     {% endfor %}
     {% if multiple %}
       </div>

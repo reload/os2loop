@@ -73,38 +73,42 @@
  */
 #}
 <article{{ attributes }}>
-  {{ title_prefix }}
-  {% if label  %}
-    <h1{{ title_attributes }}>
-      {{ label }}
-    </h1>
-  {% endif %}
-  {{ title_suffix }}
-
-  <div{{ content_attributes }}>
-  <div class="row">
-  <div class="col-md-9">
-    {{ content.os2loop_documents_document_conte }}
-    </div>
-    <div class="col-md-3">
-        <div class="rounded bg-secondary-loop p-2">
-          <div> {{ content.os2loop_shared_profession }}</div>
-          <div> {{ content.os2loop_shared_tags }}</div>
-          <div> {{ content.os2loop_shared_subject }}</div>
-          <div> {{ content.os2loop_documents_document_autho }}</div>
-        </div>
-        </div>
-        </div>
-  </div>
-
-  {% if display_submitted %}
-    <footer>
-      {{ author_picture }}
-      <div{{ author_attributes }}>
-        {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
-        {{ metadata }}
-      </div>
-    </footer>
-  {% endif %}
-
+	<ul class="tabs nav" id="document-tabs" role="tablist">
+		<li>
+			<a class="tab active" id="document-tab" data-toggle="tab" href="#document" role="tab" aria-controls="document" aria-selected="true">Document</a>
+		</li>
+		<li>
+			<a class="tab" id="about-document-tab" data-toggle="tab" href="#about-document" role="tab" aria-controls="about-document" aria-selected="false">About document</a>
+		</li>
+	</ul>
+	<div class="tab-content" id="document-tabs-content">
+		<div class="tab-pane show active" id="document" role="tabpanel" aria-labelledby="document-tab">
+			{{ title_prefix }}
+			{% if label  %}
+				<h1{{ title_attributes }}>
+					{{ label }}
+				</h1>
+			{% endif %}
+			{{ title_suffix }}
+			<div{{ content_attributes }}>
+				{{ content.os2loop_shared_subject }}
+				{{ content.os2loop_documents_document_conte }}
+			</div>
+		</div>
+		<div class="tab-pane" id="about-document" role="tabpanel" aria-labelledby="about-document-tab">
+			{{ title_prefix }}
+			{% if label  %}
+				<h1{{ title_attributes }}>
+					Om dokumentet
+				</h1>
+			{% endif %}
+			{{ title_suffix }}
+			{{ content.os2loop_documents_document_autho }}
+			<div{{ content_attributes.addClass("bg-secondary-loop") }}>
+				{{ content.os2loop_shared_tags }}
+				{{ content.os2loop_shared_subject }}
+				{{ content.os2loop_shared_profession }}
+			</div>
+		</div>
+	</div>
 </article>

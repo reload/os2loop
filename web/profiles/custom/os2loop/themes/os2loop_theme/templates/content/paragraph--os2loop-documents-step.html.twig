@@ -42,7 +42,8 @@
     'paragraph',
     'counter',
     'counter-wrapper-second-number',
-
+    'paragraph-step',
+    content.os2loop_documents_steps ? 'indented-step',
     'paragraph--type--' ~ paragraph.bundle|clean_class,
     view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
     not paragraph.isPublished() ? 'paragraph--unpublished'
@@ -52,8 +53,10 @@
 {% block paragraph %}
     {% block content %}
         <li {{ attributes.addClass(classes) }}>
-          <span>{{ content.os2loop_documents_step_text }}</span>
-          <span>{{ content.os2loop_documents_step_image }}</span>
+        <div class="step">
+          {{ content.os2loop_documents_step_text }}
+          {{ content.os2loop_documents_step_image }}
+          </div>
           <ol class="indented">{{ content.os2loop_documents_steps }}</ol>
         </li>
     {% endblock %}
