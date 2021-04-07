@@ -42,6 +42,7 @@ module:
   update: 0
   user: 0
   views: 0
+  viewsreference: 0
   paragraphs: 11
   better_formats: 100
   os2loop: 1000
