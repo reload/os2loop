@@ -1,0 +1,19 @@
+uuid: 2fb6d2b0-5ee1-4788-9f5b-c1930b3eb242
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+    - text
+id: paragraph.os2loop_section_page_view_text
+field_name: os2loop_section_page_view_text
+entity_type: paragraph
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
