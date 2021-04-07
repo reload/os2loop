@@ -1,0 +1,10 @@
+uuid: 2f7df64f-c72e-4180-a7fa-00c841c004be
+langcode: en
+status: true
+dependencies: {  }
+id: os2loop_section_page_views_refer
+label: 'List section'
+icon_uuid: null
+icon_default: null
+description: 'A paragraph for displaying a list'
+behavior_plugins: {  }

@@ -1,0 +1,14 @@
+uuid: 900870cc-f647-432d-be76-a0cb5184d22e
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.os2loop_section_page_views_refer
+id: paragraph.os2loop_section_page_views_refer.default
+targetEntityType: paragraph
+bundle: os2loop_section_page_views_refer
+mode: default
+content: {  }
+hidden:
+  created: true
+  status: true
