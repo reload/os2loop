@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies: {  }
 name: 'Section (rich text)'
-format: os2loop_section
+format: os2loop_section_page
 weight: 0
 filters:
   filter_html:

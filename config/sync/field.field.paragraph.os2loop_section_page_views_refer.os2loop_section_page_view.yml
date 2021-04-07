@@ -28,7 +28,7 @@ settings:
     page: 0
     feed: 0
   preselect_views:
-    newest_content: newest_content
+    newest_content: os2loop_section_page_newest_content
     comment: 0
     comments_recent: 0
     os2loop_search_db: 0

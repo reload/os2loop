@@ -12,7 +12,7 @@ third_party_settings:
   better_formats:
     allowed_formats_toggle: 1
     allowed_formats:
-      os2loop_section: os2loop_section
+      os2loop_section_page: os2loop_section_page
       os2loop_question_answer_plain_text: 0
       os2loop_question_answer_rich_text: 0
       os2loop_post_comment_plain_text: 0
@@ -46,7 +46,7 @@ third_party_settings:
           weight: '0'
         os2loop_question_rich_text:
           weight: '0'
-        os2loop_section:
+        os2loop_section_page:
           weight: '0'
 id: paragraph.os2loop_section_page_views_refer.os2loop_section_page_view_text
 field_name: os2loop_section_page_view_text
