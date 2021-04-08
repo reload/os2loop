@@ -1,0 +1,33 @@
+uuid: cfba875f-17ab-40c2-9647-bf2eaae52bc5
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: os2loop_favourite
+label: Favourite
+bundles:
+  - os2loop_documents_collection
+  - os2loop_documents_document
+  - os2loop_post
+  - os2loop_question
+entity_type: node
+global: false
+weight: 0
+flag_short: Favourite
+flag_long: ''
+flag_message: ''
+unflag_short: 'Remove as favourite'
+unflag_long: ''
+unflag_message: ''
+unflag_denied_text: ''
+flag_type: 'entity:node'
+link_type: ajax_link
+flagTypeConfig:
+  show_in_links: {  }
+  show_as_field: true
+  show_on_form: false
+  show_contextual_link: false
+  extra_permissions:
+    owner: '0'
+linkTypeConfig: {  }
