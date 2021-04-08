@@ -1,23 +1,23 @@
-uuid: 2a51b702-e6c1-4dbf-9b2d-3d36cd9e527a
+uuid: 0607d78d-f51b-4616-95bb-fc5830a24763
 langcode: en
-status: false
+status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.teaser
+    - core.entity_view_mode.node.os2loop_search_db_search_autocomplete
     - field.field.node.os2loop_section_page.os2loop_section_page_paragraph
     - node.type.os2loop_section_page
   module:
     - user
-id: node.os2loop_section_page.teaser
+id: node.os2loop_section_page.os2loop_search_db_search_autocomplete
 targetEntityType: node
 bundle: os2loop_section_page
-mode: teaser
+mode: os2loop_search_db_search_autocomplete
 content:
-  links:
-    weight: 100
+  search_api_excerpt:
+    weight: 0
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden:
+  links: true
   os2loop_section_page_paragraph: true
-  search_api_excerpt: true

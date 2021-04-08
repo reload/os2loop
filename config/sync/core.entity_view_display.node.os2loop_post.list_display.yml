@@ -1,9 +1,10 @@
-uuid: 57eff808-4024-4971-9b4b-6f77ac9fb9f5
+uuid: 5e2347c8-1a45-4db9-9741-db981ac9cbf2
 langcode: en
 status: true
 dependencies:
   config:
     - core.entity_view_display.comment.os2loop_post_comment.default
+    - core.entity_view_mode.node.list_display
     - field.field.node.os2loop_post.os2loop_post_comments
     - field.field.node.os2loop_post.os2loop_post_content
     - field.field.node.os2loop_post.os2loop_post_file
@@ -18,16 +19,16 @@ dependencies:
     - file
     - text
     - user
-id: node.os2loop_post.default
+id: node.os2loop_post.list_display
 targetEntityType: node
 bundle: os2loop_post
-mode: default
+mode: list_display
 content:
   flag_os2loop_favourite:
     weight: 10
-    region: content
     settings: {  }
     third_party_settings: {  }
+    region: content
   links:
     weight: 0
     region: content

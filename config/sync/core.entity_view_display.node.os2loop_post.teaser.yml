@@ -1,6 +1,6 @@
 uuid: 55ffd7dc-5f68-48a4-aafa-344ee88a7cf6
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
@@ -19,6 +19,11 @@ targetEntityType: node
 bundle: os2loop_post
 mode: teaser
 content:
+  flag_os2loop_favourite:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   links:
     weight: 100
     settings: {  }

@@ -1,13 +1,13 @@
 uuid: 630ff33b-6bd9-41da-879e-00d5fe9a09a9
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - field.field.node.os2loop_documents_collection.os2loop_documents_dc_content
     - field.field.node.os2loop_documents_collection.os2loop_shared_profession
     - field.field.node.os2loop_documents_collection.os2loop_shared_subject
     - field.field.node.os2loop_documents_collection.os2loop_shared_tags
-    - field.field.node.os2loop_documents_collection.os2loop_documents_dc_content
     - node.type.os2loop_documents_collection
   module:
     - user
@@ -16,6 +16,11 @@ targetEntityType: node
 bundle: os2loop_documents_collection
 mode: teaser
 content:
+  flag_os2loop_favourite:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   links:
     weight: 100
     settings: {  }
