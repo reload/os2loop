@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.node.list_display
     - node.type.os2loop_documents_collection
     - node.type.os2loop_documents_document
     - node.type.os2loop_post
@@ -57,7 +58,10 @@ display:
       style:
         type: default
       row:
-        type: fields
+        type: 'entity:node'
+        options:
+          relationship: none
+          view_mode: list_display
       fields:
         type:
           id: type
