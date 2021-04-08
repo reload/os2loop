@@ -8,7 +8,7 @@
 [![Github downloads](https://img.shields.io/github/downloads/os2loop/os2loop/total?style=flat-square&colorB=darkmagenta)](https://packagist.org/packages/os2loop/os2loop/stats)
 
 OS2loop is a question-answering system built on Drupal 9. See [os2.eu/produkt/os2loop](https://os2.eu/produkt/os2loop)
-(in danish) for more information.
+(in Danish) for more information.
 
 ## Installation
 
