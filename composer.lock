@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
-    "content-hash": "e867403d92531e096642d372e6020bad",
-=======
     "content-hash": "88dfa721c776462ae34891d29f6f243a",
->>>>>>> 666a734fd4e3ff067fb087cddf64506fcdaffc74
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -8985,11 +8981,7 @@
         },
         {
             "name": "os2loop/os2loop_fixtures",
-<<<<<<< HEAD
-            "version": "dev-feature/LOOP-744-user-profile",
-=======
             "version": "dev-develop",
->>>>>>> 666a734fd4e3ff067fb087cddf64506fcdaffc74
             "dist": {
                 "type": "path",
                 "url": "web/profiles/custom/os2loop/modules/os2loop_fixtures",
@@ -10951,16 +10943,16 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "3.5.8",
+            "version": "3.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "9d583721a7157ee997f235f327de038e7ea6dac4"
+                "reference": "ffced0d2c8fa8e6cdc4d695a743271fab6c38625"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/9d583721a7157ee997f235f327de038e7ea6dac4",
-                "reference": "9d583721a7157ee997f235f327de038e7ea6dac4",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/ffced0d2c8fa8e6cdc4d695a743271fab6c38625",
+                "reference": "ffced0d2c8fa8e6cdc4d695a743271fab6c38625",
                 "shasum": ""
             },
             "require": {
@@ -11003,7 +10995,7 @@
                 "source": "https://github.com/squizlabs/PHP_CodeSniffer",
                 "wiki": "https://github.com/squizlabs/PHP_CodeSniffer/wiki"
             },
-            "time": "2020-10-23T02:01:07+00:00"
+            "time": "2021-04-09T00:54:41+00:00"
         },
         {
             "name": "symfony/browser-kit",
