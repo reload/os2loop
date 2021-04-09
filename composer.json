@@ -45,7 +45,8 @@
         "drupal/snowball_stemmer": "^2.0",
         "drupal/theme_switcher": "dev-8.x-1.x",
         "drupal/viewsreference": "^2.0",
-        "drush/drush": "^10.4"
+        "drush/drush": "^10.4",
+        "mikehaertl/phpwkhtmltopdf": "^2.5"
     },
     "scripts": {
         "post-install-cmd": [
