@@ -34,12 +34,12 @@
  */
 #}
 {% if links -%}
-		{%- for item in links -%}
-			<li{{ item.attributes }} class="icon {{ item.link['#title']|lower }}">
-				{%- if item.link -%}
-					<a href={{ item.link['#url'] }} aria-label={{ item.link['#title'] }}>
-					</a>
-				{%- endif -%}
-			</li>
-		{%- endfor -%}
+    {%- for item in links -%}
+      <li{{ item.attributes }} class="icon {{ item.link['#title']|lower }}">
+        {%- if item.link -%}
+          <a href={{ item.link['#url'] }} aria-label={{ item.link['#title'] }}>
+          </a>
+        {%- endif -%}
+      </li>
+    {%- endfor -%}
 {%- endif %}
