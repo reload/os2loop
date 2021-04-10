@@ -1,8 +1,9 @@
-uuid: 6760a242-fd8f-4daf-af9b-f05dd5448ac3
+uuid: 6bc55882-9e67-48b8-bb60-e500291c4fd6
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.node.pdf
     - field.field.node.os2loop_documents_collection.os2loop_documents_dc_content
     - field.field.node.os2loop_documents_collection.os2loop_shared_profession
     - field.field.node.os2loop_documents_collection.os2loop_shared_subject
@@ -11,13 +12,13 @@ dependencies:
   module:
     - text
     - user
-id: node.os2loop_documents_collection.default
+id: node.os2loop_documents_collection.pdf
 targetEntityType: node
 bundle: os2loop_documents_collection
-mode: default
+mode: pdf
 content:
   flag_os2loop_favourite:
-    weight: 10
+    weight: 0
     region: content
     settings: {  }
     third_party_settings: {  }

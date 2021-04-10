@@ -15,14 +15,14 @@ mode: default
 content:
   os2loop_documents_hc_content:
     weight: 1
-    label: visually_hidden
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     type: text_default
     region: content
   os2loop_documents_hc_title:
     weight: 0
-    label: visually_hidden
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }

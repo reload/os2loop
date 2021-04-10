@@ -5,6 +5,11 @@ description: 'A theme for os2loop.'
 core_version_requirement: ^8 || ^9
 screenshot: loop.png
 
+# This breaks `drush site:install` (maybe related to
+# https://www.drupal.org/project/drupal/issues/3100374).
+# dependencies:
+#   - drupal:twig_tweak
+
 libraries:
   - os2loop_theme/global-styling
   - os2loop_theme/global-scripts

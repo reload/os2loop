@@ -182,6 +182,18 @@ BODY,
           'target_id' => $this->getReference('os2loop_profession:Andet')->id(),
         ],
       ]);
+
+      $paragraph = Paragraph::create([
+        'type' => 'os2loop_documents_highlighted_co',
+        'os2loop_documents_hc_title' => sprintf('Important note on %s', $document->getTitle()),
+        'os2loop_documents_hc_content' => [
+          'value' => sprintf('<p>This is the content of %s</p>', $document->getTitle()),
+          'format' => 'os2loop_documents_rich_text',
+        ],
+      ]);
+      $paragraph->save();
+      $document->get('os2loop_documents_document_conte')->appendItem($paragraph);
+
       $this->setReference($document->getType() . ':' . $document->getTitle(), $document);
       $document->save();
     }
