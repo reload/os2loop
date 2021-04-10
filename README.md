@@ -36,6 +36,12 @@ composer install --no-dev --optimize-autoloader
 vendor/bin/drush --yes site:install os2loop --existing-config
 ```
 
+You must also build the [OS2Loop
+theme](web/profiles/custom/os2loop/themes/os2loop_theme/README.md) assets; see
+[Building
+assets](web/profiles/custom/os2loop/themes/os2loop_theme/README.md#building-assets)
+for details.
+
 ### Development
 
 See [docs/development](docs/development/README.md) for details on development.
