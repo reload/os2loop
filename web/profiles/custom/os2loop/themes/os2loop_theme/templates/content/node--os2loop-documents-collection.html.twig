@@ -120,4 +120,6 @@
         </div>
   </div>
 
+  {# @todo design #}
+  <a class="btn btn-secondary btn-print" href="{{ path('entity_print.view', {export_type: 'pdf', entity_type: 'node', entity_id: node.id}) }}">{{ 'Print collection (PDF)'|t }}</a>
 </article>
