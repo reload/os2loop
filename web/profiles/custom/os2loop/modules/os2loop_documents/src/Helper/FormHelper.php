@@ -201,7 +201,7 @@ class FormHelper {
           ],
           // We must have unique values to make FormState::getTriggeringElement
           // work as expected.
-          '#value' => $this->t('Remove %document from collection', ['%document' => $row['name']]),
+          '#value' => $this->t('Remove @title from collection', ['@title' => $row['name']]),
           '#attributes' => [
             'data-document-id' => $row['id'],
             // @todo Show only on leaf nodes.
@@ -304,10 +304,18 @@ class FormHelper {
           'id' => $document->id(),
           'pid' => 0,
         ];
-        $this->messenger->addStatus($this->t('Document added to collection.'));
+        $this->messenger->addStatus($this->t('Document @title added to collection.', [
+          '@title' => $this->buildDocumentTitle($document),
+        ]));
+        // Clear the document input field.
+        $input = $formState->getUserInput();
+        unset($input['document']);
+        $formState->setUserInput($input);
       }
       else {
-        $this->messenger->addWarning($this->t('Document already in collection.'));
+        $this->messenger->addWarning($this->t('Document @title already in collection.', [
+          '@title' => $this->buildDocumentTitle($document),
+        ]));
       }
     }
     $this->setDocumentsData($formState, $data);
@@ -338,7 +346,6 @@ class FormHelper {
    *   The form state.
    */
   public function removeDocumentSubmit(array &$form, FormStateInterface $formState) {
-    // $this->getDocumentsData($formState);
     $data = $formState->getValue(self::DOCUMENTS_TREE) ?: [];
     $trigger = $formState->getTriggeringElement();
     if (isset($trigger['#attributes']['data-document-id'])) {
@@ -346,7 +353,10 @@ class FormHelper {
       // Only leaf documents can be removed.
       if (!$this->collectionHelper->hasChildren($documentId, $data)) {
         unset($data[$documentId]);
-        $this->messenger->addStatus($this->t('Document removed from collection.'));
+        $document = Node::load($documentId);
+        $this->messenger->addStatus($this->t('Document @title removed from collection.', [
+          '@title' => $this->buildDocumentTitle($document),
+        ]));
       }
       else {
         $this->messenger->addError($this->t('Only leaf documents can be removed.'));
@@ -463,10 +473,9 @@ class FormHelper {
           '@type' => $document->getType(),
         ]);
       }
-      elseif (isset($data[$document - > id()])) {
-        $errorMessage = $this->t('Document @title (@id) already in collection', [
-          '@title' => $document->getTitle(),
-          '@id' => $document->id(),
+      elseif (isset($data[$document->id()])) {
+        $errorMessage = $this->t('Document @title already in collection', [
+          '@title' => $this->buildDocumentTitle($document),
         ]);
       }
     }
@@ -500,6 +509,13 @@ class FormHelper {
 
     $body = $node->get('os2loop_documents_document_body')->value;
     return !empty(strip_tags($body ?? ''));
+    }
+
+  /**
+   * Build unique document title.
+   */
+  private function buildDocumentTitle(NodeInterface $document) {
+    return sprintf('%s (%s)', $document->getTitle(), $document->id());
   }
 
 }
