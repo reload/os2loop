@@ -13,12 +13,28 @@ function os2loop_theme_preprocess(&$variables) {
 };
 
 /**
- * Implements hook_preprocess_node().
+ * Implements hook_preprocess_menu_local_task().
  *
- * Add edit and deline links.
+ * Add classes for styling, and aria labels.
  */
 function os2loop_preprocess_menu_local_task(&$variables) {
   $link_class = str_replace(' ', '-', $variables['element']['#link']['title']);
   $variables['attributes']['class'][] = strtolower($link_class);
   $variables['attributes']['aria-label'][] = strtolower($variables['element']['#link']['title']);
+}
+
+/**
+ * Implements hook_preprocess_node().
+ *
+ * Add comment/answers counts.
+ */
+function os2loop_theme_preprocess_node(&$variables) {
+  if ($variables['view_mode'] === 'teaser') {
+    if ($variables['node']->getType() === 'os2loop_question') {
+      $variables['comment_count'] = $variables['node']->get('os2loop_question_answers')->comment_count;
+    }
+    if ($variables['node']->getType() === 'os2loop_post') {
+      $variables['comment_count'] = $variables['node']->get('os2loop_post_comments')->comment_count;
+    }
+  }
 }
