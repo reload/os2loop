@@ -1,5 +1,6 @@
 @import "bootstrap";
 @import "bootstrap-icons/font/bootstrap-icons.css";
+@import "mixins";
 @import "colors";
 
 $font-family-base: "Montserrat";
@@ -46,6 +47,7 @@ input {
 
 @import "bootstrap";
 @import "./comment";
+@import "./teasers";
 @import "./search_api_autocomplete";
 @import "./tabs";
 @import "./fields";
