@@ -3,6 +3,7 @@ langcode: en
 status: false
 dependencies:
   config:
+    - core.entity_view_display.comment.os2loop_question_answer.default
     - core.entity_view_mode.node.teaser
     - field.field.node.os2loop_question.os2loop_question_answers
     - field.field.node.os2loop_question.os2loop_question_content
@@ -13,6 +14,8 @@ dependencies:
     - field.field.node.os2loop_question.os2loop_shared_tags
     - node.type.os2loop_question
   module:
+    - comment
+    - text
     - user
 id: node.os2loop_question.teaser
 targetEntityType: node
@@ -27,14 +30,30 @@ content:
   links:
     weight: 100
     settings: {  }
-    third_party_settings: {  }
+  os2loop_question_answers:
+    type: comment_default
+    weight: 4
     region: content
+    label: above
+    settings:
+      view_mode: default
+      pager_id: 0
+    third_party_settings: {  }
+  os2loop_question_content:
+    type: text_default
+    weight: 0
+    region: content
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   os2loop_question_answers: true
   os2loop_question_content: true
+  flag_os2loop_favourite: true
+  links: true
   os2loop_question_file: true
   os2loop_shared_profession: true
   os2loop_shared_rev_date: true
