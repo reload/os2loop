@@ -30,6 +30,7 @@ settings:
   preselect_views:
     os2loop_section_page_most_viewed: os2loop_section_page_most_viewed
     os2loop_section_page_newest_content: os2loop_section_page_newest_content
+    os2loop_section_page_user_favourites: os2loop_section_page_user_favourites
     comment: 0
     comments_recent: 0
     message: 0

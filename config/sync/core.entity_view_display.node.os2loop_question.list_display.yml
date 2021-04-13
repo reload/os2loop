@@ -1,39 +1,40 @@
-uuid: 57eff808-4024-4971-9b4b-6f77ac9fb9f5
+uuid: 8f4b946a-a7ad-4261-aa56-fc314375c883
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_display.comment.os2loop_post_comment.default
-    - field.field.node.os2loop_post.os2loop_post_comments
-    - field.field.node.os2loop_post.os2loop_post_content
-    - field.field.node.os2loop_post.os2loop_post_file
-    - field.field.node.os2loop_post.os2loop_shared_profession
-    - field.field.node.os2loop_post.os2loop_shared_rev_date
-    - field.field.node.os2loop_post.os2loop_shared_subject
-    - field.field.node.os2loop_post.os2loop_shared_tags
-    - node.type.os2loop_post
+    - core.entity_view_display.comment.os2loop_question_answer.default
+    - core.entity_view_mode.node.list_display
+    - field.field.node.os2loop_question.os2loop_question_answers
+    - field.field.node.os2loop_question.os2loop_question_content
+    - field.field.node.os2loop_question.os2loop_question_file
+    - field.field.node.os2loop_question.os2loop_shared_profession
+    - field.field.node.os2loop_question.os2loop_shared_rev_date
+    - field.field.node.os2loop_question.os2loop_shared_subject
+    - field.field.node.os2loop_question.os2loop_shared_tags
+    - node.type.os2loop_question
   module:
     - comment
     - datetime
     - file
     - text
     - user
-id: node.os2loop_post.default
+id: node.os2loop_question.list_display
 targetEntityType: node
-bundle: os2loop_post
-mode: default
+bundle: os2loop_question
+mode: list_display
 content:
   flag_os2loop_favourite:
     weight: 10
-    region: content
     settings: {  }
     third_party_settings: {  }
+    region: content
   links:
     weight: 0
     region: content
     settings: {  }
     third_party_settings: {  }
-  os2loop_post_comments:
+  os2loop_question_answers:
     weight: 6
     label: above
     settings:
@@ -42,14 +43,14 @@ content:
     third_party_settings: {  }
     type: comment_default
     region: content
-  os2loop_post_content:
+  os2loop_question_content:
     weight: 1
     label: visually_hidden
     settings: {  }
     third_party_settings: {  }
     type: text_default
     region: content
-  os2loop_post_file:
+  os2loop_question_file:
     weight: 5
     label: visually_hidden
     settings:
@@ -58,13 +59,13 @@ content:
     type: file_default
     region: content
   os2loop_shared_profession:
-    weight: 4
     label: inline
     settings:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
     region: content
+    weight: 2
   os2loop_shared_rev_date:
     weight: 7
     label: above
@@ -75,20 +76,20 @@ content:
     type: datetime_default
     region: content
   os2loop_shared_subject:
-    weight: 2
-    label: inline
+    label: above
     settings:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
     region: content
-  os2loop_shared_tags:
     weight: 3
-    label: inline
+  os2loop_shared_tags:
+    label: above
     settings:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
     region: content
+    weight: 4
 hidden:
   search_api_excerpt: true

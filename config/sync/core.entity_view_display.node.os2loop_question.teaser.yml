@@ -1,6 +1,6 @@
 uuid: 0a6247f4-1495-41a3-b99e-54abede84979
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
@@ -19,6 +19,11 @@ targetEntityType: node
 bundle: os2loop_question
 mode: teaser
 content:
+  flag_os2loop_favourite:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   links:
     weight: 100
     settings: {  }

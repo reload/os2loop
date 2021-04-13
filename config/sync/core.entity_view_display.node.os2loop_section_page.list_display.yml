@@ -1,26 +1,22 @@
-uuid: 8f791cda-dd6a-4c44-a00a-351e7e639ab6
+uuid: 2829985c-f98d-4c1c-afe8-b7f366bc8349
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.node.list_display
     - field.field.node.os2loop_section_page.os2loop_section_page_paragraph
     - node.type.os2loop_section_page
   module:
     - entity_reference_revisions
     - user
-id: node.os2loop_section_page.default
+id: node.os2loop_section_page.list_display
 targetEntityType: node
 bundle: os2loop_section_page
-mode: default
+mode: list_display
 content:
-  links:
-    weight: 100
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   os2loop_section_page_paragraph:
     type: entity_reference_revisions_entity_view
-    weight: 101
+    weight: 0
     label: hidden
     settings:
       view_mode: default
@@ -28,4 +24,5 @@ content:
     third_party_settings: {  }
     region: content
 hidden:
+  links: true
   search_api_excerpt: true

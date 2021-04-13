@@ -1,8 +1,9 @@
-uuid: 81841f27-0a00-445c-9045-3c36501b7d86
+uuid: 8d19c71b-b7c8-4f9d-b385-d296984dd2b2
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.node.list_display
     - field.field.node.os2loop_documents_document.os2loop_documents_document_autho
     - field.field.node.os2loop_documents_document.os2loop_documents_document_conte
     - field.field.node.os2loop_documents_document.os2loop_shared_profession
@@ -12,16 +13,16 @@ dependencies:
   module:
     - entity_reference_revisions
     - user
-id: node.os2loop_documents_document.default
+id: node.os2loop_documents_document.list_display
 targetEntityType: node
 bundle: os2loop_documents_document
-mode: default
+mode: list_display
 content:
   flag_os2loop_favourite:
     weight: 10
-    region: content
     settings: {  }
     third_party_settings: {  }
+    region: content
   links:
     weight: 100
     region: content

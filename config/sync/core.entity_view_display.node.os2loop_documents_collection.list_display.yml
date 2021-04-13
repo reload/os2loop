@@ -1,8 +1,9 @@
-uuid: 6760a242-fd8f-4daf-af9b-f05dd5448ac3
+uuid: 09be8991-d3d5-4b75-b6f0-d3cb0a1d1b5b
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.node.list_display
     - field.field.node.os2loop_documents_collection.os2loop_documents_dc_content
     - field.field.node.os2loop_documents_collection.os2loop_shared_profession
     - field.field.node.os2loop_documents_collection.os2loop_shared_subject
@@ -11,16 +12,16 @@ dependencies:
   module:
     - text
     - user
-id: node.os2loop_documents_collection.default
+id: node.os2loop_documents_collection.list_display
 targetEntityType: node
 bundle: os2loop_documents_collection
-mode: default
+mode: list_display
 content:
   flag_os2loop_favourite:
     weight: 10
-    region: content
     settings: {  }
     third_party_settings: {  }
+    region: content
   links:
     weight: 100
     region: content
