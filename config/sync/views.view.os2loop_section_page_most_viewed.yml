@@ -351,7 +351,7 @@ display:
         operator: AND
         groups:
           1: AND
-      title: Indlæg
+      title: ''
     cache_metadata:
       max-age: -1
       contexts:
@@ -368,7 +368,7 @@ display:
     display_options:
       display_extenders: {  }
       display_description: ''
-      title: Dokumenter
+      title: ''
       defaults:
         title: false
         filters: false
@@ -450,7 +450,7 @@ display:
     display_options:
       display_extenders: {  }
       display_description: ''
-      title: Spørgsmål
+      title: ''
       defaults:
         title: false
         filters: false
@@ -531,7 +531,7 @@ display:
     display_options:
       display_extenders: {  }
       display_description: ''
-      title: Indlæg/Spørgsmål/Dokumenter
+      title: ''
       defaults:
         title: false
         filters: false

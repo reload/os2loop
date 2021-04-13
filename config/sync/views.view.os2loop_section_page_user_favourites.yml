@@ -154,7 +154,7 @@ display:
           expose:
             label: ''
           granularity: second
-      title: 'User favourites'
+      title: ''
       header: {  }
       footer: {  }
       empty: {  }
@@ -184,10 +184,11 @@ display:
   block_1:
     display_plugin: block
     id: block_1
-    display_title: Block
+    display_title: 'User favourites'
     position: 1
     display_options:
       display_extenders: {  }
+      display_description: ''
     cache_metadata:
       max-age: -1
       contexts:

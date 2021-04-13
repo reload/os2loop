@@ -331,7 +331,7 @@ display:
           expose:
             label: ''
           granularity: second
-      title: Indlæg
+      title: ''
       header: {  }
       footer: {  }
       empty: {  }
@@ -497,12 +497,11 @@ display:
       defaults:
         filters: false
         filter_groups: false
-        title: false
+        title: true
       filter_groups:
         operator: AND
         groups:
           1: AND
-      title: Dokumenter
     cache_metadata:
       max-age: -1
       contexts:
@@ -578,12 +577,11 @@ display:
       defaults:
         filters: false
         filter_groups: false
-        title: false
+        title: true
       filter_groups:
         operator: AND
         groups:
           1: AND
-      title: Spørgsmål
     cache_metadata:
       max-age: -1
       contexts:
