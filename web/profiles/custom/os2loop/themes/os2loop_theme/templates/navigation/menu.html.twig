@@ -24,19 +24,6 @@
   We call a macro which calls itself to render the full tree.
   @see http://twig.sensiolabs.org/doc/tags/macro.html
 #}
-<header class="container" role="banner-brand" id="header-brand">
-
-    <!-- branding header -->
-      <div class="d-md-flex">
-        <div class="d-none d-md-flex align-items-center">
-          <a class="navbar-brand d-flex align-items-center" href="{{ front_page }}"><img class="text-white mr-3 logo" style="height: 3em;" src="{{ logopath }}" />
-        </div>
-        <div>
-    </div>
-    <!-- branding header -->
-
-  </div>
-</header>
 {{ menus.menu_links(items, attributes, 0) }}
 {% macro menu_links(items, attributes, menu_level) %}
   {% import _self as menus %}

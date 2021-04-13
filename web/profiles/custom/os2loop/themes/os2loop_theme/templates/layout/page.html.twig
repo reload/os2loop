@@ -44,20 +44,7 @@
  */
 #}
 <div class="container-fluid">
-
-  <header role="banner">
-    {{ page.header }}
-  </header>
-
-  {{ page.primary_menu }}
-  {{ page.secondary_menu }}
-
-  {{ page.breadcrumb }}
-
-  {{ page.highlighted }}
-
-  {{ page.help }}
-
+  {{ page.header }}
   <main role="main" class="bg-secondary-loop">
     <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
 
@@ -70,13 +57,6 @@
         {{ page.sidebar_first }}
       </aside>
     {% endif %}
-
-    {% if page.sidebar_second %}
-      <aside class="layout-sidebar-second" role="complementary">
-        {{ page.sidebar_second }}
-      </aside>
-    {% endif %}
-
   </main>
 
   {% if page.footer %}
