@@ -1,0 +1,3 @@
+services:
+  os2loop_documents.form_helper:
+    class: Drupal\os2loop_documents\Helper\FormHelper

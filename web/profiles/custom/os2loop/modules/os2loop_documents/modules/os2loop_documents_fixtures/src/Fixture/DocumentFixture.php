@@ -13,9 +13,9 @@ use Drupal\os2loop_taxonomy_fixtures\Fixture\TagFixture;
 use Drupal\paragraphs\Entity\Paragraph;
 
 /**
- * Page fixture.
+ * Document fixture.
  *
- * @package Drupal\os2loop_page_fixtures\Fixture
+ * @package Drupal\os2loop_documents_fixtures\Fixture
  */
 class DocumentFixture extends AbstractFixture implements DependentFixtureInterface, FixtureGroupInterface {
 

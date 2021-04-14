@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.os2loop_documents_document.os2loop_documents_document_autho
+    - field.field.node.os2loop_documents_document.os2loop_documents_document_body
     - field.field.node.os2loop_documents_document.os2loop_documents_document_conte
     - field.field.node.os2loop_documents_document.os2loop_shared_profession
     - field.field.node.os2loop_documents_document.os2loop_shared_subject
@@ -29,6 +30,7 @@ content:
     region: content
 hidden:
   os2loop_documents_document_autho: true
+  os2loop_documents_document_body: true
   os2loop_documents_document_conte: true
   os2loop_shared_profession: true
   os2loop_shared_subject: true

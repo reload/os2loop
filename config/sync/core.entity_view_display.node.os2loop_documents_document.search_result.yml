@@ -33,6 +33,7 @@ content:
 hidden:
   links: true
   os2loop_documents_document_autho: true
+  os2loop_documents_document_body: true
   os2loop_documents_document_conte: true
   os2loop_shared_profession: true
   os2loop_shared_tags: true
