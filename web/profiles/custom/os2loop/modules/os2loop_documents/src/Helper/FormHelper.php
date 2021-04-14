@@ -509,7 +509,7 @@ class FormHelper {
 
     $body = $node->get('os2loop_documents_document_body')->value;
     return !empty(strip_tags($body ?? ''));
-    }
+  }
 
   /**
    * Build unique document title.
