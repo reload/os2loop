@@ -15,7 +15,11 @@
  */
 #}
 {% if content %}
-  <header{{ attributes.addClass('navbar navbar-expand-lg navbar-light bg-primary row d-md-flex align-items-center') }}>
-    {{ content }}
+  <header{{ attributes.addClass('bg-primary') }}>
+    <div class="container">
+      <div class="navbar navbar-light navbar-expand-lg justify-content-between">
+        {{ content }}
+      </div>
+    </div>
   </header>
 {% endif %}
