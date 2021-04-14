@@ -2,8 +2,6 @@
 
 namespace Drupal\os2loop_documents\Helper;
 
-use Drupal\Core\Form\FormStateInterface;
-use Drupal\node\NodeInterface;
 use Drupal\Core\DependencyInjection\DependencySerializationTrait;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Messenger\MessengerInterface;
@@ -297,9 +295,9 @@ class FormHelper {
     $documentId = $this->getDocumentId($formState);
     if (NULL !== $documentId) {
       $document = Node::load($documentId);
-      if ($document && !isset($data[$document - > id()])) {
+      if ($document && !isset($data[$document->id()])) {
         $weight = (int) max(array_column($data, 'weight'));
-        $data[$document - > id()] = [
+        $data[$document->id()] = [
           'weight' => $weight + 1,
           'id' => $document->id(),
           'pid' => 0,
