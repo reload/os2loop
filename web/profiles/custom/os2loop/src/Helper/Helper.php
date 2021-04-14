@@ -71,12 +71,12 @@ class Helper {
           return 0 !== $value;
         });
       // Vocabulary name => Block id.
-      $stuff = [
+      $vocabularyBlocks = [
         'os2loop_subject' => 'os2loop_search_db_subject',
         'os2loop_tag' => 'os2loop_search_db_tags',
         'os2loop_profession' => 'os2loop_search_db_profession',
       ];
-      foreach ($stuff as $vocabularyName => $blockId) {
+      foreach ($vocabularyBlocks as $vocabularyName => $blockId) {
         if ($blockId === $block->id() && !isset($enabledTaxonomyVocabularies[$vocabularyName])) {
           return AccessResult::forbidden();
         }
@@ -113,13 +113,13 @@ class Helper {
     });
 
     // Vocabulary name => Field name.
-    $stuff = [
+    $vocabularyFields = [
       'os2loop_subject' => 'os2loop_shared_subject',
       'os2loop_tag' => 'os2loop_shared_tags',
       'os2loop_profession' => 'os2loop_shared_profession',
     ];
 
-    foreach ($stuff as $vocabularyName => $fieldName) {
+    foreach ($vocabularyFields as $vocabularyName => $fieldName) {
       if (isset($element[$fieldName]) && !isset($enabledTaxonomyVocabularies[$vocabularyName])) {
         unset($element[$fieldName]);
       }
