@@ -19,6 +19,11 @@ targetEntityType: node
 bundle: os2loop_post
 mode: search_result
 content:
+  flag_os2loop_favourite:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   os2loop_shared_subject:
     weight: 1
     label: visually_hidden
