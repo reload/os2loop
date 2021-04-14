@@ -17,6 +17,11 @@ targetEntityType: node
 bundle: os2loop_documents_document
 mode: default
 content:
+  flag_os2loop_favourite:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   links:
     weight: 100
     region: content
