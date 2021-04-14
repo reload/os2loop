@@ -15,10 +15,9 @@
  */
 #}
 {% set classes = [
-		"icon",
+    "icon",
     is_active ? 'active'
   ]
 %}
 
 <li {{ attributes.addClass(classes) }}>{{ link("", link["#url"]) }}</li>
-

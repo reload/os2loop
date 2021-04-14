@@ -71,36 +71,36 @@
  */
 #}
 <article{{ attributes.addClass("os2loop-content os2loop-question") }}>
-	<div>
-		{{ title_prefix }}
-		{% if label %}
-			<h1{{ title_attributes }}>
-				{{ label }}
-			</h1>
-		{% endif %}
-		{{ title_suffix }}
-		<div class="user">
-			{% if author_picture %}
-				{{ author_picture }}
-			{% else %}
-				<i class="bi bi-file-person"></i>
-			{% endif %}
-			{# TODO fix image #}
-			<div class="col-md">
-				<div>{{ author_name }}
-					{{ date }}</div>
-				<div>metadata</div>
-				{# TODO fix metadata #}
-			</div>
-		</div>
-		<div{{ content_attributes.addClass('bg-secondary-loop') }}>
-			{{ content.os2loop_question_content }}
-			{{ content.os2loop_shared_tags }}
-			{{ content.os2loop_shared_subject }}
-			{{ content.os2loop_shared_profession }}
-			{{ content.os2loop_question_file }}
+  <div>
+    {{ title_prefix }}
+    {% if label %}
+      <h1{{ title_attributes }}>
+        {{ label }}
+      </h1>
+    {% endif %}
+    {{ title_suffix }}
+    <div class="user">
+      {% if author_picture %}
+        {{ author_picture }}
+      {% else %}
+        <i class="bi bi-file-person"></i>
+      {% endif %}
+      {# TODO fix image #}
+      <div class="col-md">
+        <div>{{ author_name }}
+          {{ date }}</div>
+        <div>metadata</div>
+        {# TODO fix metadata #}
+      </div>
+    </div>
+    <div{{ content_attributes.addClass('bg-secondary-loop') }}>
+      {{ content.os2loop_question_content }}
+      {{ content.os2loop_shared_tags }}
+      {{ content.os2loop_shared_subject }}
+      {{ content.os2loop_shared_profession }}
+      {{ content.os2loop_question_file }}
       {{ content.flag_os2loop_favourite }}
-		</div>
-		{{ content.os2loop_question_answers }}
-	</div>
+    </div>
+    {{ content.os2loop_question_answers }}
+  </div>
 </article>
