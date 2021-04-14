@@ -7,3 +7,9 @@ global-scripts:
   version: 1.x
   js:
     build/app.js: {  }
+
+pdf-styling:
+  version: 1.x
+  css:
+    theme:
+      build/pdf.css: {}

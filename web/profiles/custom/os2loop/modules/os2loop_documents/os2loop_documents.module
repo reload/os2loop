@@ -5,6 +5,7 @@
  * Code for the Loop documents feature.
  */
 
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Form\FormStateInterface;
 
@@ -31,4 +32,18 @@ function os2loop_documents_form_node_form_alter(array &$form, FormStateInterface
   // @todo We should use hook_event_dispatcher for this
   // https://www.drupal.org/project/hook_event_dispatcher/issues/3199174
   \Drupal::service('os2loop_documents.form_helper')->alterForm($form, $form_state, $form_id);
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update().
+ */
+function os2loop_documents_node_update(EntityInterface $entity) {
+  \Drupal::service('os2loop_documents.node_helper')->updateNode($entity);
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function os2loop_documents_preprocess_node(array &$variables) {
+  \Drupal::service('os2loop_documents.node_helper')->preprocessNode($variables);
 }

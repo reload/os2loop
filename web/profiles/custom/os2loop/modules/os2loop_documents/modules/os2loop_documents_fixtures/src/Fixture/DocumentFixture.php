@@ -165,6 +165,38 @@ BODY,
     $document->get('os2loop_documents_document_conte')->appendItem($paragraph);
 
     $document->save();
+
+    foreach (['Aaa', 'Bbb', 'Ccc', 'Ddd', 'Eee', 'Fff'] as $title) {
+      $document = Node::create([
+        'type' => 'os2loop_documents_document',
+        'title' => $title,
+        'os2loop_documents_document_autho' => 'Document Author',
+        'os2loop_shared_subject' => [
+          'target_id' => $this->getReference('os2loop_subject:Diverse')->id(),
+        ],
+        'os2loop_shared_tags' => [
+          ['target_id' => $this->getReference('os2loop_tag:test')->id()],
+          ['target_id' => $this->getReference('os2loop_tag:Udredning')->id()],
+        ],
+        'os2loop_shared_profession' => [
+          'target_id' => $this->getReference('os2loop_profession:Andet')->id(),
+        ],
+      ]);
+
+      $paragraph = Paragraph::create([
+        'type' => 'os2loop_documents_highlighted_co',
+        'os2loop_documents_hc_title' => sprintf('Important note on %s', $document->getTitle()),
+        'os2loop_documents_hc_content' => [
+          'value' => sprintf('<p>This is the content of %s</p>', $document->getTitle()),
+          'format' => 'os2loop_documents_rich_text',
+        ],
+      ]);
+      $paragraph->save();
+      $document->get('os2loop_documents_document_conte')->appendItem($paragraph);
+
+      $this->setReference($document->getType() . ':' . $document->getTitle(), $document);
+      $document->save();
+    }
   }
 
   /**
