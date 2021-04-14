@@ -11,7 +11,7 @@ dependencies:
 id: mainnavigation
 theme: os2loop_theme
 region: header
-weight: -7
+weight: -5
 provider: null
 plugin: 'system_menu_block:main'
 settings:
@@ -20,6 +20,6 @@ settings:
   provider: system
   label_display: '0'
   level: 1
-  depth: 0
-  expand_all_items: false
+  depth: 2
+  expand_all_items: true
 visibility: {  }
