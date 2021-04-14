@@ -25,7 +25,7 @@ class DocumentLegacyFixture extends AbstractFixture implements DependentFixtureI
     $document = Node::create([
       'type' => 'os2loop_documents_document',
       'title' => 'A legacy document (with body)',
-      'os2loop_documents_body' => [
+      'os2loop_documents_document_body' => [
         'value' => <<<'BODY'
 <p>This is the legacy content.</p>
 
