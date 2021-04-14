@@ -72,6 +72,20 @@
  * @ingroup themeable
  */
 #}
+{% macro table_of_contents(items, collection) %}
+  {% if items %}
+    <ol>
+      {% for item in items %}
+        {% set document = item.document %}
+        <li>
+          <a href="{{ path('entity.node.canonical', {node: document.id, collection: collection.id}) }}" class="document-title">{{ document.title.value }}</a>
+          {{ item.children ? _self.table_of_contents(item.children, collection) }}
+        </li>
+      {% endfor %}
+    </ol>
+  {% endif %}
+{% endmacro %}
+
 <article{{ attributes.addClass("container") }}>
   {{ title_prefix }}
   {% if label  %}
@@ -83,8 +97,16 @@
 
   <div{{ content_attributes }}>
   <div class="row">
-  <div class="col-md-9">
-    {{ content.os2loop_documents_dc_content }}
+    <div class="col-md-9">
+      {{ content.os2loop_documents_dc_content }}
+
+      {% if os2loop_documents_collection_tree|default(false) %}
+        <fieldset>
+          <legend>{{ 'Documents in collection'|trans }}</legend>
+          {{ _self.table_of_contents(os2loop_documents_collection_tree, node) }}
+        </fieldset>
+      {% endif %}
+
     </div>
     <div class="col-md-3">
         <div class="bg-secondary-loop">
@@ -98,4 +120,6 @@
         </div>
   </div>
 
+  {# @todo design #}
+  <a class="btn btn-secondary btn-print d-print-none" href="{{ path('entity_print.view', {export_type: 'pdf', entity_type: 'node', entity_id: node.id}) }}">{{ 'Print collection (PDF)'|t }}</a>
 </article>

@@ -72,44 +72,81 @@
  * @ingroup themeable
  */
 #}
+{% macro table_of_contents(items, collection, node) %}
+  {% if items %}
+    <ol>
+      {% for item in items %}
+        {% set document = item.document %}
+        <li>
+          <a href="{{ path('entity.node.canonical', {node: document.id, collection: collection.id}) }}"
+            {{ node.id == document.id ? 'class="active" aria-current="true"' }}
+          ><span class="document-title">{{ document.title.value }}</span></a>
+          {{ item.children ? _self.table_of_contents(item.children, collection, node) }}
+        </li>
+      {% endfor %}
+    </ol>
+  {% endif %}
+{% endmacro %}
+
 <article{{ attributes }}>
-	<ul class="tabs nav" id="document-tabs" role="tablist">
-		<li>
-			<a class="tab active" id="document-tab" data-toggle="tab" href="#document" role="tab" aria-controls="document" aria-selected="true">Document</a>
-		</li>
-		<li>
-			<a class="tab" id="about-document-tab" data-toggle="tab" href="#about-document" role="tab" aria-controls="about-document" aria-selected="false">About document</a>
-		</li>
-	</ul>
-	<div class="tab-content" id="document-tabs-content">
-		<div class="tab-pane show active" id="document" role="tabpanel" aria-labelledby="document-tab">
-			{{ title_prefix }}
-			{% if label  %}
-				<h1{{ title_attributes }}>
-					{{ label }}
-				</h1>
-			{% endif %}
-			{{ title_suffix }}
-			<div{{ content_attributes }}>
-				{{ content.os2loop_shared_subject }}
-				{{ content.os2loop_documents_document_conte }}
-			</div>
-		</div>
-		<div class="tab-pane" id="about-document" role="tabpanel" aria-labelledby="about-document-tab">
-			{{ title_prefix }}
-			{% if label  %}
-				<h1{{ title_attributes }}>
-					Om dokumentet
-				</h1>
-			{% endif %}
-			{{ title_suffix }}
-			{{ content.os2loop_documents_document_autho }}
-			<div{{ content_attributes.addClass("bg-secondary-loop") }}>
-				{{ content.os2loop_shared_tags }}
-				{{ content.os2loop_shared_subject }}
-				{{ content.os2loop_shared_profession }}
+  <ul class="tabs nav" id="document-tabs" role="tablist">
+    <li>
+      <a class="tab active" id="document-tab" data-toggle="tab" href="#document" role="tab" aria-controls="document" aria-selected="true">Document</a>
+    </li>
+    <li>
+      <a class="tab" id="about-document-tab" data-toggle="tab" href="#about-document" role="tab" aria-controls="about-document" aria-selected="false">About document</a>
+    </li>
+  </ul>
+  <div class="tab-content" id="document-tabs-content">
+    <div class="tab-pane show active" id="document" role="tabpanel" aria-labelledby="document-tab">
+      {{ title_prefix }}
+      {% if label  %}
+        <h1{{ title_attributes }}>
+          {{ label }}
+        </h1>
+      {% endif %}
+      {{ title_suffix }}
+      {% if os2loop_documents_collection_tree|default(false) %}
+        <fieldset>
+          <legend>{{ 'Documents in collection'|trans }}
+            <a href="{{ path('entity.node.canonical', {node: os2loop_documents_collection.id}) }}">{{ os2loop_documents_collection.title.value }}</a>
+          </legend>
+          {{ _self.table_of_contents(os2loop_documents_collection_tree, os2loop_documents_collection, node) }}
+        </fieldset>
+      {% elseif os2loop_documents_collections|default(false) %}
+        <fieldset>
+          <legend>{{ 'Document is part of these collections'|trans }}</legend>
+          <ol>
+            {% for collection in os2loop_documents_collections %}
+              <li><a href="{{ path('entity.node.canonical', {node: node.id, collection: collection.id}) }}">{{ collection.title.value }}</a></li>
+            {% endfor %}
+          </ol>
+        </fieldset>
+      {% endif %}
+      <div{{ content_attributes }}>
+        {{ content.os2loop_shared_subject }}
+        {{ content.os2loop_documents_document_body }}
+        {{ content.os2loop_documents_document_conte }}
+      </div>
+    </div>
+    <div class="tab-pane" id="about-document" role="tabpanel" aria-labelledby="about-document-tab">
+      {{ title_prefix }}
+      {% if label  %}
+        <h1{{ title_attributes }}>
+          Om dokumentet
+        </h1>
+      {% endif %}
+      {{ title_suffix }}
+      {{ content.os2loop_documents_document_autho }}
+      <div{{ content_attributes.addClass("bg-secondary-loop") }}>
+        {{ content.os2loop_shared_tags }}
+        {{ content.os2loop_shared_subject }}
+        {{ content.os2loop_shared_profession }}
         {{ content.flag_os2loop_favourite }}
-			</div>
-		</div>
-	</div>
+      </div>
+    </div>
+  </div>
+
+  {# @todo design #}
+  <a class="btn btn-secondary btn-print d-print-none" href="{{ path('entity_print.view', {export_type: 'pdf', entity_type: 'node', entity_id: node.id}) }}">{{ 'Print document (PDF)'|t }}</a>
 </article>

@@ -73,25 +73,25 @@
  */
 #}
 <article{{ attributes.addClass("os2loop-content") }}>
-	{{ title_prefix }}
-	{% if label %}
-		<h1{{ title_attributes }}>
-			{{ label }}
-		</h1>
-	{% endif %}
-	{{ title_suffix }}
-	<div class="user">
-		<i class="bi bi-file-person"></i>
-		{# TODO fix image #}
-		<div class="col-md">
-			<div>{{ author_name }}
-				{{ date }}</div>
-			<div>metadata</div>
-			{# TODO fix metadata #}
-		</div>
-	</div>
+  {{ title_prefix }}
+  {% if label %}
+    <h1{{ title_attributes }}>
+      {{ label }}
+    </h1>
+  {% endif %}
+  {{ title_suffix }}
+  <div class="user">
+    <i class="bi bi-file-person"></i>
+    {# TODO fix image #}
+    <div class="col-md">
+      <div>{{ author_name }}
+        {{ date }}</div>
+      <div>metadata</div>
+      {# TODO fix metadata #}
+    </div>
+  </div>
 
-	<div{{ content_attributes.addClass("bg-secondary-loop") }}>
-		{{ content|without('os2loop_shared_profession', 'os2loop_shared_tags', 'os2loop_shared_subject') }}
-	</div>
+  <div{{ content_attributes.addClass("bg-secondary-loop") }}>
+    {{ content|without('os2loop_shared_profession', 'os2loop_shared_tags', 'os2loop_shared_subject') }}
+  </div>
 </article>

@@ -17,6 +17,11 @@ targetEntityType: node
 bundle: os2loop_documents_document
 mode: search_result
 content:
+  flag_os2loop_favourite:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   os2loop_shared_subject:
     weight: 1
     label: visually_hidden
@@ -31,8 +36,12 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
   links: true
   os2loop_documents_document_autho: true
+  os2loop_documents_document_body: true
   os2loop_documents_document_conte: true
   os2loop_shared_profession: true
   os2loop_shared_tags: true

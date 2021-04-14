@@ -19,6 +19,11 @@ targetEntityType: node
 bundle: os2loop_question
 mode: os2loop_search_db_search_autocomplete
 content:
+  flag_os2loop_favourite:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   links:
     weight: 0
     region: content
@@ -33,6 +38,9 @@ content:
     region: content
     weight: 1
 hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
   os2loop_question_answers: true
   os2loop_question_content: true
   os2loop_question_file: true

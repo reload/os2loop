@@ -8,15 +8,15 @@ dependencies:
     - search_api
   config:
     - field.storage.node.os2loop_documents_dc_content
-    - field.storage.node.os2loop_post_content
-    - field.storage.node.os2loop_question_content
     - field.storage.node.os2loop_documents_document_conte
-    - field.storage.paragraph.os2loop_documents_hc_content
     - field.storage.paragraph.os2loop_documents_description
+    - field.storage.paragraph.os2loop_documents_hc_content
+    - field.storage.paragraph.os2loop_documents_hc_title
     - field.storage.paragraph.os2loop_documents_step_text
     - field.storage.paragraph.os2loop_documents_tai_text
-    - field.storage.paragraph.os2loop_documents_hc_title
     - field.storage.node.os2loop_external_descripti
+    - field.storage.node.os2loop_post_content
+    - field.storage.node.os2loop_question_content
     - field.storage.node.os2loop_shared_profession
     - field.storage.node.os2loop_shared_subject
     - field.storage.node.os2loop_shared_tags
@@ -192,6 +192,31 @@ processor_settings:
     suffix: '</strong>'
     weights:
       postprocess_query: 0
+  html_filter:
+    all_fields: true
+    fields:
+      - os2loop_documents_dc_content
+      - os2loop_documents_description
+      - os2loop_documents_hc_content
+      - os2loop_documents_hc_title
+      - os2loop_documents_step_text
+      - os2loop_documents_tai_text
+      - os2loop_external_descripti
+      - os2loop_post_content
+      - os2loop_question_content
+      - title
+      - type
+    title: false
+    alt: true
+    tags:
+      b: 2
+      h1: 5
+      h2: 3
+      h3: 2
+      strong: 2
+    weights:
+      preprocess_index: -15
+      preprocess_query: -15
   language_with_fallback: {  }
   rendered_item: {  }
   type_boost:

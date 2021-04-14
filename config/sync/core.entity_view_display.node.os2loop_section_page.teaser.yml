@@ -1,6 +1,6 @@
 uuid: 2a51b702-e6c1-4dbf-9b2d-3d36cd9e527a
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
@@ -19,5 +19,8 @@ content:
     third_party_settings: {  }
     region: content
 hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
   os2loop_section_page_paragraph: true
   search_api_excerpt: true
