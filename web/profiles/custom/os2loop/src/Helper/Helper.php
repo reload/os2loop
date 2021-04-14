@@ -32,7 +32,11 @@ class Helper {
    * Implements hook_entity_create_access().
    */
   public function entityCreateAccess(AccountInterface $account, array $context, $entity_bundle): AccessResult {
-    return $this->contentTypeAccess($entity_bundle);
+    if ('node' === $context['entity_type_id']) {
+      return $this->contentTypeAccess($entity_bundle);
+    }
+
+    return AccessResult::neutral();
   }
 
   /**
