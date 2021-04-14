@@ -5,6 +5,7 @@ namespace Drupal\os2loop_upvote_fixtures\Fixture;
 use Drupal\content_fixtures\Fixture\AbstractFixture;
 use Drupal\content_fixtures\Fixture\DependentFixtureInterface;
 use Drupal\content_fixtures\Fixture\FixtureGroupInterface;
+use Drupal\os2loop_post_fixtures\Fixture\CommentFixture;
 use Drupal\os2loop_post_fixtures\Fixture\PostFixture;
 use Drupal\os2loop_question_fixtures\Fixture\QuestionFixture;
 
@@ -40,6 +41,7 @@ class UpvoteFixture extends AbstractFixture implements DependentFixtureInterface
    */
   public function getDependencies() {
     return [
+      CommentFixture::class,
       PostFixture::class,
       QuestionFixture::class,
     ];
