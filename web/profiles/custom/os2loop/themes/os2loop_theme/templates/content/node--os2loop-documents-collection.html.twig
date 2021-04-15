@@ -87,6 +87,18 @@
 {% endmacro %}
 
 <article{{ attributes.addClass("container") }}>
+<div class="d-flex">
+  <div>
+    <a class="button btn-print d-print-none" href="{{ path('entity_print.view', {export_type: 'pdf', entity_type: 'node', entity_id: node.id}) }}">{{ 'Print collection (PDF)'|t }}</a>
+  </div>
+  <div>
+    <a class="button">{{ 'Contact editoral staff'|t }}</a>
+  </div>
+  {{ content.flag_os2loop_favourite }}
+  <div>
+    <a class="button">{{ 'Share with a friend'|t }}</a>
+  </div>
+</div>
   {{ title_prefix }}
   {% if label  %}
     <h1{{ title_attributes }}>
@@ -114,12 +126,9 @@
           <div> {{ content.os2loop_shared_tags }}</div>
           <div> {{ content.os2loop_shared_subject }}</div>
           <div> {{ content.os2loop_documents_document_autho }}</div>
-          <div> {{ content.flag_os2loop_favourite }}</div>
         </div>
         </div>
         </div>
   </div>
 
-  {# @todo design #}
-  <a class="btn btn-secondary btn-print d-print-none" href="{{ path('entity_print.view', {export_type: 'pdf', entity_type: 'node', entity_id: node.id}) }}">{{ 'Print collection (PDF)'|t }}</a>
 </article>

@@ -89,6 +89,18 @@
 {% endmacro %}
 
 <article{{ attributes }}>
+<div class="d-flex">
+  <div>
+    <a class="button btn-print d-print-none" href="{{ path('entity_print.view', {export_type: 'pdf', entity_type: 'node', entity_id: node.id}) }}">{{ 'Print document (PDF)'|t }}</a>
+  </div>
+  <div>
+    <a class="button">{{ 'Contact editoral staff'|t }}</a>
+  </div>
+  {{ content.flag_os2loop_favourite }}
+  <div>
+    <a class="button">{{ 'Share with a friend'|t }}</a>
+  </div>
+</div>
   <ul class="tabs nav" id="document-tabs" role="tablist">
     <li>
       <a class="tab active" id="document-tab" data-toggle="tab" href="#document" role="tab" aria-controls="document" aria-selected="true">{{ "Document"|t }}</a>
@@ -141,11 +153,7 @@
         {{ content.os2loop_shared_tags }}
         {{ content.os2loop_shared_subject }}
         {{ content.os2loop_shared_profession }}
-        {{ content.flag_os2loop_favourite }}
       </div>
     </div>
   </div>
-
-  {# @todo design #}
-  <a class="btn btn-secondary btn-print d-print-none" href="{{ path('entity_print.view', {export_type: 'pdf', entity_type: 'node', entity_id: node.id}) }}">{{ 'Print document (PDF)'|t }}</a>
 </article>
