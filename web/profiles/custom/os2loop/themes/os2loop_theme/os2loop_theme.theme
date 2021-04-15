@@ -13,17 +13,6 @@ function os2loop_theme_preprocess(&$variables) {
 };
 
 /**
- * Implements hook_preprocess_menu_local_task().
- *
- * Add classes for styling, and aria labels.
- */
-function os2loop_preprocess_menu_local_task(&$variables) {
-  $link_class = str_replace(' ', '-', $variables['element']['#link']['title']);
-  $variables['attributes']['class'][] = strtolower($link_class);
-  $variables['attributes']['aria-label'][] = strtolower($variables['element']['#link']['title']);
-}
-
-/**
  * Implements hook_preprocess_node().
  *
  * Add comment/answers counts.
