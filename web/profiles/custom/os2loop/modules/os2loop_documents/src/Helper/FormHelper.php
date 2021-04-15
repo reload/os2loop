@@ -81,6 +81,11 @@ class FormHelper {
 
   /**
    * Implements hook_form_BASE_FORM_ID_alter().
+   *
+   * Hides legacy body field on non-legacy documents (cf.
+   * self::isLegacyDocument).
+   *
+   * Insert UI for adding documents to a collection.
    */
   public function alterForm(array &$form, FormStateInterface $formState, string $formId) {
     switch ($formId) {
