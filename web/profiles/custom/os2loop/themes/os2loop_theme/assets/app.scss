@@ -37,9 +37,10 @@ img {
 
 input {
   &.button {
-    color: $black;
-    background-color: $secondary-color;
-    border-color: $dark-secondary-color;
+    @extend .btn;
+    color: $black !important;
+    background-color: $secondary-color !important;
+    border-color: $dark-secondary-color !important;
 
     &:hover {
       color: $black;
@@ -51,9 +52,10 @@ input {
 
 a {
   &.button {
-    color: $black;
-    background-color: $secondary-color;
-    border-color: $dark-secondary-color;
+    @extend .btn;
+    color: $black !important;
+    background-color: $secondary-color !important;
+    border-color: $dark-secondary-color !important;
 
     &:hover {
       color: $black;
