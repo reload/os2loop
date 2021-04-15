@@ -9,7 +9,6 @@ use Drupal\Core\Render\MainContent\AjaxRenderer;
 use Drupal\Core\Render\RendererInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -294,7 +293,7 @@ class FormHelper {
     $data = $formState->getValue(self::DOCUMENTS_TREE) ?: [];
     $documentId = $this->getDocumentId($formState);
     if (NULL !== $documentId) {
-      $document = Node::load($documentId);
+      $document = $this->collectionHelper->loadDocument($documentId);
       if ($document && !isset($data[$document->id()])) {
         $weight = (int) max(array_column($data, 'weight'));
         $data[$document->id()] = [
@@ -351,7 +350,7 @@ class FormHelper {
       // Only leaf documents can be removed.
       if (!$this->collectionHelper->hasChildren($documentId, $data)) {
         unset($data[$documentId]);
-        $document = Node::load($documentId);
+        $document = $this->collectionHelper->loadDocument($documentId);
         $this->messenger->addStatus($this->t('Document @title removed from collection.', [
           '@title' => $this->buildDocumentTitle($document),
         ]));
@@ -457,11 +456,10 @@ class FormHelper {
     if (1 === 1) {
       return;
     }
-    $trigger = $formState->getTriggeringElement();
     $documentId = $this->getDocumentId($formState);
     if (NULL !== $documentId) {
       $data = $this->getDocumentsData($formState);
-      $document = Node::load($documentId);
+      $document = $this->collectionHelper->loadDocument($documentId);
       $errorMessage = NULL;
       if (NULL === $document) {
         $errorMessage = $this->t('Missing document');

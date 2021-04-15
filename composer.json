@@ -52,7 +52,11 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "ln -sf ../../scripts/git/hooks/pre-commit .git/hooks/pre-commit"
+            "ln -sf ../../scripts/git/hooks/pre-commit .git/hooks/pre-commit",
+            "@install-codestandards"
+        ],
+        "install-codestandards": [
+            "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run"
         ],
         "coding-standards-check/phpcs": [
             "vendor/bin/phpcs --standard=phpcs.xml.dist"
