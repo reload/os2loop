@@ -91,10 +91,10 @@
 <article{{ attributes }}>
   <ul class="tabs nav" id="document-tabs" role="tablist">
     <li>
-      <a class="tab active" id="document-tab" data-toggle="tab" href="#document" role="tab" aria-controls="document" aria-selected="true">Document</a>
+      <a class="tab active" id="document-tab" data-toggle="tab" href="#document" role="tab" aria-controls="document" aria-selected="true">{{ "Document"|t }}</a>
     </li>
     <li>
-      <a class="tab" id="about-document-tab" data-toggle="tab" href="#about-document" role="tab" aria-controls="about-document" aria-selected="false">About document</a>
+      <a class="tab" id="about-document-tab" data-toggle="tab" href="#about-document" role="tab" aria-controls="about-document" aria-selected="false">{{ "About document"|t }}</a>
     </li>
   </ul>
   <div class="tab-content" id="document-tabs-content">
@@ -132,7 +132,7 @@
       {{ title_prefix }}
       {% if label  %}
         <h1{{ title_attributes }}>
-          Om dokumentet
+          {{ "About document"|t }}
         </h1>
       {% endif %}
       {{ title_suffix }}
