@@ -35,12 +35,12 @@ class FlagHelper {
    * If there is no "correct answer", the top comment will be the most upvoted.
    */
   public function preprocessField(array &$variables) {
-    // An array of the two comment fields.
+    // An array of the two relevant comment fields.
     $field = ['os2loop_question_answers', 'os2loop_post_comments'];
     if (in_array($variables['field_name'], $field)) {
       foreach ($variables['comments'] as $comment) {
         if (isset($comment['#comment'])) {
-          // Get flags for this comment: correct answers and upvote.
+          // Get flags for this comment: correct answer and upvote.
           $comment_flag_counts = $this->flagCountManager->getEntityFlagCounts($comment['#comment']);
           // If comment is marked as correct answer, it is the top comment.
           if (isset($comment_flag_counts['os2loop_upvote_correct_answer'])) {
@@ -57,6 +57,7 @@ class FlagHelper {
               $comment_upvotes = intval($comment_flag_counts['os2loop_upvote_upvote_button']);
 
               if ($comment_upvotes > $upvoted_comment_upvotes) {
+                // If current comment has more upvotes make it upvoted comment.
                 $upvoted_comment = $comment;
               }
             }
@@ -64,10 +65,11 @@ class FlagHelper {
         }
       }
       if (isset($upvoted_comment) || isset($correct_answer)) {
+        // Correct answer wins.
         $top_comment = isset($correct_answer) ? $correct_answer : $upvoted_comment;
         // Set a top value, used to add a styling class.
         $top_comment['#top'] = TRUE;
-        // Threaded: false, to avoid indentation.
+        // Threaded: false, to avoid indentation (styling).
         $top_comment['#comment_threaded'] = FALSE;
         // Add to top of comment list.
         array_unshift($variables['comments'], $top_comment);
