@@ -266,6 +266,7 @@ class FormHelper {
     $form[self::DOCUMENTS]['add_document']['actions']['submit'] = [
       '#type' => 'submit',
       '#submit' => [[$this, 'addDocumentSubmit']],
+      '#name' => 'add-document',
       // @see https://www.drupal.org/docs/drupal-apis/ajax-api/basic-concepts#sub_form
       '#ajax' => [
         'callback' => [$this, 'addDocumentResult'],
@@ -452,8 +453,9 @@ class FormHelper {
    * Validate document.
    */
   public function validateDocument(array &$element, FormStateInterface $formState) {
-    // @todo This should only run on document add.
-    if (1 === 1) {
+    // Run only when adding document.
+    $trigger = $formState->getTriggeringElement();
+    if ('add-document' !== $trigger['#name']) {
       return;
     }
     $documentId = $this->getDocumentId($formState);
