@@ -37,10 +37,14 @@
  * @see template_preprocess_field()
  */
 #}
+
 {% set title_classes = [
-    'os2loop-title-text'
+    label_display == 'visually_hidden' ? 'visually-hidden',
+    label_display == 'inline' ? 'os2loop-title-text-inline',
+    label_display != 'inline' ? 'os2loop-title-text',
   ]
 %}
+
 {% if label_hidden %}
   {% if multiple %}
     <div{{ attributes.addClass('os2loop-title') }}>
@@ -53,6 +57,19 @@
       <div{{ item.attributes.addClass('shared-tags') }}>{{ item.content }}</div>
     {% endfor %}
   {% endif %}
+{% elseif label_display == 'inline' %}
+  <span{{ attributes }}>
+    <span{{ title_attributes.addClass(title_classes) }}>{{ label }}:</span>
+    {% if multiple %}
+      <span>
+    {% endif %}
+    {% for item in items %}
+      <span{{ item.attributes.addClass('shared-tags') }}>{{ item.content }}</span>
+    {% endfor %}
+    {% if multiple %}
+      </span>
+    {% endif %}
+  </span>
 {% else %}
   <div{{ attributes.addClass('os2loop-title') }}>
     <div{{ title_attributes.addClass(title_classes) }}>{{ label }}</div>

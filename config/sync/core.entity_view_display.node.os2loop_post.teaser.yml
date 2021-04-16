@@ -3,6 +3,7 @@ langcode: en
 status: false
 dependencies:
   config:
+    - core.entity_view_display.comment.os2loop_post_comment.default
     - core.entity_view_mode.node.teaser
     - field.field.node.os2loop_post.os2loop_post_comments
     - field.field.node.os2loop_post.os2loop_post_content
@@ -13,6 +14,8 @@ dependencies:
     - field.field.node.os2loop_post.os2loop_shared_tags
     - node.type.os2loop_post
   module:
+    - comment
+    - text
     - user
 id: node.os2loop_post.teaser
 targetEntityType: node
@@ -27,12 +30,29 @@ content:
   links:
     weight: 100
     settings: {  }
-    third_party_settings: {  }
     region: content
+  os2loop_post_comments:
+    type: comment_default
+    weight: 1
+    region: content
+    label: above
+    settings:
+      view_mode: default
+      pager_id: 0
+    third_party_settings: {  }
+  os2loop_post_content:
+    type: text_default
+    weight: 0
+    region: content
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  flag_os2loop_favourite: true
+  links: true
   os2loop_post_comments: true
   os2loop_post_content: true
   os2loop_post_file: true

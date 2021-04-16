@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * Theme override to display a node.
+ * Olivero's theme implementation to display a node teaser.
  *
  * Available variables:
  * - node: The node entity with limited access to object properties and methods.
@@ -64,51 +64,32 @@
  *   is an administrator.
  *
  * @see template_preprocess_node()
- *
- * @todo Remove the id attribute (or make it a class), because if that gets
- *   rendered twice on a page this is invalid CSS for example: two lists
- *   in different view modes.
  */
 #}
-<article{{ attributes.addClass("os2loop-content os2loop-question") }}>
-  <div class="d-flex">
-    <div>
-      <a class="button">{{ 'Contact editoral staff'|t }}</a>
-    </div>
-    {{ content.flag_os2loop_favourite }}
-    <div>
-      <a class="button">{{ 'Share with a friend'|t }}</a>
-    </div>
-  </div>
-  <div>
-    {{ title_prefix }}
-    {% if label %}
-      <h1{{ title_attributes }}>
-        {{ label }}
-      </h1>
-    {% endif %}
-    {{ title_suffix }}
-    <div class="user">
-      {% if author_picture %}
-        {{ author_picture }}
-      {% else %}
-        <i class="bi bi-file-person"></i>
-      {% endif %}
-      {# TODO fix image #}
-      <div class="col-md">
-        <div>{{ author_name }}
-          {{ date }}</div>
-        <div>metadata</div>
-        {# TODO fix metadata #}
+
+{% set classes = [
+    'node',
+    'teaser',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+  ]
+%}
+
+<article{{ attributes.addClass(classes) }}>
+  <div class="row">
+    <div class="icon-container external"></div>
+    <div class="col-md">
+      <div class="created">
+        {{ date }}
       </div>
+      <h2>
+        <a href="{{ url }}">{{ label }}</a>
+      </h2>
+      {{ content.os2loop_external_descripti }}
+      {{ content.os2loop_external_url }}
     </div>
-    <div{{ content_attributes.addClass('bg-secondary-loop') }}>
-      {{ content.os2loop_question_content }}
-      {{ content.os2loop_shared_tags }}
-      {{ content.os2loop_shared_subject }}
-      {{ content.os2loop_shared_profession }}
-      {{ content.os2loop_question_file }}
-    </div>
-    {{ content.os2loop_question_answers }}
   </div>
 </article>

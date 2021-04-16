@@ -73,6 +73,15 @@
  */
 #}
 <article{{ attributes.addClass("os2loop-content") }}>
+  <div class="d-flex">
+    <div>
+      <a class="button">{{ 'Contact editoral staff'|t }}</a>
+    </div>
+    {{ content.flag_os2loop_favourite }}
+    <div>
+      <a class="button">{{ 'Share with a friend'|t }}</a>
+    </div>
+  </div>
   {{ title_prefix }}
   {% if label %}
     <h1{{ title_attributes }}>

@@ -2,6 +2,8 @@ uuid: a32a1e68-3a4a-4f83-8f73-7d387b19cc30
 langcode: en
 status: true
 dependencies:
+  module:
+    - system
   theme:
     - os2loop_theme
 _core:

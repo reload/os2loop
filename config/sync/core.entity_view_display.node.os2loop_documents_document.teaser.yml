@@ -32,6 +32,8 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  flag_os2loop_favourite: true
+  links: true
   os2loop_documents_document_autho: true
   os2loop_documents_document_body: true
   os2loop_documents_document_conte: true

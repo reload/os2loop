@@ -12,6 +12,8 @@ dependencies:
     - field.field.node.os2loop_external.os2loop_shared_tags
     - node.type.os2loop_external
   module:
+    - link
+    - text
     - user
 id: node.os2loop_external.teaser
 targetEntityType: node
@@ -19,10 +21,29 @@ bundle: os2loop_external
 mode: teaser
 content:
   links:
-    weight: 100
+    weight: 0
+    region: content
     settings: {  }
     third_party_settings: {  }
+  os2loop_external_descripti:
+    type: text_default
+    weight: 1
     region: content
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+  os2loop_external_url:
+    type: link
+    weight: 2
+    region: content
+    label: inline
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
