@@ -80,7 +80,6 @@ class FlagHelper {
         $upvoted_comment['#comment_threaded'] = FALSE;
         // Add to top of comment list.
         array_unshift($variables['comments'], $upvoted_comment);
-
       }
     }
   }
