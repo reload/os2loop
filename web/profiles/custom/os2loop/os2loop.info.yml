@@ -55,8 +55,9 @@ install:
 dependencies:
   # @todo Complete this list of dependencies
   - drupal:block
-  - drupal:node
+  - drupal:config_translation
   - drupal:language
+  - drupal:node
   - drupal:twig_tweak
   - drupal:views
   - drupal:os2loop_menu

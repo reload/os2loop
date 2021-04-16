@@ -1,0 +1,11 @@
+uuid: 7be71fcc-c685-4d34-a654-923e8798e6dd
+langcode: da
+status: true
+dependencies:
+  config:
+    - node.type.os2loop_question
+id: node.os2loop_question
+target_entity_type_id: node
+target_bundle: os2loop_question
+default_langcode: site_default
+language_alterable: false
