@@ -9,15 +9,15 @@ dependencies:
     - search_api
   config:
     - field.storage.node.os2loop_documents_dc_content
-    - field.storage.node.os2loop_question_content
-    - field.storage.node.os2loop_post_content
     - field.storage.node.os2loop_documents_document_conte
-    - field.storage.paragraph.os2loop_documents_hc_content
     - field.storage.paragraph.os2loop_documents_description
+    - field.storage.paragraph.os2loop_documents_hc_content
+    - field.storage.paragraph.os2loop_documents_hc_title
     - field.storage.paragraph.os2loop_documents_step_text
     - field.storage.paragraph.os2loop_documents_tai_text
-    - field.storage.paragraph.os2loop_documents_hc_title
     - field.storage.node.os2loop_external_descripti
+    - field.storage.node.os2loop_post_content
+    - field.storage.node.os2loop_question_content
     - field.storage.node.os2loop_shared_profession
     - field.storage.node.os2loop_shared_subject
     - field.storage.node.os2loop_shared_tags
@@ -188,6 +188,7 @@ datasource_settings:
       default: true
       selected:
         - os2loop_page
+        - os2loop_section_page
     languages:
       default: true
       selected: {  }
