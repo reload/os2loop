@@ -21,8 +21,4 @@ settings:
   label_display: '0'
   primary: true
   secondary: false
-visibility:
-  request_path:
-    id: request_path
-    pages: '*/taxonomy/term/*'
-    negate: true
+visibility: { }
