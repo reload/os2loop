@@ -21,4 +21,4 @@ settings:
   label_display: '0'
   primary: true
   secondary: false
-visibility: { }
+visibility: {  }
