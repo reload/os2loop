@@ -78,7 +78,7 @@ class DocumentCollectionItem extends ContentEntityBase implements ContentEntityI
    * @param \Drupal\node\NodeInterface $document
    *   The document.
    *
-   * @return DocumentDocumentItem
+   * @return DocumentCollectionItem
    *   The item.
    */
   public function setDocument(NodeInterface $document): self {

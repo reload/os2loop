@@ -38,7 +38,7 @@ class CollectionHelper {
    * @param int $id
    *   The document (node) id.
    *
-   * @return \Drupal\node\Entity\NodeInterface|null
+   * @return \Drupal\node\NodeInterface|null
    *   The document if it exists.
    */
   public function loadDocument(int $id): ?NodeInterface {
@@ -54,7 +54,7 @@ class CollectionHelper {
   /**
    * Load collection items from database.
    *
-   * @param \Drupal\node\Entity\NodeInterface $collection
+   * @param \Drupal\node\NodeInterface $collection
    *   The collection.
    *
    * @return \Drupal\os2loop_documents\Entity\DocumentCollectionItem[]
@@ -100,11 +100,11 @@ class CollectionHelper {
   /**
    * Add document to collection.
    *
-   * @param \Drupal\node\Entity\NodeInterface $collection
+   * @param \Drupal\node\NodeInterface $collection
    *   The collection.
-   * @param \Drupal\node\Entity\NodeInterface $document
+   * @param \Drupal\node\NodeInterface $document
    *   The document.
-   * @param \Drupal\node\Entity\NodeInterface|null $parent
+   * @param \Drupal\node\NodeInterface|null $parent
    *   The optional document parent.
    *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
@@ -141,11 +141,13 @@ class CollectionHelper {
   /**
    * Remove document from collection.
    *
-   * @param \Drupal\node\Entity\NodeInterface $collection
+   * @param \Drupal\node\NodeInterface $collection
    *   The collection.
-   * @param \Drupal\node\Entity\NodeInterface $document
+   * @param \Drupal\node\NodeInterface $document
    *   The document.
    *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public function removeDocument(NodeInterface $collection, NodeInterface $document) {
@@ -370,7 +372,7 @@ class CollectionHelper {
   /**
    * Build document tree by setting children on document nodes.
    *
-   * @param \Drupal\os2loop_documents\Entity\DocumentCollectionItem|array $items
+   * @param \Drupal\os2loop_documents\Entity\DocumentCollectionItem[]|array $items
    *   The tree as a result from self::loadTree.
    * @param \Drupal\os2loop_documents\Entity\DocumentCollectionItem|null $root
    *   The root of the current tree.
@@ -404,7 +406,7 @@ class CollectionHelper {
   /**
    * Load all collection containing a document.
    *
-   * @param \Drupal\node\Entity\NodeInterface $document
+   * @param \Drupal\node\NodeInterface $document
    *   The document.
    */
   public function loadCollections(NodeInterface $document) {

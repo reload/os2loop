@@ -372,7 +372,7 @@ class FormHelper {
    * @param \Drupal\Core\Form\FormStateInterface $formState
    *   The form state.
    *
-   * @return array
+   * @return \Symfony\Component\HttpFoundation\Response
    *   The form element.
    */
   public function removeDocumentResult(array &$form, FormStateInterface $formState) {
