@@ -31,7 +31,8 @@ jobs:
           tools: composer:v2
       - name: Install Dependencies
         run: |
-          composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+          # Using `--no-scripts` breaks something with mglaman/drupal-check.
+          composer install --quiet --no-ansi --no-interaction --no-progress --prefer-dist
           # @see https://github.com/Dealerdirect/phpcodesniffer-composer-installer#calling-the-plugin-directly
           composer run-script install-codestandards
       - name: PHPCS
