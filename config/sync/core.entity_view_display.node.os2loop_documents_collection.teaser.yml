@@ -24,6 +24,7 @@ content:
     region: content
   links:
     weight: 100
+    region: content
   os2loop_documents_dc_content:
     type: text_default
     weight: 0
@@ -35,9 +36,9 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
-  os2loop_documents_dc_content: true
   flag_os2loop_favourite: true
   links: true
+  os2loop_documents_dc_content: true
   os2loop_shared_profession: true
   os2loop_shared_subject: true
   os2loop_shared_tags: true
