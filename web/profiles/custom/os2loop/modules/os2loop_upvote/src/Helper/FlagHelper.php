@@ -35,30 +35,43 @@ class FlagHelper {
    * If there is no "correct answer", the top comment will be the most upvoted.
    */
   public function preprocessField(array &$variables) {
+    // An array of the two comment fields.
     $field = ['os2loop_question_answers', 'os2loop_post_comments'];
     if (in_array($variables['field_name'], $field)) {
       foreach ($variables['comments'] as $comment) {
         if (isset($comment['#comment'])) {
-          $flag_counts = $this->flagCountManager->getEntityFlagCounts($comment['#comment']);
-          if (isset($flag_counts['os2loop_upvote_correct_answer'])) {
-            $top_comment = $comment;
+          // Get flags for this comment: correct answers and upvote.
+          $comment_flag_counts = $this->flagCountManager->getEntityFlagCounts($comment['#comment']);
+          // If comment is marked as correct answer, it is the top comment.
+          if (isset($comment_flag_counts['os2loop_upvote_correct_answer'])) {
+            $correct_answer = $comment;
+            break;
           }
           else {
-            if (isset($flag_counts['os2loop_upvote_upvote_button'])) {
-              if (!isset($top_comment)) {
-                $top_comment = $comment;
-              }
-              $top_comment_flag_counts = $this->flagCountManager->getEntityFlagCounts($top_comment['#comment']);
-              if (isset($top_comment_flag_counts['os2loop_upvote_upvote_button']) && intval($flag_counts['os2loop_upvote_upvote_button']) > intval($top_comment_flag_counts['os2loop_upvote_upvote_button'])) {
-                $top_comment = $comment;
+            if (isset($comment_flag_counts['os2loop_upvote_upvote_button'])) {
+              // If there is no upvoted comment, set it to current comment.
+              $upvoted_comment = isset($upvoted_comment) ? $upvoted_comment : $comment;
+
+              // Get number of upvotes for comment and upvoted comment.
+              $upvoted_comment_upvotes = intval($this->flagCountManager->getEntityFlagCounts($upvoted_comment['#comment']));
+              $comment_upvotes = intval($comment_flag_counts['os2loop_upvote_upvote_button']);
+
+              if ($comment_upvotes > $upvoted_comment_upvotes) {
+                $upvoted_comment = $comment;
               }
             }
           }
         }
       }
-      $top_comment['#top'] = TRUE;
-      $top_comment['#comment_threaded'] = FALSE;
-      array_unshift($variables['comments'], $top_comment);
+      if (isset($upvoted_comment) || isset($correct_answer)) {
+        $top_comment = isset($correct_answer) ? $correct_answer : $upvoted_comment;
+        // Set a top value, used to add a styling class.
+        $top_comment['#top'] = TRUE;
+        // Threaded: false, to avoid indentation.
+        $top_comment['#comment_threaded'] = FALSE;
+        // Add to top of comment list.
+        array_unshift($variables['comments'], $top_comment);
+      }
     }
   }
 
@@ -84,7 +97,6 @@ class FlagHelper {
    */
   public function preprocessComment(array &$variables) {
     if (isset($variables['elements']['#top'])) {
-      // @todo when styling change these classes to fit.
       $variables['attributes'] += ['class' => ['top-comment']];
     }
   }
