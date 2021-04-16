@@ -64,15 +64,23 @@ class FlagHelper {
           }
         }
       }
-      if (isset($upvoted_comment) || isset($correct_answer)) {
-        // Correct answer wins.
-        $top_comment = isset($correct_answer) ? $correct_answer : $upvoted_comment;
+
+      if (isset($correct_answer)) {
         // Set a top value, used to add a styling class.
-        $top_comment['#top'] = TRUE;
+        $correct_answer['#top'] = TRUE;
         // Threaded: false, to avoid indentation (styling).
-        $top_comment['#comment_threaded'] = FALSE;
+        $correct_answer['#comment_threaded'] = FALSE;
         // Add to top of comment list.
-        array_unshift($variables['comments'], $top_comment);
+        array_unshift($variables['comments'], $correct_answer);
+      }
+      elseif (isset($upvoted_comment)) {
+        // Set a top value, used to add a styling class.
+        $upvoted_comment['#top'] = TRUE;
+        // Threaded: false, to avoid indentation (styling).
+        $upvoted_comment['#comment_threaded'] = FALSE;
+        // Add to top of comment list.
+        array_unshift($variables['comments'], $upvoted_comment);
+
       }
     }
   }
