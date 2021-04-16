@@ -529,7 +529,7 @@ class FormHelper {
       return FALSE;
     }
 
-    $body = $node->get('os2loop_documents_document_body')->value;
+    $body = $node->get('os2loop_documents_document_body')->getValue()[0]['value'] ?? NULL;
     return !empty(strip_tags($body ?? ''));
   }
 
