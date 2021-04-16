@@ -105,6 +105,28 @@ vendor/bin/drush --yes locale:update
 vendor/bin/drush --yes cache:rebuild
 ```
 
+## Translations
+
+Import translations by running
+
+```sh
+(cd web && ../vendor/bin/drush locale:import --type=customized --override=none da profiles/custom/os2loop/translations/translations.da.po)
+```
+
+Export translations by running
+
+```sh
+(cd web && ../vendor/bin/drush locale:export da --types=customized > profiles/custom/os2loop/translations/translations.da.po)
+```
+
+Open `web/profiles/custom/os2loop/translations/translations.da.po` with the
+latest version of [Poedit](https://poedit.net/) to clean up and then save the
+file.
+
+See
+<https://medium.com/limoengroen/how-to-deploy-drupal-interface-translations-5653294c4af6>
+for further details.
+
 ## Coding standards
 
 ```sh
