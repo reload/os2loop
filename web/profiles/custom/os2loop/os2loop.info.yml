@@ -56,6 +56,7 @@ dependencies:
   # @todo Complete this list of dependencies
   - drupal:block
   - drupal:node
+  - drupal:language
   - drupal:twig_tweak
   - drupal:views
   - drupal:os2loop_menu
