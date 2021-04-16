@@ -3,6 +3,7 @@
 namespace Drupal\os2loop_documents\Helper;
 
 use Drupal\Core\DependencyInjection\DependencySerializationTrait;
+use Drupal\Core\Entity\EntityForm;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Render\MainContent\AjaxRenderer;
@@ -85,14 +86,14 @@ class FormHelper {
     switch ($formId) {
       case 'node_os2loop_documents_document_form':
       case 'node_os2loop_documents_document_edit_form':
-        $node = $formState->getformObject()->getEntity();
-        if (!$this->isLegacyDocument($node)) {
+        $node = $this->getNode($formState);
+        if (NULL !== $node && !$this->isLegacyDocument($node)) {
           unset($form['os2loop_documents_document_body']);
         }
     }
 
     if ('node_os2loop_documents_collection_edit_form' === $formId) {
-      $node = $formState->getformObject()->getEntity();
+      $node = $this->getNode($formState);
       if (NULL !== $node && $node->getType() === NodeHelper::CONTENT_TYPE_COLLECTION) {
         if (!$formState->isSubmitted()) {
           $collection = $this->collectionHelper->loadCollectionItems($node);
@@ -396,8 +397,31 @@ class FormHelper {
     if (!is_array($data)) {
       $data = [];
     }
-    $node = $formState->getformObject()->getEntity();
-    $this->collectionHelper->updateCollection($node, $data);
+    $node = $this->getNode($formState);
+    if (NULL !== $node) {
+      $this->collectionHelper->updateCollection($node, $data);
+    }
+  }
+
+  /**
+   * Get node from form state.
+   *
+   * @param \Drupal\Core\Form\FormStateInterface $formState
+   *   The form state.
+   *
+   * @return null|NodeInterface
+   *   The node if any.
+   */
+  private function getNode(FormStateInterface $formState) {
+    $form = $formState->getFormObject();
+    if ($form instanceof EntityForm) {
+      $entity = $form->getEntity();
+      if ($entity instanceof NodeInterface) {
+        return $entity;
+      }
+    }
+
+    return NULL;
   }
 
   /**
