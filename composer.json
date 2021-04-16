@@ -58,6 +58,9 @@
         "install-codestandards": [
             "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run"
         ],
+        "coding-standards-check/drupal-check": [
+            "vendor/bin/drupal-check -ad web/profiles/custom/os2loop"
+        ],
         "coding-standards-check/phpcs": [
             "vendor/bin/phpcs --standard=phpcs.xml.dist"
         ],
@@ -68,6 +71,7 @@
             "yarn prettier --check web/profiles/custom/os2loop/themes/os2loop_theme/**/*.scss"
         ],
         "coding-standards-check": [
+            "@coding-standards-check/drupal-check",
             "@coding-standards-check/phpcs",
             "@coding-standards-check/twigcs"
         ],
@@ -162,6 +166,7 @@
         "drupal/coder": "^8.3",
         "drupal/core-dev": "^9.1",
         "friendsoftwig/twigcs": "^5.0",
+        "mglaman/drupal-check": "^1.1",
         "os2loop/os2loop_fixtures": "*",
         "phpspec/prophecy-phpunit": "^2.0"
     }
