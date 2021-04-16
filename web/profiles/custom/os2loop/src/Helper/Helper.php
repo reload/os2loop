@@ -30,6 +30,8 @@ class Helper {
 
   /**
    * Implements hook_entity_create_access().
+   *
+   * Checks if a node type is enabled (cf self::contentTypeAccess()).
    */
   public function entityCreateAccess(AccountInterface $account, array $context, $entity_bundle): AccessResult {
     if ('node' === $context['entity_type_id']) {
@@ -41,6 +43,8 @@ class Helper {
 
   /**
    * Implements hook_node_access().
+   *
+   * Checks if a node type is enabled (cf self::contentTypeAccess()).
    */
   public function nodeAccess(NodeInterface $node, $op, AccountInterface $account): AccessResult {
     return $this->contentTypeAccess($node->bundle());
@@ -48,6 +52,8 @@ class Helper {
 
   /**
    * Implements hook_form_alter().
+   *
+   * Hides field for disabled taxonomies from a form.
    */
   public function formAlter(&$form, FormStateInterface $form_state, $form_id) {
     $this->hideTaxonomyVocabularies($form);
@@ -55,6 +61,8 @@ class Helper {
 
   /**
    * Implements hook_preprocess_node().
+   *
+   * Hides disabled taxonomies from a node.
    */
   public function preprocessNode(array &$variables) {
     if (isset($variables['content'])) {
@@ -67,6 +75,8 @@ class Helper {
 
   /**
    * Implements hook_block_access().
+   *
+   * Hides disabled blocks.
    */
   public function blockAccess(Block $block, $operation, AccountInterface $account) {
     if ('view' === $operation) {

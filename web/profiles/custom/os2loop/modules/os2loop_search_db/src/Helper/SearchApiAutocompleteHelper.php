@@ -15,6 +15,9 @@ class SearchApiAutocompleteHelper {
 
   /**
    * Implements hook_search_api_autocomplete_suggestions_alter().
+   *
+   * Adds a suggestion, "See all results for …", linking to the full search
+   * result for the current query.
    */
   public function alterSuggestions(array &$suggestions, array $alter_params) {
     /** @var string $user_input */

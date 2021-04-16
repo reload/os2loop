@@ -64,6 +64,11 @@ class NodeHelper {
 
   /**
    * Implements hook_preprocess_HOOK().
+   *
+   * Adds collection table of contents to collection and document views.
+   *
+   * Adds list of collections to document view (when document is in more than
+   * one colletion).
    */
   public function preprocessNode(array &$variables) {
     /** @var \Drupal\node\NodeInterface $node */

@@ -25,6 +25,8 @@ function os2loop_search_db_help($route_name, RouteMatchInterface $route_match) {
 
 /**
  * Implements hook_search_api_autocomplete_suggestions_alter().
+ *
+ * @see \Drupal\os2loop_search_db\Helper\SearchApiAutocompleteHelper::alterSuggestions()
  */
 function os2loop_search_db_search_api_autocomplete_suggestions_alter(array &$suggestions, array $alter_params) {
   $helper = \Drupal::service('os2loop_search_db.search_api_autocomplete_helper');

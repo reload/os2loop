@@ -13,6 +13,8 @@ use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Implements hook_entity_create_access().
+ *
+ * @see Helper::entityCreateAccess()
  */
 function os2loop_entity_create_access(AccountInterface $account, array $context, $entity_bundle) {
   return Drupal::service(Helper::class)->entityCreateAccess($account, $context, $entity_bundle);
@@ -20,6 +22,8 @@ function os2loop_entity_create_access(AccountInterface $account, array $context,
 
 /**
  * Implements hook_node_access().
+ *
+ * @see Helper::nodeAccess()
  */
 function os2loop_node_access(NodeInterface $node, $op, AccountInterface $account) {
   return Drupal::service(Helper::class)->nodeAccess($node, $op, $account);
@@ -27,6 +31,8 @@ function os2loop_node_access(NodeInterface $node, $op, AccountInterface $account
 
 /**
  * Implements hook_form_alter().
+ *
+ * @see Helper::formAlter()
  */
 function os2loop_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   return Drupal::service(Helper::class)->formAlter($form, $form_state, $form_id);
@@ -34,6 +40,8 @@ function os2loop_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 
 /**
  * Implements hook_preprocess_node().
+ *
+ * @see Helper::preprocessNode()
  */
 function os2loop_preprocess_node(array &$variables) {
   return Drupal::service(Helper::class)->preprocessNode($variables);
@@ -41,6 +49,8 @@ function os2loop_preprocess_node(array &$variables) {
 
 /**
  * Implements hook_block_access().
+ *
+ * @see Helper::blockAccess()
  */
 function os2loop_block_access(Block $block, $operation, AccountInterface $account) {
   return Drupal::service(Helper::class)->blockAccess($block, $operation, $account);
