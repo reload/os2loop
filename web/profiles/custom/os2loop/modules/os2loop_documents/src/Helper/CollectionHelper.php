@@ -3,7 +3,6 @@
 namespace Drupal\os2loop_documents\Helper;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
 use Drupal\os2loop_documents\Entity\DocumentCollectionItem;
 
@@ -19,10 +18,37 @@ class CollectionHelper {
   private $entityTypeManager;
 
   /**
+   * The node storage.
+   *
+   * @var \Drupal\Core\Entity\EntityStorageInterface
+   */
+  private $nodeStorage;
+
+  /**
    * {@inheritdoc}
    */
   public function __construct(EntityTypeManagerInterface $entityTypeManager) {
     $this->entityTypeManager = $entityTypeManager;
+    $this->nodeStorage = $this->entityTypeManager->getStorage('node');
+  }
+
+  /**
+   * Load a document by id.
+   *
+   * @param int $id
+   *   The document (node) id.
+   *
+   * @return \Drupal\node\Entity\NodeInterface|null
+   *   The document if it exists.
+   */
+  public function loadDocument(int $id): ?NodeInterface {
+    $node = $this->nodeStorage->load($id);
+
+    if (NodeHelper::CONTENT_TYPE_DOCUMENT !== $node->bundle()) {
+      return NULL;
+    }
+
+    return $node;
   }
 
   /**
@@ -148,7 +174,7 @@ class CollectionHelper {
   public function getCollectionItems(array $data) {
     $this->addDepths($data);
     $this->sortItems($data);
-    $nodes = Node::loadMultiple(array_keys($data));
+    $nodes = $this->nodeStorage->loadMultiple(array_keys($data));
     foreach ($data as &$item) {
       $node = $nodes[$item['id']] ?? NULL;
       $item['node'] = $node;
@@ -261,11 +287,14 @@ class CollectionHelper {
         $this->treeChildren[$collectionId] = [];
         $this->treeParents[$collectionId] = [];
         $this->treeItems[$collectionId] = [];
-        $result = $this->loadCollectionItems(Node::load($collectionId));
-        foreach ($result as $item) {
-          $this->treeChildren[$collectionId][$item->parent_document_id->value][] = $item->document_id->value;
-          $this->treeParents[$collectionId][$item->document_id->value][] = $item->parent_document_id->value;
-          $this->treeItems[$collectionId][$item->document_id->value] = $item;
+        $node = $this->nodeStorage->load($collectionId);
+        if (NULL !== $node) {
+          $result = $this->loadCollectionItems($node);
+          foreach ($result as $item) {
+            $this->treeChildren[$collectionId][$item->parent_document_id->value][] = $item->document_id->value;
+            $this->treeParents[$collectionId][$item->document_id->value][] = $item->parent_document_id->value;
+            $this->treeItems[$collectionId][$item->document_id->value] = $item;
+          }
         }
       }
 
@@ -354,7 +383,7 @@ class CollectionHelper {
       $nodeIds = array_map(static function (DocumentCollectionItem $item) {
         return $item->document_id->value;
       }, $items);
-      $documents = Node::loadMultiple($nodeIds);
+      $documents = $this->nodeStorage->loadMultiple($nodeIds);
       foreach ($items as $item) {
         $item->document = $documents[$item->document_id->value];
       }
@@ -388,7 +417,7 @@ class CollectionHelper {
       return $item->collection_id->value;
     }, $items);
 
-    return Node::loadMultiple($collectionIds);
+    return $this->nodeStorage->loadMultiple($collectionIds);
   }
 
   /**

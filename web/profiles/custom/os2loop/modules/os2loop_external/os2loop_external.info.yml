@@ -4,7 +4,7 @@ description: 'OS2Loop External'
 core_version_requirement: ^9
 package: 'OS2Loop'
 dependencies:
-  - better_formats
-  - link
-  - os2loop_shared
-  - os2loop_taxonomy
+  - drupal:better_formats
+  - drupal:link
+  - drupal:os2loop_shared
+  - drupal:os2loop_taxonomy

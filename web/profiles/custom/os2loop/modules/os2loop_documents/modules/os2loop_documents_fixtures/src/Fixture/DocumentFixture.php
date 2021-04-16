@@ -135,7 +135,7 @@ BODY,
       ],
     ], $step0);
 
-    $step000 = $this->createStep([
+    $this->createStep([
       'os2loop_documents_step_text' => [
         'value' => <<<'BODY'
 Step 0.0.0.
@@ -144,7 +144,7 @@ BODY,
       ],
     ], $step00);
 
-    $step001 = $this->createStep([
+    $this->createStep([
       'os2loop_documents_step_text' => [
         'value' => <<<'BODY'
 Step 0.0.1.
@@ -153,7 +153,7 @@ BODY,
       ],
     ], $step00);
 
-    $step01 = $this->createStep([
+    $this->createStep([
       'os2loop_documents_step_text' => [
         'value' => <<<'BODY'
 Step 0.1.
