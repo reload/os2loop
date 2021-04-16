@@ -5,18 +5,19 @@ dependencies:
   module:
     - node
     - paragraphs
+    - taxonomy
     - search_api
   config:
     - field.storage.node.os2loop_documents_dc_content
+    - field.storage.node.os2loop_question_content
+    - field.storage.node.os2loop_post_content
     - field.storage.node.os2loop_documents_document_conte
-    - field.storage.paragraph.os2loop_documents_description
     - field.storage.paragraph.os2loop_documents_hc_content
-    - field.storage.paragraph.os2loop_documents_hc_title
+    - field.storage.paragraph.os2loop_documents_description
     - field.storage.paragraph.os2loop_documents_step_text
     - field.storage.paragraph.os2loop_documents_tai_text
+    - field.storage.paragraph.os2loop_documents_hc_title
     - field.storage.node.os2loop_external_descripti
-    - field.storage.node.os2loop_post_content
-    - field.storage.node.os2loop_question_content
     - field.storage.node.os2loop_shared_profession
     - field.storage.node.os2loop_shared_subject
     - field.storage.node.os2loop_shared_tags
@@ -145,6 +146,17 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.os2loop_shared_subject
+  os2loop_shared_subject_name:
+    label: 'Subject » Taxonomy term » Name'
+    datasource_id: 'entity:node'
+    property_path: 'os2loop_shared_subject:entity:name'
+    type: text
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.os2loop_shared_subject
+      module:
+        - taxonomy
   os2loop_shared_tags:
     label: Tags
     datasource_id: 'entity:node'
@@ -204,6 +216,7 @@ processor_settings:
       - os2loop_external_descripti
       - os2loop_post_content
       - os2loop_question_content
+      - os2loop_shared_subject_name
       - title
       - type
     title: false
