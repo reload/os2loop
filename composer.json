@@ -59,7 +59,7 @@
             "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run"
         ],
         "coding-standards-check/drupal-check": [
-            "vendor/bin/drupal-check -ad web/profiles/custom/os2loop"
+            "vendor/bin/drupal-check --deprecations --analysis web/profiles/custom/os2loop"
         ],
         "coding-standards-check/phpcs": [
             "vendor/bin/phpcs --standard=phpcs.xml.dist"
