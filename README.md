@@ -34,6 +34,7 @@ EOF
 ```sh
 composer install --no-dev --optimize-autoloader
 vendor/bin/drush --yes site:install os2loop --existing-config
+vendor/bin/drush --yes locale:update
 ```
 
 You must also build the [OS2Loop
@@ -100,6 +101,7 @@ vendor/bin/drush --yes pm:uninstall content_fixtures
 composer install --no-dev --optimize-autoloader
 vendor/bin/drush --yes updatedb
 vendor/bin/drush --yes config:import
+vendor/bin/drush --yes locale:update
 vendor/bin/drush --yes cache:rebuild
 ```
 
