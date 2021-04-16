@@ -44,7 +44,9 @@ class CollectionHelper {
   public function loadDocument(int $id): ?NodeInterface {
     $node = $this->nodeStorage->load($id);
 
-    if (NodeHelper::CONTENT_TYPE_DOCUMENT !== $node->bundle()) {
+    if (NULL === $node
+      || !$node instanceof NodeInterface
+      || NodeHelper::CONTENT_TYPE_DOCUMENT !== $node->bundle()) {
       return NULL;
     }
 
@@ -115,7 +117,7 @@ class CollectionHelper {
     $items = $this->loadCollectionItems($collection);
     $weight = -1;
     foreach ($items as $item) {
-      $weight = max($weight, $item->weight->value);
+      $weight = max($weight, $item->getWeight());
     }
     if (isset($items[$document->id()])) {
       throw new \InvalidArgumentException(sprintf('Document %s is already in collection %s', $document->id(), $collection->id()));
@@ -157,8 +159,8 @@ class CollectionHelper {
     }
     // Delete document and any children.
     foreach ($items as $item) {
-      if ((int) $document->id() === (int) $item->document_id->value
-        || (int) $document->id() === (int) $item->parent_document_id->value) {
+      if ((int) $document->id() === $item->getDocumentId()
+        || (int) $document->id() === $item->getParentDocumentId()) {
         $item->delete();
       }
     }
@@ -176,6 +178,7 @@ class CollectionHelper {
   public function getCollectionItems(array $data) {
     $this->addDepths($data);
     $this->sortItems($data);
+    /** @var \Drupal\node\NodeInterface[] $nodes */
     $nodes = $this->nodeStorage->loadMultiple(array_keys($data));
     foreach ($data as &$item) {
       $node = $nodes[$item['id']] ?? NULL;
@@ -240,11 +243,11 @@ class CollectionHelper {
    */
   public function buildTree(array $items, array &$tree = [], $depth = 0, $parent = 0): array {
     $roots = array_filter($items, static function (DocumentCollectionItem $item) use ($parent) {
-      return $item->parent_document_id->value == $parent;
+      return $item->getParentDocumentId() == $parent;
     });
 
     foreach ($roots as $root) {
-      $id = $root->document_id->value;
+      $id = $root->getDocumentId();
       $root->depth = $depth;
       $tree[$id] = $root;
       $this->buildTree($items, $tree, $depth + 1, $id);
@@ -275,6 +278,13 @@ class CollectionHelper {
   protected $treeItems = [];
 
   /**
+   * The trees.
+   *
+   * @var array
+   */
+  private $trees;
+
+  /**
    * Lifted from Drupal\taxonomy\TermStorage::loadTree().
    *
    * @return \Drupal\os2loop_documents\Entity\DocumentCollectionItem[]
@@ -293,9 +303,9 @@ class CollectionHelper {
         if (NULL !== $node) {
           $result = $this->loadCollectionItems($node);
           foreach ($result as $item) {
-            $this->treeChildren[$collectionId][$item->parent_document_id->value][] = $item->document_id->value;
-            $this->treeParents[$collectionId][$item->document_id->value][] = $item->parent_document_id->value;
-            $this->treeItems[$collectionId][$item->document_id->value] = $item;
+            $this->treeChildren[$collectionId][$item->getParentDocumentId()][] = $item->getDocumentId();
+            $this->treeParents[$collectionId][$item->getDocumentId()][] = $item->getParentDocumentId();
+            $this->treeItems[$collectionId][$item->getDocumentId()] = $item;
           }
         }
       }
@@ -304,7 +314,7 @@ class CollectionHelper {
       // caches the results.
       $item_entities = [];
       if ($load_entities) {
-        $item_entities = $this->loadMultiple(array_keys($this->treeItems[$collectionId]));
+        $item_entities = $this->nodeStorage->loadMultiple(array_keys($this->treeItems[$collectionId]));
       }
 
       if (NULL === $max_depth) {
@@ -331,13 +341,13 @@ class CollectionHelper {
               break;
             }
             $item = $load_entities ? $item_entities[$child] : $this->treeItems[$collectionId][$child];
-            if (isset($this->treeParents[$collectionId][$load_entities ? $item->id() : $item->document_id->value])) {
+            if (isset($this->treeParents[$collectionId][$load_entities ? $item->id() : $item->getDocumentId()])) {
               // Clone the item so that the depth attribute remains correct
               // in the event of multiple parents.
               $item = clone $item;
             }
             $item->depth = $depth;
-            $tid = $load_entities ? $item->id() : $item->document_id->value;
+            $tid = $load_entities ? $item->id() : $item->getDocumentId();
             $tree[] = $item;
             if (!empty($this->treeChildren[$collectionId][$tid])) {
               $has_children = TRUE;
@@ -380,24 +390,24 @@ class CollectionHelper {
    * @return array|DocumentCollectionItem[]
    *   The items with children.
    */
-  public function buildDocumentTree(array $items, DocumentCollectionItem $root = NULL) {
+  public function buildDocumentTree(array $items, DocumentCollectionItem $root = NULL): array {
     if (NULL === $root) {
       $nodeIds = array_map(static function (DocumentCollectionItem $item) {
-        return $item->document_id->value;
+        return $item->getDocumentId();
       }, $items);
       $documents = $this->nodeStorage->loadMultiple($nodeIds);
       foreach ($items as $item) {
-        $item->document = $documents[$item->document_id->value];
+        $item->setDocument($documents[$item->getDocumentId()]);
       }
     }
     $children = array_filter($items, static function (DocumentCollectionItem $item) use ($root) {
-      return NULL === $root ? 0 === $item->depth : $root->document_id->value === $item->parent_document_id->value;
+      return NULL === $root ? 0 === $item->depth : $root->getDocumentId() === $item->getParentDocumentId();
     });
     foreach ($children as $child) {
       $this->buildDocumentTree($items, $child);
     }
     if (NULL !== $root) {
-      $root->children = $children;
+      $root->setChildren($children);
     }
 
     return $children;
@@ -416,7 +426,7 @@ class CollectionHelper {
     $items = DocumentCollectionItem::loadMultiple($ids);
 
     $collectionIds = array_map(static function (DocumentCollectionItem $item) {
-      return $item->collection_id->value;
+      return $item->getCollectionId();
     }, $items);
 
     return $this->nodeStorage->loadMultiple($collectionIds);

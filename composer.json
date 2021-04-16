@@ -71,8 +71,8 @@
             "yarn prettier --check web/profiles/custom/os2loop/themes/os2loop_theme/**/*.scss"
         ],
         "coding-standards-check": [
-            "@coding-standards-check/drupal-check",
             "@coding-standards-check/phpcs",
+            "@coding-standards-check/drupal-check",
             "@coding-standards-check/twigcs"
         ],
         "coding-standards-apply/phpcs": [

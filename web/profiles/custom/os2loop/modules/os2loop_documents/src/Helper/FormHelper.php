@@ -99,9 +99,9 @@ class FormHelper {
           $collection = $this->collectionHelper->loadCollectionItems($node);
           $data = array_map(static function ($item) {
             return [
-              'id' => $item->document_id->value,
-              'pid' => $item->parent_document_id->value,
-              'weight' => $item->weight->value,
+              'id' => $item->getDocumentId(),
+              'pid' => $item->getParentDocumentId(),
+              'weight' => $item->getWeight(),
             ];
           }, $collection);
           $this->setDocumentsData($formState, $data);
