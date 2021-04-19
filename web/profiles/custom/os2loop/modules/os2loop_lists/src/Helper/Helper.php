@@ -2,9 +2,8 @@
 
 namespace Drupal\os2loop_lists\Helper;
 
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountProxyInterface;
-use Drupal\user\Entity\User;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Os2Loop list helper.
@@ -20,28 +19,36 @@ class Helper {
   protected $currentUser;
 
   /**
-   * Helper constructor.
+   * The entity type manager.
    *
-   * @param \Drupal\Core\Session\AccountProxyInterface $currentUser
-   *   Logged in user account.
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
-  public function __construct(AccountProxyInterface $currentUser) {
-    $this->currentUser = $currentUser;
-  }
+  protected $entityTypeManager;
 
   /**
-   * Create current user.
+   * The full user entity.
    *
-   * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
-   *   The container.
-   *
-   * @return static
-   *   The current user.
+   * @var \Drupal\user\UserStorageInterface
    */
-  public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('current_user')
-    );
+  protected $userStorage;
+
+  /**
+   * Helper constructor.
+   *
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
+   *   Entity type manager.
+   * @param \Drupal\Core\Session\AccountProxyInterface $currentUser
+   *   Logged in user account.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   *   Thrown if the entity type doesn't exist.
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   *   Thrown if the storage handler couldn't be loaded.
+   */
+  public function __construct(EntityTypeManagerInterface $entityTypeManager, AccountProxyInterface $currentUser) {
+    $this->userStorage = $entityTypeManager->getStorage('user');
+    $this->currentUser = $currentUser;
+    $this->entityTypeManager = $entityTypeManager;
   }
 
   /**
@@ -56,7 +63,8 @@ class Helper {
     if (empty($user_expertises)) {
       return [];
     }
-    return \Drupal::entityTypeManager()
+
+    return $this->entityTypeManager
       ->getListBuilder('node')
       ->getStorage()
       ->loadByProperties([
@@ -78,7 +86,8 @@ class Helper {
     if (empty($user_professions)) {
       return [];
     }
-    return \Drupal::entityTypeManager()
+
+    return $this->entityTypeManager
       ->getListBuilder('node')
       ->getStorage()
       ->loadByProperties([
@@ -96,7 +105,8 @@ class Helper {
    */
   private function getCurrentUserExpertisesId(): array {
     $term_ids = [];
-    $user = User::load($this->currentUser->id());
+    $user = $this->userStorage->load($this->currentUser->id());
+    /** @var \Drupal\user\UserInterface $user */
     $expertises = $user->get('os2loop_user_areas_of_expertise')->getValue();
     foreach ($expertises as $expertise) {
       $term_ids[] = $expertise['target_id'];
@@ -112,7 +122,8 @@ class Helper {
    */
   private function getCurrentUserProfessionsId(): array {
     $term_ids = [];
-    $user = User::load($this->currentUser->id());
+    $user = $this->userStorage->load($this->currentUser->id());
+    /** @var \Drupal\user\UserInterface $user */
     $professions = $user->get('os2loop_user_professions')->getValue();
     foreach ($professions as $profession) {
       $term_ids[] = $profession['target_id'];
