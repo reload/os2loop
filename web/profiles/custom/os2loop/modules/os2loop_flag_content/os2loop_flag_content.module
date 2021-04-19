@@ -9,17 +9,5 @@
  * Implements hook_mail().
  */
 function os2loop_flag_content_mail($key, &$message, $params) {
-  $options = [
-    'langcode' => $message['langcode'],
-  ];
-  switch ($key) {
-    case 'flag_content':
-      $subject = t('Flagged content: @cause with @title', [
-        '@title' => $params['node_title'],
-        '@cause' => $params['cause'],
-      ], $options);
-      $message['subject'] = $subject;
-      $message['body'][] = $params['message'];
-      break;
-  }
+  Drupal::service('os2loop_flag_content.mail_helper')->preprocessMail($key, $message, $params);
 }
