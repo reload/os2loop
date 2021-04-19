@@ -8,4 +8,3 @@ package: OS2Loop
 # version: VERSION
 dependencies:
   - drupal:os2loop_section_page_fixtures
-  # - drupal:os2loop_menu
