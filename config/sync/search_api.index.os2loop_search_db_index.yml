@@ -8,16 +8,17 @@ dependencies:
     - taxonomy
     - search_api
   config:
+    - field.storage.node.os2loop_documents_document_body
     - field.storage.node.os2loop_documents_dc_content
+    - field.storage.node.os2loop_question_content
+    - field.storage.node.os2loop_post_content
     - field.storage.node.os2loop_documents_document_conte
-    - field.storage.paragraph.os2loop_documents_description
     - field.storage.paragraph.os2loop_documents_hc_content
-    - field.storage.paragraph.os2loop_documents_hc_title
+    - field.storage.paragraph.os2loop_documents_description
     - field.storage.paragraph.os2loop_documents_step_text
     - field.storage.paragraph.os2loop_documents_tai_text
+    - field.storage.paragraph.os2loop_documents_hc_title
     - field.storage.node.os2loop_external_descripti
-    - field.storage.node.os2loop_post_content
-    - field.storage.node.os2loop_question_content
     - field.storage.node.os2loop_shared_profession
     - field.storage.node.os2loop_shared_subject
     - field.storage.node.os2loop_shared_tags
@@ -62,6 +63,14 @@ field_settings:
         - field.storage.paragraph.os2loop_documents_description
       module:
         - paragraphs
+  os2loop_documents_document_body:
+    label: 'Body (legacy)'
+    datasource_id: 'entity:node'
+    property_path: os2loop_documents_document_body
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.os2loop_documents_document_body
   os2loop_documents_hc_content:
     label: 'Content » Paragraph » Content'
     datasource_id: 'entity:node'
@@ -210,6 +219,7 @@ processor_settings:
     fields:
       - os2loop_documents_dc_content
       - os2loop_documents_description
+      - os2loop_documents_document_body
       - os2loop_documents_hc_content
       - os2loop_documents_hc_title
       - os2loop_documents_step_text
