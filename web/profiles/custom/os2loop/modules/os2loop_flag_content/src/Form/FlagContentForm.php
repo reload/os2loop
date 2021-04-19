@@ -157,13 +157,12 @@ class FlagContentForm extends FormBase implements ContainerInjectionInterface {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $nid = $form_state->getValue('node') ?? $this->routeMatch->getRawParameter('node');
     $node = $this->entityTypeManager->getStorage('node')->load($nid);
-    $subject = $form_state->getValue('cause');
     $message = $form_state->getValue('message');
     $flag_config = $this->configService->getFlagContentSettings();
     $to = $flag_config->get('to_email');
     $module = 'os2loop_flag_content';
-    $key = 'send_file';
-    $params['mail_title'] = $subject;
+    $key = 'flag_content';
+    $params['cause'] = $form_state->getValue('cause');
     $params['message'] = $message;
     $params['node_title'] = $node->label();
     $langcode = $this->currentUser->getPreferredLangcode();
