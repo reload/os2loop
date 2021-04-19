@@ -21,7 +21,7 @@ class FlagContentAdminForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'example_admin_settings';
+    return 'os2loop_flag_content_settings';
   }
 
   /**
