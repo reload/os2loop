@@ -82,9 +82,9 @@ class FlagContentForm extends FormBase implements ContainerInjectionInterface {
     return new static(
       $container->get('entity_type.manager'),
       $container->get('current_route_match'),
-      $container->get("plugin.manager.mail"),
-      $container->get("current_user"),
-      $container->get("os2loop_flag_content.config_service"),
+      $container->get('plugin.manager.mail'),
+      $container->get('current_user'),
+      $container->get('os2loop_flag_content.config_service'),
     );
   }
 
@@ -107,14 +107,12 @@ class FlagContentForm extends FormBase implements ContainerInjectionInterface {
     ];
 
     $config_reasons = array_values(array_map('trim', explode(PHP_EOL, $flag_config->get('reasons'))));
-    foreach ($config_reasons as $reason) {
-      $reasons[$reason] = $reason;
-    }
+    $reasons = array_combine($config_reasons, $config_reasons);
+
     $form['reason'] = [
       '#type' => 'select',
       '#title' => $this->t('Reasons'),
       '#options' => $reasons,
-      '#validated' => TRUE,
       '#empty_option' => $this->t('Pick a reason'),
     ];
 
@@ -141,10 +139,10 @@ class FlagContentForm extends FormBase implements ContainerInjectionInterface {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    if ("" === $form_state->getValue('reason')) {
+    if ('' === $form_state->getValue('reason')) {
       $form_state->setErrorByName('reason', $this->t('Please select a reason'));
     }
-    if ("" === $form_state->getValue('message')) {
+    if ('' === $form_state->getValue('message')) {
       $form_state->setErrorByName('message', $this->t('Please write a message'));
     }
 

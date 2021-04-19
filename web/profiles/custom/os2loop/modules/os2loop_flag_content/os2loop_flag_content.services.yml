@@ -1,8 +1,4 @@
 services:
-  os2loop_flag_content.twig.FlagContent:
-    class: Drupal\os2loop_flag_content\FlagContent
-    tags:
-      - { name: twig.extension }
   os2loop_flag_content.config_service:
     class: Drupal\os2loop_flag_content\Services\ConfigService
     arguments:
