@@ -113,6 +113,7 @@ class FlagContentForm extends FormBase implements ContainerInjectionInterface {
     $form['reason'] = [
       '#type' => 'select',
       '#title' => $this->t('Reasons'),
+      '#required' => TRUE,
       '#options' => $reasons,
       '#empty_option' => $this->t('Pick a reason'),
     ];
@@ -120,6 +121,7 @@ class FlagContentForm extends FormBase implements ContainerInjectionInterface {
     $form['message'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Message'),
+      '#required' => TRUE,
     ];
 
     $form['actions']['#type'] = 'actions';
@@ -150,16 +152,7 @@ class FlagContentForm extends FormBase implements ContainerInjectionInterface {
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-    if ('' === $form_state->getValue('reason')) {
-      $form_state->setErrorByName('reason', $this->t('Please select a reason'));
-    }
-    if ('' === $form_state->getValue('message')) {
-      $form_state->setErrorByName('message', $this->t('Please write a message'));
-    }
-
-    parent::validateForm($form, $form_state);
-  }
+  public function validateForm(array &$form, FormStateInterface $form_state) {}
 
   /**
    * {@inheritdoc}
