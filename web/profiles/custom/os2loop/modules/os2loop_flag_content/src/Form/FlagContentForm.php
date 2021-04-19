@@ -6,7 +6,11 @@ use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\os2loop_flag_content\Services\ConfigService;
+use Drupal\Core\Mail\MailManagerInterface;
+use Drupal\Core\Session\AccountProxyInterface;
 
 /**
  * Flag content form.
@@ -22,13 +26,53 @@ class FlagContentForm extends FormBase implements ContainerInjectionInterface {
   protected $entityTypeManager;
 
   /**
+   * The route mathcer.
+   *
+   * @var \Drupal\Core\Routing\RouteMatchInterface
+   */
+  protected $routeMatcher;
+
+  /**
+   * The mail manager.
+   *
+   * @var \Drupal\Core\Mail\MailManagerInterface
+   */
+  protected $mailManager;
+
+  /**
+   * The mail manager.
+   *
+   * @var \Drupal\Core\Session\AccountProxyInterface
+   */
+  protected $currentUser;
+
+  /**
+   * Config service for flag content admin settings.
+   *
+   * @var \Drupal\os2loop_flag_content\Services\ConfigService
+   */
+  protected $configService;
+
+  /**
    * Constructs an flag content form.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   The entity type manager.
+   * @param \Drupal\Core\Routing\RouteMatchInterface $routeMatcher
+   *   The route matcher.
+   * @param \Drupal\Core\Mail\MailManagerInterface $mailManager
+   *   The mail manager.
+   * @param \Drupal\Core\Session\AccountProxyInterface $currentUser
+   *   The current user.
+   * @param \Drupal\os2loop_flag_content\Services\ConfigService $configService
+   *   The config for flag content.
    */
-  public function __construct(EntityTypeManagerInterface $entityTypeManager) {
+  public function __construct(EntityTypeManagerInterface $entityTypeManager, RouteMatchInterface $routeMatcher, MailManagerInterface $mailManager, AccountProxyInterface $currentUser, ConfigService $configService) {
     $this->entityTypeManager = $entityTypeManager;
+    $this->routeMatcher = $routeMatcher;
+    $this->mailManager = $mailManager;
+    $this->currentUser = $currentUser;
+    $this->configService = $configService;
   }
 
   /**
@@ -37,6 +81,10 @@ class FlagContentForm extends FormBase implements ContainerInjectionInterface {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('entity_type.manager'),
+      $container->get('current_route_match'),
+      $container->get("plugin.manager.mail"),
+      $container->get("current_user"),
+      $container->get("os2loop_flag_content.config_service"),
     );
   }
 
@@ -51,9 +99,8 @@ class FlagContentForm extends FormBase implements ContainerInjectionInterface {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $flag_config = \Drupal::config('os2loop_flag_content.settings');
-    $nid = \Drupal::routeMatch()->getRawParameter('node');
-
+    $flag_config = $this->configService->getFlagContentSettings();
+    $nid = $this->routeMatcher->getRawParameter('node');
     $form['node'] = [
       '#type' => 'hidden',
       '#value' => $nid,
@@ -65,10 +112,10 @@ class FlagContentForm extends FormBase implements ContainerInjectionInterface {
     }
     $form['cause'] = [
       '#type' => 'select',
-      '#title' => $this->t('Årsager'),
-      '#required' => TRUE,
+      '#title' => $this->t('Causes'),
       '#options' => $causes,
-      '#empty_option' => $this->t('Vælg en årsag'),
+      '#validated' => TRUE,
+      '#empty_option' => $this->t('Pick a cause'),
     ];
 
     $form['message'] = [
@@ -76,26 +123,13 @@ class FlagContentForm extends FormBase implements ContainerInjectionInterface {
       '#title' => $this->t('Message'),
     ];
 
-    $attributes = [
-      'class' => [
-        'js-form-submit',
-        'form-submit',
-        'button',
-        'btn',
-        'btn-primary',
-      ],
-    ];
-
-    $form['submit_button'] = [
+    $form['actions']['#type'] = 'actions';
+    $form['actions']['submit'] = [
       '#type' => 'submit',
-      '#value' => "Send",
+      '#value' => $this->t('Send'),
       '#attributes' => [
         'class' => [
-          'js-form-submit',
-          'form-submit',
           'button',
-          'btn',
-          'btn-primary',
         ],
       ],
     ];
@@ -106,30 +140,44 @@ class FlagContentForm extends FormBase implements ContainerInjectionInterface {
   /**
    * {@inheritdoc}
    */
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+    if ("" === $form_state->getValue('cause')) {
+      $form_state->setErrorByName('cause', $this->t('Please pick a cause'));
+    }
+    if ("" === $form_state->getValue('message')) {
+      $form_state->setErrorByName('message', $this->t('Please write a message'));
+    }
+
+    parent::validateForm($form, $form_state);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $nid = $form_state->getValue('node') ?? $this->routeMatch->getRawParameter('node');
     $node = $this->entityTypeManager->getStorage('node')->load($nid);
     $subject = $form_state->getValue('cause');
     $message = $form_state->getValue('message');
-    $flag_config = \Drupal::config('os2loop_flag_content.settings');
+    $flag_config = $this->configService->getFlagContentSettings();
     $to = $flag_config->get('to_email');
-    $to = 'sinejespersen@gmail.com';
-    $mailManager = \Drupal::service('plugin.manager.mail');
     $module = 'os2loop_flag_content';
     $key = 'send_file';
     $params['mail_title'] = $subject;
     $params['message'] = $message;
     $params['node_title'] = $node->label();
-    $langcode = \Drupal::currentUser()->getPreferredLangcode();
+    $langcode = $this->currentUser->getPreferredLangcode();
     $send = TRUE;
-    $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
+    $result = $this->mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
 
-    // If ($result['result'] !== TRUE) {
-    // drupal_set_message(t('error.'), 'error');
-    // }
-    // else {
-    // drupal_set_message(t('Your message has been sent.'));
-    // }.
+    if ($result['result'] !== TRUE) {
+      // addmessage("error") ?
+      // @todo .
+    }
+    else {
+      // addmessage("yay") ?
+      // @todo .
+    }
   }
 
 }

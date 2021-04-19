@@ -3,3 +3,7 @@ services:
     class: Drupal\os2loop_flag_content\FlagContent
     tags:
       - { name: twig.extension }
+  os2loop_flag_content.config_service:
+    class: Drupal\os2loop_flag_content\Services\ConfigService
+    arguments:
+      - '@config.factory'
