@@ -47,7 +47,7 @@ class FlagContentAdminForm extends ConfigFormBase {
     ];
 
     $form['to_email'] = [
-      '#type' => 'textfield',
+      '#type' => 'email',
       '#title' => $this->t('Email address of recipient'),
       '#default_value' => $config->get('to_email'),
     ];
