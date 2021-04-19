@@ -1,6 +1,6 @@
 # OS2Loop Menu
 
-For now we only have fixtures in this module.
+Adds default menu items to main menu on install.
 
 ## Fixtures
 
