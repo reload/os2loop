@@ -4,6 +4,7 @@ namespace Drupal\os2loop_flag_content\Form;
 
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Form\FormBase;
+use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -47,6 +48,13 @@ class FlagContentForm extends FormBase implements ContainerInjectionInterface {
   protected $configService;
 
   /**
+   * The messenger.
+   *
+   * @var \Drupal\Core\Messenger\MessengerInterface
+   */
+  protected $messenger;
+
+  /**
    * Constructs an flag content form.
    *
    * @param \Drupal\Core\Routing\RouteMatchInterface $routeMatcher
@@ -57,12 +65,15 @@ class FlagContentForm extends FormBase implements ContainerInjectionInterface {
    *   The current user.
    * @param \Drupal\os2loop_flag_content\Services\ConfigService $configService
    *   The config for flag content.
+   * @param \Drupal\Core\Messenger\MessengerInterface $messenger
+   *   The messenger.
    */
-  public function __construct(RouteMatchInterface $routeMatcher, MailManagerInterface $mailManager, AccountProxyInterface $currentUser, ConfigService $configService) {
+  public function __construct(RouteMatchInterface $routeMatcher, MailManagerInterface $mailManager, AccountProxyInterface $currentUser, ConfigService $configService, MessengerInterface $messenger) {
     $this->routeMatcher = $routeMatcher;
     $this->mailManager = $mailManager;
     $this->currentUser = $currentUser;
     $this->configService = $configService;
+    $this->messenger = $messenger;
   }
 
   /**
@@ -74,6 +85,7 @@ class FlagContentForm extends FormBase implements ContainerInjectionInterface {
       $container->get('plugin.manager.mail'),
       $container->get('current_user'),
       $container->get('os2loop_flag_content.config_service'),
+      $container->get('messenger'),
     );
   }
 
@@ -153,7 +165,13 @@ class FlagContentForm extends FormBase implements ContainerInjectionInterface {
     $params['node_title'] = $node->label();
     $langcode = $this->currentUser->getPreferredLangcode();
     $send = TRUE;
-    $this->mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
+    $result = $this->mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
+    if ($result['result'] !== TRUE) {
+      $this->messenger->addMessage($this->t('There was a problem sending your message and it was not sent.'), 'error');
+    }
+    else {
+      $this->messenger->addError($this->t('Your message has been sent.'));
+    }
   }
 
 }
