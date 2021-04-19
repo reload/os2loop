@@ -3,7 +3,6 @@
 namespace Drupal\os2loop_flag_content\Form;
 
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
@@ -19,13 +18,6 @@ use Drupal\Core\Url;
  * @package Drupal\os2loop_flag_content\Form
  */
 class FlagContentForm extends FormBase implements ContainerInjectionInterface {
-  /**
-   * The entity type manager.
-   *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
-   */
-  protected $entityTypeManager;
-
   /**
    * The route mathcer.
    *
@@ -57,8 +49,6 @@ class FlagContentForm extends FormBase implements ContainerInjectionInterface {
   /**
    * Constructs an flag content form.
    *
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
-   *   The entity type manager.
    * @param \Drupal\Core\Routing\RouteMatchInterface $routeMatcher
    *   The route matcher.
    * @param \Drupal\Core\Mail\MailManagerInterface $mailManager
@@ -68,8 +58,7 @@ class FlagContentForm extends FormBase implements ContainerInjectionInterface {
    * @param \Drupal\os2loop_flag_content\Services\ConfigService $configService
    *   The config for flag content.
    */
-  public function __construct(EntityTypeManagerInterface $entityTypeManager, RouteMatchInterface $routeMatcher, MailManagerInterface $mailManager, AccountProxyInterface $currentUser, ConfigService $configService) {
-    $this->entityTypeManager = $entityTypeManager;
+  public function __construct(RouteMatchInterface $routeMatcher, MailManagerInterface $mailManager, AccountProxyInterface $currentUser, ConfigService $configService) {
     $this->routeMatcher = $routeMatcher;
     $this->mailManager = $mailManager;
     $this->currentUser = $currentUser;
@@ -81,7 +70,6 @@ class FlagContentForm extends FormBase implements ContainerInjectionInterface {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('entity_type.manager'),
       $container->get('current_route_match'),
       $container->get('plugin.manager.mail'),
       $container->get('current_user'),
@@ -101,11 +89,7 @@ class FlagContentForm extends FormBase implements ContainerInjectionInterface {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $flag_config = $this->configService->getFlagContentSettings();
-    $nid = $this->routeMatcher->getRawParameter('node');
-    $form['node'] = [
-      '#type' => 'hidden',
-      '#value' => $nid,
-    ];
+    $node = $this->routeMatcher->getRawParameter('node');
 
     $config_reasons = array_values(array_map('trim', explode(PHP_EOL, $flag_config->get('reasons'))));
     $reasons = array_combine($config_reasons, $config_reasons);
@@ -137,7 +121,7 @@ class FlagContentForm extends FormBase implements ContainerInjectionInterface {
 
     $form['actions']['cancel'] = [
       '#type' => 'link',
-      '#url' => new Url('entity.node.canonical', ['node' => $nid]),
+      '#url' => new Url('entity.node.canonical', ['node' => $node]),
       '#title' => $this->t('Cancel'),
       '#attributes' => [
         'class' => [
@@ -158,8 +142,7 @@ class FlagContentForm extends FormBase implements ContainerInjectionInterface {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $nid = $form_state->getValue('node') ?? $this->routeMatch->getRawParameter('node');
-    $node = $this->entityTypeManager->getStorage('node')->load($nid);
+    $node = $this->routeMatcher->getParameter('node');
     $message = $form_state->getValue('message');
     $flag_config = $this->configService->getFlagContentSettings();
     $to = $flag_config->get('to_email');
