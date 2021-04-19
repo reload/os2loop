@@ -8,3 +8,8 @@ services:
     class: Drupal\os2loop_post_fixtures\Fixture\CommentFixture
     tags:
       - { name: content_fixture }
+
+  os2loop_post_fixtures.medicin_fixture:
+    class: Drupal\os2loop_post_fixtures\Fixture\MedicinFixture
+    tags:
+      - { name: content_fixture }
