@@ -1,25 +1,3 @@
-@mixin icon(
-  $content: null,
-  $color: $icon-base-color,
-  $hover-color: $dark-icon-base-color
-) {
-  background-color: $color;
-
-  &:hover {
-    background-color: $hover-color;
-  }
-  a {
-    @if $content {
-      &::before {
-        color: $white;
-        font-size: 1.2em;
-        font-family: bootstrap-icons !important;
-        content: $content;
-      }
-    }
-  }
-}
-
 .icon-container {
   display: flex;
   margin: 0;
@@ -37,31 +15,31 @@
     color: $white;
 
     &.edit {
-      @include icon("\f4ca", $edit, $dark-edit);
+      @include link-icon("\f4ca", $edit, $dark-edit);
     }
 
     &.reply {
-      @include icon("\f51f");
+      @include link-icon("\f51f");
     }
 
     &.delete {
-      @include icon("\f5de", $delete, $dark-delete);
+      @include link-icon("\f5de", $delete, $dark-delete);
     }
 
     &.revisions {
-      @include icon("\f4b3");
+      @include link-icon("\f4b3");
     }
 
     &.view {
-      @include icon("\f341");
+      @include link-icon("\f341");
     }
 
     &.upvote.flag {
-      @include icon("\f407", $upvote, $dark-upvote);
+      @include link-icon("\f407", $upvote, $dark-upvote);
     }
 
     &.upvote.unflag {
-      @include icon("\f406", $upvote, $dark-upvote);
+      @include link-icon("\f406", $upvote, $dark-upvote);
     }
 
     i {

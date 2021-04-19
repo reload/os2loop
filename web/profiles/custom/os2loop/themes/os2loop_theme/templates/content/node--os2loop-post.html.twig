@@ -71,6 +71,15 @@
  */
 #}
 <article{{ attributes.addClass("os2loop-content os2loop-post") }}>
+  <div class="d-flex">
+    <div>
+      <a class="button">{{ 'Contact editoral staff'|t }}</a>
+    </div>
+    {{ content.flag_os2loop_favourite }}
+    <div>
+      <a class="button">{{ 'Share with a friend'|t }}</a>
+    </div>
+  </div>
   <div>
     {{ title_prefix }}
     {% if label %}
@@ -99,7 +108,6 @@
       {{ content.os2loop_shared_subject }}
       {{ content.os2loop_shared_profession }}
       {{ content.os2loop_post_file }}
-      {{ content.flag_os2loop_favourite }}
     </div>
     {{ content.os2loop_post_comments }}
   </div>

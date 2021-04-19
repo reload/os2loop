@@ -1,0 +1,33 @@
+@mixin link-icon(
+  $content: null,
+  $color: $icon-base-color,
+  $hover-color: $dark-icon-base-color
+) {
+  background-color: $color;
+
+  &:hover {
+    background-color: $hover-color;
+  }
+  a {
+    @if $content {
+      &::before {
+        color: $white;
+        font-size: 1.2em;
+        font-family: bootstrap-icons !important;
+        content: $content;
+      }
+    }
+  }
+}
+
+@mixin icon($content: null, $font-size: 1em) {
+  @if $content {
+    &::before {
+      color: $icon-base-color;
+      font-size: $font-size;
+      margin-right: 0.5 * $spacer;
+      font-family: bootstrap-icons !important;
+      content: $content;
+    }
+  }
+}

@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.os2loop_documents_collection.os2loop_shared_tags
     - node.type.os2loop_documents_collection
   module:
+    - text
     - user
 id: node.os2loop_documents_collection.teaser
 targetEntityType: node
@@ -23,13 +24,20 @@ content:
     region: content
   links:
     weight: 100
+    region: content
+  os2loop_documents_dc_content:
+    type: text_default
+    weight: 0
+    region: content
+    label: visually_hidden
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  flag_os2loop_favourite: true
+  links: true
   os2loop_documents_dc_content: true
   os2loop_shared_profession: true
   os2loop_shared_subject: true

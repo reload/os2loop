@@ -3,13 +3,13 @@
 namespace Drupal\os2loop_documents\Helper;
 
 use Drupal\Core\DependencyInjection\DependencySerializationTrait;
+use Drupal\Core\Entity\EntityForm;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Render\MainContent\AjaxRenderer;
 use Drupal\Core\Render\RendererInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -81,27 +81,32 @@ class FormHelper {
 
   /**
    * Implements hook_form_BASE_FORM_ID_alter().
+   *
+   * Hides legacy body field on non-legacy documents (cf.
+   * self::isLegacyDocument).
+   *
+   * Insert UI for adding documents to a collection.
    */
   public function alterForm(array &$form, FormStateInterface $formState, string $formId) {
     switch ($formId) {
       case 'node_os2loop_documents_document_form':
       case 'node_os2loop_documents_document_edit_form':
-        $node = $formState->getformObject()->getEntity();
-        if (!$this->isLegacyDocument($node)) {
+        $node = $this->getNode($formState);
+        if (NULL !== $node && !$this->isLegacyDocument($node)) {
           unset($form['os2loop_documents_document_body']);
         }
     }
 
     if ('node_os2loop_documents_collection_edit_form' === $formId) {
-      $node = $formState->getformObject()->getEntity();
+      $node = $this->getNode($formState);
       if (NULL !== $node && $node->getType() === NodeHelper::CONTENT_TYPE_COLLECTION) {
         if (!$formState->isSubmitted()) {
           $collection = $this->collectionHelper->loadCollectionItems($node);
           $data = array_map(static function ($item) {
             return [
-              'id' => $item->document_id->value,
-              'pid' => $item->parent_document_id->value,
-              'weight' => $item->weight->value,
+              'id' => $item->getDocumentId(),
+              'pid' => $item->getParentDocumentId(),
+              'weight' => $item->getWeight(),
             ];
           }, $collection);
           $this->setDocumentsData($formState, $data);
@@ -267,6 +272,7 @@ class FormHelper {
     $form[self::DOCUMENTS]['add_document']['actions']['submit'] = [
       '#type' => 'submit',
       '#submit' => [[$this, 'addDocumentSubmit']],
+      '#name' => 'add-document',
       // @see https://www.drupal.org/docs/drupal-apis/ajax-api/basic-concepts#sub_form
       '#ajax' => [
         'callback' => [$this, 'addDocumentResult'],
@@ -294,7 +300,7 @@ class FormHelper {
     $data = $formState->getValue(self::DOCUMENTS_TREE) ?: [];
     $documentId = $this->getDocumentId($formState);
     if (NULL !== $documentId) {
-      $document = Node::load($documentId);
+      $document = $this->collectionHelper->loadDocument($documentId);
       if ($document && !isset($data[$document->id()])) {
         $weight = (int) max(array_column($data, 'weight'));
         $data[$document->id()] = [
@@ -351,7 +357,7 @@ class FormHelper {
       // Only leaf documents can be removed.
       if (!$this->collectionHelper->hasChildren($documentId, $data)) {
         unset($data[$documentId]);
-        $document = Node::load($documentId);
+        $document = $this->collectionHelper->loadDocument($documentId);
         $this->messenger->addStatus($this->t('Document @title removed from collection.', [
           '@title' => $this->buildDocumentTitle($document),
         ]));
@@ -372,7 +378,7 @@ class FormHelper {
    * @param \Drupal\Core\Form\FormStateInterface $formState
    *   The form state.
    *
-   * @return array
+   * @return \Symfony\Component\HttpFoundation\Response
    *   The form element.
    */
   public function removeDocumentResult(array &$form, FormStateInterface $formState) {
@@ -396,8 +402,31 @@ class FormHelper {
     if (!is_array($data)) {
       $data = [];
     }
-    $node = $formState->getformObject()->getEntity();
-    $this->collectionHelper->updateCollection($node, $data);
+    $node = $this->getNode($formState);
+    if (NULL !== $node) {
+      $this->collectionHelper->updateCollection($node, $data);
+    }
+  }
+
+  /**
+   * Get node from form state.
+   *
+   * @param \Drupal\Core\Form\FormStateInterface $formState
+   *   The form state.
+   *
+   * @return null|NodeInterface
+   *   The node if any.
+   */
+  private function getNode(FormStateInterface $formState) {
+    $form = $formState->getFormObject();
+    if ($form instanceof EntityForm) {
+      $entity = $form->getEntity();
+      if ($entity instanceof NodeInterface) {
+        return $entity;
+      }
+    }
+
+    return NULL;
   }
 
   /**
@@ -453,15 +482,15 @@ class FormHelper {
    * Validate document.
    */
   public function validateDocument(array &$element, FormStateInterface $formState) {
-    // @todo This should only run on document add.
-    if (1 === 1) {
+    // Run only when adding document.
+    $trigger = $formState->getTriggeringElement();
+    if ('add-document' !== $trigger['#name']) {
       return;
     }
-    $trigger = $formState->getTriggeringElement();
     $documentId = $this->getDocumentId($formState);
     if (NULL !== $documentId) {
       $data = $this->getDocumentsData($formState);
-      $document = Node::load($documentId);
+      $document = $this->collectionHelper->loadDocument($documentId);
       $errorMessage = NULL;
       if (NULL === $document) {
         $errorMessage = $this->t('Missing document');
@@ -505,7 +534,7 @@ class FormHelper {
       return FALSE;
     }
 
-    $body = $node->get('os2loop_documents_document_body')->value;
+    $body = $node->get('os2loop_documents_document_body')->getValue()[0]['value'] ?? NULL;
     return !empty(strip_tags($body ?? ''));
   }
 

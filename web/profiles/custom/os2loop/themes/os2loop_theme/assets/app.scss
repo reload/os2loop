@@ -1,8 +1,13 @@
 @import "bootstrap";
 @import "bootstrap-icons/font/bootstrap-icons.css";
+@import "mixins";
 @import "colors";
 
 $font-family-base: "Montserrat";
+
+a {
+  color: $link-color;
+}
 
 .bg-secondary-loop {
   background-color: $light-background;
@@ -32,9 +37,10 @@ img {
 
 input {
   &.button {
-    color: $black;
-    background-color: $secondary-color;
-    border-color: $dark-secondary-color;
+    @extend .btn;
+    color: $black !important;
+    background-color: $secondary-color !important;
+    border-color: $dark-secondary-color !important;
 
     &:hover {
       color: $black;
@@ -44,8 +50,25 @@ input {
   }
 }
 
+a {
+  &.button {
+    @extend .btn;
+    color: $black !important;
+    background-color: $secondary-color !important;
+    border-color: $dark-secondary-color !important;
+
+    &:hover {
+      color: $black;
+      background-color: $dark-secondary-color;
+      border-color: $dark-secondary-color;
+    }
+  }
+}
+
+
 @import "bootstrap";
 @import "./comment";
+@import "./teasers";
 @import "./search_api_autocomplete";
 @import "./tabs";
 @import "./fields";

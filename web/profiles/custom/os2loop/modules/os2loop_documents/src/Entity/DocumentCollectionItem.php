@@ -24,11 +24,10 @@ use Drupal\node\NodeInterface;
  *   },
  * )
  *
- * @method DocumentCollectionItem create
- * @property \Drupal\Core\Field\FieldItemList collection_id
- * @property \Drupal\Core\Field\FieldItemList parent_document_id
- * @property \Drupal\Core\Field\FieldItemList document_id
- * @property \Drupal\Core\Field\FieldItemList weight
+ * @property \Drupal\Core\Field\FieldItemList $collection_id
+ * @property \Drupal\Core\Field\FieldItemList $parent_document_id
+ * @property \Drupal\Core\Field\FieldItemList $document_id
+ * @property \Drupal\Core\Field\FieldItemList $weight
  */
 class DocumentCollectionItem extends ContentEntityBase implements ContentEntityInterface {
   /**
@@ -48,9 +47,81 @@ class DocumentCollectionItem extends ContentEntityBase implements ContentEntityI
   /**
    * The children if loaded.
    *
-   * @var \Drupal\node\NodeInterface[]
+   * @var DocumentCollectionItem[]|array
    */
   public $children = [];
+
+  /**
+   * Get collection id.
+   *
+   * @return int
+   *   The collection id.
+   */
+  public function getCollectionId() {
+    return (int) ($this->get('collection_id')->getValue()[0]['value'] ?? 0);
+  }
+
+  /**
+   * Get parent document id.
+   *
+   * @return null|int
+   *   The parent document id if any.
+   */
+  public function getParentDocumentId() {
+    $id = $this->get('parent_document_id')->getValue()[0]['value'] ?? NULL;
+
+    return NULL === $id ? NULL : (int) $id;
+  }
+
+  /**
+   * Get document id.
+   *
+   * @return int
+   *   The document id.
+   */
+  public function getDocumentId() {
+    return (int) ($this->get('document_id')->getValue()[0]['value'] ?? 0);
+  }
+
+  /**
+   * Get weight.
+   *
+   * @return int
+   *   The weight.
+   */
+  public function getWeight() {
+    return (int) ($this->get('weight')->getValue()[0]['value'] ?? 0);
+  }
+
+  /**
+   * Set loaded document.
+   *
+   * @param \Drupal\node\NodeInterface $document
+   *   The document.
+   *
+   * @return DocumentCollectionItem
+   *   The item.
+   */
+  public function setDocument(NodeInterface $document) {
+    $this->document = $document;
+
+    return $this;
+  }
+
+  /**
+   * Set children.
+   *
+   * @param array|DocumentCollectionItem[] $children
+   *   The children.
+   *
+   * @return DocumentCollectionItem
+   *   The item.
+   */
+  public function setChildren(array $children) {
+    $this->children = $children;
+
+    return $this;
+  }
 
   /**
    * Set collection.
@@ -69,27 +140,14 @@ class DocumentCollectionItem extends ContentEntityBase implements ContentEntityI
    * Get collection.
    */
   public function getCollection(): NodeInterface {
-    return Node::load($this->get('collection_id')->value);
-  }
-
-  /**
-   * Set document.
-   *
-   * @param \Drupal\node\NodeInterface $document
-   *   The document.
-   *
-   * @return DocumentDocumentItem
-   *   The item.
-   */
-  public function setDocument(NodeInterface $document): self {
-    return $this->set('document_id', $document->id());
+    return Node::load($this->getCollectionId());
   }
 
   /**
    * Get document.
    */
   public function getDocument(): NodeInterface {
-    return Node::load($this->get('document_id')->value);
+    return Node::load($this->getDocumentId());
   }
 
   /**

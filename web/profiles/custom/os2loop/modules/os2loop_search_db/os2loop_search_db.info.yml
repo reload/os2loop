@@ -4,5 +4,5 @@ description: 'OS2Loop Search DB'
 core_version_requirement: ^9
 package: 'OS2Loop'
 dependencies:
-  - search_api_db
-  - snowball_stemmer
+  - drupal:search_api_db
+  - drupal:snowball_stemmer

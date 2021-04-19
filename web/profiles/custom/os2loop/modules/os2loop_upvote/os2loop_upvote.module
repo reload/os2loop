@@ -7,6 +7,8 @@
 
 /**
  * Implements hook_preprocess_flag().
+ *
+ * @see \Drupal\os2loop_upvote\Helper\FlagHelper::preprocessFlag()
  */
 function os2loop_upvote_preprocess_flag(array &$variables) {
   Drupal::service('os2loop_upvote.flag_helper')->preprocessFlag($variables);
@@ -14,6 +16,8 @@ function os2loop_upvote_preprocess_flag(array &$variables) {
 
 /**
  * Implements hook_preprocess_field().
+ *
+ * @see \Drupal\os2loop_upvote\Helper\FlagHelper::preprocessField()
  */
 function os2loop_upvote_preprocess_field(array &$variables, $hook) {
   Drupal::service('os2loop_upvote.flag_helper')->preprocessField($variables);
@@ -21,6 +25,8 @@ function os2loop_upvote_preprocess_field(array &$variables, $hook) {
 
 /**
  * Implements hook_preprocess_comment().
+ *
+ * @see \Drupal\os2loop_upvote\Helper\FlagHelper::preprocessComment()
  */
 function os2loop_upvote_preprocess_comment(array &$variables) {
   Drupal::service('os2loop_upvote.flag_helper')->preprocessComment($variables);
