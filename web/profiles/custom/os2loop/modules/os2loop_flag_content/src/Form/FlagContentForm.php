@@ -168,16 +168,7 @@ class FlagContentForm extends FormBase implements ContainerInjectionInterface {
     $params['node_title'] = $node->label();
     $langcode = $this->currentUser->getPreferredLangcode();
     $send = TRUE;
-    $result = $this->mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
-
-    if ($result['result'] !== TRUE) {
-      // addmessage("error") ?
-      // @todo .
-    }
-    else {
-      // addmessage("yay") ?
-      // @todo .
-    }
+    $this->mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
   }
 
 }
