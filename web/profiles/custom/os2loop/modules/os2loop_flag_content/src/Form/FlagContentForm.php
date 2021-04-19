@@ -106,7 +106,7 @@ class FlagContentForm extends FormBase implements ContainerInjectionInterface {
       '#value' => $nid,
     ];
 
-    $config_reasons = explode("\n", $flag_config->get('reasons'));
+    $config_reasons = array_values(array_map('trim', explode(PHP_EOL, $flag_config->get('reasons'))));
     foreach ($config_reasons as $reason) {
       $reasons[$reason] = $reason;
     }
