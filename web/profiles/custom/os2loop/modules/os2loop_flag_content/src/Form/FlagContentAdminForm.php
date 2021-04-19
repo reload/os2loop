@@ -39,10 +39,11 @@ class FlagContentAdminForm extends ConfigFormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $config = $this->config(static::SETTINGS);
 
-    $form['causes'] = [
+    $form['reasons'] = [
       '#type' => 'textarea',
-      '#title' => $this->t('Causes'),
-      '#default_value' => $config->get('causes'),
+      '#title' => $this->t('Reasons'),
+      '#description' => $this->t('Write the possible reasons, separated by a newline'),
+      '#default_value' => $config->get('reasons'),
     ];
 
     $form['to_email'] = [
@@ -61,7 +62,7 @@ class FlagContentAdminForm extends ConfigFormBase {
     // Retrieve the configuration.
     $form_state->getValue('content_types');
     $this->configFactory->getEditable(static::SETTINGS)
-      ->set('causes', $form_state->getValue('causes'))
+      ->set('reasons', $form_state->getValue('reasons'))
       ->set('content_types', $form_state->getValue('content_types'))
       ->set('to_email', $form_state->getValue('to_email'))
       ->save();

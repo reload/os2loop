@@ -106,16 +106,16 @@ class FlagContentForm extends FormBase implements ContainerInjectionInterface {
       '#value' => $nid,
     ];
 
-    $config_causes = explode("\n", $flag_config->get('causes'));
-    foreach ($config_causes as $cause) {
-      $causes[$cause] = $cause;
+    $config_reasons = explode("\n", $flag_config->get('reasons'));
+    foreach ($config_reasons as $reason) {
+      $reasons[$reason] = $reason;
     }
-    $form['cause'] = [
+    $form['reason'] = [
       '#type' => 'select',
-      '#title' => $this->t('Causes'),
-      '#options' => $causes,
+      '#title' => $this->t('Reasons'),
+      '#options' => $reasons,
       '#validated' => TRUE,
-      '#empty_option' => $this->t('Pick a cause'),
+      '#empty_option' => $this->t('Pick a reason'),
     ];
 
     $form['message'] = [
@@ -141,8 +141,8 @@ class FlagContentForm extends FormBase implements ContainerInjectionInterface {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    if ("" === $form_state->getValue('cause')) {
-      $form_state->setErrorByName('cause', $this->t('Please pick a cause'));
+    if ("" === $form_state->getValue('reason')) {
+      $form_state->setErrorByName('reason', $this->t('Please select a reason'));
     }
     if ("" === $form_state->getValue('message')) {
       $form_state->setErrorByName('message', $this->t('Please write a message'));
@@ -162,7 +162,7 @@ class FlagContentForm extends FormBase implements ContainerInjectionInterface {
     $to = $flag_config->get('to_email');
     $module = 'os2loop_flag_content';
     $key = 'flag_content';
-    $params['cause'] = $form_state->getValue('cause');
+    $params['reason'] = $form_state->getValue('reason');
     $params['message'] = $message;
     $params['node_title'] = $node->label();
     $langcode = $this->currentUser->getPreferredLangcode();
