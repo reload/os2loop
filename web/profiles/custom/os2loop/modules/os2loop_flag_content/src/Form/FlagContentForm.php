@@ -11,6 +11,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\os2loop_flag_content\Services\ConfigService;
 use Drupal\Core\Mail\MailManagerInterface;
 use Drupal\Core\Session\AccountProxyInterface;
+use Drupal\Core\Url;
 
 /**
  * Flag content form.
@@ -125,6 +126,17 @@ class FlagContentForm extends FormBase implements ContainerInjectionInterface {
     $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Send'),
+      '#attributes' => [
+        'class' => [
+          'button',
+        ],
+      ],
+    ];
+
+    $form['actions']['cancel'] = [
+      '#type' => 'link',
+      '#url' => new Url('entity.node.canonical', ['node' => $nid]),
+      '#title' => $this->t('Cancel'),
       '#attributes' => [
         'class' => [
           'button',
