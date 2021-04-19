@@ -53,8 +53,16 @@ docker-compose exec phpfpm vendor/bin/drush --yes site:install os2loop --existin
 # Get the site url
 echo "http://$(docker-compose port nginx 80)"
 # Get admin sign in url
-docker-compose exec phpfpm vendor/bin/drush --yes \
-  --uri="http://$(docker-compose port nginx 80)" user:login
+docker-compose exec phpfpm vendor/bin/drush --yes --uri="http://$(docker-compose port nginx 80)" user:login
+```
+
+#### Mails
+
+Mails are caught by [MailHog](https://github.com/mailhog/MailHog) and can be
+read on the url reported by
+
+```sh
+echo "http://$(docker-compose port mailhog 8025)"
 ```
 
 #### Using `symfony` binary
