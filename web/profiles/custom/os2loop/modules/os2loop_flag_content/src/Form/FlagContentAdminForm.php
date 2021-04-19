@@ -8,7 +8,7 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Configure flag content admin settings for this site.
  */
-class FlagAdminForm extends ConfigFormBase {
+class FlagContentAdminForm extends ConfigFormBase {
 
   /**
    * Config settings.
