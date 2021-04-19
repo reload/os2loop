@@ -59,6 +59,7 @@ class SectionPageFixture extends AbstractFixture implements DependentFixtureInte
     $paragraph->save();
     $page->get('os2loop_section_page_paragraph')->appendItem($paragraph);
 
+    $this->setReference($page->getType() . ':' . $page->getTitle(), $page);
     $page->save();
 
     $page = Node::create([
@@ -83,6 +84,7 @@ class SectionPageFixture extends AbstractFixture implements DependentFixtureInte
     $paragraph->save();
     $page->get('os2loop_section_page_paragraph')->appendItem($paragraph);
 
+    $this->setReference($page->getType() . ':' . $page->getTitle(), $page);
     $page->save();
   }
 

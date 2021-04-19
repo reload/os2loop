@@ -1,0 +1,5 @@
+services:
+  os2loop_menu_fixtures.main_menu_fixture:
+    class: Drupal\os2loop_menu_fixtures\Fixture\MainMenuFixture
+    tags:
+      - { name: content_fixture }
