@@ -2,12 +2,9 @@ uuid: e9ce8c07-994e-4d35-88b4-f4065ac9611b
 langcode: en
 status: true
 dependencies:
-  module:
-    - node
-    - paragraphs
-    - taxonomy
-    - search_api
   config:
+    - field.storage.comment.os2loop_question_answer
+    - field.storage.comment.os2loop_post_comment
     - field.storage.node.os2loop_documents_document_body
     - field.storage.node.os2loop_documents_dc_content
     - field.storage.node.os2loop_question_content
@@ -23,6 +20,12 @@ dependencies:
     - field.storage.node.os2loop_shared_subject
     - field.storage.node.os2loop_shared_tags
     - search_api.server.os2loop_search_db_server
+  module:
+    - node
+    - paragraphs
+    - taxonomy
+    - search_api
+    - comment
 id: os2loop_search_db_index
 name: Index
 description: ''
@@ -123,6 +126,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.os2loop_external_descripti
+  os2loop_post_comment:
+    label: Comment
+    datasource_id: 'entity:comment'
+    property_path: os2loop_post_comment
+    type: text
+    dependencies:
+      config:
+        - field.storage.comment.os2loop_post_comment
   os2loop_post_content:
     label: Content
     datasource_id: 'entity:node'
@@ -131,6 +142,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.os2loop_post_content
+  os2loop_question_answer:
+    label: Answer
+    datasource_id: 'entity:comment'
+    property_path: os2loop_question_answer
+    type: text
+    dependencies:
+      config:
+        - field.storage.comment.os2loop_question_answer
   os2loop_question_content:
     label: Content
     datasource_id: 'entity:node'
@@ -192,6 +211,13 @@ field_settings:
       module:
         - node
 datasource_settings:
+  'entity:comment':
+    bundles:
+      default: true
+      selected: {  }
+    languages:
+      default: true
+      selected: {  }
   'entity:node':
     bundles:
       default: true
@@ -225,7 +251,9 @@ processor_settings:
       - os2loop_documents_step_text
       - os2loop_documents_tai_text
       - os2loop_external_descripti
+      - os2loop_post_comment
       - os2loop_post_content
+      - os2loop_question_answer
       - os2loop_question_content
       - os2loop_shared_subject_name
       - title

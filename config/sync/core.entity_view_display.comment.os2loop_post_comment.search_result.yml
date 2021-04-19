@@ -1,42 +1,38 @@
-uuid: a01ab977-f95a-45dd-8c50-b57e183fb3c3
+uuid: 540c590b-87ec-4e8e-a247-54abd4ebcddc
 langcode: en
 status: true
 dependencies:
   config:
     - comment.type.os2loop_post_comment
+    - core.entity_view_mode.comment.search_result
     - field.field.comment.os2loop_post_comment.os2loop_post_comment
   module:
     - text
-id: comment.os2loop_post_comment.default
+id: comment.os2loop_post_comment.search_result
 targetEntityType: comment
 bundle: os2loop_post_comment
-mode: default
+mode: search_result
 content:
-  flag_os2loop_upvote_correct_answer:
-    weight: 10
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  flag_os2loop_upvote_upvote_button:
-    weight: 10
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   links:
-    weight: 100
+    weight: 0
     region: content
     settings: {  }
     third_party_settings: {  }
   os2loop_post_comment:
-    weight: 101
+    weight: 1
     label: visually_hidden
     settings: {  }
     third_party_settings: {  }
     type: text_default
     region: content
+  search_api_excerpt:
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
-  langcode: true
-  search_api_excerpt: true
+  flag_os2loop_upvote_correct_answer: true
+  flag_os2loop_upvote_upvote_button: true

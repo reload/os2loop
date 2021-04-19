@@ -1,0 +1,10 @@
+uuid: 72eae837-f6c7-4b74-832f-7cc2eb4f7e03
+langcode: en
+status: true
+dependencies:
+  module:
+    - comment
+id: comment.search_result
+label: 'Search result'
+targetEntityType: comment
+cache: true

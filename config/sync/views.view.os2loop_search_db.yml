@@ -66,6 +66,9 @@ display:
         type: search_api
         options:
           view_modes:
+            'entity:comment':
+              os2loop_post_comment: search_result
+              os2loop_question_answer: search_result
             'entity:node':
               os2loop_documents_collection: search_result
               os2loop_documents_document: search_result
