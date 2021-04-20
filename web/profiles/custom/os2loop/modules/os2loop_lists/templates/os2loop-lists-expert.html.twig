@@ -1,0 +1,25 @@
+{#
+/**
+ * @file
+ * Display list of content that the logged in user should be an expert on.
+ *
+ * Available variables:
+ * - data: A list of nodes
+ */
+#}
+{% if data is empty %}
+  <div class="list-group">
+    <div class="list-group-item mb-2 bg-light border-0">
+      {{ 'No content related to your user'|t }}
+    </div>
+  </div>
+{% else %}
+  {% for node in data %}
+    <div class="list-group">
+      <article class="list-group-item mb-2 bg-light border-0">
+        <div class="text-muted small">{{ node.type.entity.label }} </div>
+        <h3 class="h6"><a href="{{ url('entity.node.canonical', { 'node': node.id() }) }}">{{ node.title() }}</a></h3>
+      </article>
+    </div>
+  {% endfor %}
+{% endif %}

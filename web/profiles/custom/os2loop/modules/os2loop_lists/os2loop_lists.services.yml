@@ -1,0 +1,6 @@
+services:
+  Drupal\os2loop_lists\Helper\Helper:
+    class: Drupal\os2loop_lists\Helper\Helper
+    arguments:
+      - '@entity_type.manager'
+      - '@current_user'
