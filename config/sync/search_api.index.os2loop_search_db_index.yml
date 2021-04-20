@@ -21,11 +21,11 @@ dependencies:
     - field.storage.node.os2loop_shared_tags
     - search_api.server.os2loop_search_db_server
   module:
+    - comment
     - node
     - paragraphs
     - taxonomy
     - search_api
-    - comment
 id: os2loop_search_db_index
 name: Index
 description: ''
@@ -39,6 +39,14 @@ field_settings:
     dependencies:
       module:
         - node
+  comment_type:
+    label: 'Comment Type'
+    datasource_id: 'entity:comment'
+    property_path: comment_type
+    type: string
+    dependencies:
+      module:
+        - comment
   created:
     label: 'Authored on'
     datasource_id: 'entity:node'
@@ -243,6 +251,7 @@ processor_settings:
   html_filter:
     all_fields: true
     fields:
+      - comment_type
       - os2loop_documents_dc_content
       - os2loop_documents_description
       - os2loop_documents_document_body
