@@ -4,8 +4,8 @@ status: true
 dependencies:
   config:
     - filter.format.os2loop_message_message
-template: os2loop_message_node_edited
-label: 'Node edited'
+template: os2loop_message_question_edited
+label: 'Question edited'
 description: message_type
 text:
   -
