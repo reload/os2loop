@@ -15,3 +15,39 @@ content when filtering on content type, i.e. when filtering on “Question” we
 also include “Answer” (a comment type) in the search query (see
 `Drupal\os2loop_search_db\Helper\Helper::alterSearchApiQuery` for implementation
 details).
+
+## Grouped content types
+
+When applying facet filters content types can be grouped, e.g. filtering on
+the content type “Document” can also includes “Document collection” and “External
+content” and this is the default grouping.
+
+The “content type groups” can be overwritten `settings.local.php` and the
+default grouping mentioned above can be defined defined as:
+
+```sh
+$config['os2loop.settings']['os2loop_search_db']['content_type_groups'] = [
+  'os2loop_documents_document' => [
+    'os2loop_documents_collection',
+    'os2loop_external',
+  ],
+];
+```
+
+If “Document” should only include “Document collection”, use
+
+```sh
+$config['os2loop.settings']['os2loop_search_db']['content_type_groups'] = [
+  'os2loop_documents_document' => [
+    'os2loop_documents_collection',
+  ],
+];
+```
+
+Use
+
+```sh
+$config['os2loop.settings']['os2loop_search_db']['content_type_groups'] = [];
+```
+
+to disable the content type grouping.
