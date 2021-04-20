@@ -1,0 +1,70 @@
+<?php
+
+/**
+ * @file
+ * Hooks for os2loop messages.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+
+/**
+ * Implements hook_entity_insert().
+ */
+function os2loop_messages_entity_insert(EntityInterface $entity) {
+  if ($entity->getEntityTypeId() == 'node') {
+    switch ($entity->bundle()) {
+      case 'os2loop_documents_collection':
+        break;
+
+      case 'os2loop_documents_document':
+        break;
+
+      case 'os2loop_question':
+        break;
+
+      case 'os2loop_post':
+        break;
+    }
+  }
+
+  if ($entity->getEntityTypeId() == 'comment') {
+    switch ($entity->bundle()) {
+      case 'os2loop_question_answer':
+        break;
+
+      case 'os2loop_post_comment':
+        break;
+    }
+  }
+}
+
+/**
+ * Implements hook_entity_update().
+ */
+function os2loop_messages_entity_update(EntityInterface $entity) {
+  if ($entity->getEntityTypeId() == 'node') {
+    switch ($entity->bundle()) {
+      case 'os2loop_documents_collection':
+        break;
+
+      case 'os2loop_documents_document':
+        break;
+
+      case 'os2loop_question':
+        break;
+
+      case 'os2loop_post':
+        break;
+    }
+  }
+
+  if ($entity->getEntityTypeId() == 'comment') {
+    switch ($entity->bundle()) {
+      case 'os2loop_question_answer':
+        break;
+
+      case 'os2loop_post_comment':
+        break;
+    }
+  }
+}
