@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.paragraph.os2loop_section_page_views_refer.field_os2loop_section_page_block
+    - field.field.paragraph.os2loop_section_page_views_refer.os2loop_section_page_block
     - field.field.paragraph.os2loop_section_page_views_refer.os2loop_section_page_view_header
     - field.field.paragraph.os2loop_section_page_views_refer.os2loop_section_page_view_text
     - paragraphs.paragraphs_type.os2loop_section_page_views_refer
@@ -15,7 +15,7 @@ targetEntityType: paragraph
 bundle: os2loop_section_page_views_refer
 mode: default
 content:
-  field_os2loop_section_page_block:
+  os2loop_section_page_block:
     weight: 3
     settings:
       plugin_id: ''

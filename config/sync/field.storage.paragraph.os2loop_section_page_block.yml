@@ -5,8 +5,8 @@ dependencies:
   module:
     - block_field
     - paragraphs
-id: paragraph.field_os2loop_section_page_block
-field_name: field_os2loop_section_page_block
+id: paragraph.os2loop_section_page_block
+field_name: os2loop_section_page_block
 entity_type: paragraph
 type: block_field
 settings: {  }

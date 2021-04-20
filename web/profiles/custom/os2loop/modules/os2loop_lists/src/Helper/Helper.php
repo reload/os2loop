@@ -64,14 +64,7 @@ class Helper {
       return [];
     }
 
-    return $this->entityTypeManager
-      ->getListBuilder('node')
-      ->getStorage()
-      ->loadByProperties([
-        'type' => 'os2loop_question',
-        'status' => 1,
-        'os2loop_shared_subject' => $user_expertises,
-      ]);
+    return $this->getList('os2loop_shared_subject', $user_expertises);
   }
 
   /**
@@ -87,14 +80,7 @@ class Helper {
       return [];
     }
 
-    return $this->entityTypeManager
-      ->getListBuilder('node')
-      ->getStorage()
-      ->loadByProperties([
-        'type' => 'os2loop_question',
-        'status' => 1,
-        'os2loop_shared_profession' => $user_professions,
-      ]);
+    return $this->getList('os2loop_shared_profession', $user_professions);
   }
 
   /**
@@ -104,14 +90,10 @@ class Helper {
    *   An array of logged in users expertise taxonomy term ids.
    */
   private function getCurrentUserExpertisesId(): array {
-    $term_ids = [];
     $user = $this->userStorage->load($this->currentUser->id());
     /** @var \Drupal\user\UserInterface $user */
     $expertises = $user->get('os2loop_user_areas_of_expertise')->getValue();
-    foreach ($expertises as $expertise) {
-      $term_ids[] = $expertise['target_id'];
-    }
-    return $term_ids;
+    return array_column($expertises, 'target_id');
   }
 
   /**
@@ -121,14 +103,32 @@ class Helper {
    *   An array of logged in users profession taxonomy term ids.
    */
   private function getCurrentUserProfessionsId(): array {
-    $term_ids = [];
     $user = $this->userStorage->load($this->currentUser->id());
     /** @var \Drupal\user\UserInterface $user */
     $professions = $user->get('os2loop_user_professions')->getValue();
-    foreach ($professions as $profession) {
-      $term_ids[] = $profession['target_id'];
-    }
-    return $term_ids;
+    return array_column($professions, 'target_id');
+  }
+
+  /**
+   * Build list.
+   *
+   * @param string $field_name
+   *   The name of the field to make condition for.
+   * @param array $taxonomy_terms
+   *   The condition of the field.
+   *
+   * @return array
+   *   A list of nodes with shared taxonomy terms.
+   */
+  private function getList(string $field_name, array $taxonomy_terms): array {
+    return $this->entityTypeManager
+      ->getListBuilder('node')
+      ->getStorage()
+      ->loadByProperties([
+        'type' => 'os2loop_question',
+        'status' => 1,
+        $field_name => $taxonomy_terms,
+      ]);
   }
 
 }

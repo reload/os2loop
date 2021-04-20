@@ -3,12 +3,12 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.paragraph.field_os2loop_section_page_block
+    - field.storage.paragraph.os2loop_section_page_block
     - paragraphs.paragraphs_type.os2loop_section_page_views_refer
   module:
     - block_field
-id: paragraph.os2loop_section_page_views_refer.field_os2loop_section_page_block
-field_name: field_os2loop_section_page_block
+id: paragraph.os2loop_section_page_views_refer.os2loop_section_page_block
+field_name: os2loop_section_page_block
 entity_type: paragraph
 bundle: os2loop_section_page_views_refer
 label: 'Block element'
