@@ -46,6 +46,8 @@
         "drupal/search_api_autocomplete": "^1.4",
         "drupal/snowball_stemmer": "^2.0",
         "drupal/theme_switcher": "dev-8.x-1.x",
+        "drupal/token": "^1.9",
+        "drupal/token_filter": "^1.2",
         "drupal/twig_tweak": "^3.0",
         "drupal/viewsreference": "^2.0",
         "drush/drush": "^10.4",
