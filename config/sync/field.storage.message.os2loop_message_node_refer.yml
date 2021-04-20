@@ -1,0 +1,20 @@
+uuid: 55964f51-fd0b-40df-9d7a-13123215790e
+langcode: en
+status: true
+dependencies:
+  module:
+    - message
+    - node
+id: message.os2loop_message_node_refer
+field_name: os2loop_message_node_refer
+entity_type: message
+type: entity_reference
+settings:
+  target_type: node
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
