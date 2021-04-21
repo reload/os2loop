@@ -37,7 +37,7 @@
 {# Set nofollow to prevent search bots from crawling anonymous flag links #}
 {% set attributes = attributes.setAttribute('rel', 'nofollow') %}
 
-<div class="{{ classes|join(' ') }}">
+<div class="{{ classes|join(' ') }}" title='{{ title }}'>
   <a{{ attributes }} aria-label='{{ title }}'></a>
 </div>
 {% endspaceless %}
