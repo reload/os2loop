@@ -6,7 +6,7 @@
 $primary-color: #41ab51;
 $secondary-color: #488cd4;
 $dark-secondary-color: darken($secondary-color, 5%);
-
+$primary: $primary-color;
 $black: #000;
 $white: #fff;
 
@@ -25,11 +25,13 @@ $text-color: $dark-grey;
 $icon-base-color: $dark-grey;
 $delete: $red;
 $upvote: $primary-color;
+$follow-content: $primary-color;
 $edit: $secondary-color;
 
 $dark-icon-base-color: darken($dark-grey, 10%);
 $dark-delete: darken($red, 10%);
 $dark-upvote: darken($primary-color, 10%);
+$dark-follow-content: darken($primary-color, 10%);
 $dark-edit: darken($secondary-color, 10%);
 
 // Link color
