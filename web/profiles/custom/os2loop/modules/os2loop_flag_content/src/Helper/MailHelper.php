@@ -13,7 +13,7 @@ class MailHelper {
   /**
    * Implements hook_mail().
    */
-  public function preprocessMail($key, &$message, $params) {
+  public function mail($key, &$message, $params) {
     $options = [
       'langcode' => $message['langcode'],
     ];

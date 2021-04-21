@@ -9,5 +9,5 @@
  * Implements hook_mail().
  */
 function os2loop_flag_content_mail($key, &$message, $params) {
-  Drupal::service('os2loop_flag_content.mail_helper')->preprocessMail($key, $message, $params);
+  Drupal::service('os2loop_flag_content.mail_helper')->mail($key, $message, $params);
 }
