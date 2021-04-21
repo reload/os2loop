@@ -466,12 +466,13 @@ class FormHelper {
    * @return int|null
    *   The document id if any.
    */
-  private function getDocumentId(FormStateInterface $formState) {
+  private function getDocumentId(FormStateInterface $formState): ?int {
     $spec = $formState->getValue('document');
     if (preg_match('/^\d+$/', $spec)) {
       return (int) $spec;
     }
-    if (preg_match('/\((?<id>\d+)\)$/', $spec, $matches)) {
+    // Get last decimal number in spec.
+    if (preg_match('/(?<id>\d+)(?!.*\d)/', $spec, $matches)) {
       return (int) $matches['id'];
     }
 
