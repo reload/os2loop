@@ -12,7 +12,7 @@ id: node.os2loop_section_page.os2loop_section_page_paragraph
 field_name: os2loop_section_page_paragraph
 entity_type: node
 bundle: os2loop_section_page
-label: Section
+label: Sections
 description: ''
 required: false
 translatable: false

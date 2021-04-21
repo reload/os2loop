@@ -11,7 +11,7 @@ third_party_settings:
     parent: 'main:'
 name: Document
 type: os2loop_documents_document
-description: 'A document'
+description: 'A document.'
 help: ''
 new_revision: true
 preview_mode: 1
