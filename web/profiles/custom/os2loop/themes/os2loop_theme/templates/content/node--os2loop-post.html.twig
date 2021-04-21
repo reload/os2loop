@@ -82,14 +82,10 @@
   </div>
 </div>
   <div class="icon-container">
-    <div class="icon print" aria-label="{{ 'Print document (PDF)'|t }}">
+    <div class="icon print" aria-label="{{ 'Print document (PDF)'|t }}" title="{{ 'Print document (PDF)'|t }}">
       <a href="{{ path('entity_print.view', {export_type: 'pdf', entity_type: 'node', entity_id: node.id}) }}"></a>
     </div>
-    <div class="icon flag" aria-label="{{ 'contact editorial office'|t }}">
-      <a></a>
-      {# todo put in link #}
-    </div>
-    <div class="icon share" aria-label="{{ 'Share with a friend'|t }}">
+    <div class="icon share" aria-label="{{ 'Share with a friend'|t }}" title="{{ 'Share with a friend'|t }}">
       <a></a>
     </div>
     {{ content.flag_os2loop_favourite }}
@@ -115,6 +111,18 @@
         {{ date }}</div>
       <div>metadata</div>
       {# TODO fix metadata #}
+    </div>
+    <div class="icon-container">
+      <div class="icon edit" title="{{ 'Edit content'|t }}">
+        <a aria-label="{{ 'edit content'|t }}" href="{{ path('entity.node.edit_form', {node: node.id}) }}"></a>
+      </div>
+      <div class="icon delete" title="{{ 'Delete content'|t }}">
+        <a aria-label="{{ 'delete content'|t }}" href="{{ path('entity.node.delete_form', {node: node.id}) }}"></a>
+      </div>
+      <div class="icon flag" aria-label="{{ 'contact editorial office'|t }}" title="{{ 'contact editorial office'|t }}">
+        <a></a>
+        {# todo put in link #}
+      </div>
     </div>
   </div>
   <div{{ content_attributes.addClass('bg-secondary-loop') }}>
