@@ -9,6 +9,11 @@ label: 'Question added'
 description: message_type
 text:
   -
-    value: 'Der er kommet et nyt spørgsmål til et emne du følger <a href="/node/[message:field-message-node-reference:nid]">[message:field-message-node-reference:field_description]</a>'
+    value: 'Der er kommet et nyt spørgsmål til et emne du følger <a href="/node/[message:os2loop_message_node_refer:entity:nid]">[message:os2loop_message_node_refer:entity:title]</a>'
     format: os2loop_message_message
-settings: {  }
+settings:
+  'token options':
+    clear: false
+    'token replace': true
+  purge_override: false
+  purge_methods: {  }

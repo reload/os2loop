@@ -9,6 +9,11 @@ label: 'Comment changed'
 description: message_type
 text:
   -
-    value: 'Et svar til spørgsmålet: <a href="/node/[message:field-message-node-reference:nid]">[message:field-message-node-reference:field_description]</a> er blevet ændret'
+    value: 'Et svar til spørgsmålet: <a href="/node/[message:os2loop_message_node_refer:entity:nid]">[message:os2loop_message_node_refer:entity:title]</a> er blevet ændret'
     format: os2loop_message_message
-settings: {  }
+settings:
+  'token options':
+    clear: false
+    'token replace': true
+  purge_override: false
+  purge_methods: {  }
