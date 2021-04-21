@@ -119,9 +119,8 @@
       <div class="icon delete" title="{{ 'Delete content'|t }}">
         <a aria-label="{{ 'delete content'|t }}" href="{{ path('entity.node.delete_form', {node: node.id}) }}"></a>
       </div>
-      <div class="icon flag" aria-label="{{ 'contact editorial office'|t }}" title="{{ 'contact editorial office'|t }}">
-        <a></a>
-        {# todo put in link #}
+      <div class="icon flag" title="{{ 'contact editorial office'|t }}">
+        <a aria-label="{{ 'Contact editorial staff'|t }}" href="{{ path('os2loop_flag_content.flag_content_form', {node: node.id}) }}"></a>
       </div>
     </div>
   </div>

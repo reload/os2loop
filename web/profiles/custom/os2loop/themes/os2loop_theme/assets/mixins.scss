@@ -10,6 +10,8 @@
   }
   a {
     @if $content {
+      width: 100%;
+      text-align: center;
       &::before {
         color: $white;
         font-size: 1.2em;

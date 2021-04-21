@@ -85,9 +85,8 @@
     <div class="icon print" aria-label="{{ 'Print document (PDF)'|t }}">
       <a href="{{ path('entity_print.view', {export_type: 'pdf', entity_type: 'node', entity_id: node.id}) }}"></a>
     </div>
-    <div class="icon flag" aria-label="{{ 'contact editorial office'|t }}">
-      <a></a>
-      {# todo put in link #}
+    <div class="icon flag" title="{{ 'contact editorial office'|t }}">
+      <a aria-label="{{ 'Contact editorial staff'|t }}" href="{{ path('os2loop_flag_content.flag_content_form', {node: node.id}) }}"></a>
     </div>
     <div class="icon share" aria-label="{{ 'Share with a friend'|t }}">
       <a></a>
