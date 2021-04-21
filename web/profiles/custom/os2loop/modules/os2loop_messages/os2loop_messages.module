@@ -11,15 +11,20 @@ use Drupal\Core\Entity\EntityInterface;
  * Implements hook_entity_insert().
  */
 function os2loop_messages_entity_insert(EntityInterface $entity) {
+  $helper = \Drupal::service('os2loop_messages.helper');
+
   if ($entity->getEntityTypeId() == 'node') {
     switch ($entity->bundle()) {
       case 'os2loop_documents_collection':
+        $helper->createMessage('os2loop_message_collection_added', $entity);
         break;
 
       case 'os2loop_documents_document':
+        $helper->createMessage('os2loop_message_document_added', $entity);
         break;
 
       case 'os2loop_question':
+        $helper->createMessage('os2loop_message_question_added', $entity);
         break;
 
       case 'os2loop_post':
@@ -30,6 +35,7 @@ function os2loop_messages_entity_insert(EntityInterface $entity) {
   if ($entity->getEntityTypeId() == 'comment') {
     switch ($entity->bundle()) {
       case 'os2loop_question_answer':
+        $helper->createMessage('os2loop_message_answer_added', $entity);
         break;
 
       case 'os2loop_post_comment':
@@ -42,28 +48,23 @@ function os2loop_messages_entity_insert(EntityInterface $entity) {
  * Implements hook_entity_update().
  */
 function os2loop_messages_entity_update(EntityInterface $entity) {
+  $helper = \Drupal::service('os2loop_messages.helper');
+
   if ($entity->getEntityTypeId() == 'node') {
     switch ($entity->bundle()) {
       case 'os2loop_documents_collection':
+        $helper->createMessage('os2loop_message_collection_edited', $entity);
         break;
 
       case 'os2loop_documents_document':
+        $helper->createMessage('os2loop_message_document_edited', $entity);
         break;
 
       case 'os2loop_question':
+        $helper->createMessage('os2loop_message_question_edited', $entity);
         break;
 
       case 'os2loop_post':
-        break;
-    }
-  }
-
-  if ($entity->getEntityTypeId() == 'comment') {
-    switch ($entity->bundle()) {
-      case 'os2loop_question_answer':
-        break;
-
-      case 'os2loop_post_comment':
         break;
     }
   }
