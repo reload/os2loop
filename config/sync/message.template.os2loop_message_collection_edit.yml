@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - filter.format.os2loop_message_message
-template: os2loop_message_collection_edited
+template: os2loop_message_collection_edit
 label: 'Document collection edited'
 description: message_type
 text:

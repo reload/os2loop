@@ -4,15 +4,15 @@ status: true
 dependencies:
   config:
     - field.storage.message.os2loop_message_node_refer
-    - message.template.os2loop_message_collection_edited
+    - message.template.os2loop_message_collection_edit
     - node.type.os2loop_documents_collection
     - node.type.os2loop_documents_document
     - node.type.os2loop_post
     - node.type.os2loop_question
-id: message.os2loop_message_collection_edited.os2loop_message_node_refer
+id: message.os2loop_message_collection_edit.os2loop_message_node_refer
 field_name: os2loop_message_node_refer
 entity_type: message
-bundle: os2loop_message_collection_edited
+bundle: os2loop_message_collection_edit
 label: 'Node reference'
 description: ''
 required: false

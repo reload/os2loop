@@ -3,11 +3,11 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.message.os2loop_message_collection_edited.os2loop_message_node_refer
-    - message.template.os2loop_message_collection_edited
-id: message.os2loop_message_collection_edited.default
+    - field.field.message.os2loop_message_collection_edit.os2loop_message_node_refer
+    - message.template.os2loop_message_collection_edit
+id: message.os2loop_message_collection_edit.default
 targetEntityType: message
-bundle: os2loop_message_collection_edited
+bundle: os2loop_message_collection_edit
 mode: default
 content:
   os2loop_message_node_refer:
