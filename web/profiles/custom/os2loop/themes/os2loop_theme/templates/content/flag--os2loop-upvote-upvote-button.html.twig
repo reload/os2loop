@@ -19,11 +19,7 @@
 {{ attach_library('flag/flag.link') }}
 
 {# Depending on the flag action, set the appropriate action class. #}
-{% if action == 'unflag' %}
-    {% set action_class = 'unflag' %}
-{% else %}
-    {% set action_class = 'flag' %}
-{% endif %}
+{% set action_class = action == 'unflag' ? 'unflag' : 'flag' %}
 
 {# Set the remaining Flag CSS classes. #}
 {% set classes = [
