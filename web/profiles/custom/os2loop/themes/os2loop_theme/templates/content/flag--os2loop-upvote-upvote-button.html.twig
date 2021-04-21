@@ -19,17 +19,16 @@
 {{ attach_library('flag/flag.link') }}
 
 {# Depending on the flag action, set the appropriate action class. #}
-{# {% if action == 'unflag' %}
-    {% set action_class = 'action-unflag' %}
+{% if action == 'unflag' %}
+    {% set action_class = 'unflag' %}
 {% else %}
-    {% set action_class = 'action-flag' %}
-{% endif %} #}
+    {% set action_class = 'flag' %}
+{% endif %}
 
 {# Set the remaining Flag CSS classes. #}
 {% set classes = [
     'icon',
     'upvote',
-    'flag',
     'flag-' ~ flag.id()|clean_class,
     'js-flag-' ~ flag.id()|clean_class ~ '-' ~ flaggable.id(),
     action_class,
