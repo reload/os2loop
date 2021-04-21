@@ -29,6 +29,7 @@ module:
   os2loop_external: 0
   os2loop_lists: 0
   os2loop_menu: 0
+  os2loop_flag_content: 0
   os2loop_page: 0
   os2loop_post: 0
   os2loop_question: 0

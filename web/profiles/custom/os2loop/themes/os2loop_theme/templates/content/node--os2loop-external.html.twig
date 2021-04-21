@@ -75,7 +75,7 @@
 <article{{ attributes.addClass("os2loop-content") }}>
   <div class="d-flex">
     <div>
-      <a class="button">{{ 'Contact editoral staff'|t }}</a>
+      <a class="button" href="{{ path('os2loop_flag_content.flag_content_form', {node: node.id}) }}">{{ 'Contact editorial staff'|t }}</a>
     </div>
     {{ content.flag_os2loop_favourite }}
     <div>

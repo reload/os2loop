@@ -92,7 +92,7 @@
     <a class="button btn-print d-print-none" href="{{ path('entity_print.view', {export_type: 'pdf', entity_type: 'node', entity_id: node.id}) }}">{{ 'Print collection (PDF)'|t }}</a>
   </div>
   <div>
-    <a class="button">{{ 'Contact editoral staff'|t }}</a>
+    <a class="button" href="{{ path('os2loop_flag_content.flag_content_form', {node: node.id}) }}">{{ 'Contact editorial staff'|t }}</a>
   </div>
   {{ content.flag_os2loop_favourite }}
   <div>
