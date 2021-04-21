@@ -109,8 +109,6 @@ class FlagContentForm extends FormBase implements ContainerInjectionInterface {
     $form['title'] = [
       '#type' => 'page_title',
       '#title' => $this->t('Flag: @document', ['@document' => $node->label()]),
-      '#prefix' => '<h1>',
-      '#suffix' => '</h1>',
     ];
 
     $form['reason'] = [
