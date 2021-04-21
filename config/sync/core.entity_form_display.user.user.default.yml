@@ -115,6 +115,11 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  language:
+    weight: 9
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   os2loop_user_address:
     type: string_textfield
     weight: 1
@@ -230,5 +235,5 @@ content:
       no_empty_message: 'No terms could be found. Please type in order to add a new term.'
     third_party_settings: {  }
 hidden:
-  language: true
+  langcode: true
   timezone: true

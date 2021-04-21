@@ -1,0 +1,11 @@
+uuid: 330b1bf6-6bde-42f3-a306-881162ead16d
+langcode: da
+status: true
+dependencies:
+  config:
+    - node.type.os2loop_documents_collection
+id: node.os2loop_documents_collection
+target_entity_type_id: node
+target_bundle: os2loop_documents_collection
+default_langcode: site_default
+language_alterable: false

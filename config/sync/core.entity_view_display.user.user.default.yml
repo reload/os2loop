@@ -31,6 +31,7 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  langcode: true
   os2loop_user_address: true
   os2loop_user_areas_of_expertise: true
   os2loop_user_biography: true

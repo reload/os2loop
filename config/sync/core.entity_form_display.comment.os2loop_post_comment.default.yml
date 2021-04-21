@@ -26,4 +26,5 @@ content:
     type: text_textarea
     region: content
 hidden:
+  langcode: true
   subject: true
