@@ -1,0 +1,26 @@
+.title {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: $spacer;
+  $icon-size: 40px;
+
+  .icon-container {
+    align-items: center;
+
+    &.external {
+      @include icon("\f471", $icon-size);
+    }
+    &.post {
+      @include icon("\f383", $icon-size);
+    }
+    &.question {
+      @include icon("\f50b", $icon-size);
+    }
+    &.collection {
+      @include icon("\f3c2", $icon-size);
+    }
+    &.document {
+      @include icon("\f3b9", $icon-size);
+    }
+  }
+}

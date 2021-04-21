@@ -46,7 +46,7 @@ content:
     region: content
   os2loop_shared_profession:
     weight: 106
-    label: above
+    label: inline
     settings:
       link: true
     third_party_settings: {  }
@@ -63,7 +63,7 @@ content:
     region: content
   os2loop_shared_subject:
     weight: 104
-    label: above
+    label: inline
     settings:
       link: true
     third_party_settings: {  }
@@ -71,7 +71,7 @@ content:
     region: content
   os2loop_shared_tags:
     weight: 105
-    label: above
+    label: inline
     settings:
       link: true
     third_party_settings: {  }

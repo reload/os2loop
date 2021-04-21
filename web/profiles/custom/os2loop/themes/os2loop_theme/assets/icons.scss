@@ -18,6 +18,25 @@
       @include link-icon("\f4ca", $edit, $dark-edit);
     }
 
+    &.print {
+      @include link-icon("\f501");
+    }
+
+    &.fav {
+      @include link-icon("\f37d", $follow-content, $dark-follow-content);
+    }
+    &.unfav {
+      @include link-icon("\f37c", $follow-content, $dark-follow-content);
+    }
+
+    &.share {
+      @include link-icon("\f52e");
+    }
+
+    &.flag {
+      @include link-icon("\f3cc");
+    }
+
     &.reply {
       @include link-icon("\f51f");
     }

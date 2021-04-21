@@ -75,7 +75,7 @@ content:
     type: datetime_default
     region: content
   os2loop_shared_subject:
-    label: above
+    label: inline
     settings:
       link: true
     third_party_settings: {  }
@@ -83,7 +83,7 @@ content:
     region: content
     weight: 3
   os2loop_shared_tags:
-    label: above
+    label: inline
     settings:
       link: true
     third_party_settings: {  }

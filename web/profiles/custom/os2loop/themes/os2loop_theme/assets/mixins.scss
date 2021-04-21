@@ -10,6 +10,8 @@
   }
   a {
     @if $content {
+      width: 100%;
+      text-align: center;
       &::before {
         color: $white;
         font-size: 1.2em;
@@ -20,12 +22,12 @@
   }
 }
 
-@mixin icon($content: null, $font-size: 1em) {
+@mixin icon($content: null, $font-size: 1em, $margin-right: $spacer) {
   @if $content {
     &::before {
       color: $icon-base-color;
       font-size: $font-size;
-      margin-right: 0.5 * $spacer;
+      margin-right: $margin-right;
       font-family: bootstrap-icons !important;
       content: $content;
     }

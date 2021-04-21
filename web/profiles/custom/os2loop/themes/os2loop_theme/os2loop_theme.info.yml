@@ -2,6 +2,7 @@ type: theme
 base theme: false
 name: 'os2loop'
 description: 'A theme for os2loop.'
+logo: logo-loop.svg
 core_version_requirement: ^8 || ^9
 screenshot: loop.png
 
