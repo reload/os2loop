@@ -134,7 +134,7 @@
       {% endif %}
       <div{{ content_attributes }}>
       {{ content.os2loop_documents_dc_content }}
-               {% if os2loop_documents_collection_tree|default(false) %}
+      {% if os2loop_documents_collection_tree|default(false) %}
         <fieldset>
           <legend>{{ 'Documents in collection'|trans }}</legend>
           {{ _self.table_of_contents(os2loop_documents_collection_tree, node) }}
