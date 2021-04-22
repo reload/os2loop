@@ -5,11 +5,11 @@ dependencies:
   config:
     - filter.format.os2loop_message_message
 template: os2loop_message_collection_edit
-label: 'Document collection edited'
+label: 'Document collection changed'
 description: message_type
 text:
   -
-    value: 'En dokumentsamling er blevet ændret: <a href="/node/[message:os2loop_message_node_refer:entity:nid]">[message:os2loop_message_node_refer:entity:title]</a>'
+    value: 'A document collection has been changed: <a href="/node/[message:os2loop_message_node_refer:entity:nid]">[message:os2loop_message_node_refer:entity:title]</a>'
     format: os2loop_message_message
 settings:
   'token options':

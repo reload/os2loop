@@ -5,11 +5,11 @@ dependencies:
   config:
     - filter.format.os2loop_message_message
 template: os2loop_message_comment_changed
-label: 'Comment changed'
+label: 'Answer changed'
 description: message_type
 text:
   -
-    value: 'Et svar til spørgsmålet: <a href="/node/[message:os2loop_message_node_refer:entity:nid]">[message:os2loop_message_node_refer:entity:title]</a> er blevet ændret'
+    value: 'An answer to the question: <a href="/node/[message:os2loop_message_node_refer:entity:nid]">[message:os2loop_message_node_refer:entity:title]</a> has been changed'
     format: os2loop_message_message
 settings:
   'token options':
@@ -17,3 +17,4 @@ settings:
     'token replace': true
   purge_override: false
   purge_methods: {  }
+

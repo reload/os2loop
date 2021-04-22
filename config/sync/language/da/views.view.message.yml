@@ -1,7 +1,6 @@
 label: Meddelelse
 display:
   default:
-    display_title: Master
     display_options:
       exposed_form:
         options:
@@ -22,13 +21,8 @@ display:
             first: '« første'
             last: 'sidste »'
       fields:
-        mid:
-          separator: ', '
-        template:
-          separator: ', '
         uid:
           label: Forfatter
-          separator: ', '
       title: Meddelelse
   page_1:
     display_title: Side

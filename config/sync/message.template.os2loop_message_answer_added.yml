@@ -5,11 +5,11 @@ dependencies:
   config:
     - filter.format.os2loop_message_message
 template: os2loop_message_answer_added
-label: 'Comment added to post'
+label: 'Answer added to question'
 description: message_type
 text:
   -
-    value: 'Der er kommet et nyt svar til spørgsmålet: <a href="/node/[message:os2loop_message_node_refer:entity:nid]">[message:os2loop_message_node_refer:entity:title]</a>'
+    value: 'There is a new answer to the question: <a href="/node/[message:os2loop_message_node_refer:entity:nid]">[message:os2loop_message_node_refer:entity:title]</a>'
     format: os2loop_message_message
 settings:
   'token options':

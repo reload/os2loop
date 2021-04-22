@@ -9,7 +9,7 @@ label: 'Document collection added'
 description: message_type
 text:
   -
-    value: 'En dokumentsamling er blevet oprettet: <a href="/node/[message:os2loop_message_node_refer:entity:nid]">[message:os2loop_message_node_refer:entity:title]</a>'
+    value: 'A document collection has been added: <a href="/node/[message:os2loop_message_node_refer:entity:nid]">[message:os2loop_message_node_refer:entity:title]</a>'
     format: os2loop_message_message
 settings:
   'token options':
