@@ -1,0 +1,24 @@
+uuid: a5465552-b423-4986-9335-1ded391aed9a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.os2loop_user_external_list
+  module:
+    - user
+id: user.user.os2loop_user_external_list
+field_name: os2loop_user_external_list
+entity_type: user
+bundle: user
+label: 'Show in external list'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean
