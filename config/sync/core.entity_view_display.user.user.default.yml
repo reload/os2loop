@@ -3,8 +3,8 @@ langcode: da
 status: true
 dependencies:
   config:
-    - field.field.user.user.field_os2loop_external_list
-    - field.field.user.user.field_os2loop_internal_list
+    - field.field.user.user.os2loop_user_external_list
+    - field.field.user.user.os2loop_user_internal_list
     - field.field.user.user.os2loop_user_address
     - field.field.user.user.os2loop_user_areas_of_expertise
     - field.field.user.user.os2loop_user_biography
