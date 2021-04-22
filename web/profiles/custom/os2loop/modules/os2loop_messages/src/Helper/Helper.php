@@ -16,6 +16,75 @@ use Drupal\comment\CommentInterface;
 class Helper extends ControllerBase {
 
   /**
+   * Create message on insert entity.
+   *
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   *   The entity that is being created.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  public function entityInsert(EntityInterface $entity) {
+    if ($entity->getEntityTypeId() == 'node') {
+      switch ($entity->bundle()) {
+        case 'os2loop_documents_collection':
+          $this->createMessage('os2loop_message_collection_added', $entity);
+          break;
+
+        case 'os2loop_documents_document':
+          $this->createMessage('os2loop_message_document_added', $entity);
+          break;
+
+        case 'os2loop_question':
+          $this->createMessage('os2loop_message_question_added', $entity);
+          break;
+
+        case 'os2loop_post':
+          break;
+      }
+    }
+
+    if ($entity->getEntityTypeId() == 'comment') {
+      switch ($entity->bundle()) {
+        case 'os2loop_question_answer':
+          $this->createMessage('os2loop_message_answer_added', $entity);
+          break;
+
+        case 'os2loop_post_comment':
+          break;
+      }
+    }
+  }
+
+  /**
+   * Create message on update entity.
+   *
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   *   The entity that is being updated.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  public function entityUpdate(EntityInterface $entity) {
+    if ($entity->getEntityTypeId() == 'node') {
+      switch ($entity->bundle()) {
+        case 'os2loop_documents_collection':
+          $this->createMessage('os2loop_message_collection_edited', $entity);
+          break;
+
+        case 'os2loop_documents_document':
+          $this->createMessage('os2loop_message_document_edited', $entity);
+          break;
+
+        case 'os2loop_question':
+          $this->createMessage('os2loop_message_question_edited', $entity);
+          break;
+
+        case 'os2loop_post':
+          break;
+      }
+    }
+  }
+
+  /**
    * Create a message.
    *
    * @param string $template_name
