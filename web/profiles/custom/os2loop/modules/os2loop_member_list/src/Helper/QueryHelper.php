@@ -42,11 +42,11 @@ class QueryHelper implements ContainerInjectionInterface {
    * Implements hook_views_query_alter().
    */
   public function queryAlter(ViewExecutable $view, QueryPluginBase $query) {
-    if ('contacts' === $view->id()) {
+    if ('contact_list' === $view->id()) {
       if ($this->currentUser->isAuthenticated()) {
         // @phpstan-ignore-next-line
         foreach ($query->where[1]['conditions'] as $index => $condition) {
-          if ('user__field_os2loop_external_list.field_os2loop_external_list_value' === $condition['field']) {
+          if ('user__os2loop_user_external_list.os2loop_user_external_list_value' === $condition['field']) {
             // @phpstan-ignore-next-line
             unset($query->where[1]['conditions'][$index]);
           }

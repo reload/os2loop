@@ -58,9 +58,11 @@ hidden:
   os2loop_user_areas_of_expertise: true
   os2loop_user_biography: true
   os2loop_user_city: true
+  os2loop_user_external_list: true
   os2loop_user_family_name: true
   os2loop_user_given_name: true
   os2loop_user_image: true
+  os2loop_user_internal_list: true
   os2loop_user_job_title: true
   os2loop_user_phone_number: true
   os2loop_user_place: true
