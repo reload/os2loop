@@ -15,8 +15,8 @@
  */
 #}
 {% if site_logo %}
-  <a href="{{ path('<front>') }}" rel="home" class="navbar-brand">
-    <img src="{{ site_logo }}" alt="{{ 'Home'|t }}" />
+  <a href="{{ path('<front>') }}" rel="home" class="navbar-brand" alt="{{ 'Home'|t }}">
+    {% include(site_logo) %}
   </a>
 {% endif %}
 {% if site_name %}

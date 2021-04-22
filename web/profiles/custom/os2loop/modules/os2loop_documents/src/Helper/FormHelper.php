@@ -88,6 +88,7 @@ class FormHelper {
    * Insert UI for adding documents to a collection.
    */
   public function alterForm(array &$form, FormStateInterface $formState, string $formId) {
+    // Handle legacy document.
     switch ($formId) {
       case 'node_os2loop_documents_document_form':
       case 'node_os2loop_documents_document_edit_form':
@@ -97,24 +98,42 @@ class FormHelper {
         }
     }
 
-    if ('node_os2loop_documents_collection_edit_form' === $formId) {
-      $node = $this->getNode($formState);
-      if (NULL !== $node && $node->getType() === NodeHelper::CONTENT_TYPE_COLLECTION) {
-        if (!$formState->isSubmitted()) {
-          $collection = $this->collectionHelper->loadCollectionItems($node);
-          $data = array_map(static function ($item) {
-            return [
-              'id' => $item->getDocumentId(),
-              'pid' => $item->getParentDocumentId(),
-              'weight' => $item->getWeight(),
-            ];
-          }, $collection);
-          $this->setDocumentsData($formState, $data);
-          $formState->setRebuild(TRUE);
-        }
+    // Handle documents in collection.
+    switch ($formId) {
+      case 'node_os2loop_documents_collection_form':
+        $form['documents'] = [
+          '#theme' => 'status_messages',
+          '#message_list' => [
+            'warning' => [
+              $this->t('You must save the collection before you can add documents.'),
+            ],
+          ],
+          '#status_headings' => [
+            'status' => $this->t('Documents'),
+          ],
+        ];
 
-        $this->buildDocumentTree($form, $formState, $node);
-      }
+        break;
+
+      case 'node_os2loop_documents_collection_edit_form':
+        $node = $this->getNode($formState);
+        if (NULL !== $node && $node->getType() === NodeHelper::CONTENT_TYPE_COLLECTION) {
+          if (!$formState->isSubmitted()) {
+            $collection = $this->collectionHelper->loadCollectionItems($node);
+            $data = array_map(static function ($item) {
+              return [
+                'id' => $item->getDocumentId(),
+                'pid' => $item->getParentDocumentId(),
+                'weight' => $item->getWeight(),
+              ];
+            }, $collection);
+            $this->setDocumentsData($formState, $data);
+            $formState->setRebuild(TRUE);
+          }
+
+          $this->buildDocumentTree($form, $formState, $node);
+          break;
+        }
     }
   }
 
@@ -466,12 +485,13 @@ class FormHelper {
    * @return int|null
    *   The document id if any.
    */
-  private function getDocumentId(FormStateInterface $formState) {
+  private function getDocumentId(FormStateInterface $formState): ?int {
     $spec = $formState->getValue('document');
     if (preg_match('/^\d+$/', $spec)) {
       return (int) $spec;
     }
-    if (preg_match('/\((?<id>\d+)\)$/', $spec, $matches)) {
+    // Get last decimal number in spec.
+    if (preg_match('/(?<id>\d+)(?!.*\d)/', $spec, $matches)) {
       return (int) $matches['id'];
     }
 

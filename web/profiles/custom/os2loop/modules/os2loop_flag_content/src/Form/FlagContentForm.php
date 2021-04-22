@@ -101,10 +101,15 @@ class FlagContentForm extends FormBase implements ContainerInjectionInterface {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $flag_config = $this->configService->getFlagContentSettings();
-    $node = $this->routeMatcher->getRawParameter('node');
+    $node = $this->routeMatcher->getParameter('node');
 
     $config_reasons = array_values(array_map('trim', explode(PHP_EOL, $flag_config->get('reasons'))));
     $reasons = array_combine($config_reasons, $config_reasons);
+
+    $form['title'] = [
+      '#type' => 'page_title',
+      '#title' => $this->t('Flag: @document', ['@document' => $node->label()]),
+    ];
 
     $form['reason'] = [
       '#type' => 'select',
@@ -133,7 +138,7 @@ class FlagContentForm extends FormBase implements ContainerInjectionInterface {
 
     $form['actions']['cancel'] = [
       '#type' => 'link',
-      '#url' => new Url('entity.node.canonical', ['node' => $node]),
+      '#url' => new Url('entity.node.canonical', ['node' => $node->id()]),
       '#title' => $this->t('Cancel'),
       '#attributes' => [
         'class' => [

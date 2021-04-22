@@ -1,7 +1,7 @@
+@import "colors";
 @import "bootstrap";
 @import "bootstrap-icons/font/bootstrap-icons.css";
 @import "mixins";
-@import "colors";
 
 $font-family-base: "Montserrat";
 
@@ -13,6 +13,13 @@ a {
   background-color: $light-background;
   padding: $spacer * 2;
   border-radius: 3px;
+  margin-bottom: $spacer * 2;
+}
+
+.bg-white-loop {
+  @extend .container;
+  background-color: $white;
+  padding: $spacer * 2;
   margin-bottom: $spacer * 2;
 }
 i {
@@ -65,10 +72,16 @@ a {
   }
 }
 
+.navbar-brand {
+  min-width: 100px;
+}
+
 @import "bootstrap";
 @import "./comment";
 @import "./teasers";
 @import "./search_api_autocomplete";
+@import "./document-collection";
+@import "./title";
 @import "./tabs";
 @import "./fields";
 @import "./font";
