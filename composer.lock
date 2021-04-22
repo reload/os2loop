@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "55781884869fe157f01565148a3ed690",
+    "content-hash": "8df406410d068711bc9fecdf33679a57",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -11061,7 +11061,7 @@
         },
         {
             "name": "os2loop/os2loop_fixtures",
-            "version": "dev-feature/security-update",
+            "version": "dev-feature/messages-module",
             "dist": {
                 "type": "path",
                 "url": "web/profiles/custom/os2loop/modules/os2loop_fixtures",
