@@ -1,0 +1,3 @@
+services:
+  os2loop_messages.helper:
+    class: Drupal\os2loop_messages\Helper\Helper

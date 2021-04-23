@@ -5,10 +5,15 @@ dependencies:
   config:
     - filter.format.os2loop_message_message
 template: os2loop_message_document_edited
-label: 'Document edited'
+label: 'Document changed'
 description: message_type
 text:
   -
-    value: 'Et dokument er blevet ændret: <a href="/node/[message:field-message-node-reference:nid]">[message:field-message-node-reference:title]</a>'
+    value: 'A document has been changed: <a href="/node/[message:os2loop_message_node_refer:entity:nid]">[message:os2loop_message_node_refer:entity:title]</a>'
     format: os2loop_message_message
-settings: {  }
+settings:
+  'token options':
+    clear: false
+    'token replace': true
+  purge_override: false
+  purge_methods: {  }

@@ -33,6 +33,8 @@ module:
   os2loop_flag_content: 0
   os2loop_lists: 0
   os2loop_menu: 0
+  os2loop_messages: 0
+  os2loop_flag_content: 0
   os2loop_page: 0
   os2loop_post: 0
   os2loop_question: 0
@@ -53,6 +55,8 @@ module:
   taxonomy: 0
   text: 0
   theme_switcher: 0
+  token: 0
+  token_filter: 0
   toolbar: 0
   twig_tweak: 0
   user: 0

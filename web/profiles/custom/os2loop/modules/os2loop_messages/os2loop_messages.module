@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @file
+ * Hooks for os2loop messages.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+
+/**
+ * Implements hook_entity_insert().
+ */
+function os2loop_messages_entity_insert(EntityInterface $entity) {
+  Drupal::service('os2loop_messages.helper')->entityInsert($entity);
+}
+
+/**
+ * Implements hook_entity_update().
+ */
+function os2loop_messages_entity_update(EntityInterface $entity) {
+  Drupal::service('os2loop_messages.helper')->entityUpdate($entity);
+}
