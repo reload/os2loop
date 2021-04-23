@@ -2,7 +2,7 @@ uuid: 32e473e1-8cb9-47f7-91bd-e3e9a122c08b
 langcode: en
 status: true
 dependencies: {  }
-name: 'OS2Loop Page'
+name: Page
 format: os2loop_page
 weight: 0
 filters:
