@@ -32,6 +32,8 @@ display:
             format_custom_false: 'Ikke udgivet'
         changed:
           label: Opdateret
+        operations:
+          label: Handlinger
       filters:
         title:
           expose:
