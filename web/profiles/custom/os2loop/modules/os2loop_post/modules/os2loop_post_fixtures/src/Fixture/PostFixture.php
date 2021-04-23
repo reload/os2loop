@@ -57,7 +57,7 @@ BODY,
         'value' => <<<'BODY'
 This is another post …
 BODY,
-        'format' => 'os2loop_post_plain_text',
+        'format' => 'os2loop_post',
       ],
     ]);
     $this->addReference('os2loop_post:another-post', $post);
