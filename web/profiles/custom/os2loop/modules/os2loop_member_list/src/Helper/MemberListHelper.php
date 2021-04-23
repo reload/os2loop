@@ -11,7 +11,7 @@ use Drupal\Core\Session\AccountProxyInterface;
 /**
  * MailHelper for creating mail templates.
  */
-class QueryHelper implements ContainerInjectionInterface {
+class MemberListHelper implements ContainerInjectionInterface {
   /**
    * The current user.
    *
@@ -53,6 +53,24 @@ class QueryHelper implements ContainerInjectionInterface {
         }
       }
     }
+  }
+
+  /**
+   * Implements hook_views_form_alter().
+   */
+  public function formAlter(&$form, $form_id) {
+    if ('user_form' === $form_id) {
+      if (isset($form["os2loop_user_internal_list"], $form["os2loop_user_external_list"])) {
+        // Enable field "Show in public contact list" only if "Show in contact
+        // list" is checked.
+        $form['os2loop_user_external_list']['#states'] = [
+          'enabled' => [
+            ':input[name="os2loop_user_internal_list[value]"]' => ['checked' => TRUE],
+          ],
+        ];
+      }
+    }
+
   }
 
 }

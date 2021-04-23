@@ -1,5 +1,5 @@
 services:
-  os2loop_member_list.query_helper:
-    class: Drupal\os2loop_member_list\Helper\QueryHelper
+  os2loop_member_list.member_list_helper:
+    class: Drupal\os2loop_member_list\Helper\MemberListHelper
     arguments:
       - '@current_user'
