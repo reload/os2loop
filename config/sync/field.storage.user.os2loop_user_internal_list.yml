@@ -1,0 +1,18 @@
+uuid: 9cffd2be-d96d-421b-9167-949a9b2a2dd1
+langcode: en
+status: true
+dependencies:
+  module:
+    - user
+id: user.os2loop_user_internal_list
+field_name: os2loop_user_internal_list
+entity_type: user
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

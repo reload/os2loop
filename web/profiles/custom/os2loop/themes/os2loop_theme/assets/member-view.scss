@@ -1,0 +1,36 @@
+.views-view-contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .rows {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .views-row {
+    background-color: $light-background;
+    margin: 0.5 * $spacer;
+    padding: 0.5 * $spacer;
+  }
+
+  .views-field-os2loop-user-given-name,
+  .views-field-os2loop-user-family-name {
+    display: inline-flex;
+
+    &::after {
+      content: "\00a0 ";
+    }
+  }
+
+  img {
+    height: 220px;
+    width: 220px;
+    object-fit: cover;
+    border-radius: 2px;
+  }
+
+  .search {
+    width: 100%;
+  }
+}
