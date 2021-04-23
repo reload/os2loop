@@ -80,10 +80,27 @@ class Helper {
    */
   public function blockAccess(Block $block, $operation, AccountInterface $account) {
     if ('view' === $operation) {
-      $enabledTaxonomyVocabularies = array_filter($this->config->get('taxonomy_vocabulary') ?: [],
+
+      $filterOnContentType = $this->config->get('search_settings.filter_content_type') ?: FALSE;
+      if (!$filterOnContentType && 'os2loop_search_db_content_type' === $block->id()) {
+        return AccessResult::forbidden();
+      }
+
+      $enabledTaxonomyVocabularies = array_filter(
+        $this->config->get('taxonomy_vocabulary') ?: [],
         static function ($value) {
           return 0 !== $value;
-        });
+        }
+      );
+      // Keep only taxonomy vocabularies that are also as search filters.
+      $enabledTaxonomyVocabularyFilters = array_filter(
+        $this->config->get('search_settings.filter_taxonomy_vocabulary') ?: [],
+        static function ($value) {
+          return 0 !== $value;
+        }
+      );
+      $enabledTaxonomyVocabularies = array_intersect($enabledTaxonomyVocabularies, $enabledTaxonomyVocabularyFilters);
+
       // Vocabulary name => Block id.
       $vocabularyBlocks = [
         'os2loop_subject' => 'os2loop_search_db_subject',
