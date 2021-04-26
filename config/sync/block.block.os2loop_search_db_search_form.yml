@@ -1,0 +1,35 @@
+uuid: d1f13b14-40c2-469b-a137-159938c17d28
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.os2loop_search_db
+  module:
+    - node
+    - views
+  theme:
+    - os2loop_theme
+id: os2loop_search_db_search_form
+theme: os2loop_theme
+region: content
+weight: -3
+provider: null
+plugin: 'views_exposed_filter_block:os2loop_search_db-page_search_form'
+settings:
+  id: 'views_exposed_filter_block:os2loop_search_db-page_search_form'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+visibility:
+  node_type:
+    id: node_type
+    bundles:
+      os2loop_documents_collection: os2loop_documents_collection
+      os2loop_documents_document: os2loop_documents_document
+      os2loop_external: os2loop_external
+      os2loop_post: os2loop_post
+      os2loop_question: os2loop_question
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

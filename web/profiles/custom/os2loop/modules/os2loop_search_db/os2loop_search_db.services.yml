@@ -1,3 +1,5 @@
 services:
-  os2loop_search_db.search_api_autocomplete_helper:
-    class: Drupal\os2loop_search_db\Helper\SearchApiAutocompleteHelper
+  Drupal\os2loop_search_db\Helper\Helper:
+    class: Drupal\os2loop_search_db\Helper\Helper
+    arguments:
+      - '@config.factory'

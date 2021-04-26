@@ -8,6 +8,7 @@ module:
   config_filter: 0
   config_ignore: 0
   config_translation: 0
+  convert_media_tags_to_markup: 0
   datetime: 0
   dblog: 0
   dynamic_page_cache: 0
@@ -30,10 +31,11 @@ module:
   node: 0
   os2loop_documents: 0
   os2loop_external: 0
+  os2loop_flag_content: 0
   os2loop_lists: 0
+  os2loop_member_list: 0
   os2loop_menu: 0
   os2loop_messages: 0
-  os2loop_flag_content: 0
   os2loop_page: 0
   os2loop_post: 0
   os2loop_question: 0

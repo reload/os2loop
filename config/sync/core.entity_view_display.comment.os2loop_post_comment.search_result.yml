@@ -1,0 +1,26 @@
+uuid: 540c590b-87ec-4e8e-a247-54abd4ebcddc
+langcode: en
+status: true
+dependencies:
+  config:
+    - comment.type.os2loop_post_comment
+    - core.entity_view_mode.comment.search_result
+    - field.field.comment.os2loop_post_comment.os2loop_post_comment
+id: comment.os2loop_post_comment.search_result
+targetEntityType: comment
+bundle: os2loop_post_comment
+mode: search_result
+content:
+  search_api_excerpt:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  flag_os2loop_upvote_correct_answer: true
+  flag_os2loop_upvote_upvote_button: true
+  links: true
+  os2loop_post_comment: true

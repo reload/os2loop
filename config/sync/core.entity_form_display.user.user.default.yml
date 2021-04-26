@@ -3,6 +3,8 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.user.user.os2loop_user_external_list
+    - field.field.user.user.os2loop_user_internal_list
     - field.field.user.user.os2loop_user_address
     - field.field.user.user.os2loop_user_areas_of_expertise
     - field.field.user.user.os2loop_user_biography
@@ -105,6 +107,20 @@ third_party_settings:
         description: ''
         required_fields: true
       label: job_title
+    group_member_list:
+      children:
+        - os2loop_user_internal_list
+        - os2loop_user_external_list
+      parent_name: ''
+      weight: 10
+      format_type: fieldset
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: 'Member list'
 id: user.user.default
 targetEntityType: user
 bundle: user
@@ -161,6 +177,13 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  os2loop_user_external_list:
+    weight: 12
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
   os2loop_user_family_name:
     type: string_textfield
     weight: 1
@@ -185,6 +208,13 @@ content:
       progress_indicator: throbber
       preview_image_style: thumbnail
     third_party_settings: {  }
+  os2loop_user_internal_list:
+    weight: 11
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
   os2loop_user_job_title:
     type: string_textfield
     weight: 0

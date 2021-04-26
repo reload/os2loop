@@ -14,19 +14,19 @@ mode: default
 content:
   flag_os2loop_upvote_correct_answer:
     weight: 10
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   flag_os2loop_upvote_upvote_button:
     weight: 10
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   links:
     weight: 100
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   os2loop_post_comment:
     weight: 101
     label: visually_hidden

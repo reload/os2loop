@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8df406410d068711bc9fecdf33679a57",
+    "content-hash": "3dc37919c35e2c65018a5cc23d8d7440",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -2350,6 +2350,50 @@
                 "source": "https://github.com/hechoendrupal/drupal-console-extend-plugin/tree/0.9.5"
             },
             "time": "2020-11-18T00:15:28+00:00"
+        },
+        {
+            "name": "drupal/convert_media_tags_to_markup",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/convert_media_tags_to_markup.git",
+                "reference": "2.0.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/convert_media_tags_to_markup-2.0.0.zip",
+                "reference": "2.0.0",
+                "shasum": "c54d533e29e935093478e57ab3f4397be8534ed9"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "2.0.0",
+                    "datestamp": "1606959858",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "alberto56",
+                    "homepage": "https://www.drupal.org/user/245583"
+                }
+            ],
+            "description": "Converts media tags to markup.",
+            "homepage": "https://www.drupal.org/project/convert_media_tags_to_markup",
+            "support": {
+                "source": "https://git.drupalcode.org/project/convert_media_tags_to_markup"
+            }
         },
         {
             "name": "drupal/core",
@@ -11061,7 +11105,7 @@
         },
         {
             "name": "os2loop/os2loop_fixtures",
-            "version": "dev-feature/messages-module",
+            "version": "dev-feature/LOOP-873-text-formats",
             "dist": {
                 "type": "path",
                 "url": "web/profiles/custom/os2loop/modules/os2loop_fixtures",

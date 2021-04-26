@@ -95,6 +95,26 @@ class SettingsForm extends ConfigFormBase {
       '#default_value' => $config->get('taxonomy_vocabulary'),
     ];
 
+    $form['search_settings'] = [
+      '#tree' => TRUE,
+      '#type' => 'fieldset',
+      '#title' => $this->t('Search settings'),
+
+      'filter_content_type' => [
+        '#type' => 'checkbox',
+        '#title' => $this->t('Enable filter on content type'),
+        '#default_value' => $config->get('search_settings.filter_content_type'),
+      ],
+
+      'filter_taxonomy_vocabulary' => [
+        '#type' => 'checkboxes',
+        '#title' => $this->t('Taxonomy vocabulary filters'),
+        '#description' => $this->t('Enable taxonomy vocabulary filters'),
+        '#options' => $options,
+        '#default_value' => $config->get('search_settings.filter_taxonomy_vocabulary') ?: [],
+      ],
+    ];
+
     return parent::buildForm($form, $form_state);
   }
 
@@ -112,6 +132,7 @@ class SettingsForm extends ConfigFormBase {
     $this->configFactory->getEditable(static::SETTINGS)
       ->set('node_type', $form_state->getValue('node_type'))
       ->set('taxonomy_vocabulary', $form_state->getValue('taxonomy_vocabulary'))
+      ->set('search_settings', $form_state->getValue('search_settings'))
       ->save();
 
     parent::submitForm($form, $form_state);
