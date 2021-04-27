@@ -67,7 +67,7 @@ class Helper extends ControllerBase {
     if ($entity->getEntityTypeId() == 'node') {
       switch ($entity->bundle()) {
         case 'os2loop_documents_collection':
-          $this->createMessage('os2loop_message_collection_edited', $entity);
+          $this->createMessage('os2loop_message_collection_edit', $entity);
           break;
 
         case 'os2loop_documents_document':
