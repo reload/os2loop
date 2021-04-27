@@ -22,5 +22,6 @@ hidden:
   entity_print_view_word_docx: true
   flag_os2loop_upvote_correct_answer: true
   flag_os2loop_upvote_upvote_button: true
+  langcode: true
   links: true
   os2loop_post_comment: true

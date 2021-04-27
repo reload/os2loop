@@ -10,6 +10,11 @@ targetEntityType: message
 bundle: os2loop_message_document_added
 mode: default
 content:
+  flag_message_read:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   os2loop_message_node_refer:
     weight: 1
     label: above
