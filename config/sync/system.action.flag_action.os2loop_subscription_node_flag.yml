@@ -1,0 +1,15 @@
+uuid: 1243d66a-a02f-46b9-be44-1f9ba53c0e20
+langcode: en
+status: true
+dependencies:
+  config:
+    - flag.flag.os2loop_subscription_node
+  module:
+    - flag
+id: flag_action.os2loop_subscription_node_flag
+label: Subscribe
+type: node
+plugin: 'flag_action:os2loop_subscription_node_flag'
+configuration:
+  flag_id: os2loop_subscription_node
+  flag_action: flag

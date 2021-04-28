@@ -1,0 +1,15 @@
+uuid: 7ad24cbe-96c3-48a2-adda-8350b79abcba
+langcode: en
+status: true
+dependencies:
+  config:
+    - flag.flag.os2loop_subscription_node
+  module:
+    - flag
+id: flag_action.os2loop_subscription_node_unflag
+label: Unsubscribe
+type: node
+plugin: 'flag_action:os2loop_subscription_node_unflag'
+configuration:
+  flag_id: os2loop_subscription_node
+  flag_action: unflag

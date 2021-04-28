@@ -1,0 +1,32 @@
+uuid: a03894bb-da1c-46e7-b8b3-2d5d856378c0
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.taxonomy_term.list_display
+    - taxonomy.vocabulary.os2loop_profession
+  module:
+    - text
+id: taxonomy_term.os2loop_profession.list_display
+targetEntityType: taxonomy_term
+bundle: os2loop_profession
+mode: list_display
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  flag_os2loop_subscription_term:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  langcode: true
+  search_api_excerpt: true

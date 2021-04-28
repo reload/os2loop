@@ -1,0 +1,10 @@
+uuid: 6f5c1e0f-50eb-4225-98a2-4350dc2f000f
+langcode: en
+status: true
+dependencies:
+  module:
+    - taxonomy
+id: taxonomy_term.list_display
+label: 'List display'
+targetEntityType: taxonomy_term
+cache: true

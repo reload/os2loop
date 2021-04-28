@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * @file
+ * OS2loop subscriptions.
+ */
+
+/**
+ * Implements hook_theme().
+ *
+ * Theme hook implementation for os2loop subscriptions.
+ */
+function os2loop_subscriptions_theme($existing, $type, $theme, $path) {
+  return [
+    'os2loop_subscriptions_user' => [
+      'template' => 'os2loop-subscriptions-user',
+    ],
+  ];
+}
