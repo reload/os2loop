@@ -72,9 +72,18 @@
  * @ingroup themeable
  */
 #}
+{% if (view is defined) %}
+  {% set view_id = view is defined ? view.id %}
+{% endif %}
+
 <div class="list-group">
   <article class="list-group-item mb-2 bg-light border-0">
     <div class="text-muted small">{{ node.type.entity.label }}</div>
-    <h3 class="h6"><a href="{{ url }}">{{ label }}</a></h3>
+    <div class="d-flex">
+      <h3 class="h6"><a href="{{ url }}">{{ label }}</a></h3>
+      {% if view_id == 'os2loop_subscriptions_node' %}
+        <div class="ml-auto">{{ content.flag_os2loop_subscription_node }}</div>
+      {% endif %}
+    </div>
   </article>
 </div>
