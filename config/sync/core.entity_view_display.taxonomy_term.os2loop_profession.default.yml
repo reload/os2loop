@@ -1,0 +1,23 @@
+uuid: 45e09d81-b767-48c1-94e8-8e0639e9aa91
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.os2loop_profession
+id: taxonomy_term.os2loop_profession.default
+targetEntityType: taxonomy_term
+bundle: os2loop_profession
+mode: default
+content:
+  flag_os2loop_subscription_term:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  description: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  langcode: true
+  search_api_excerpt: true
