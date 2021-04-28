@@ -3,3 +3,6 @@ type: module
 description: 'Show subscriptions on user page and provide info on subscribers'
 core_version_requirement: ^9
 package: 'OS2Loop'
+dependencies:
+  - drupal:twik_tweak
+  - drupal:views
