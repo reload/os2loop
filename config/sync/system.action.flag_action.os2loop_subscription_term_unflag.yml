@@ -1,0 +1,15 @@
+uuid: a38ec1c1-3bc5-46f5-9c4f-c98ea7f1f50d
+langcode: en
+status: true
+dependencies:
+  config:
+    - flag.flag.os2loop_subscription_term
+  module:
+    - flag
+id: flag_action.os2loop_subscription_term_unflag
+label: Unsubscribe
+type: taxonomy_term
+plugin: 'flag_action:os2loop_subscription_term_unflag'
+configuration:
+  flag_id: os2loop_subscription_term
+  flag_action: unflag
