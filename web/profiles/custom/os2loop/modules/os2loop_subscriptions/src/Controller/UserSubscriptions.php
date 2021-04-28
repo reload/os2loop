@@ -14,7 +14,6 @@ class UserSubscriptions extends ControllerBase {
    */
   public function content() {
     return [
-      '#type' => 'markup',
       '#theme' => 'os2loop_subscriptions_user',
     ];
   }
