@@ -2,6 +2,11 @@
 
 This is the default theme for OS2Loop.
 
+## File structure
+
+- Follows the template structure of stable9 theme.
+- Js and scss is located in assets folder and compiled into build folder.
+
 ## Building assets
 
 Assets are built using [Symfony
