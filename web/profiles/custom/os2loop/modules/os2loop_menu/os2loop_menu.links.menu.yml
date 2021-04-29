@@ -3,12 +3,3 @@ os2loop_menu.front:
   weight: 0
   route_name: '<front>'
   menu_name: main
-os2loop_menu.account:
-  title: 'My account'
-  weight: 10
-  route_name: user.page
-  menu_name: main
-os2loop_menu.logout:
-  weight: 100
-  menu_name: main
-  class: Drupal\user\Plugin\Menu\LoginLogoutMenuLink

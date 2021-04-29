@@ -408,6 +408,9 @@ display:
       display_extenders: {  }
       path: user/messages
       display_description: ''
+      title: Messages
+      defaults:
+        title: false
     cache_metadata:
       max-age: -1
       contexts:

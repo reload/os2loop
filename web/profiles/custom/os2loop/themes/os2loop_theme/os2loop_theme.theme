@@ -39,3 +39,12 @@ function os2loop_theme_theme_suggestions_taxonomy_term_alter(array &$suggestions
   $suggestions[] = 'taxonomy_term__' . $sanitized_view_mode;
   $suggestions[] = 'taxonomy_term__' . $term->bundle() . '__' . $sanitized_view_mode;
 }
+
+/**
+ * Implements hook_theme_suggestions_comment_alter().
+ */
+function os2loop_theme_theme_suggestions_comment_alter(array &$suggestions, array $variables) {
+  $sanitized_view_mode = strtr($variables['elements']['#view_mode'], '.', '_');
+  // Add view mode theme suggestions.
+  $suggestions[] = 'comment__' . $sanitized_view_mode;
+}

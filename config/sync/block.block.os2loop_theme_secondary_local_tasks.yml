@@ -9,7 +9,7 @@ _core:
 id: os2loop_theme_secondary_local_tasks
 theme: os2loop_theme
 region: content
-weight: -5
+weight: -1
 provider: null
 plugin: local_tasks_block
 settings:
