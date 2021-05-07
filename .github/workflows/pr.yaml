@@ -32,7 +32,7 @@ jobs:
       - name: Install Dependencies
         run: |
           # Using `--no-scripts` breaks something with mglaman/drupal-check.
-          composer install --quiet --no-ansi --no-interaction --no-progress --prefer-dist
+          composer install --no-interaction --no-progress
           # @see https://github.com/Dealerdirect/phpcodesniffer-composer-installer#calling-the-plugin-directly
           composer run-script install-codestandards
       - name: PHPCS
