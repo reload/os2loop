@@ -9,4 +9,5 @@ is_admin: null
 permissions:
   - 'access toolbar'
   - 'administer users'
+  - 'view all files in media browser'
   - 'view the administration theme'

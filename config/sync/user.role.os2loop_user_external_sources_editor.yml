@@ -20,3 +20,4 @@ permissions:
   - 'view admin path'
   - 'view os2loop_external revisions'
   - 'view the administration theme'
+  - 'view all files in media browser'

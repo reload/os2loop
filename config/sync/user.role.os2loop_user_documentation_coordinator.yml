@@ -31,6 +31,7 @@ permissions:
   - 'use text format os2loop_documents_rich_text'
   - 'view admin path'
   - 'view os2loop_documents_document revisions'
+  - 'view all files in media browser'
   - 'view revisions'
   - 'view the administration theme'
   - 'view unpublished paragraphs'

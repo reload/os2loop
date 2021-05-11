@@ -19,5 +19,6 @@ permissions:
   - 'revert os2loop_post revisions'
   - 'unflag os2loop_upvote_correct_answer'
   - 'use text format os2loop_post'
+  - 'view all files in media browser'
   - 'view os2loop_post revisions'
   - 'view the administration theme'
