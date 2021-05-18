@@ -405,17 +405,7 @@ class Helper {
         // Send mail to user.
         $groupedMessages = $this->groupMessages($userMessages);
 
-        var_export([
-          $user->getEmail(),
-        ]);
-        foreach ($groupedMessages as $type => $msgs) {
-          var_export([
-            $type,
-            array_map(static function (Message $message) {
-              return $message->getText();
-            }, $msgs),
-          ]);
-        }
+        $this->mailHelper->sendNotification($user, $groupedMessages);
       }
     }
   }

@@ -16,3 +16,11 @@ services:
       - '@plugin.manager.mail'
       - '@entity_type.manager'
       - '@database'
+      - '@os2loop_mail_notifications.mail_helper'
+
+  os2loop_mail_notifications.mail_helper:
+    class: Drupal\os2loop_mail_notifications\Helper\MailHelper
+    arguments:
+      - '@config.factory'
+      - '@renderer'
+      - '@plugin.manager.mail'
