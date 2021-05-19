@@ -400,12 +400,20 @@ class Helper {
     $users = $this->getUsers();
 
     foreach ($users as $user) {
+      if (0 === $this->getNotificationInterval($user)) {
+        continue;
+      }
+
       $userMessages = $this->getUserMessages($user, $messages);
       if (!empty($userMessages)) {
-        // Send mail to user.
         $groupedMessages = $this->groupMessages($userMessages);
-
-        $this->mailHelper->sendNotification($user, $groupedMessages);
+        $success = $this->mailHelper->sendNotification($user, $groupedMessages);
+        if ($success) {
+          $this->logger->info(sprintf('Notification mail sent to %s', $user->getEmail()));
+        }
+        else {
+          $this->logger->error(sprintf('Error sending motification mail to %s', $user->getEmail()));
+        }
       }
     }
   }
@@ -594,6 +602,76 @@ class Helper {
 
     // @phpstan-ignore-next-line
     return reset($nodes) ?: NULL;
+  }
+
+  /**
+   * Get user notification interval.
+   *
+   * @param \Drupal\user\Entity\User $user
+   *   The user.
+   */
+  private function getNotificationInterval(User $user): int {
+    return (int) ($user->get('os2loop_mail_notifications_intvl')->getValue()[0]['value'] ?: 0);
+  }
+
+  /**
+   * Get last run at from state.
+   *
+   * @return \DateTimeInterface
+   *   The time.
+   */
+  private function getLastRunAt(): \DateTimeInterface {
+    $value = $this->getStateValue('last_run_at');
+    try {
+      return new \DateTimeImmutable($value ?: '1970-01-01T00:00:00');
+    }
+    catch (\Exception $exception) {
+      return new \DateTimeImmutable('1970-01-01T00:00:00');
+    }
+  }
+
+  /**
+   * Set last run at in state.
+   *
+   * @param \DateTimeInterface $time
+   *   The time.
+   */
+  private function setLastRunAt(\DateTimeInterface $time) {
+    $this->setStateValue('last_run_at', $time->format($time::ATOM));
+  }
+
+  /**
+   * Get module state value.
+   *
+   * @param string $key
+   *   The key.
+   * @param mixed $defaultValue
+   *   The default value.
+   *
+   * @return mixed
+   *   The state value if any.
+   */
+  private function getStateValue(string $key, $defaultValue = NULL) {
+    $value = $this->state->get(static::MODULE);
+    if (!is_array($value)) {
+      $value = [];
+    }
+
+    return $value[$key] ?? $defaultValue;
+  }
+
+  /**
+   * Set module state value.
+   *
+   * @param string $key
+   *   The key.
+   * @param mixed $value
+   *   The value.
+   */
+  private function setStateValue(string $key, $value) {
+    $stateValue = $this->state->get(static::MODULE);
+    $stateValue[$key] = $value;
+    $this->state->set(static::MODULE, $stateValue);
   }
 
 }
