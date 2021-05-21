@@ -84,6 +84,17 @@ class Helper extends ControllerBase {
           break;
       }
     }
+    elseif ($entity instanceof CommentInterface) {
+      switch ($entity->bundle()) {
+        case 'os2loop_question_answer':
+          $this->createMessage('os2loop_message_answer_upd', $entity);
+          break;
+
+        case 'os2loop_post_comment':
+          $this->createMessage('os2loop_message_comment_upd', $entity);
+          break;
+      }
+    }
   }
 
   /**
