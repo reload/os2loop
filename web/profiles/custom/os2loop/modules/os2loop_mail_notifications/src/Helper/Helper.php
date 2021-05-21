@@ -43,6 +43,8 @@ class Helper {
     'os2loop_message_comment_upd',
     'os2loop_message_document_ins',
     'os2loop_message_document_upd',
+    'os2loop_message_post_ins',
+    'os2loop_message_post_upd',
     'os2loop_message_question_ins',
     'os2loop_message_question_upd',
   ];

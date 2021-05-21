@@ -39,6 +39,7 @@ class Helper extends ControllerBase {
           break;
 
         case 'os2loop_post':
+          $this->createMessage('os2loop_message_post_ins', $entity);
           break;
       }
     }
@@ -79,6 +80,7 @@ class Helper extends ControllerBase {
           break;
 
         case 'os2loop_post':
+          $this->createMessage('os2loop_message_post_upd', $entity);
           break;
       }
     }

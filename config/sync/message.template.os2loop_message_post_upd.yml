@@ -1,0 +1,14 @@
+uuid: 35910953-cdbe-48c1-99ab-65b3df32e785
+langcode: en
+status: true
+dependencies: {  }
+template: os2loop_message_post_upd
+label: 'Post edited'
+description: ''
+text: {  }
+settings:
+  'token options':
+    clear: false
+    'token replace': true
+  purge_override: false
+  purge_methods: {  }
