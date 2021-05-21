@@ -1,11 +1,16 @@
 uuid: 39940fea-9626-47e9-bac8-b45a3e543554
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - filter.format.os2loop_message_message
 template: os2loop_message_answer_upd
 label: 'Answer edited'
 description: ''
-text: {  }
+text:
+  -
+    value: 'An answer your follow has be updated: <a href="/node/[message:os2loop_message_node_refer:entity:nid]">[message:os2loop_message_node_refer:entity:title]</a>'
+    format: os2loop_message_message
 settings:
   'token options':
     clear: false
