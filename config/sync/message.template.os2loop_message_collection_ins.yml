@@ -6,7 +6,7 @@ dependencies:
     - filter.format.os2loop_message_message
 template: os2loop_message_collection_ins
 label: 'Document collection added'
-description: message_type
+description: ''
 text:
   -
     value: 'A document collection has been added: <a href="/node/[message:os2loop_message_node_refer:entity:nid]">[message:os2loop_message_node_refer:entity:title]</a>'
