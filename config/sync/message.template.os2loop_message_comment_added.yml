@@ -1,0 +1,14 @@
+uuid: 77e63684-347d-4e02-8e25-a4f257d2929e
+langcode: en
+status: true
+dependencies: {  }
+template: os2loop_message_comment_added
+label: 'Comment added'
+description: ''
+text: {  }
+settings:
+  'token options':
+    clear: false
+    'token replace': true
+  purge_override: false
+  purge_methods: {  }

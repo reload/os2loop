@@ -103,6 +103,7 @@ class Helper extends ControllerBase {
       $node_storage = $this->entityTypeManager()->getStorage('node');
       $node = $node_storage->load($entity->get('entity_id')->getValue()[0]['target_id']);
       $message->set('os2loop_message_node_refer', $node);
+      $message->set('os2loop_message_comment_refer', $entity);
     }
     $message->save();
   }

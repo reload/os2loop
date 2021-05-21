@@ -1,14 +1,14 @@
-uuid: 72d3be7b-f98c-48f6-b5a1-86ebfe011fa9
+uuid: 5d78d4a8-e1b7-495b-886d-6760ef6029db
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.message.os2loop_message_answer_added.os2loop_message_comment_refer
-    - field.field.message.os2loop_message_answer_added.os2loop_message_node_refer
-    - message.template.os2loop_message_answer_added
-id: message.os2loop_message_answer_added.default
+    - field.field.message.os2loop_message_comment_added.os2loop_message_comment_refer
+    - field.field.message.os2loop_message_comment_added.os2loop_message_node_refer
+    - message.template.os2loop_message_comment_added
+id: message.os2loop_message_comment_added.default
 targetEntityType: message
-bundle: os2loop_message_answer_added
+bundle: os2loop_message_comment_added
 mode: default
 content:
   os2loop_message_comment_refer:

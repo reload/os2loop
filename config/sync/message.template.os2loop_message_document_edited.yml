@@ -5,7 +5,7 @@ dependencies:
   config:
     - filter.format.os2loop_message_message
 template: os2loop_message_document_edited
-label: 'Document changed'
+label: 'Document edited'
 description: message_type
 text:
   -
