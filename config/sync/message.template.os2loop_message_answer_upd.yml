@@ -9,7 +9,7 @@ label: 'Answer edited'
 description: ''
 text:
   -
-    value: 'An answer you follow has be updated: <a href="/node/[message:os2loop_message_node_refer:entity:nid]">[message:os2loop_message_node_refer:entity:title]</a>'
+    value: 'An answer you follow has be updated: <a href="/node/[message:os2loop_message_node_refer:entity:nid]#comment-[message:os2loop_message_comment_refer:target_id]">[message:os2loop_message_node_refer:entity:title]</a>'
     format: os2loop_message_message
 settings:
   'token options':
