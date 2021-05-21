@@ -35,14 +35,16 @@ class Helper {
    * @var string[]
    */
   private static $messageTemplateNames = [
-    'os2loop_message_answer_added',
-    'os2loop_message_collection_added',
-    'os2loop_message_collection_edit',
-    'os2loop_message_comment_changed',
-    'os2loop_message_document_added',
-    'os2loop_message_document_edited',
-    'os2loop_message_question_added',
-    'os2loop_message_question_edited',
+    'os2loop_message_answer_ins',
+    'os2loop_message_answer_upd',
+    'os2loop_message_collection_ins',
+    'os2loop_message_collection_upd',
+    'os2loop_message_comment_ins',
+    'os2loop_message_comment_upd',
+    'os2loop_message_document_ins',
+    'os2loop_message_document_upd',
+    'os2loop_message_question_ins',
+    'os2loop_message_question_upd',
   ];
 
   /**

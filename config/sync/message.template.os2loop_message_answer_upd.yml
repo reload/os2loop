@@ -1,0 +1,14 @@
+uuid: 39940fea-9626-47e9-bac8-b45a3e543554
+langcode: en
+status: true
+dependencies: {  }
+template: os2loop_message_answer_upd
+label: 'Answer edited'
+description: ''
+text: {  }
+settings:
+  'token options':
+    clear: false
+    'token replace': true
+  purge_override: false
+  purge_methods: {  }

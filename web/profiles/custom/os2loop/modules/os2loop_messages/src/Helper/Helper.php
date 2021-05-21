@@ -2,11 +2,11 @@
 
 namespace Drupal\os2loop_messages\Helper;
 
+use Drupal\comment\CommentInterface;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\message\Entity\Message;
 use Drupal\node\NodeInterface;
-use Drupal\comment\CommentInterface;
 
 /**
  * Os2Loop messages helper.
@@ -24,32 +24,32 @@ class Helper extends ControllerBase {
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public function entityInsert(EntityInterface $entity) {
-    if ($entity->getEntityTypeId() == 'node') {
+    if ($entity instanceof NodeInterface) {
       switch ($entity->bundle()) {
         case 'os2loop_documents_collection':
-          $this->createMessage('os2loop_message_collection_added', $entity);
+          $this->createMessage('os2loop_message_collection_ins', $entity);
           break;
 
         case 'os2loop_documents_document':
-          $this->createMessage('os2loop_message_document_added', $entity);
+          $this->createMessage('os2loop_message_document_ins', $entity);
           break;
 
         case 'os2loop_question':
-          $this->createMessage('os2loop_message_question_added', $entity);
+          $this->createMessage('os2loop_message_question_ins', $entity);
           break;
 
         case 'os2loop_post':
           break;
       }
     }
-
-    if ($entity->getEntityTypeId() == 'comment') {
+    elseif ($entity instanceof CommentInterface) {
       switch ($entity->bundle()) {
         case 'os2loop_question_answer':
-          $this->createMessage('os2loop_message_answer_added', $entity);
+          $this->createMessage('os2loop_message_answer_ins', $entity);
           break;
 
         case 'os2loop_post_comment':
+          $this->createMessage('os2loop_message_comment_ins', $entity);
           break;
       }
     }
@@ -64,18 +64,18 @@ class Helper extends ControllerBase {
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public function entityUpdate(EntityInterface $entity) {
-    if ($entity->getEntityTypeId() == 'node') {
+    if ($entity instanceof NodeInterface) {
       switch ($entity->bundle()) {
         case 'os2loop_documents_collection':
-          $this->createMessage('os2loop_message_collection_edit', $entity);
+          $this->createMessage('os2loop_message_collection_upd', $entity);
           break;
 
         case 'os2loop_documents_document':
-          $this->createMessage('os2loop_message_document_edited', $entity);
+          $this->createMessage('os2loop_message_document_upd', $entity);
           break;
 
         case 'os2loop_question':
-          $this->createMessage('os2loop_message_question_edited', $entity);
+          $this->createMessage('os2loop_message_question_upd', $entity);
           break;
 
         case 'os2loop_post':
