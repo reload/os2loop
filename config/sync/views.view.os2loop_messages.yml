@@ -459,7 +459,7 @@ display:
           plugin_id: flag_relationship
       arguments: {  }
       display_extenders: {  }
-      use_ajax: false
+      use_ajax: true
       filter_groups:
         operator: AND
         groups:
