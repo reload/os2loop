@@ -1,0 +1,15 @@
+uuid: 826e6adb-4245-4699-8a82-463b8035cb87
+langcode: en
+status: true
+dependencies:
+  config:
+    - flag.flag.os2loop_subscription_term
+  module:
+    - flag
+id: flag_action.os2loop_subscription_term_flag
+label: Subscribe
+type: taxonomy_term
+plugin: 'flag_action:os2loop_subscription_term_flag'
+configuration:
+  flag_id: os2loop_subscription_term
+  flag_action: flag

@@ -1,0 +1,18 @@
+uuid: 3bb17bb7-6598-4cc7-ac94-e9c37f0924cf
+langcode: en
+status: true
+dependencies:
+  module:
+    - user
+id: user.os2loop_user_external_list
+field_name: os2loop_user_external_list
+entity_type: user
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

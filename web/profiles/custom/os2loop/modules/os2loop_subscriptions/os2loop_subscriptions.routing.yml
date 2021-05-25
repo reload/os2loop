@@ -1,0 +1,7 @@
+os2loop_subscriptions.user_subscriptions:
+  path: '/user/subscriptions'
+  defaults:
+    _controller: '\Drupal\os2loop_subscriptions\Controller\UserSubscriptions::content'
+    _title: 'User subscriptions'
+  requirements:
+    _permission: 'access content'

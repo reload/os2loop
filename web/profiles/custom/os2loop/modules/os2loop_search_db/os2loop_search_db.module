@@ -6,6 +6,8 @@
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\os2loop_search_db\Helper\Helper;
+use Drupal\search_api\Query\QueryInterface;
 
 /**
  * Implements hook_help().
@@ -25,8 +27,16 @@ function os2loop_search_db_help($route_name, RouteMatchInterface $route_match) {
 
 /**
  * Implements hook_search_api_autocomplete_suggestions_alter().
+ *
+ * @see \Drupal\os2loop_search_db\Helper\Helper::alterSuggestions()
  */
 function os2loop_search_db_search_api_autocomplete_suggestions_alter(array &$suggestions, array $alter_params) {
-  $helper = \Drupal::service('os2loop_search_db.search_api_autocomplete_helper');
-  $helper->alterSuggestions($suggestions, $alter_params);
+  Drupal::service(Helper::class)->alterSuggestions($suggestions, $alter_params);
+}
+
+/**
+ * Implements hook_search_api_query_alter().
+ */
+function os2loop_search_db_search_api_query_alter(QueryInterface $query) {
+  Drupal::service(Helper::class)->alterSearchApiQuery($query);
 }

@@ -1,10 +1,17 @@
 uuid: b8533089-61c8-416a-95c7-23c2f85fb240
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
 name: Post
 type: os2loop_post
-description: 'This is a post.'
+description: 'A post.'
 help: ''
 new_revision: true
 preview_mode: 1

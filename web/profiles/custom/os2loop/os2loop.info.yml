@@ -27,6 +27,7 @@ distribution:
 
 # # Modules to install to support the profile.
 install:
+  # @todo Complete this list of dependencies
   - history
   - block_content
   - breakpoint
@@ -52,9 +53,14 @@ install:
 # # Required modules
 # # Note that any dependencies of the modules listed here will be installed automatically.
 dependencies:
-  - node
-  - block
-  - views
+  # @todo Complete this list of dependencies
+  - drupal:block
+  - drupal:config_translation
+  - drupal:language
+  - drupal:node
+  - drupal:twig_tweak
+  - drupal:views
+  - drupal:os2loop_menu
 
 # # List any themes that should be installed as part of the profile installation.
 # # Note that this will not set any theme as the default theme.

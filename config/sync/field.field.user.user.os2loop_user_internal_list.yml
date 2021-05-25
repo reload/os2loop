@@ -1,0 +1,24 @@
+uuid: 0acfeb66-9f31-4332-b15d-12255fab8545
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.os2loop_user_internal_list
+  module:
+    - user
+id: user.user.os2loop_user_internal_list
+field_name: os2loop_user_internal_list
+entity_type: user
+bundle: user
+label: 'Show in internal list'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

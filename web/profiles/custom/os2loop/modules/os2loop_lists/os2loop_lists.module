@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * OS2loop lists.
+ */
+
+/**
+ * Implements hook_theme().
+ *
+ * Theme hook implementation for os2loop lists.
+ */
+function os2loop_lists_theme($existing, $type, $theme, $path) {
+  return [
+    'os2loop_lists_expert' => [
+      'variables' => ['data' => NULL],
+      'template' => 'os2loop-lists-expert',
+    ],
+    'os2loop_lists_profession' => [
+      'variables' => ['data' => NULL],
+      'template' => 'os2loop-lists-profession',
+    ],
+  ];
+}

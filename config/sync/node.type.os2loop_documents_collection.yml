@@ -11,7 +11,7 @@ third_party_settings:
     parent: 'main:'
 name: 'Document collection'
 type: os2loop_documents_collection
-description: 'A document collection is a content type with paragraphs and a collection of documents connected.'
+description: 'A collection of documents.'
 help: ''
 new_revision: true
 preview_mode: 1

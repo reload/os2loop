@@ -1,0 +1,44 @@
+uuid: d9e9f8bf-f3e3-4c0a-876a-ba95aafa7f9f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.os2loop_section_page_views_refer.os2loop_section_page_block
+    - field.field.paragraph.os2loop_section_page_views_refer.os2loop_section_page_view_header
+    - field.field.paragraph.os2loop_section_page_views_refer.os2loop_section_page_view_text
+    - paragraphs.paragraphs_type.os2loop_section_page_views_refer
+  module:
+    - block_field
+    - text
+id: paragraph.os2loop_section_page_views_refer.default
+targetEntityType: paragraph
+bundle: os2loop_section_page_views_refer
+mode: default
+content:
+  os2loop_section_page_block:
+    weight: 3
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: block_field
+    region: content
+  os2loop_section_page_view_header:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  os2loop_section_page_view_text:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  search_api_excerpt: true

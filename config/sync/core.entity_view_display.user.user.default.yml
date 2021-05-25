@@ -1,0 +1,71 @@
+uuid: 4e9a2001-6a25-4c74-9678-dbe07095db79
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.user.user.os2loop_user_external_list
+    - field.field.user.user.os2loop_user_internal_list
+    - field.field.user.user.os2loop_user_address
+    - field.field.user.user.os2loop_user_areas_of_expertise
+    - field.field.user.user.os2loop_user_biography
+    - field.field.user.user.os2loop_user_city
+    - field.field.user.user.os2loop_user_family_name
+    - field.field.user.user.os2loop_user_given_name
+    - field.field.user.user.os2loop_user_image
+    - field.field.user.user.os2loop_user_job_title
+    - field.field.user.user.os2loop_user_phone_number
+    - field.field.user.user.os2loop_user_place
+    - field.field.user.user.os2loop_user_postal_code
+    - field.field.user.user.os2loop_user_professions
+  module:
+    - user
+id: user.user.default
+targetEntityType: user
+bundle: user
+mode: default
+content:
+  field_os2loop_external_list:
+    weight: 6
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_os2loop_internal_list:
+    weight: 7
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  member_for:
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  langcode: true
+  os2loop_user_address: true
+  os2loop_user_areas_of_expertise: true
+  os2loop_user_biography: true
+  os2loop_user_city: true
+  os2loop_user_external_list: true
+  os2loop_user_family_name: true
+  os2loop_user_given_name: true
+  os2loop_user_image: true
+  os2loop_user_internal_list: true
+  os2loop_user_job_title: true
+  os2loop_user_phone_number: true
+  os2loop_user_place: true
+  os2loop_user_postal_code: true
+  os2loop_user_professions: true
+  search_api_excerpt: true

@@ -1,7 +1,9 @@
 uuid: 3d67dbc0-4079-4f36-b7d7-8a84afb564a0
 langcode: en
-status: false
+status: true
 dependencies:
+  module:
+    - system
   theme:
     - os2loop_theme
 _core:
@@ -9,7 +11,7 @@ _core:
 id: os2loop_theme_page_title
 theme: os2loop_theme
 region: content
-weight: 1
+weight: -3
 provider: null
 plugin: page_title_block
 settings:
@@ -17,4 +19,8 @@ settings:
   label: 'Page title'
   provider: core
   label_display: '0'
-visibility: {  }
+visibility:
+  request_path:
+    id: request_path
+    pages: '/node/*'
+    negate: true

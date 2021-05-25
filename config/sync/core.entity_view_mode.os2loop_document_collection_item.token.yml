@@ -1,0 +1,10 @@
+uuid: 314f5e56-f968-4e80-9f38-99c3b34dc600
+langcode: en
+status: true
+dependencies:
+  module:
+    - os2loop_documents
+id: os2loop_document_collection_item.token
+label: Token
+targetEntityType: os2loop_document_collection_item
+cache: true

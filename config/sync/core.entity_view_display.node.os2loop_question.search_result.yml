@@ -19,6 +19,16 @@ targetEntityType: node
 bundle: os2loop_question
 mode: search_result
 content:
+  flag_os2loop_favourite:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  flag_os2loop_subscription_node:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   os2loop_shared_subject:
     label: visually_hidden
     settings:
@@ -33,6 +43,10 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  langcode: true
   links: true
   os2loop_question_answers: true
   os2loop_question_content: true

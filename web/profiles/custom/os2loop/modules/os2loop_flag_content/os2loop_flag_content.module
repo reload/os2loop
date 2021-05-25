@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * The module file for os2loop_flag_content.
+ */
+
+/**
+ * Implements hook_mail().
+ */
+function os2loop_flag_content_mail($key, &$message, $params) {
+  Drupal::service('os2loop_flag_content.mail_helper')->mail($key, $message, $params);
+}

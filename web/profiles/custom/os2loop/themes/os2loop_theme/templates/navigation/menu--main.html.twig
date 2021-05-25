@@ -1,0 +1,77 @@
+{#
+/**
+ * @file
+ * Theme override to display a menu.
+ *
+ * Available variables:
+ * - menu_name: The machine name of the menu.
+ * - items: A nested list of menu items. Each menu item contains:
+ *   - attributes: HTML attributes for the menu item.
+ *   - below: The menu item child items.
+ *   - title: The menu link title.
+ *   - url: The menu link url, instance of \Drupal\Core\Url
+ *   - localized_options: Menu link localized options.
+ *   - is_expanded: TRUE if the link has visible children within the current
+ *     menu tree.
+ *   - is_collapsed: TRUE if the link has children within the current menu tree
+ *     that are not currently visible.
+ *   - in_active_trail: TRUE if the link is in the active trail.
+ */
+#}
+{% import _self as menus %}
+
+{#
+  We call a macro which calls itself to render the full tree.
+  @see http://twig.sensiolabs.org/doc/tags/macro.html
+#}
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse main-menu" id="navbarMain">
+  {{ menus.menu_links(items, attributes, 0) }}
+  {% macro menu_links(items, attributes, menu_level) %}
+    {% import _self as menus %}
+    {% if items %}
+      {% if menu_level == 0 %}
+        <ul{{ attributes.addClass(['navbar-nav mr-auto']) }}>
+          {% for item in items %}
+            {% set classes_list_item = [
+              'nav-item',
+              item.below ? 'dropdown',
+            ] %}
+            {% set classes_link = [
+              'nav-link',
+              'text-dark',
+              item.is_expanded and item.url.routeName == '<nolink>' ? 'dropdown-toggle',
+              item.is_collapsed and item.url.routeName == '<nolink>' ? 'dropdown-toggle',
+              item.in_active_trail ? 'active',
+            ] %}
+            <li{{ item.attributes.addClass(classes_list_item) }}>
+              {% if item.url.routeName == '<nolink>' %}
+                <a class="{{ classes_link|join(' ') }}" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  {{ item.title }}
+                </a>
+              {% else %}
+              {{ link(item.title, item.url, {'class': classes_link}) }}
+              {% endif %}
+              {% if item.below %}
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
+                </div>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+      {% if menu_level == 1 %}
+        {% for item in items %}
+          {% set classes_link = [
+            item.url.routeName != '<nolink>' ? 'dropdown-item',
+            item.in_active_trail ? 'active',
+          ] %}
+          {{ link(item.title, item.url, {'class': classes_link}) }}
+        {% endfor %}
+      {% endif %}
+    {% endif %}
+  {% endmacro %}
+</div>

@@ -25,25 +25,46 @@
     },
     "require": {
         "composer/installers": "^1.9",
+        "cweagans/composer-patches": "^1.7",
         "drupal/adminimal_theme": "^1.6",
+        "drupal/autocomplete_deluxe": "^2.0@RC",
         "drupal/better_formats": "1.x-dev",
+        "drupal/block_field": "^1.0@RC",
+        "drupal/config_ignore": "^2.3",
+        "drupal/console": "^1.9",
+        "drupal/convert_media_tags_to_markup": "^2.0",
         "drupal/core-composer-scaffold": "^9.1",
         "drupal/core-project-message": "^9.1",
         "drupal/core-recommended": "^9.1",
         "drupal/diff": "^1.0",
+        "drupal/entity_print": "^2.2",
         "drupal/facets": "^1.7",
+        "drupal/field_group": "^3.1",
         "drupal/flag": "^4.0@beta",
         "drupal/masquerade": "^2.0@beta",
+        "drupal/message": "^1.2",
         "drupal/paragraphs": "^1.12",
         "drupal/search_api": "^1.19",
         "drupal/search_api_autocomplete": "^1.4",
         "drupal/snowball_stemmer": "^2.0",
         "drupal/theme_switcher": "dev-8.x-1.x",
-        "drush/drush": "^10.4"
+        "drupal/token": "^1.9",
+        "drupal/token_filter": "^1.2",
+        "drupal/twig_tweak": "^3.0",
+        "drupal/viewsreference": "^2.0",
+        "drush/drush": "^10.4",
+        "mikehaertl/phpwkhtmltopdf": "^2.5"
     },
     "scripts": {
         "post-install-cmd": [
-            "ln -sf ../../scripts/git/hooks/pre-commit .git/hooks/pre-commit"
+            "ln -sf ../../scripts/git/hooks/pre-commit .git/hooks/pre-commit",
+            "@install-codestandards"
+        ],
+        "install-codestandards": [
+            "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run"
+        ],
+        "coding-standards-check/drupal-check": [
+            "vendor/bin/drupal-check --deprecations --analysis web/profiles/custom/os2loop"
         ],
         "coding-standards-check/phpcs": [
             "vendor/bin/phpcs --standard=phpcs.xml.dist"
@@ -51,15 +72,23 @@
         "coding-standards-check/twigcs": [
             "twigcs web/profiles/custom/os2loop/themes/os2loop_theme/templates"
         ],
+        "coding-standards-check/prettier": [
+            "yarn prettier --check web/profiles/custom/os2loop/themes/os2loop_theme/**/*.scss"
+        ],
         "coding-standards-check": [
             "@coding-standards-check/phpcs",
+            "@coding-standards-check/drupal-check",
             "@coding-standards-check/twigcs"
         ],
         "coding-standards-apply/phpcs": [
             "vendor/bin/phpcbf --standard=phpcs.xml.dist"
         ],
+        "coding-standards-apply/prettier": [
+            "yarn prettier --write web/profiles/custom/os2loop/themes/os2loop_theme/**/*.scss"
+        ],
         "coding-standards-apply": [
-            "@coding-standards-apply/phpcs"
+            "@coding-standards-apply/phpcs",
+            "@coding-standards-apply/prettier"
         ]
     },
     "conflict": {
@@ -128,6 +157,13 @@
                 "  * Remove the plugin that prints this message:",
                 "      composer remove drupal/core-project-message"
             ]
+        },
+        "enable-patching": true,
+        "patches": {
+            "drupal/flag": {
+                "Implement Migration Paths for Flag 7.x (https://www.drupal.org/project/flag/issues/2409901#comment-13082245)": "https://www.drupal.org/files/issues/2019-04-25/2409901_flag_migration_paths_52.patch",
+                "Implement Migration Paths for Flag 7.x (https://www.drupal.org/project/flag/issues/2409901#comment-13281955)": "https://www.drupal.org/files/issues/2019-10-02/2409901-60.patch"
+            }
         }
     },
     "require-dev": {
@@ -135,6 +171,8 @@
         "drupal/coder": "^8.3",
         "drupal/core-dev": "^9.1",
         "friendsoftwig/twigcs": "^5.0",
-        "os2loop/os2loop_fixtures": "*"
+        "mglaman/drupal-check": "^1.1",
+        "os2loop/os2loop_fixtures": "*",
+        "phpspec/prophecy-phpunit": "^2.0"
     }
 }

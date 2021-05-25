@@ -34,7 +34,14 @@ EOF
 ```sh
 composer install --no-dev --optimize-autoloader
 vendor/bin/drush --yes site:install os2loop --existing-config
+vendor/bin/drush --yes locale:update
 ```
+
+You must also build the [OS2Loop
+theme](web/profiles/custom/os2loop/themes/os2loop_theme/README.md) assets; see
+[Building
+assets](web/profiles/custom/os2loop/themes/os2loop_theme/README.md#building-assets)
+for details.
 
 ### Development
 
@@ -47,8 +54,16 @@ docker-compose exec phpfpm vendor/bin/drush --yes site:install os2loop --existin
 # Get the site url
 echo "http://$(docker-compose port nginx 80)"
 # Get admin sign in url
-docker-compose exec phpfpm vendor/bin/drush --yes \
-  --uri="http://$(docker-compose port nginx 80)" user:login
+docker-compose exec phpfpm vendor/bin/drush --yes --uri="http://$(docker-compose port nginx 80)" user:login
+```
+
+#### Mails
+
+Mails are caught by [MailHog](https://github.com/mailhog/MailHog) and can be
+read on the url reported by
+
+```sh
+echo "http://$(docker-compose port mailhog 8025)"
 ```
 
 #### Using `symfony` binary
@@ -86,8 +101,31 @@ vendor/bin/drush --yes pm:uninstall content_fixtures
 composer install --no-dev --optimize-autoloader
 vendor/bin/drush --yes updatedb
 vendor/bin/drush --yes config:import
+vendor/bin/drush --yes locale:update
 vendor/bin/drush --yes cache:rebuild
 ```
+
+## Translations
+
+Import translations by running
+
+```sh
+(cd web && ../vendor/bin/drush locale:import --type=customized --override=none da profiles/custom/os2loop/translations/translations.da.po)
+```
+
+Export translations by running
+
+```sh
+(cd web && ../vendor/bin/drush locale:export da --types=customized > profiles/custom/os2loop/translations/translations.da.po)
+```
+
+Open `web/profiles/custom/os2loop/translations/translations.da.po` with the
+latest version of [Poedit](https://poedit.net/) to clean up and then save the
+file.
+
+See
+<https://medium.com/limoengroen/how-to-deploy-drupal-interface-translations-5653294c4af6>
+for further details.
 
 ## Coding standards
 
@@ -101,6 +139,22 @@ docker run --volume ${PWD}:/app --workdir /app node:latest yarn install
 docker run --volume ${PWD}:/app --workdir /app node:latest yarn coding-standards-check
 docker run --volume ${PWD}:/app --workdir /app node:latest yarn coding-standards-apply
 ```
+
+### GitHub Actions
+
+We use [GitHub Actions](https://github.com/features/actions) to check coding
+standards whenever a pull request is made.
+
+Before making a pull request you can run the GitHub Actions locally to check for
+any problems:
+
+[Install `act`](https://github.com/nektos/act#installation) and run
+
+```sh
+act -P ubuntu-latest=shivammathur/node:focal pull_request
+```
+
+(cf. <https://github.com/shivammathur/setup-php#local-testing-setup>).
 
 ### Twigcs
 

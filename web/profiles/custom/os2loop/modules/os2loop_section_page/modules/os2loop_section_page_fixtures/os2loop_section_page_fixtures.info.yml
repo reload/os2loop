@@ -1,0 +1,11 @@
+name: 'OS2Loop Section page fixtures'
+type: module
+description: 'OS2Loop Section page fixtures'
+# Used only for development and testing.
+hidden: true
+core_version_requirement: ^9
+package: OS2Loop
+# version: VERSION
+dependencies:
+  - drupal:os2loop_fixtures
+  - drupal:os2loop_section_page

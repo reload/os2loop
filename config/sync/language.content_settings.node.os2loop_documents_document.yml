@@ -1,0 +1,11 @@
+uuid: 91251f6c-a6f9-4a33-8a9d-44b924a45c7d
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.os2loop_documents_document
+id: node.os2loop_documents_document
+target_entity_type_id: node
+target_bundle: os2loop_documents_document
+default_langcode: site_default
+language_alterable: false

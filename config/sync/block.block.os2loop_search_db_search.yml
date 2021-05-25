@@ -5,19 +5,24 @@ dependencies:
   config:
     - views.view.os2loop_search_db
   module:
+    - system
     - views
   theme:
     - os2loop_theme
 id: os2loop_search_db_search
 theme: os2loop_theme
 region: content
-weight: -5
+weight: 0
 provider: null
-plugin: 'views_exposed_filter_block:os2loop_search_db-page_1'
+plugin: 'views_exposed_filter_block:os2loop_search_db-page_search'
 settings:
-  id: 'views_exposed_filter_block:os2loop_search_db-page_1'
+  id: 'views_exposed_filter_block:os2loop_search_db-page_search'
   label: ''
   provider: views
-  label_display: visible
+  label_display: '0'
   views_label: ''
-visibility: {  }
+visibility:
+  request_path:
+    id: request_path
+    pages: /search
+    negate: false

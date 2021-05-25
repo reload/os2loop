@@ -5,6 +5,7 @@
  * Code for the Loop documents feature.
  */
 
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Form\FormStateInterface;
 
@@ -26,18 +27,29 @@ function os2loop_documents_help($route_name, RouteMatchInterface $route_match) {
 
 /**
  * Implements hook_form_BASE_FORM_ID_alter().
+ *
+ * @see \Drupal\os2loop_documents\Helper\FormHelper::alterForm()
  */
-function os2loop_documents_form_node_form_alter(&$form, &$form_state, $form_id) {
-  // @todo Handle collection documents.
+function os2loop_documents_form_node_form_alter(array &$form, FormStateInterface $form_state, $form_id) {
+  // @todo We should use hook_event_dispatcher for this
+  // https://www.drupal.org/project/hook_event_dispatcher/issues/3199174
+  \Drupal::service('os2loop_documents.form_helper')->alterForm($form, $form_state, $form_id);
 }
 
 /**
- * Ajax callback to add a document to a collection menu.
+ * Implements hook_ENTITY_TYPE_update().
  *
- * @param array $form
- *   The form.
- * @param \Drupal\Core\Form\FormStateInterface $form_state
- *   The form state.
+ * @see \Drupal\os2loop_documents\Helper\NodeHelper::updateNode()
  */
-function os2loop_documents_add_document_callback(array $form, FormStateInterface $form_state) {
+function os2loop_documents_node_update(EntityInterface $entity) {
+  \Drupal::service('os2loop_documents.node_helper')->updateNode($entity);
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ *
+ * @see \Drupal\os2loop_documents\Helper\NodeHelper::preprocessNode()
+ */
+function os2loop_documents_preprocess_node(array &$variables) {
+  \Drupal::service('os2loop_documents.node_helper')->preprocessNode($variables);
 }

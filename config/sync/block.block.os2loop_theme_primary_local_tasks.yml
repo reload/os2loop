@@ -8,8 +8,8 @@ _core:
   default_config_hash: 7cvXIzw8NabmQCWMPqBz0mvIQZzXUZB3OeOTa5eqbCo
 id: os2loop_theme_primary_local_tasks
 theme: os2loop_theme
-region: header
-weight: 0
+region: content
+weight: -2
 provider: null
 plugin: local_tasks_block
 settings:

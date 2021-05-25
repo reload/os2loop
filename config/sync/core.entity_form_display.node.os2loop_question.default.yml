@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.os2loop_question.os2loop_shared_tags
     - node.type.os2loop_question
   module:
+    - autocomplete_deluxe
     - comment
     - datetime
     - file
@@ -28,7 +29,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   os2loop_question_answers:
-    weight: 26
+    weight: 11
     settings: {  }
     third_party_settings: {  }
     type: comment_default
@@ -51,15 +52,22 @@ content:
   os2loop_shared_profession:
     settings:
       match_operator: CONTAINS
-      match_limit: 10
+      autocomplete_route_name: autocomplete_deluxe.autocomplete
       size: 60
-      placeholder: ''
+      selection_handler: default
+      limit: 10
+      min_length: 0
+      delimiter: ''
+      not_found_message_allow: false
+      not_found_message: 'The term ''@term'' will be added'
+      new_terms: false
+      no_empty_message: 'No terms could be found. Please type in order to add a new term.'
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+    type: autocomplete_deluxe
     region: content
-    weight: 7
+    weight: 9
   os2loop_shared_rev_date:
-    weight: 27
+    weight: 12
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
@@ -67,23 +75,37 @@ content:
   os2loop_shared_subject:
     settings:
       match_operator: CONTAINS
-      match_limit: 10
+      autocomplete_route_name: autocomplete_deluxe.autocomplete
       size: 60
-      placeholder: ''
+      selection_handler: default
+      limit: 10
+      min_length: 0
+      delimiter: ''
+      not_found_message_allow: false
+      not_found_message: 'The term ''@term'' will be added'
+      new_terms: false
+      no_empty_message: 'No terms could be found. Please type in order to add a new term.'
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+    type: autocomplete_deluxe
     region: content
-    weight: 8
+    weight: 7
   os2loop_shared_tags:
     settings:
+      limit: '10'
+      min_length: '0'
+      delimiter: ''
+      not_found_message: 'The term ''@term'' will be added'
+      new_terms: '1'
+      no_empty_message: 'No terms could be found. Please type in order to add a new term.'
+      not_found_message_allow: 0
       match_operator: CONTAINS
-      match_limit: 10
+      autocomplete_route_name: autocomplete_deluxe.autocomplete
       size: 60
-      placeholder: ''
+      selection_handler: default
     third_party_settings: {  }
-    type: entity_reference_autocomplete_tags
+    type: autocomplete_deluxe
     region: content
-    weight: 9
+    weight: 8
   promote:
     type: boolean_checkbox
     settings:
@@ -123,4 +145,5 @@ content:
       match_limit: 10
     region: content
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  langcode: true

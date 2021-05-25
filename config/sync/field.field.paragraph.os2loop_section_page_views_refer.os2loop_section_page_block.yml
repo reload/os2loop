@@ -1,0 +1,37 @@
+uuid: 8007b015-6286-40ad-9725-902927e0c469
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.os2loop_section_page_block
+    - paragraphs.paragraphs_type.os2loop_section_page_views_refer
+  module:
+    - block_field
+id: paragraph.os2loop_section_page_views_refer.os2loop_section_page_block
+field_name: os2loop_section_page_block
+entity_type: paragraph
+bundle: os2loop_section_page_views_refer
+label: 'Block element'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  selection: blocks
+  selection_settings:
+    plugin_ids:
+      'views_block:os2loop_section_page_most_viewed-block_2': 'views_block:os2loop_section_page_most_viewed-block_2'
+      'views_block:os2loop_section_page_most_viewed-block_1': 'views_block:os2loop_section_page_most_viewed-block_1'
+      'views_block:os2loop_section_page_most_viewed-block_4': 'views_block:os2loop_section_page_most_viewed-block_4'
+      'views_block:os2loop_section_page_most_viewed-block_3': 'views_block:os2loop_section_page_most_viewed-block_3'
+      'views_block:os2loop_section_page_newest_content-block_2': 'views_block:os2loop_section_page_newest_content-block_2'
+      'views_block:os2loop_section_page_newest_content-block_1': 'views_block:os2loop_section_page_newest_content-block_1'
+      'views_block:os2loop_section_page_newest_content-block_4': 'views_block:os2loop_section_page_newest_content-block_4'
+      'views_block:os2loop_section_page_newest_content-block_3': 'views_block:os2loop_section_page_newest_content-block_3'
+      'views_block:os2loop_messages-block_1': 'views_block:os2loop_messages-block_1'
+      'views_block:os2loop_section_page_user_favourites-block_1': 'views_block:os2loop_section_page_user_favourites-block_1'
+      os2loop_list_user_expert_content: os2loop_list_user_expert_content
+      os2loop_list_user_profession_content: os2loop_list_user_profession_content
+      'views_exposed_filter_block:os2loop_search_db-page_1': 'views_exposed_filter_block:os2loop_search_db-page_1'
+field_type: block_field

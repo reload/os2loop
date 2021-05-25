@@ -1,0 +1,32 @@
+uuid: 0607d78d-f51b-4616-95bb-fc5830a24763
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.os2loop_search_db_search_autocomplete
+    - field.field.node.os2loop_section_page.os2loop_section_page_paragraph
+    - node.type.os2loop_section_page
+  module:
+    - user
+id: node.os2loop_section_page.os2loop_search_db_search_autocomplete
+targetEntityType: node
+bundle: os2loop_section_page
+mode: os2loop_search_db_search_autocomplete
+content:
+  flag_os2loop_subscription_node:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  search_api_excerpt:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  langcode: true
+  links: true
+  os2loop_section_page_paragraph: true

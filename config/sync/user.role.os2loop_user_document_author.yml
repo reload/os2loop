@@ -17,6 +17,7 @@ permissions:
   - 'download any image files'
   - 'edit own os2loop_documents_document content'
   - 'use media wysiwyg'
+  - 'use text format os2loop_documents_body'
   - 'use text format os2loop_documents_rich_text'
   - 'view admin path'
   - 'view any unpublished os2loop_documents_document content'

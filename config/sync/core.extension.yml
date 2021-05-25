@@ -1,30 +1,48 @@
 module:
+  autocomplete_deluxe: 0
   block: 0
+  block_field: 0
   breakpoint: 0
   ckeditor: 0
   comment: 0
+  config_filter: 0
+  config_ignore: 0
+  config_translation: 0
+  convert_media_tags_to_markup: 0
   datetime: 0
   dblog: 0
   dynamic_page_cache: 0
   editor: 0
+  entity_print: 0
   entity_reference_revisions: 0
   facets: 0
   field: 0
+  field_group: 0
   file: 0
   filter: 0
   flag: 0
   image: 0
+  language: 0
   link: 0
+  locale: 0
   menu_link_content: 0
   menu_ui: 0
+  message: 0
   node: 0
   os2loop_documents: 0
   os2loop_external: 0
+  os2loop_flag_content: 0
+  os2loop_lists: 0
+  os2loop_member_list: 0
+  os2loop_menu: 0
+  os2loop_messages: 0
   os2loop_page: 0
   os2loop_post: 0
   os2loop_question: 0
   os2loop_search_db: 0
+  os2loop_section_page: 0
   os2loop_shared: 0
+  os2loop_subscriptions: 0
   os2loop_taxonomy: 0
   os2loop_upvote: 0
   os2loop_user: 0
@@ -34,14 +52,18 @@ module:
   search_api_autocomplete: 0
   search_api_db: 0
   snowball_stemmer: 0
+  statistics: 0
   system: 0
   taxonomy: 0
   text: 0
   theme_switcher: 0
+  token: 0
+  token_filter: 0
   toolbar: 0
-  update: 0
+  twig_tweak: 0
   user: 0
   views: 0
+  viewsreference: 0
   paragraphs: 11
   better_formats: 100
   os2loop: 1000

@@ -70,45 +70,67 @@
  *   in different view modes.
  */
 #}
-<article{{ attributes }}>
-  <div>
-    {% if display_submitted %}
-    <div class="d-flex justify-content-between">
-    {# Todo: test with actual user image #}
-      {% if author_picture %}
-        {{ author_picture }}
-      {% else %}
-        <i class="bi bi-file-person"></i>
-      {% endif %}
-      <div class="col-md">
-        <div{{ author_attributes }}>
-          <div>{{ author_name }}</div>
-          <div>{{ metadata }}</div>
-        </div>
-      </div>
-         <div class="col-md-3 rounded bg-secondary-loop pb-2 pt-2">
-          <div> {{ date }}</div>
-          {{ content.os2loop_shared_subject }}
-          {{ content.os2loop_shared_profession }}
-        </div>
-      </div>
+{% macro title(title, class, node, content) %}
+  <div class="title">
+    <div class="icon-container {{ class }}"><div>
+    <h1{{ title_attributes }}>
+      {{ title }}
+    </h1>
+    <div>
+      {{ content.os2loop_shared_subject }}
     </div>
-    {% endif %}
-    {{ title_prefix }}
-    {% if label and not page %}
-      <h2{{ title_attributes }}>
-        <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-      </h2>
-    {% endif %}
-    {{ title_suffix }}
-    <div{{ content_attributes }}>
-      <h1>
-      {{ label }}
-      </h1>
-      {{ content.os2loop_post_file }}
-      {{ content.os2loop_post_content }}
-      {{ content.os2loop_shared_tags }}
-    </div>
-  {{ content.os2loop_post_comments }}
   </div>
+</div>
+  <div class="icon-container">
+    <div class="icon print" aria-label="{{ 'Print document (PDF)'|t }}" title="{{ 'Print document (PDF)'|t }}">
+      <a href="{{ path('entity_print.view', {export_type: 'pdf', entity_type: 'node', entity_id: node.id}) }}"></a>
+    </div>
+    <div class="icon share" aria-label="{{ 'Share with a friend'|t }}" title="{{ 'Share with a friend'|t }}">
+      <a></a>
+    </div>
+    {{ content.flag_os2loop_favourite }}
+  </div>
+</div>
+{% endmacro %}
+
+<article{{ attributes.addClass("os2loop-content os2loop-post") }}>
+  {{ title_prefix }}
+  {% if label %}
+    {{ _self.title(label, "post", node, content) }}
+  {% endif %}
+  {{ title_suffix }}
+  <div class="user">
+    {% if author_picture %}
+      {{ author_picture }}
+    {% else %}
+      <i class="bi bi-file-person"></i>
+    {% endif %}
+    {# TODO fix image #}
+    <div class="col-md">
+      <div>{{ author_name }}
+        {{ date }}</div>
+      <div>metadata</div>
+      {# TODO fix metadata #}
+    </div>
+    <div class="icon-container">
+      <div class="icon edit" title="{{ 'Edit content'|t }}">
+        <a aria-label="{{ 'edit content'|t }}" href="{{ path('entity.node.edit_form', {node: node.id}) }}"></a>
+      </div>
+      <div class="icon delete" title="{{ 'Delete content'|t }}">
+        <a aria-label="{{ 'delete content'|t }}" href="{{ path('entity.node.delete_form', {node: node.id}) }}"></a>
+      </div>
+      <div class="icon flag" title="{{ 'contact editorial office'|t }}">
+        <a aria-label="{{ 'Contact editorial staff'|t }}" href="{{ path('os2loop_flag_content.flag_content_form', {node: node.id}) }}"></a>
+      </div>
+    </div>
+  </div>
+  <div{{ content_attributes.addClass('bg-secondary-loop') }}>
+    {{ content.os2loop_post_content }}
+    {{ content.os2loop_shared_tags }}
+    {{ content.os2loop_shared_subject }}
+    {{ content.os2loop_shared_profession }}
+    {{ content.os2loop_post_file }}
+  </div>
+  {{ content.os2loop_post_comments }}
+</div>
 </article>

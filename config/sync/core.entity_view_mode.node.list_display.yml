@@ -1,0 +1,10 @@
+uuid: 37322b3a-df62-4efc-a06f-3795f172bd00
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.list_display
+label: 'List display'
+targetEntityType: node
+cache: true

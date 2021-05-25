@@ -1,0 +1,6 @@
+os2loop_user.subscriptions:
+  title: 'Subscriptions'
+  parent: os2loop_user.user
+  weight: 2
+  menu_name: main
+  route_name: os2loop_subscriptions.user_subscriptions

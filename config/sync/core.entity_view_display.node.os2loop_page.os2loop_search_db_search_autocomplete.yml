@@ -14,12 +14,21 @@ targetEntityType: node
 bundle: os2loop_page
 mode: os2loop_search_db_search_autocomplete
 content:
+  flag_os2loop_subscription_node:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   search_api_excerpt:
     weight: 0
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  langcode: true
   links: true
   os2loop_page_content: true
   os2loop_page_image: true

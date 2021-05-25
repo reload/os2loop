@@ -1,27 +1,49 @@
 uuid: 630ff33b-6bd9-41da-879e-00d5fe9a09a9
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - field.field.node.os2loop_documents_collection.os2loop_documents_dc_content
     - field.field.node.os2loop_documents_collection.os2loop_shared_profession
     - field.field.node.os2loop_documents_collection.os2loop_shared_subject
     - field.field.node.os2loop_documents_collection.os2loop_shared_tags
-    - field.field.node.os2loop_documents_collection.os2loop_documents_dc_content
     - node.type.os2loop_documents_collection
   module:
+    - text
     - user
 id: node.os2loop_documents_collection.teaser
 targetEntityType: node
 bundle: os2loop_documents_collection
 mode: teaser
 content:
-  links:
-    weight: 100
+  flag_os2loop_favourite:
+    weight: 10
     settings: {  }
     third_party_settings: {  }
     region: content
+  flag_os2loop_subscription_node:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    region: content
+  os2loop_documents_dc_content:
+    type: text_default
+    weight: 0
+    region: content
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
 hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  flag_os2loop_favourite: true
+  langcode: true
+  links: true
   os2loop_documents_dc_content: true
   os2loop_shared_profession: true
   os2loop_shared_subject: true

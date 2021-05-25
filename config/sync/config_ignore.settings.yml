@@ -1,0 +1,6 @@
+ignored_config_entities:
+  - os2loop.settings
+  - system.site
+  - os2loop_flag_content.settings
+_core:
+  default_config_hash: UVH1aJ4b44UM-VdPVN7hNNuuVqfReJxwfVeDQH1Hvsk

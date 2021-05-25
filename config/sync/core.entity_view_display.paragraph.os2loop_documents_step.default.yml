@@ -18,7 +18,7 @@ mode: default
 content:
   os2loop_documents_step_image:
     weight: 1
-    label: above
+    label: hidden
     settings:
       image_style: ''
       image_link: ''
@@ -27,7 +27,7 @@ content:
     region: content
   os2loop_documents_step_text:
     weight: 0
-    label: above
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     type: text_default
@@ -35,11 +35,14 @@ content:
   os2loop_documents_steps:
     type: entity_reference_revisions_entity_view
     weight: 2
-    label: above
+    label: hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
     region: content
 hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
   search_api_excerpt: true

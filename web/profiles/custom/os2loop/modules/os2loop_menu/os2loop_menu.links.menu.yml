@@ -1,0 +1,5 @@
+os2loop_menu.front:
+  title: 'Front page'
+  weight: 0
+  route_name: '<front>'
+  menu_name: main

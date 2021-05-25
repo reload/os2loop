@@ -1,0 +1,15 @@
+uuid: 0fefa7c4-6785-4acb-a346-6599ed4a98d9
+langcode: en
+status: true
+dependencies:
+  config:
+    - flag.flag.os2loop_favourite
+  module:
+    - flag
+id: flag_action.os2loop_favourite_flag
+label: Favourite
+type: node
+plugin: 'flag_action:os2loop_favourite_flag'
+configuration:
+  flag_id: os2loop_favourite
+  flag_action: flag

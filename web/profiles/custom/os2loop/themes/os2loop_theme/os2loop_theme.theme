@@ -11,3 +11,40 @@
 function os2loop_theme_preprocess(&$variables) {
   $variables['logopath'] = file_url_transform_relative(file_create_url(theme_get_setting('logo.url')));
 };
+
+/**
+ * Implements hook_preprocess_node().
+ *
+ * Add comment/answers counts.
+ */
+function os2loop_theme_preprocess_node(&$variables) {
+  if ($variables['view_mode'] === 'teaser') {
+    if ($variables['node']->getType() === 'os2loop_question') {
+      $variables['comment_count'] = $variables['node']->get('os2loop_question_answers')->comment_count;
+    }
+    if ($variables['node']->getType() === 'os2loop_post') {
+      $variables['comment_count'] = $variables['node']->get('os2loop_post_comments')->comment_count;
+    }
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_taxonomy_term_alter().
+ */
+function os2loop_theme_theme_suggestions_taxonomy_term_alter(array &$suggestions, array $variables) {
+  /** @var \Drupal\taxonomy\TermInterface $term */
+  $term = $variables['elements']['#taxonomy_term'];
+  $sanitized_view_mode = strtr($variables['elements']['#view_mode'], '.', '_');
+  // Add view mode theme suggestions.
+  $suggestions[] = 'taxonomy_term__' . $sanitized_view_mode;
+  $suggestions[] = 'taxonomy_term__' . $term->bundle() . '__' . $sanitized_view_mode;
+}
+
+/**
+ * Implements hook_theme_suggestions_comment_alter().
+ */
+function os2loop_theme_theme_suggestions_comment_alter(array &$suggestions, array $variables) {
+  $sanitized_view_mode = strtr($variables['elements']['#view_mode'], '.', '_');
+  // Add view mode theme suggestions.
+  $suggestions[] = 'comment__' . $sanitized_view_mode;
+}

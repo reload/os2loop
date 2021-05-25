@@ -10,8 +10,8 @@ _core:
   default_config_hash: iIy-YIc9d9s1isAtTIKWDBKd6kd2r6LxoYz_-hkLJco
 id: os2loop_theme_messages
 theme: os2loop_theme
-region: header
-weight: 0
+region: content
+weight: -6
 provider: null
 plugin: system_messages_block
 settings:

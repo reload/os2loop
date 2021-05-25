@@ -1,0 +1,11 @@
+uuid: cb4ca9a7-0fd3-490c-bb17-0159b09b6e2a
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.os2loop_section_page
+id: node.os2loop_section_page
+target_entity_type_id: node
+target_bundle: os2loop_section_page
+default_langcode: site_default
+language_alterable: false
