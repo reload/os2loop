@@ -28,11 +28,6 @@
 @import "./paragraphs/info-block";
 @import "./taxonomy-colors";
 
-// Generel overrides
-body {
-  background-color: $light-background;
-}
-
 a {
   color: $link-color;
 }
@@ -65,3 +60,24 @@ img {
 .navbar-brand {
   min-width: 100px;
 }
+
+@import "bootstrap";
+@import "bootstrap-contrast-fixes";
+@import "./comment";
+@import "./teasers";
+@import "./documents";
+@import "./title";
+@import "./tabs";
+@import "./fields";
+@import "./form";
+@import "./icons";
+@import "./search";
+@import "./terms";
+@import "./navbar";
+@import "./member-view";
+@import "./media-library";
+@import "./paragraphs/step-by-step";
+@import "./paragraphs/highlighted-content";
+@import "./paragraphs/text-and-image";
+@import "./paragraphs/info-block";
+@import "./taxonomy-colors";
