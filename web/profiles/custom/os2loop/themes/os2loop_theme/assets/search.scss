@@ -94,7 +94,9 @@ $search-highlight-color: $light;
   }
 }
 
-.search-result {
+.icon-list,
+.search-result,
+.search-autocomplete {
   @each $content-type in $content-types {
     &.#{$content-type},
     &.search-result--node--#{$content-type},
