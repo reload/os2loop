@@ -9,6 +9,7 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 ## [Unreleased]
 
 - [LOOP-949](https://jira.itkdev.dk/browse/LOOP-949): Styling of subscriptions page
+- [LOOP-947](https://jira.itkdev.dk/browse/LOOP-947) Styling user profile page
 - [LOOP-732](https://jira.itkdev.dk/browse/LOOP-732),
   [LOOP-733](https://jira.itkdev.dk/browse/LOOP-733) and
   [LOOP-734](https://jira.itkdev.dk/browse/LOOP-734): Drupal, SAML and OpenID
