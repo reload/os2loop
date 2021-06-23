@@ -42,53 +42,27 @@ img {
   height: auto;
 }
 
-input {
-  &.button {
-    @extend .btn;
-    color: $black !important;
-    background-color: $secondary-color !important;
-    border-color: $dark-secondary-color !important;
-
-    &:hover {
-      color: $black;
-      background-color: $dark-secondary-color;
-      border-color: $dark-secondary-color;
-    }
-  }
-}
-
-a {
-  &.button {
-    @extend .btn;
-    color: $black !important;
-    background-color: $secondary-color !important;
-    border-color: $dark-secondary-color !important;
-
-    &:hover {
-      color: $black;
-      background-color: $dark-secondary-color;
-      border-color: $dark-secondary-color;
-    }
-  }
-}
-
 .navbar-brand {
   min-width: 100px;
 }
 
 @import "bootstrap";
+@import "bootstrap-contrast-fixes";
 @import "./comment";
 @import "./teasers";
-@import "./search_api_autocomplete";
 @import "./document-collection";
 @import "./title";
 @import "./tabs";
 @import "./fields";
 @import "./font";
+@import "./form";
 @import "./icons";
+@import "./search";
 @import "./tags";
 @import "./navbar";
 @import "./member-view";
+@import "./media-library";
 @import "./paragraphs/step-by-step";
 @import "./paragraphs/highlighted-content";
 @import "./paragraphs/text-and-image";
+@import "./paragraphs/info-block";
