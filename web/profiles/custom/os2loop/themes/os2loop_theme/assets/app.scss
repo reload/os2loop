@@ -14,7 +14,6 @@
 @import "./title";
 @import "./tabs";
 @import "./fields";
-@import "./font";
 @import "./form";
 @import "./icons";
 @import "./search";
@@ -28,6 +27,7 @@
 @import "./paragraphs/info-block";
 @import "./taxonomy-colors";
 @import "./os2loop-user-login";
+@import "collapse";
 @import "_user.scss";
 
 // Generel overrides
@@ -35,10 +35,6 @@ body {
   background-color: $gray-100;
 }
 
-.bg-secondary-loop {
-  //padding: $spacer * 2;
-  //border-radius: 3px;
-  //margin-bottom: $spacer * 2;
 a {
   color: $link-color;
   &:hover {
