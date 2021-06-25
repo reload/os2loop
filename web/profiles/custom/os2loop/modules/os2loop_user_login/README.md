@@ -2,14 +2,41 @@
 
 Log in via OpenID Connect and SAML.
 
-In the default configuration, both login methods assume that the identitity
-provider returns a `name` claim which is used as the Drupal user name and that a
-`groups` claim is a list of groups that can be mapped to Drupal roles.
+Go to Administration › Configuration › OS2Loop › OS2Loop user login settings
+(`/admin/config/os2loop/os2loop_user_login/settings`) to enable login methods.
+
+## OpenID Connect
+
+The modules [OpenID Connect](https://www.drupal.org/project/openid_connect) and
+[OpenID Connect Microsoft Azure Active Directory
+client](https://www.drupal.org/project/openid_connect_windows_aad) are used for
+OpenID Connect login. In the default configuration both login methods assume
+that the identitity provider returns a `name` claim which is used as the Drupal
+user name and that a `groups` claim is a list of groups that can be mapped to
+Drupal roles.
 
 Any changes to the default configuration can be made in `settings.local.php` as
 shown in the following sections.
 
-## OpenID Connect
+### Generic
+
+Your identity provider must allow `https://«OS2Loop url»/openid-connect/generic`
+as a valid return url.
+
+```php
+// web/sites/*/settings.local.php
+// Enable Generic OpenID Connect
+$config['openid_connect.settings.generic']['enabled'] = 'generic';
+$config['openid_connect.settings.generic']['settings']['client_id'] = …; // Get this from your IdP provider
+$config['openid_connect.settings.generic']['settings']['client_secret'] = …; // Get this from your IdP provider
+$config['openid_connect.settings.generic']['settings']['authorization_endpoint'] = …; // Get this from your IdP provider
+$config['openid_connect.settings.generic']['settings']['token_endpoint'] = …; // Get this from your IdP provider
+```
+
+### Microsoft Azure Active Directory
+
+Your identity provider must allow `https://«OS2Loop
+url»/openid-connect/windows_aad` as a valid return url.
 
 ```php
 // web/sites/*/settings.local.php
@@ -27,6 +54,9 @@ $config['openid_connect.settings.windows_aad']['settings']['userinfo_endpoint_wa
 @todo Document default role mapping
 
 ## SAML
+
+The [SAML Authentication](https://www.drupal.org/project/samlauth) module is
+used for SAML authentication (!).
 
 ```php
 // web/sites/*/settings.local.php
