@@ -6,6 +6,18 @@ All OS2Loop settings can be found Administration › Configuration › OS2Loop
 After [installing OS2Loop](../README.md#production) you should run through all
 the module settings below and make sure that everything is set up as needed.
 
+The basic idea behind site configuration of OS2Loop is that all available
+OS2Loop modules (and their dependencies) are installed and all have reasonable
+standard configuration. Using the settings outlines below some tweaks to the
+default configuration can be made.
+
+## Technical details
+
+Behind the scenes the configuration for all modules is stored in (and may be
+imported from) the [`config/sync`](../config/sync) folder and the [`Config
+Ignore`](https://www.drupal.org/project/config_ignore) module is used to prevent
+overwriting site specific configurations when updating the OS2Loop core.
+
 ## OS2Loop settings
 
 Path: `/admin/config/os2loop/settings`
