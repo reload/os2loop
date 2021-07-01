@@ -25,17 +25,16 @@
  * @ingroup themeable
  */
 #}
-{% set analytics = get_os2loop_config('os2loop_analytics.settings') %}
-{% set cookie_script = get_os2loop_config('os2loop_cookies.settings') %}
-
 <!DOCTYPE html>
 <html{{ html_attributes }}>
   <head>
     <head-placeholder token="{{ placeholder_token }}">
     <title>{{ head_title|safe_join(' | ') }}</title>
     <css-placeholder token="{{ placeholder_token }}">
+    {% set cookie_script = get_os2loop_config('os2loop_cookies.settings') %}
     {{ cookie_script.os2loop_cookie_information_script|raw }}
     <js-placeholder token="{{ placeholder_token }}">
+    {% set analytics = get_os2loop_config('os2loop_analytics.settings') %}
     {% for script in analytics %}
       {{ script|raw }}
     {% endfor %}
