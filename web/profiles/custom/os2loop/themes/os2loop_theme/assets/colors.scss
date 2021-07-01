@@ -3,7 +3,7 @@
  * Os2loop colors. for now.
  */
 
-// Bootstrap colors
+// Override Bootstrap colors
 $primary: #41ab51;
 $secondary: #6c757d;
 $success: #28a745;
@@ -12,6 +12,13 @@ $warning: #ffc107;
 $danger: #dc3545;
 $light: #f8f9fa;
 $dark: #343a40;
+$blue: #0a58ca;
+
+// Taxonomy colors
+$taxonomy-color-1: hsl(60, 54%, 35%);
+$taxonomy-color-2: hsl(120, 54%, 35%);
+$taxonomy-color-3: hsl(230, 54%, 35%);
+$taxonomy-color-4: hsl(0, 0%, 13%);
 
 // Black and white
 $black: #000;
@@ -19,16 +26,21 @@ $white: #fff;
 
 @import "contrast-function";
 
-$light-background: $light;
-$dark-background: darken($light-background, 10%);
+$light-background: $gray-100;
+$dark-background: $gray-300;
 $field-title-color: $dark;
 
 // Text color
 $text-color: $dark;
 $text-on-primary: contrast-color($primary);
+$text-on-secondary: contrast-color($secondary);
+$text-on-success: contrast-color($success);
+$text-on-info: contrast-color($info);
+$text-on-warning: contrast-color($warning);
+$text-on-danger: contrast-color($danger);
 
 // Icon buttons
-$icon-base-color: $secondary;
+$icon-base-color: $gray-700;
 $delete: $danger;
 $upvote: $primary;
 $follow-content: $primary;
@@ -47,4 +59,6 @@ $dark-favourite: darken($favourite, 10%);
 // Attributes
 $highlighted: lighten($primary, 40%);
 $highlighted-border: $primary;
-$link-color: #0056b3;
+$link-color: $blue;
+
+$info-box-background: $info;

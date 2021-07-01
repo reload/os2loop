@@ -72,6 +72,7 @@ class SettingsForm extends ConfigFormBase {
     $form['enable_rich_text'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Enable rich text in questions'),
+      '#description' => $this->t('<strong>Note</strong>: This has effect for new questions only. Existing questions will keep their current text format.'),
       '#default_value' => $config->get('enable_rich_text'),
     ];
 
@@ -85,6 +86,8 @@ class SettingsForm extends ConfigFormBase {
     $this->configFactory->getEditable(static::SETTINGS_NAME)
       ->set('enable_rich_text', $form_state->getValue('enable_rich_text'))
       ->save();
+
+    drupal_flush_all_caches();
 
     parent::submitForm($form, $form_state);
   }
