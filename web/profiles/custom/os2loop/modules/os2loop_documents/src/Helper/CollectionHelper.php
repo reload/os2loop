@@ -418,7 +418,9 @@ class CollectionHelper {
       }, $items);
       $documents = $this->nodeStorage->loadMultiple($nodeIds);
       foreach ($items as $item) {
-        $item->setDocument($documents[$item->getDocumentId()]);
+        if (isset($documents[$item->getDocumentId()])) {
+          $item->setDocument($documents[$item->getDocumentId()]);
+        }
       }
     }
     $children = array_filter($items, static function (DocumentCollectionItem $item) use ($root) {
