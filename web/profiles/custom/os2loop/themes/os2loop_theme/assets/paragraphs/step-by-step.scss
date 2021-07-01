@@ -16,7 +16,6 @@
 
   li {
     &.paragraph-step {
-      //display: table;
       counter-increment: item;
       width: 100%;
 
@@ -27,7 +26,6 @@
         position: absolute;
         top: $spacer/2;
         left: -$spacer/2;
-        //margin: 0 0 0 -20px;
         padding: $spacer * 1.5;
         width: 15px;
         height: 15px;
