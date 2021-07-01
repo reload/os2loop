@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6489662120e169ad3f80a9de07527d0f",
+    "content-hash": "48407be62fcdb4cefaaa90c53cf1ec30",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -3929,17 +3929,17 @@
         },
         {
             "name": "drupal/samlauth",
-            "version": "3.3.0",
+            "version": "3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/samlauth.git",
-                "reference": "8.x-3.3"
+                "reference": "8.x-3.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/samlauth-8.x-3.3.zip",
-                "reference": "8.x-3.3",
-                "shasum": "743d1d4f8ee79eaeb941fe025d2b0c69eae416b7"
+                "url": "https://ftp.drupal.org/files/projects/samlauth-8.x-3.2.zip",
+                "reference": "8.x-3.2",
+                "shasum": "b2f53c15811265bb94f504c83a32736244a297f4"
             },
             "require": {
                 "drupal/core": "^8 || ^9",
@@ -3949,8 +3949,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-3.3",
-                    "datestamp": "1624398207",
+                    "version": "8.x-3.2",
+                    "datestamp": "1621516376",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -12842,7 +12842,7 @@
         },
         {
             "name": "os2loop/os2loop_fixtures",
-            "version": "dev-develop",
+            "version": "dev-hotfix/d9.2-update-and-contrib",
             "dist": {
                 "type": "path",
                 "url": "web/profiles/custom/os2loop/modules/os2loop_fixtures",
