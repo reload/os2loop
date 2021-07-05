@@ -2,14 +2,62 @@
 
 Log in via OpenID Connect and SAML.
 
-In the default configuration, both login methods assume that the identitity
+Go to Administration › Configuration › OS2Loop › OS2Loop user login settings
+(`/admin/config/os2loop/os2loop_user_login/settings`) to enable login methods.
+
+## OpenID Connect
+
+The modules [OpenID Connect](https://www.drupal.org/project/openid_connect) and
+[OpenID Connect Microsoft Azure Active Directory
+client](https://www.drupal.org/project/openid_connect_windows_aad) are used for
+OpenID Connect login. *Note*: Eventhough it's called “OpenID Connect Microsoft
+Azure Active Directory client” it also work with other OpenID Connect identity
+providers.
+
+In the default configuration both login methods assume that the identitity
 provider returns a `name` claim which is used as the Drupal user name and that a
 `groups` claim is a list of groups that can be mapped to Drupal roles.
 
 Any changes to the default configuration can be made in `settings.local.php` as
 shown in the following sections.
 
-## OpenID Connect
+### Required claims
+
+The following claims are required to make signing in work:
+
+| Claim    | Description                                                                                  |
+|----------|----------------------------------------------------------------------------------------------|
+| `upn`    | Unique user id, e.g. email address                                                           |
+| `name`   | Drupal user name                                                                             |
+| `email`  | Drupal user mail                                                                             |
+| `groups` | Mapped to Drupal user roles (see [Groups to roles mapping](#groups-to-roles-mapping) below). |
+
+### Claim to field mapping
+
+As mentioned above, the default configuration maps the `name` claim to the
+Drupal user name and the `email` claim is mapped to the user mail. Further
+claims can be mapped and by default the claims `family_name` and `given_name`
+are mapped to the user's name fields (`os2loop_user_family_name` and
+`os2loop_user_given_name` respectively). See
+[`openid_connect.settings.yml`](../../../../../../config/sync/openid_connect.settings.yml)
+for details.
+
+Changes and additions to the default field mapping can be made in
+`settings.local.php`:
+
+```php
+// web/sites/*/settings.local.php
+// Use the department claim as user's Place/Department
+$config['openid_connect.settings']['userinfo_mappings']['os2loop_user_place'] = 'department';
+```
+
+### Microsoft Azure Active Directory
+
+**Note**: This login method is not limited to Microsoft Azure Active Directory,
+but can be used by other IdPs as well.
+
+Your identity provider must allow `https://«OS2Loop
+url»/openid-connect/windows_aad` as a valid return url.
 
 ```php
 // web/sites/*/settings.local.php
@@ -19,14 +67,38 @@ $config['openid_connect.settings.windows_aad']['settings']['client_id'] = …; /
 $config['openid_connect.settings.windows_aad']['settings']['client_secret'] = …; // Get this from your IdP provider
 $config['openid_connect.settings.windows_aad']['settings']['authorization_endpoint_wa'] = …; // Get this from your OpenID Connect Discovery endpoint
 $config['openid_connect.settings.windows_aad']['settings']['token_endpoint_wa'] = …; // Get this from your OpenID Connect Discovery endpoint
-$config['openid_connect.settings.windows_aad']['settings']['use_v2'] = true;
-// Fake userinfo endpoint to force v2 (cf. https://www.drupal.org/project/openid_connect_windows_aad/issues/3021812).
-$config['openid_connect.settings.windows_aad']['settings']['userinfo_endpoint_wa'] = 'use_v2';
 ```
 
-@todo Document default role mapping
+#### Groups to roles mapping
+
+[The default configuration groups to roles
+mapping](../../../../../../config/sync/openid_connect.settings.windows_aad.yml)
+maps groups (in the `groups` claim which must be a list of names) as follows:
+
+| Drupal role                             | group                      |
+|-----------------------------------------|----------------------------|
+| os2loop_user_administrator              | administrator              |
+| os2loop_user_document_author            | document_author            |
+| os2loop_user_document_collection_editor | document_collection_editor |
+| os2loop_user_documentation_coordinator  | documentation_coordinator  |
+| os2loop_user_external_sources_editor    | external_sources_editor    |
+| os2loop_user_manager                    | manager                    |
+| os2loop_user_post_author                | post_author                |
+| os2loop_user_read_only                  | read_only                  |
+| os2loop_user_user_administrator         | user_administrator         |
+
+Any changes can be made in `settings.local.php`, e.g
+
+```php
+// web/sites/*/settings.local.php
+$config['openid_connect.settings.windows_aad']['settings']['group_mapping']['method'] = 1; // Manual mapping
+$config['openid_connect.settings.windows_aad']['settings']['group_mapping']['mappings'] = "os2loop_user_administrator|administrator\r\nos2loop_user_manager|manager";
+```
 
 ## SAML
+
+The [SAML Authentication](https://www.drupal.org/project/samlauth) module is
+used for SAML authentication (!).
 
 ```php
 // web/sites/*/settings.local.php
@@ -43,3 +115,28 @@ $config['samlauth.authentication']['user_name_attribute'] = 'name';
 $config['samlauth.authentication']['user_mail_attribute'] = 'mail';
 $config['samlauth.authentication']['sp_name_id_format'] = 'urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress';
 ```
+
+### Translations
+
+On the login form, the OpenID Connect login buttons will show a generic “Log in
+with «login provider name»” text which doesn’t make much sense to users. Under
+the reasonable assumption that only one OpenID Connect login method is enabled
+we can remedy this by adding a translating that makes sense to the user.
+
+The translation can be made on `/admin/config/regional/translate` or in
+`settings.local.php`:
+
+```php
+// web/sites/*/settings.local.php
+$settings['locale_custom_strings_en'][''] = [
+   'Log in with @client_title' => 'Log in with OpenID Connect (employee)',
+];
+
+$settings['locale_custom_strings_da'][''] = [
+   'Log in with @client_title' => 'Log ind med OpenID Connect (medarbejderlogin)',
+];
+```
+
+Note that we translate `Log in with @client_title` to a fixed text that doesn't
+use the `@client_title` placeholder, and that's why this will only work with just
+a single active OpenID login method.

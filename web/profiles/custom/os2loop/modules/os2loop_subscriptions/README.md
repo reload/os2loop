@@ -1,6 +1,4 @@
-# OS2Loop media
-
-This module sets permission for viewing the media library.
+# OS2Loop Subscriptions
 
 ## Fixtures
 
