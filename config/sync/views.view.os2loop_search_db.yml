@@ -253,7 +253,7 @@ display:
           group_type: group
           admin_label: ''
           empty: false
-          content: 'Displaying @start - @end of @total'
+          content: '<div class="mx-2">Displaying @start - @end of @total</div>'
           plugin_id: result
       footer: {  }
       empty:
