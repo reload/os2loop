@@ -123,7 +123,12 @@ class NodeHelper {
    * Implements hook_access().
    */
   public function nodeAccess(EntityInterface $entity, string $operation, AccountInterface $account) {
-    if ('delete' === $operation && $entity instanceof NodeInterface && self::CONTENT_TYPE_DOCUMENT === $entity->getType()) {
+    if (
+      0 < $account->id() &&
+      'delete' === $operation &&
+      $entity instanceof NodeInterface &&
+      self::CONTENT_TYPE_DOCUMENT === $entity->getType()
+    ) {
       $collections = $this->collectionHelper->loadCollections($entity);
       if (!empty($collections)) {
         $message = $this->formatPlural(
