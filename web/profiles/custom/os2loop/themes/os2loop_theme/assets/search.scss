@@ -219,3 +219,13 @@ input[type="search"]::-webkit-search-results-decoration {
     @extend .form-check-input;
   }
 }
+
+.block-facet--checkbox {
+  .dropdown-menu {
+    min-width: 200px;
+  }
+
+  .facet-item {
+    margin: 0 0.5em;
+  }
+}

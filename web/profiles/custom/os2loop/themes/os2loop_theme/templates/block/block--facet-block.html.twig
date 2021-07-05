@@ -27,12 +27,7 @@
  * @ingroup themeable
  */
 #}
-<div{{ attributes }}>
-  {{ title_prefix }}
-  {% if label %}
-    <h2{{ title_attributes }}>{{ label }}</h2>
-  {% endif %}
-  {{ title_suffix }}
+<div{{ attributes.addClass('d-inline-block m-2') }}>
   {% block content %}
     {{ content }}
   {% endblock %}
