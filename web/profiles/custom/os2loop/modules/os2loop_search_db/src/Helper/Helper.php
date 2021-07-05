@@ -68,8 +68,9 @@ class Helper {
         'os2loop_tag' => 'os2loop_search_db_tags',
         'os2loop_profession' => 'os2loop_search_db_profession',
       ];
+
       foreach ($vocabularyBlocks as $vocabularyName => $blockId) {
-        if ($blockId === $block->id() && !isset($enabledTaxonomyVocabularies[$vocabularyName])) {
+        if ($blockId === $block->id() && !in_array($vocabularyName, $enabledTaxonomyVocabularies)) {
           return AccessResult::forbidden();
         }
       }

@@ -24,27 +24,20 @@
  * @ingroup themeable
  */
 #}
-<div class="facets-widget- {{- facet.widget.type -}} ">
-  {% if facet.widget.type %}
-    {%- set attributes = attributes.addClass('item-list__' ~ facet.widget.type) %}
-  {% endif %}
-  {% if items or empty %}
-    {%- if title is not empty -%}
-      <h3>{{ title }}</h3>
-    {%- endif -%}
 
+<div class="dropdown">
+  {% if items or empty %}
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown-{{ facet.id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      {{ facet.label }}
+    </button>
     {%- if items -%}
-      <{{ list_type }}{{ attributes }}>
+      <div class="dropdown-menu" aria-labelledby="dropdown-{{ facet.id }}">
         {%- for item in items -%}
-          <li{{ item.attributes }}>{{ item.value }}</li>
+          <div{{ item.attributes }}>{{ item.value }}</div>
         {%- endfor -%}
-      </{{ list_type }}>
+      </div>
     {%- else -%}
       {{- empty -}}
     {%- endif -%}
   {%- endif %}
-
-{% if facet.widget.type == "dropdown" %}
-  <label id="facet_{{ facet.id }}_label">{{ 'Facet'|t }} {{ facet.label }}</label>
-{%- endif %}
 </div>
