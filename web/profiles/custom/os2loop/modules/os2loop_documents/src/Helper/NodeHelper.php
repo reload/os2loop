@@ -131,15 +131,6 @@ class NodeHelper {
     ) {
       $collections = $this->collectionHelper->loadCollections($entity);
       if (!empty($collections)) {
-        $message = $this->formatPlural(
-          count($collections),
-          'You can not delete document "%title" as it is being used in a collection.',
-          'You can not delete document "%title" as it is being used in @count collections.',
-          [
-            '%title' => $entity->getTitle(),
-          ]
-        );
-        $this->messenger->addError($message);
         return AccessResult::forbidden('document is used in collections');
       }
     }
