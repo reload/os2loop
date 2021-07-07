@@ -2,30 +2,30 @@ uuid: e9ce8c07-994e-4d35-88b4-f4065ac9611b
 langcode: en
 status: true
 dependencies:
+  module:
+    - node
+    - comment
+    - paragraphs
+    - taxonomy
+    - search_api
   config:
-    - field.storage.comment.os2loop_question_answer
-    - field.storage.comment.os2loop_post_comment
-    - field.storage.node.os2loop_documents_document_body
     - field.storage.node.os2loop_documents_dc_content
-    - field.storage.node.os2loop_question_content
-    - field.storage.node.os2loop_post_content
     - field.storage.node.os2loop_documents_document_conte
-    - field.storage.paragraph.os2loop_documents_hc_content
     - field.storage.paragraph.os2loop_documents_description
+    - field.storage.node.os2loop_documents_document_body
+    - field.storage.paragraph.os2loop_documents_hc_content
+    - field.storage.paragraph.os2loop_documents_hc_title
     - field.storage.paragraph.os2loop_documents_step_text
     - field.storage.paragraph.os2loop_documents_tai_text
-    - field.storage.paragraph.os2loop_documents_hc_title
     - field.storage.node.os2loop_external_descripti
+    - field.storage.comment.os2loop_post_comment
+    - field.storage.node.os2loop_post_content
+    - field.storage.comment.os2loop_question_answer
+    - field.storage.node.os2loop_question_content
     - field.storage.node.os2loop_shared_profession
     - field.storage.node.os2loop_shared_subject
     - field.storage.node.os2loop_shared_tags
     - search_api.server.os2loop_search_db_server
-  module:
-    - comment
-    - node
-    - paragraphs
-    - taxonomy
-    - search_api
 id: os2loop_search_db_index
 name: Index
 description: ''
@@ -238,6 +238,7 @@ datasource_settings:
 processor_settings:
   add_url: {  }
   aggregated_field: {  }
+  entity_status: {  }
   highlight:
     highlight: always
     highlight_partial: true
@@ -278,10 +279,34 @@ processor_settings:
     weights:
       preprocess_index: -15
       preprocess_query: -15
+  ignorecase:
+    all_fields: true
+    fields:
+      - comment_type
+      - os2loop_documents_dc_content
+      - os2loop_documents_description
+      - os2loop_documents_document_body
+      - os2loop_documents_hc_content
+      - os2loop_documents_hc_title
+      - os2loop_documents_step_text
+      - os2loop_documents_tai_text
+      - os2loop_external_descripti
+      - os2loop_post_comment
+      - os2loop_post_content
+      - os2loop_question_answer
+      - os2loop_question_content
+      - os2loop_shared_subject_name
+      - title
+      - type
+    weights:
+      preprocess_index: -20
+      preprocess_query: -20
   language_with_fallback: {  }
   rendered_item: {  }
   type_boost:
     boosts:
+      'entity:comment':
+        datasource_boost: !!float 1
       'entity:node':
         datasource_boost: !!float 1
     weights:
