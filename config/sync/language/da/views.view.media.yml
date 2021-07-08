@@ -51,19 +51,6 @@ display:
         bundle:
           expose:
             label: Type
-        status:
-          expose:
-            label: Sandt
-          group_info:
-            label: Publiceringsstatus
-            group_items:
-              1:
-                title: Udgivet
-              2:
-                title: 'Ikke udgivet'
-        langcode:
-          expose:
-            label: Sprog
       title: Media
       empty:
         area_text_custom:
