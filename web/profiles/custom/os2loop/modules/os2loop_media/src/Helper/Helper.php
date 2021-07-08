@@ -2,6 +2,7 @@
 
 namespace Drupal\os2loop_media\Helper;
 
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\views\Plugin\views\query\QueryPluginBase;
 use Drupal\views\Plugin\views\query\Sql;
@@ -84,6 +85,60 @@ class Helper {
     }
 
     return $query;
+  }
+
+  /**
+   * Implements hook_form_alter().
+   *
+   * Alter media add/edit forms.
+   */
+  public function alterForm(array &$form, FormStateInterface $form_state, string $form_id) {
+    switch ($form_id) {
+      case 'media_os2loop_media_file_add_form':
+      case 'media_os2loop_media_image_add_form':
+      case 'media_os2loop_media_file_edit_form':
+      case 'media_os2loop_media_image_edit_form':
+      case 'media_library_add_form_upload':
+        $form['#current_user'] = $this->currentUser;
+        $currentUserRoles = $form['#current_user']->getRoles();
+        if (1 < count($currentUserRoles) || '1' == $form['#current_user']->id()) {
+          $form['field_media_library']['widget']['#required'] = TRUE;
+        }
+        else {
+          $form['field_media_library']['#access'] = FALSE;
+        }
+        break;
+    }
+
+    // The inline upload form is built later som we use after build.
+    if ('media_library_add_form_upload' === $form_id) {
+      $form['#after_build'][] = [static::class, 'afterBuild'];
+    }
+  }
+
+  /**
+   * Modify inline upload form.
+   *
+   * @param array $form
+   *   The form.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The state of the form.
+   *
+   * @return array
+   *   The altered form.
+   */
+  public static function afterBuild(array $form, FormStateInterface $form_state) {
+    if (!empty($form['media'][0]['fields']['field_media_library'])) {
+      $currentUserRoles = $form['#current_user']->getRoles();
+      if (1 < count($currentUserRoles) || '1' == $form['#current_user']->id()) {
+        $form['media'][0]['fields']['field_media_library']['widget']['#required'] = TRUE;
+      }
+      else {
+        $form['media'][0]['fields']['field_media_library']['#access'] = FALSE;
+      }
+    }
+
+    return $form;
   }
 
 }
