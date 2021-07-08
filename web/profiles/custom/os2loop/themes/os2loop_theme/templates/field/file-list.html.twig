@@ -60,10 +60,10 @@
     {% if multiple %}
       <span>
     {% endif %}
-        {% for item in items %}
-          <span{{ item.attributes }}>{{ item.content }}</span>
-        {% endfor %}
-        {% if multiple %}
+    {% for item in items %}
+      <span{{ item.attributes }}>{{ item.content }}</span>
+    {% endfor %}
+    {% if multiple %}
       </span>
     {% endif %}
   </span>
@@ -71,18 +71,21 @@
   <div{{ attributes.addClass("os2loop-title") }}>
     <div{{ title_attributes.addClass(title_classes) }}>{{ label }}</div>
     {% if multiple %}
-    <div>
+      <div>
+    {% endif %}
+    {% for item in items %}
+      {% set media = drupal_entity('media', item.content['#plain_text'])['#media'] %}
+      {% if media.bundle() is same as('os2loop_media_file') %}
+        {% set file_id = media.field_media_file.value[0].target_id %}
       {% endif %}
-
-        {% for item in items %}
-          {% set file = drupal_entity('file', item.content['#plain_text'])['#file'] %}
-
-            <a href="{{ file_url(file.getFileUri()) }}" class="btn btn-sm btn-dark"><i class="bi bi-file-earmark-arrow-down-fill mr-1"></i>{{ file.getFileName() }}</a>
-
-        {% endfor %}
-
-      {% if multiple %}
-    </div>
+      {% if media.bundle() is same as('os2loop_media_image') %}
+        {% set file_id = media.field_media_image.value[0].target_id %}
+      {% endif %}
+      {% set file = drupal_entity('file', file_id)['#file'] %}
+        <a href="{{ file_url(file.getFileUri()) }}" class="btn btn-sm btn-dark"><i class="bi bi-file-earmark-arrow-down-fill mr-1"></i>{{ file.getFileName() }}</a>
+    {% endfor %}
+    {% if multiple %}
+      </div>
     {% endif %}
   </div>
 {% endif %}
