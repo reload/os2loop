@@ -188,7 +188,8 @@ class Helper {
    * Implements hook_form_alter().
    */
   public function formAlter(array &$form, FormStateInterface $form_state, $form_id) {
-    if ('views_exposed_form' === $form_id) {
+    if ('views_exposed_form' === $form_id
+      && 'views-exposed-form-os2loop-search-db-page-search' === ($form['#id'] ?? NULL)) {
       // Add facet filter query to form to keep the filters when submitting
       // search form.
       $request = $this->requestStack->getCurrentRequest();
