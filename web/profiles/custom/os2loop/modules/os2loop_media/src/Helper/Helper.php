@@ -99,9 +99,8 @@ class Helper {
       case 'media_os2loop_media_file_edit_form':
       case 'media_os2loop_media_image_edit_form':
       case 'media_library_add_form_upload':
-        $form['#current_user'] = $this->currentUser;
-        $currentUserRoles = $form['#current_user']->getRoles();
-        if (1 < count($currentUserRoles) || '1' == $form['#current_user']->id()) {
+        $currentUserRoles = $this->currentUser->getRoles();
+        if (1 < count($currentUserRoles) || '1' == $this->currentUser->id()) {
           $form['field_media_library']['widget']['#required'] = TRUE;
         }
         else {
@@ -112,7 +111,7 @@ class Helper {
 
     // The inline upload form is built later som we use after build.
     if ('media_library_add_form_upload' === $form_id) {
-      $form['#after_build'][] = [static::class, 'afterBuild'];
+      $form['#after_build'][] = [$this, 'afterBuild'];
     }
   }
 
@@ -127,10 +126,10 @@ class Helper {
    * @return array
    *   The altered form.
    */
-  public static function afterBuild(array $form, FormStateInterface $form_state) {
+  public function afterBuild(array $form, FormStateInterface $form_state) {
     if (!empty($form['media'][0]['fields']['field_media_library'])) {
-      $currentUserRoles = $form['#current_user']->getRoles();
-      if (1 < count($currentUserRoles) || '1' == $form['#current_user']->id()) {
+      $currentUserRoles = $this->currentUser->getRoles();
+      if (1 < count($currentUserRoles) || '1' == $this->currentUser->id()) {
         $form['media'][0]['fields']['field_media_library']['widget']['#required'] = TRUE;
       }
       else {
