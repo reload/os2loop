@@ -48,9 +48,6 @@ content:
       display_label: true
     weight: 100
     region: content
-    settings:
-      size: 60
-      placeholder: ''
     third_party_settings: {  }
 hidden:
   created: true

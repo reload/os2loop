@@ -40,11 +40,6 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  status:
-    type: boolean_checkbox
-    settings:
-      display_label: true
-    weight: 100
 hidden:
   created: true
   langcode: true
