@@ -10,6 +10,7 @@ use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\os2loop_search_db\Helper\Helper;
 use Drupal\search_api\Query\QueryInterface;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Implements hook_help().
@@ -52,4 +53,13 @@ function os2loop_search_db_search_api_query_alter(QueryInterface $query) {
  */
 function os2loop_search_db_block_access(Block $block, $operation, AccountInterface $account) {
   return Drupal::service(Helper::class)->blockAccess($block, $operation, $account);
+}
+
+/**
+ * Implements hook_form_alter().
+ *
+ * @see \Drupal\os2loop_search_db\Helper\Helper::formAlter()
+ */
+function os2loop_search_db_form_alter(array &$form, FormStateInterface $form_state, $form_id) {
+  return Drupal::service(Helper::class)->formAlter($form, $form_state, $form_id);
 }
