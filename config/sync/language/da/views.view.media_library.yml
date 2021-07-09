@@ -1,9 +1,12 @@
+label: 'Medie bibliotek'
+description: 'Find og håndtér mediefiler.'
 display:
   default:
-    display_title: Master
+    display_title: Standard
     display_options:
       exposed_form:
         options:
+          submit_button: 'Tilføj filtre'
           reset_button_label: Gendan
           exposed_sorts_label: 'Sortér efter'
           sort_asc_label: Stigende
@@ -46,10 +49,16 @@ display:
         created:
           expose:
             label: 'Nyeste først'
+        name:
+          expose:
+            label: 'Navn (A-Z)'
+        name_1:
+          expose:
+            label: 'Navn (Z-A)'
       title: Media
       empty:
         area_text_custom:
-          content: 'Ingen tilgængelige media'
+          content: 'Ingen tilgængelige media.'
   page:
     display_title: Side
     display_options:
@@ -59,8 +68,14 @@ display:
         name:
           separator: ', '
         edit_media:
+          alter:
+            text: 'Redigér {{ name }}'
+            alt: 'Redigér {{ name }}'
           text: Redigér
         delete_media:
+          alter:
+            text: 'Slet {{ name }}'
+            alt: 'Slet {{ name }}'
           text: Slet
   widget:
     display_title: Widget
@@ -75,6 +90,7 @@ display:
         display_link_table:
           label: Tabel
   widget_table:
+    display_title: 'Widget (table)'
     display_options:
       fields:
         thumbnail__target_id:

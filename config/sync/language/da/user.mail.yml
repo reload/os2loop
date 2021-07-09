@@ -1,18 +1,4 @@
 cancel_confirm:
-  body: |-
-    [user:display-name],
-
-    Vi har modtaget en forespørgsel om at lukke din konto på [site:name].
-
-    Du kan lukke din konto på [site:url-brief] ved at klikke på linket eller ved at kopiere det og indsætte det i din browser:
-
-    [user:cancel-url]
-
-    BEMÆRK: Du kan ikke fortyde lukningen af din konto.
-
-    Linket udløber om én dag og der sker ikke noget hvis det ikke bruges.
-
-    --  Holdet bag [site:name]
   subject: 'Anmodning om opsigelse af konto for [user:display-name] på [site:name]'
 password_reset:
   body: |-
@@ -63,6 +49,12 @@ register_no_approval_required:
     --  Holdet bag [site:name]
   subject: 'Kontoinformationer for [user:display-name] på [site:name] (blokeret)'
 register_pending_approval:
+  body: |-
+    [bruger:vist navn],
+
+    Tak for din tilmelding på [site:name]. Din ansøgning om en konto afventer i øjeblikket godkendelse. Når den er godkendt, modtager du en anden e-mail med oplysninger om, hvordan du logger ind, angiver din adgangskode og andre detaljer.
+
+    -- [site:name] holdet
   subject: 'Kontoinformation for [user:display-name] på [site:name] (afventer godkendelse af administrator)'
 register_pending_approval_admin:
   body: |-
