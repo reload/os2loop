@@ -2,30 +2,30 @@ uuid: e9ce8c07-994e-4d35-88b4-f4065ac9611b
 langcode: en
 status: true
 dependencies:
+  module:
+    - node
+    - comment
+    - taxonomy
+    - paragraphs
+    - search_api
   config:
-    - field.storage.comment.os2loop_question_answer
-    - field.storage.comment.os2loop_post_comment
-    - field.storage.node.os2loop_documents_document_body
+    - field.storage.node.os2loop_shared_tags
     - field.storage.node.os2loop_documents_dc_content
-    - field.storage.node.os2loop_question_content
-    - field.storage.node.os2loop_post_content
     - field.storage.node.os2loop_documents_document_conte
-    - field.storage.paragraph.os2loop_documents_hc_content
     - field.storage.paragraph.os2loop_documents_description
+    - field.storage.node.os2loop_documents_document_body
+    - field.storage.paragraph.os2loop_documents_hc_content
+    - field.storage.paragraph.os2loop_documents_hc_title
     - field.storage.paragraph.os2loop_documents_step_text
     - field.storage.paragraph.os2loop_documents_tai_text
-    - field.storage.paragraph.os2loop_documents_hc_title
     - field.storage.node.os2loop_external_descripti
+    - field.storage.comment.os2loop_post_comment
+    - field.storage.node.os2loop_post_content
+    - field.storage.comment.os2loop_question_answer
+    - field.storage.node.os2loop_question_content
     - field.storage.node.os2loop_shared_profession
     - field.storage.node.os2loop_shared_subject
-    - field.storage.node.os2loop_shared_tags
     - search_api.server.os2loop_search_db_server
-  module:
-    - comment
-    - node
-    - paragraphs
-    - taxonomy
-    - search_api
 id: os2loop_search_db_index
 name: Index
 description: ''
@@ -55,6 +55,16 @@ field_settings:
     dependencies:
       module:
         - node
+  name:
+    label: 'Tags » Taxonomy term » Name'
+    datasource_id: 'entity:node'
+    property_path: 'os2loop_shared_tags:entity:name'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.os2loop_shared_tags
+      module:
+        - taxonomy
   os2loop_documents_dc_content:
     label: Content
     datasource_id: 'entity:node'
@@ -238,6 +248,7 @@ datasource_settings:
 processor_settings:
   add_url: {  }
   aggregated_field: {  }
+  entity_status: {  }
   highlight:
     highlight: always
     highlight_partial: true
@@ -252,6 +263,7 @@ processor_settings:
     all_fields: true
     fields:
       - comment_type
+      - name
       - os2loop_documents_dc_content
       - os2loop_documents_description
       - os2loop_documents_document_body
@@ -278,12 +290,349 @@ processor_settings:
     weights:
       preprocess_index: -15
       preprocess_query: -15
+  ignorecase:
+    all_fields: true
+    fields:
+      - comment_type
+      - name
+      - os2loop_documents_dc_content
+      - os2loop_documents_description
+      - os2loop_documents_document_body
+      - os2loop_documents_hc_content
+      - os2loop_documents_hc_title
+      - os2loop_documents_step_text
+      - os2loop_documents_tai_text
+      - os2loop_external_descripti
+      - os2loop_post_comment
+      - os2loop_post_content
+      - os2loop_question_answer
+      - os2loop_question_content
+      - os2loop_shared_subject_name
+      - title
+      - type
+    weights:
+      preprocess_index: -20
+      preprocess_query: -20
   language_with_fallback: {  }
   rendered_item: {  }
+  stopwords:
+    all_fields: true
+    fields:
+      - name
+      - os2loop_documents_dc_content
+      - os2loop_documents_description
+      - os2loop_documents_document_body
+      - os2loop_documents_hc_content
+      - os2loop_documents_hc_title
+      - os2loop_documents_step_text
+      - os2loop_documents_tai_text
+      - os2loop_external_descripti
+      - os2loop_post_comment
+      - os2loop_post_content
+      - os2loop_question_answer
+      - os2loop_question_content
+      - os2loop_shared_subject_name
+      - title
+    stopwords:
+      - ad
+      - af
+      - aldrig
+      - alene
+      - alle
+      - allerede
+      - alligevel
+      - alt
+      - altid
+      - anden
+      - andet
+      - andre
+      - at
+      - bag
+      - bare
+      - begge
+      - bl.a.
+      - blandt
+      - blev
+      - blive
+      - bliver
+      - burde
+      - bør
+      - ca.
+      - da
+      - de
+      - dem
+      - den
+      - denne
+      - dens
+      - der
+      - derefter
+      - deres
+      - derfor
+      - derfra
+      - deri
+      - dermed
+      - derpå
+      - derved
+      - det
+      - dette
+      - dig
+      - din
+      - dine
+      - disse
+      - dit
+      - dog
+      - du
+      - efter
+      - egen
+      - ej
+      - eller
+      - ellers
+      - en
+      - end
+      - endnu
+      - ene
+      - eneste
+      - enhver
+      - ens
+      - enten
+      - er
+      - et
+      - f.eks.
+      - far
+      - fem
+      - fik
+      - fire
+      - flere
+      - flest
+      - fleste
+      - for
+      - foran
+      - fordi
+      - forrige
+      - fra
+      - fx
+      - få
+      - får
+      - før
+      - først
+      - gennem
+      - gjorde
+      - gjort
+      - god
+      - godt
+      - gør
+      - gøre
+      - gørende
+      - ham
+      - han
+      - hans
+      - har
+      - havde
+      - have
+      - hej
+      - hel
+      - heller
+      - helt
+      - hen
+      - hende
+      - hendes
+      - henover
+      - her
+      - herefter
+      - heri
+      - hermed
+      - herpå
+      - hos
+      - hun
+      - hvad
+      - hvem
+      - hver
+      - hvilke
+      - hvilken
+      - hvilkes
+      - hvis
+      - hvor
+      - hvordan
+      - hvorefter
+      - hvorfor
+      - hvorfra
+      - hvorhen
+      - hvori
+      - hvorimod
+      - hvornår
+      - hvorved
+      - i
+      - igen
+      - igennem
+      - ikke
+      - imellem
+      - imens
+      - imod
+      - ind
+      - indtil
+      - ingen
+      - intet
+      - ja
+      - jeg
+      - jer
+      - jeres
+      - jo
+      - kan
+      - kom
+      - komme
+      - kommer
+      - kun
+      - kunne
+      - lad
+      - langs
+      - lav
+      - lave
+      - lavet
+      - lidt
+      - lige
+      - ligesom
+      - lille
+      - længere
+      - man
+      - mand
+      - mange
+      - med
+      - meget
+      - mellem
+      - men
+      - mens
+      - mere
+      - mest
+      - mig
+      - min
+      - mindre
+      - mindst
+      - mine
+      - mit
+      - mod
+      - må
+      - måske
+      - ned
+      - nej
+      - nemlig
+      - ni
+      - nogen
+      - nogensinde
+      - noget
+      - nogle
+      - nok
+      - nu
+      - ny
+      - nyt
+      - når
+      - nær
+      - næste
+      - næsten
+      - og
+      - også
+      - okay
+      - om
+      - omkring
+      - op
+      - os
+      - otte
+      - over
+      - overalt
+      - pga.
+      - på
+      - samme
+      - sammen
+      - se
+      - seks
+      - selv
+      - selvom
+      - senere
+      - ser
+      - ses
+      - siden
+      - sig
+      - sige
+      - sin
+      - sine
+      - sit
+      - skal
+      - skulle
+      - som
+      - stadig
+      - stor
+      - store
+      - synes
+      - syntes
+      - syv
+      - så
+      - sådan
+      - således
+      - tag
+      - tage
+      - temmelig
+      - thi
+      - ti
+      - tidligere
+      - til
+      - tilbage
+      - tit
+      - to
+      - tre
+      - ud
+      - uden
+      - udover
+      - under
+      - undtagen
+      - var
+      - ved
+      - vi
+      - via
+      - vil
+      - ville
+      - vor
+      - vore
+      - vores
+      - vær
+      - være
+      - været
+      - øvrigt
+    weights:
+      preprocess_index: -5
+      preprocess_query: -2
+  tokenizer:
+    all_fields: true
+    fields:
+      - name
+      - os2loop_documents_dc_content
+      - os2loop_documents_description
+      - os2loop_documents_document_body
+      - os2loop_documents_hc_content
+      - os2loop_documents_hc_title
+      - os2loop_documents_step_text
+      - os2loop_documents_tai_text
+      - os2loop_external_descripti
+      - os2loop_post_comment
+      - os2loop_post_content
+      - os2loop_question_answer
+      - os2loop_question_content
+      - os2loop_shared_subject_name
+      - title
+    ignored: ._-
+    spaces: ''
+    overlap_cjk: 1
+    minimum_word_size: '3'
+    weights:
+      preprocess_index: -6
+      preprocess_query: -6
   type_boost:
     boosts:
+      'entity:comment':
+        datasource_boost: !!float 1
       'entity:node':
         datasource_boost: !!float 1
+        bundle_boosts:
+          os2loop_documents_collection: !!float 2
+          os2loop_documents_document: !!float 2
     weights:
       preprocess_index: 0
 tracker_settings:
