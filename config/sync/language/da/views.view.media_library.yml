@@ -29,19 +29,6 @@ display:
             label: 'Medie type'
           group_info:
             label: 'Medie type'
-        langcode:
-          expose:
-            label: Sprog
-      sorts:
-        created:
-          expose:
-            label: 'Nyeste først'
-        name:
-          expose:
-            label: 'Navn (A-Z)'
-        name_1:
-          expose:
-            label: 'Navn (Z-A)'
       title: Media
       empty:
         area_text_custom:
