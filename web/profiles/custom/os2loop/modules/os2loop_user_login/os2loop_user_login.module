@@ -15,3 +15,12 @@ use Drupal\Core\Form\FormStateInterface;
 function os2loop_user_login_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   Drupal::service('os2loop_user_login.helper')->alterForm($form, $form_state, $form_id);
 }
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ *
+ * @see \Drupal\os2loop_user_login\Helper\Helper::alterLocalTasks()
+ */
+function os2loop_user_login_menu_local_tasks_alter(&$data, $route_name) {
+  Drupal::service('os2loop_user_login.helper')->alterLocalTasks($data, $route_name);
+}

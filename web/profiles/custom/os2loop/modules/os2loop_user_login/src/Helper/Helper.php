@@ -7,6 +7,7 @@ use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Url;
 use Drupal\os2loop_user_login\Form\SettingsForm;
 use Drupal\os2loop_settings\Settings;
+use Drupal\Core\Extension\ModuleHandlerInterface;
 
 /**
  * Helper for os2loop_user_login.
@@ -22,10 +23,18 @@ class Helper {
   private $config;
 
   /**
+   * The module handler service.
+   *
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface
+   */
+  protected $moduleHandler;
+
+  /**
    * Constructor.
    */
-  public function __construct(Settings $settings) {
+  public function __construct(Settings $settings, ModuleHandlerInterface $module_handler) {
     $this->config = $settings->getConfig(SettingsForm::SETTINGS_NAME);
+    $this->moduleHandler = $module_handler;
   }
 
   /**
@@ -69,6 +78,26 @@ class Helper {
             'class' => ['os2loop-user-login-button'],
           ],
         ];
+      }
+    }
+  }
+
+  /**
+   * Remove "Connected accounts" tab on user profile and edit form.
+   *
+   * @param array $data
+   *   The local tasks data.
+   * @param string $route_name
+   *   The current route.
+   */
+  public function alterLocalTasks(array &$data, string $route_name) {
+    if ($this->moduleHandler->moduleExists('openid_connect')) {
+      if ('entity.user.canonical' === $route_name || 'entity.user.edit_form' === $route_name) {
+        foreach ($data['tabs'][0] as $key => $tab) {
+          if ('entity.user.openid_connect_accounts' === $key) {
+            unset($data['tabs'][0][$key]);
+          }
+        }
       }
     }
   }

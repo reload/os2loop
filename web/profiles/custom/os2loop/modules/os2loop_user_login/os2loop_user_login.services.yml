@@ -3,3 +3,4 @@ services:
     class: Drupal\os2loop_user_login\Helper\Helper
     arguments:
       - '@Drupal\os2loop_settings\Settings'
+      - '@module_handler'
