@@ -91,6 +91,8 @@ class Helper {
    * Implements hook_form_alter().
    *
    * Alter media add/edit forms.
+   * Deny access to field_media_library for users that are only authenticated,
+   * make field required for users with more than authenticated users.
    */
   public function alterForm(array &$form, FormStateInterface $form_state, string $form_id) {
     switch ($form_id) {
@@ -109,7 +111,7 @@ class Helper {
         break;
     }
 
-    // The inline upload form is built later som we use after build.
+    // The inline upload form is built later so we use after build.
     if ('media_library_add_form_upload' === $form_id) {
       $form['#after_build'][] = [$this, 'afterBuild'];
     }
@@ -117,6 +119,9 @@ class Helper {
 
   /**
    * Modify inline upload form.
+   *
+   * Deny access to field_media_library for users that are only authenticated,
+   * make field required for users with more than authenticated users.
    *
    * @param array $form
    *   The form.
