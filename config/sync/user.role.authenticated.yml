@@ -52,6 +52,7 @@ permissions:
   - 'unflag ranking'
   - 'unflag subscribe_node'
   - 'unflag subscribe_term'
+  - 'update media'
   - 'use Rules component rules_remove_subscription'
   - 'use search_api_autocomplete for os2loop_search_db'
   - 'use text format os2loop_post_comment_plain_text'

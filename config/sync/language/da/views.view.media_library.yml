@@ -24,19 +24,6 @@ display:
         media_bulk_form:
           action_title: Handling
       filters:
-        status:
-          expose:
-            label: Publiceringsstatus
-          group_info:
-            label: Udgivet
-            group_items:
-              1:
-                title: Udgivet
-              2:
-                title: 'Ikke udgivet'
-        name:
-          expose:
-            label: Navn
         bundle:
           expose:
             label: 'Medie type'
@@ -80,10 +67,6 @@ display:
   widget:
     display_title: Widget
     display_options:
-      filters:
-        name:
-          expose:
-            label: Navn
       header:
         display_link_grid:
           label: Gitter
@@ -101,10 +84,6 @@ display:
           label: Forfatter
         changed:
           label: Opdateret
-      filters:
-        name:
-          expose:
-            label: Navn
       header:
         display_link_grid:
           label: Gitter

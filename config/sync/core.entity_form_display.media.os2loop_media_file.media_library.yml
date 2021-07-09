@@ -5,7 +5,10 @@ dependencies:
   config:
     - core.entity_form_mode.media.media_library
     - field.field.media.os2loop_media_file.field_media_file
+    - field.field.media.os2loop_media_file.field_media_library
     - media.type.os2loop_media_file
+  module:
+    - file
 id: media.os2loop_media_file.media_library
 targetEntityType: media
 bundle: os2loop_media_file
@@ -17,10 +20,29 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_media_file:
+    type: file_generic
+    weight: 1
+    region: content
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+  field_media_library:
+    type: options_buttons
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
 hidden:
   created: true
-  field_media_file: true
   langcode: true
-  name: true
   status: true
   uid: true
