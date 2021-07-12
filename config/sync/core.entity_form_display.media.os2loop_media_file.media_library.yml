@@ -14,12 +14,6 @@ targetEntityType: media
 bundle: os2loop_media_file
 mode: media_library
 content:
-  path:
-    type: path
-    weight: 30
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   field_media_file:
     type: file_generic
     weight: 1
@@ -40,6 +34,12 @@ content:
     settings:
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 30
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden:
   created: true
