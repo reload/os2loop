@@ -23,6 +23,13 @@ class SettingsForm extends ConfigFormBase {
   public const SETTINGS_NAME = 'os2loop_settings.settings';
 
   /**
+   * Site config setting name.
+   *
+   * @var string
+   */
+  public const SITE_SETTINGS_NAME = 'system.site';
+
+  /**
    * The settings.
    *
    * @var \Drupal\os2loop_settings\Settings
@@ -67,14 +74,41 @@ class SettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+    // Handle select site settings.
+    $siteConfig = $this->settings->getConfig('system.site');
+    $form['site_settings'] = [
+      '#type' => 'fieldset',
+      '#title' => $this->t('Site settings'),
+    ];
+    $form['site_settings']['name'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Site name'),
+      '#default_value' => $siteConfig->get('name'),
+    ];
+    $form['site_settings']['mail'] = [
+      '#type' => 'email',
+      '#title' => $this->t('Email address'),
+      '#default_value' => $siteConfig->get('mail'),
+    ];
+    $form['site_settings']['front_page'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Front page'),
+      '#default_value' => $siteConfig->get('page')['front'] ?? NULL,
+    ];
+
+    // OS2Loop settings.
     $config = $this->settings->getConfig(static::SETTINGS_NAME);
+    $form['content_settings'] = [
+      '#type' => 'fieldset',
+      '#title' => $this->t('Content settings'),
+    ];
 
     $nodeTypes = $this->settings->getContentTypes();
     $options = array_map(static function (NodeType $nodeType) {
       return $nodeType->label();
     }, $nodeTypes);
 
-    $form['node_type'] = [
+    $form['content_settings']['node_type'] = [
       '#type' => 'checkboxes',
       '#title' => $this->t('Content types'),
       '#description' => $this->t('Enable content types'),
@@ -87,7 +121,7 @@ class SettingsForm extends ConfigFormBase {
       return $vocabulary->label();
     }, $vocabularies);
 
-    $form['taxonomy_vocabulary'] = [
+    $form['content_settings']['taxonomy_vocabulary'] = [
       '#type' => 'checkboxes',
       '#title' => $this->t('Taxonomy vocabularies'),
       '#description' => $this->t('Enable taxonomy vocabularies'),
@@ -102,6 +136,13 @@ class SettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+    $siteConfig = $this->settings->getEditableConfig(static::SITE_SETTINGS_NAME);
+    $siteConfig
+      ->set('name', $form_state->getValue('name'))
+      ->set('mail', $form_state->getValue('mail'))
+      ->set('page', ['front' => $form_state->getValue('front_page')] + $siteConfig->get('page'))
+      ->save();
+
     $this->settings->getEditableConfig()
       ->set('node_type', $form_state->getValue('node_type'))
       ->set('taxonomy_vocabulary', $form_state->getValue('taxonomy_vocabulary'))
