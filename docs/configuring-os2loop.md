@@ -11,6 +11,23 @@ OS2Loop modules (and their dependencies) are installed and all have reasonable
 standard configuration. Using the settings outlines below some tweaks to the
 default configuration can be made.
 
+## Important post-installation configuration
+
+Right after installing OS2Loop, go to `/admin/config/os2loop/settings` and
+define the site name, email address and front page url. Also decide on which
+content types and taxonomies should be available for use on the site.
+
+### Taxonomies
+
+In order to make the media library work, go to
+`/admin/structure/taxonomy/manage/os2loop_media_library/overview` and define the
+media categories for the site.
+
+Go to `/admin/structure/taxonomy` and make sure that the Profession and Subject
+taxonomies containt the terms needed for the content. Users can dynamically
+create new terms in the Tag taxonomy, but any default terms can be added if
+needed.
+
 ## Technical details
 
 Behind the scenes the configuration for all modules is stored in (and may be
