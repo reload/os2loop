@@ -25,7 +25,7 @@
     </div>
   {% endif %}
   <div class="icon comment-reply" data-toggle="reply-to-reply" title="{{ 'Reply to reply'|t }}">
-    <a href="{{ path('comment.reply', {entity_type: 'node', entity: node['#node'].id, field_name: comment.field_name.value, pid: comment.id}) }}" aria-label="Reply to reply">
+    <a href="{{ path('comment.reply', {entity_type: 'node', entity: node['#node'].id, field_name: comment.field_name.value, pid: comment.id}) }}" aria-label="{{ 'Reply to reply'|t }}">
       <span class="visually-hidden">{{ 'Reply to reply'|t }}</span>
     </a>
   </div>
