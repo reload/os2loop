@@ -48,7 +48,7 @@ content:
     region: content
   os2loop_user_address:
     type: string
-    weight: 8
+    weight: 7
     region: content
     label: inline
     settings:
@@ -56,7 +56,7 @@ content:
     third_party_settings: {  }
   os2loop_user_areas_of_expertise:
     type: entity_reference_label
-    weight: 6
+    weight: 5
     region: content
     label: inline
     settings:
@@ -64,60 +64,12 @@ content:
     third_party_settings: {  }
   os2loop_user_biography:
     type: basic_string
-    weight: 11
+    weight: 10
     region: content
     label: above
     settings: {  }
     third_party_settings: {  }
   os2loop_user_city:
-    type: string
-    weight: 10
-    region: content
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-  os2loop_user_family_name:
-    type: string
-    weight: 2
-    region: content
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-  os2loop_user_given_name:
-    type: string
-    weight: 1
-    region: content
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-  os2loop_user_job_title:
-    type: string
-    weight: 4
-    region: content
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-  os2loop_user_phone_number:
-    type: string
-    weight: 3
-    region: content
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-  os2loop_user_place:
-    type: string
-    weight: 7
-    region: content
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-  os2loop_user_postal_code:
     type: string
     weight: 9
     region: content
@@ -125,9 +77,66 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
+  os2loop_user_family_name:
+    type: string
+    weight: 1
+    region: content
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  os2loop_user_given_name:
+    type: string
+    weight: 0
+    region: content
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  os2loop_user_image:
+    type: entity_reference_entity_view
+    weight: 11
+    region: content
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+  os2loop_user_job_title:
+    type: string
+    weight: 3
+    region: content
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  os2loop_user_phone_number:
+    type: string
+    weight: 2
+    region: content
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  os2loop_user_place:
+    type: string
+    weight: 6
+    region: content
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  os2loop_user_postal_code:
+    type: string
+    weight: 8
+    region: content
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
   os2loop_user_professions:
     type: entity_reference_label
-    weight: 5
+    weight: 4
     region: content
     label: inline
     settings:
@@ -141,6 +150,5 @@ hidden:
   member_for: true
   os2loop_mail_notifications_intvl: true
   os2loop_user_external_list: true
-  os2loop_user_image: true
   os2loop_user_internal_list: true
   search_api_excerpt: true

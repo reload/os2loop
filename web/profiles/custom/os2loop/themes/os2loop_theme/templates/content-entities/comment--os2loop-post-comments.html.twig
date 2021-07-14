@@ -82,10 +82,7 @@
     indicator here would break the render cache.
     #}
   <div class="d-flex align-items-center">
-    <div class="icon-container">
-      {{ content.flag_os2loop_upvote_upvote_button }}
-      {{ content.links }}
-    </div>
+    {% include '@os2loop_theme/navigation/comment-tasks.html.twig' %}
     {{ title_prefix }}
     {% if label %}
       <h1{{ title_attributes }}>
