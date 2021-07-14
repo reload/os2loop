@@ -15,7 +15,9 @@ label: 'Mail notifications interval'
 description: 'Specify how often you want mail notifications.'
 required: true
 translatable: false
-default_value: {  }
+default_value:
+  -
+    value: 604800
 default_value_callback: ''
 settings: {  }
 field_type: list_integer
