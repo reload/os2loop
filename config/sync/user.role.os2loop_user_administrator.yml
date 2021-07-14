@@ -20,6 +20,7 @@ permissions:
   - 'access content'
   - 'access content overview'
   - 'access contextual links'
+  - 'access entity usage statistics'
   - 'access media browser'
   - 'access media overview'
   - 'access own authorizations'
