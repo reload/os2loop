@@ -8,6 +8,7 @@ use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Url;
 use Drupal\os2loop_user_login\Form\SettingsForm;
 use Drupal\os2loop_settings\Settings;
+use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Messenger\MessengerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -24,7 +25,6 @@ class Helper {
    * @var \Drupal\Core\Config\ImmutableConfig
    */
   private $config;
-
 
   /**
    * The entity type manager.
@@ -55,10 +55,18 @@ class Helper {
   private $requestStack;
 
   /**
+   * The module handler service.
+   *
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface
+   */
+  protected $moduleHandler;
+
+  /**
    * Constructor.
    */
-  public function __construct(Settings $settings, EntityTypeManagerInterface $entity_type_manager, EntityFieldManager $entity_field_manager, MessengerInterface $messenger, RequestStack $requestStack) {
+  public function __construct(Settings $settings, ModuleHandlerInterface $module_handler, EntityTypeManagerInterface $entity_type_manager, EntityFieldManager $entity_field_manager, MessengerInterface $messenger, RequestStack $requestStack) {
     $this->config = $settings->getConfig(SettingsForm::SETTINGS_NAME);
+    $this->moduleHandler = $module_handler;
     $this->entityTypeManager = $entity_type_manager;
     $this->entityFieldManager = $entity_field_manager;
     $this->messenger = $messenger;
@@ -108,6 +116,26 @@ class Helper {
             'class' => ['os2loop-user-login-button'],
           ],
         ];
+      }
+    }
+  }
+
+  /**
+   * Remove "Connected accounts" tab on user profile and edit form.
+   *
+   * @param array $data
+   *   The local tasks data.
+   * @param string $route_name
+   *   The current route.
+   */
+  public function alterLocalTasks(array &$data, string $route_name) {
+    if ($this->moduleHandler->moduleExists('openid_connect')) {
+      if ('entity.user.canonical' === $route_name || 'entity.user.edit_form' === $route_name) {
+        foreach ($data['tabs'][0] as $key => $tab) {
+          if ('entity.user.openid_connect_accounts' === $key) {
+            unset($data['tabs'][0][$key]);
+          }
+        }
       }
     }
   }
