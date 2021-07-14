@@ -1,7 +1,7 @@
 reasons: "Incorrect information\r\nTypo\r\nFoul language"
 to_email: editor@example.com
 template_subject: 'Flagged content ([os2loop_flag_content:reason]) on [site:name]'
-template_body: "The content [node:title] ([node:url]) has been flagged with [os2loop_flag_content:reason] and the message\r\n\r\n[os2loop_flag_content:message]"
+template_body: "The content [node:title] ( [node:url] ) has been flagged with [os2loop_flag_content:reason] and the message\r\n\r\n[os2loop_flag_content:message]"
 node_types:
   os2loop_documents_collection: os2loop_documents_collection
   os2loop_documents_document: os2loop_documents_document
