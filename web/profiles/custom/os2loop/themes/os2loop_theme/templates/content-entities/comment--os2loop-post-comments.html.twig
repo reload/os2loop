@@ -82,7 +82,7 @@
     indicator here would break the render cache.
     #}
   <div class="d-flex align-items-center">
-    {% include '@os2loop_theme/navigation/comment-tasks.html.twig' %}
+    {% include '@os2loop_theme/navigation/comment-tasks.html.twig' with {node: drupal_entity('node', comment.entity_id.target_id)} %}
     {{ title_prefix }}
     {% if label %}
       <h1{{ title_attributes }}>
