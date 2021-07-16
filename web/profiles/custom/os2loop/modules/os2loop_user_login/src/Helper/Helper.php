@@ -4,6 +4,7 @@ namespace Drupal\os2loop_user_login\Helper;
 
 use Drupal\Core\Entity\EntityFieldManager;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Url;
 use Drupal\os2loop_user_login\Form\SettingsForm;
@@ -11,6 +12,7 @@ use Drupal\os2loop_settings\Settings;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Messenger\MessengerInterface;
+use Drupal\user\UserInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
@@ -80,13 +82,11 @@ class Helper {
    */
   public function alterForm(&$form, FormStateInterface $form_state, $form_id) {
     if ('openid_connect_login_form' === $form_id) {
-      $form['#submit'][] = [$this, 'redirect'];
       if (!$this->config->get('show_oidc_login')) {
         $form['#access'] = FALSE;
       }
     }
     elseif ('user_login_form' === $form_id) {
-      $form['#submit'][] = [$this, 'redirect'];
       if (!$this->config->get('show_drupal_login')) {
         $form['#attached']['library'][] = 'os2loop_user_login/user-login-form';
 
@@ -141,42 +141,32 @@ class Helper {
   }
 
   /**
-   * Redirect users after login.
+   * Implements hook_user_login().
    *
-   * @param array $form
-   *   The form.
-   * @param \Drupal\Core\Form\FormStateInterface $form_state
-   *   The state of the form.
+   * Show a message to the user about incomplete profile.
    *
-   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
-   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   * Forcing the user to go to the profile page using a redirect will be too
+   * hard to implement and maintain, så we do this the Drupal way (cf.
+   * user_user_login()).
+   *
+   * @see user_user_login()
    */
-  public function redirect(array $form, FormStateInterface $form_state) {
-    $url = Url::fromRoute('<front>');
-    $parameters = $form_state->getRedirect()->getRouteParameters();
-
-    // Check if there are empty required fields on the user that is
-    // attempting to login.
-    if (isset($parameters['user']) && is_numeric($parameters['user']) && $this->userHasEmptyRequiredFields($parameters['user'])) {
-      $url = Url::fromRoute('entity.user.edit_form', $parameters);
-      $this->messenger->addWarning($this->t('Please fill the required fields and save your profile.'));
-    }
-
-    // Check if a destination is already set.
-    $request = $this->requestStack->getCurrentRequest();
-    if (!$request->request->has('destination')) {
-      $form_state->setRedirectUrl($url);
-    }
-    else {
-      $request->query->set('destination', $request->request->get('destination'));
+  public function userLogin(AccountInterface $account) {
+    if (($account instanceof UserInterface) && $this->userHasEmptyRequiredFields($account)) {
+      $this->messenger->addWarning(
+        $this->t('Your user profile is not complete. Please go to <a href=":user-edit">your profile page</a> and fill in the required fields.',
+          [
+            ':user-edit' => $account->toUrl('edit-form')->toString(),
+          ])
+      );
     }
   }
 
   /**
    * Check if a user has empty required fields.
    *
-   * @param int $uid
-   *   The id of the user to check.
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   The account to check.
    *
    * @return bool
    *   True if the user has empty required fields.
@@ -184,16 +174,14 @@ class Helper {
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  private function userHasEmptyRequiredFields(int $uid): bool {
+  private function userHasEmptyRequiredFields(AccountInterface $account): bool {
     /** @var \Drupal\user\Entity\User $user */
-    $user = $this->entityTypeManager->getStorage('user')->load($uid);
+    $user = $this->entityTypeManager->getStorage('user')->load($account->id());
     $fields = $this->entityFieldManager->getFieldDefinitions('user', 'user');
 
     foreach ($fields as $field_name => $field) {
-      if ($field->isRequired()) {
-        if (empty($user->get($field_name)->getValue())) {
-          return TRUE;
-        }
+      if ($field->isRequired() && empty($user->get($field_name)->getValue())) {
+        return TRUE;
       }
     }
 
