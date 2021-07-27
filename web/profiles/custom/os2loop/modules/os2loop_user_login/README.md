@@ -32,6 +32,25 @@ The following claims are required to make signing in work:
 | `email`  | Drupal user mail                                                                             |
 | `groups` | Mapped to Drupal user roles (see [Groups to roles mapping](#groups-to-roles-mapping) below). |
 
+#### Mapping claims
+
+If needed you can map claims from the IdP response to match the claims required
+for login (cf. above).
+
+For example to use the `sub` claim as `preferred_username` (which will be used
+as Drupal user name) and `upn` as `email`, add this to `settings.local.php`:
+
+```php
+// Map IdP claim `sub` to `preferred_username`
+$config['os2loop_user_login.settings']['claims_mapping']['preferred_username'] = 'sub';
+// Map IdP claim `upn` to `email`
+$config['os2loop_user_login.settings']['claims_mapping']['email'] = 'upn';
+```
+
+**Note**: Mapping claims will never overwrite an existing claim from the IdP,
+i.e. if `email` is aldready set it will no be overwritten (with the value of
+`upn`).
+
 ### Claim to field mapping
 
 As mentioned above, the default configuration maps the `name` claim to the
@@ -51,28 +70,31 @@ Changes and additions to the default field mapping can be made in
 $config['openid_connect.settings']['userinfo_mappings']['os2loop_user_place'] = 'department';
 ```
 
-### Microsoft Azure Active Directory
-
-**Note**: This login method is not limited to Microsoft Azure Active Directory,
-but can be used by other IdPs as well.
+### IdP configuration
 
 Your identity provider must allow `https://«OS2Loop
-url»/openid-connect/windows_aad` as a valid return url.
+url»/openid-connect/generic` as a valid return url.
 
 ```php
 // web/sites/*/settings.local.php
-// Enable Windows Azure AD
-$config['openid_connect.settings.windows_aad']['enabled'] = 'windows_aad';
-$config['openid_connect.settings.windows_aad']['settings']['client_id'] = …; // Get this from your IdP provider
-$config['openid_connect.settings.windows_aad']['settings']['client_secret'] = …; // Get this from your IdP provider
-$config['openid_connect.settings.windows_aad']['settings']['authorization_endpoint_wa'] = …; // Get this from your OpenID Connect Discovery endpoint
-$config['openid_connect.settings.windows_aad']['settings']['token_endpoint_wa'] = …; // Get this from your OpenID Connect Discovery endpoint
+$config['openid_connect.client.generic']['settings']['client_id'] = …; // Get this from your IdP provider
+$config['openid_connect.client.generic']['settings']['client_secret'] = …; // Get this from your IdP provider
+$config['openid_connect.client.generic']['settings']['authorization_endpoint'] = …; // Get this from your OpenID Connect Discovery endpoint
+$config['openid_connect.client.generic']['settings']['token_endpoint'] = …; // Get this from your OpenID Connect Discovery endpoint
+// Optional
+$config['openid_connect.client.generic']['settings']['end_session_endpoint'] = …; // Get this from your OpenID Connect Discovery endpoint
+```
+
+Check your overwrites by running
+
+```sh
+vendor/bin/drush config:get --include-overridden openid_connect.client.generic
 ```
 
 #### Groups to roles mapping
 
 [The default configuration groups to roles
-mapping](../../../../../../config/sync/openid_connect.settings.windows_aad.yml)
+mapping](../../../../../../config/sync/config/sync/openid_connect.settings.yml)
 maps groups (in the `groups` claim which must be a list of names) as follows:
 
 | Drupal role                             | group                      |
@@ -91,8 +113,14 @@ Any changes can be made in `settings.local.php`, e.g
 
 ```php
 // web/sites/*/settings.local.php
-$config['openid_connect.settings.windows_aad']['settings']['group_mapping']['method'] = 1; // Manual mapping
-$config['openid_connect.settings.windows_aad']['settings']['group_mapping']['mappings'] = "os2loop_user_administrator|administrator\r\nos2loop_user_manager|manager";
+$config['openid_connect.settings']['role_mappings']['os2loop_user_administrator'] = ['Loop-Admin'];
+$config['openid_connect.settings']['role_mappings']['os2loop_user_manager'] = ['Loop-Manager'];
+```
+
+Check your overwrites by running
+
+```sh
+vendor/bin/drush config:get --include-overridden openid_connect.settings
 ```
 
 ## SAML

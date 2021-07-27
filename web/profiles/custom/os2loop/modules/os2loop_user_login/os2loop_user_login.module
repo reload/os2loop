@@ -32,3 +32,10 @@ function os2loop_user_login_menu_local_tasks_alter(&$data, $route_name) {
 function os2loop_user_user_login(UserInterface $account) {
   Drupal::service('os2loop_user_login.helper')->userLogin($account);
 }
+
+/**
+ * Implements hook_openid_connect_userinfo_alter().
+ */
+function os2loop_user_login_openid_connect_userinfo_alter(array &$userinfo, array $context) {
+  Drupal::service('os2loop_user_login.helper')->openidConnectUserinfoAlter($userinfo, $context);
+}
