@@ -163,6 +163,27 @@ class Helper {
   }
 
   /**
+   * Implements hook_openid_connect_userinfo_alter()
+   */
+  public function openidConnectUserinfoAlter(array &$userinfo, array $context) {
+    $mapping = $this->config->get('claims_mapping');
+    // Allow mapping for a specific client.
+    if (isset($mapping[$context['plugin_id']])) {
+      $mapping = $mapping[$context['plugin_id']];
+    }
+
+    if (is_array($mapping)) {
+      // Keep only string values (to weed out any client specific mappings).
+      $mapping = array_filter($mapping, 'is_string');
+      foreach ($mapping as $targetClaim => $sourceClaim) {
+        if (empty($userinfo[$targetClaim]) && !empty($userinfo[$sourceClaim])) {
+          $userinfo[$targetClaim] = $userinfo[$sourceClaim];
+        }
+      }
+    }
+  }
+
+  /**
    * Check if a user has empty required fields.
    *
    * @param \Drupal\Core\Session\AccountInterface $account
