@@ -121,6 +121,24 @@ class Helper {
   }
 
   /**
+   * Implements hook_preprocess_block().
+   */
+  public function preprocessBlock(array &$variables) {
+    if ('userlogin' === ($variables['elements']['#id'] ?? NULL)) {
+      $defaultLoginMethod = $this->config->get('default_login_method');
+      switch ($defaultLoginMethod) {
+        case 'oidc':
+          $variables['default_login_form_id'] = 'openid-connect-login-form';
+          break;
+
+        case 'saml':
+          // @todo Handle SAML redirect
+          break;
+      }
+    }
+  }
+
+  /**
    * Remove "Connected accounts" tab on user profile and edit form.
    *
    * @param array $data
