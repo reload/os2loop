@@ -73,14 +73,26 @@
 {% import '@os2loop_theme/macros.html.twig' as macros %}
 
 <article{{ attributes.addClass("os2loop-content os2loop-post") }}>
-  {{ macros.title(label, "post", node, content) }}
+  {{ macros.title(label, "post", node, content, false) }}
   {% include '@os2loop_theme/field/user-info.html.twig' with {user: drupal_entity('user', node.uid.target_id)} %}
-  <div{{ content_attributes.addClass('bg-secondary-loop') }}>
+  <div{{ content_attributes.addClass('mt-3 mb-5 px-3') }}>
     {{ content.os2loop_post_content }}
-    {{ content.os2loop_shared_tags }}
-    {{ content.os2loop_shared_subject }}
-    {{ content.os2loop_shared_profession }}
-    {{ content.os2loop_post_file }}
+    <div class="row mt-3 mt-md-5 py-2 bg-light">
+      <div class="col-12 col-md-auto">
+        {{ content.os2loop_shared_tags }}
+      </div>
+      <div class="col-12 col-md-auto">
+        {{ content.os2loop_shared_subject }}
+      </div>
+      <div class="col-12 col-md-auto">
+        {{ content.os2loop_shared_profession }}
+      </div>
+    </div>
+    <div class="row border-top pt-2 pb-3 bg-light rounded-bottom">
+      <div class="col">
+        {{ content.os2loop_post_file }}
+      </div>
+    </div>
   </div>
   {{ content.os2loop_post_comments }}
 </article>

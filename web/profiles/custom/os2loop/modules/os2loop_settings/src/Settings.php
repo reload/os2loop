@@ -117,7 +117,7 @@ class Settings {
   public function getEnabledTaxonomyVocabularies(): array {
     $vocabularies = $this->getTaxonomyVocabularies();
     return array_filter($vocabularies, function (Vocabulary $vocabulary) {
-      return isset($this->get('taxonomy_vocabulary', NULL)[$vocabulary->id()]);
+      return !empty($this->get('taxonomy_vocabulary', NULL)[$vocabulary->id()]);
     });
   }
 
