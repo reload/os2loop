@@ -243,6 +243,30 @@ display:
           expose:
             label: Title
           plugin_id: search_api
+        changed_1:
+          id: changed_1
+          table: search_api_index_os2loop_search_db_index
+          field: changed
+          relationship: none
+          group_type: group
+          admin_label: 'Changed (fallback)'
+          order: DESC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: search_api
+        title_1:
+          id: title_1
+          table: search_api_index_os2loop_search_db_index
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: 'Title (fallback)'
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: search_api
       title: Search
       header:
         result:
