@@ -119,7 +119,7 @@ class SettingsForm extends ConfigFormBase {
         '#options' => $options,
         '#empty_value' => '',
         '#default_value' => $config->get('default_login_method'),
-        '#description' => $this->t('The default login method to use. If specified, anonymous users will automatically be logged id with this method.'),
+        '#description' => $this->t('The default login method to use. If specified, anonymous users will automatically be logged in with this method.'),
       ];
     }
 
