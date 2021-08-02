@@ -72,8 +72,8 @@ $config['openid_connect.settings']['userinfo_mappings']['os2loop_user_place'] = 
 
 ### IdP configuration
 
-Your identity provider must allow `https://«OS2Loop
-url»/openid-connect/generic` as a valid return url.
+Your identity provider must allow `https://«OS2Loop url»/openid-connect/generic`
+as a valid return url.
 
 ```php
 // web/sites/*/settings.local.php

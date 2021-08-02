@@ -29,7 +29,7 @@ function os2loop_user_login_menu_local_tasks_alter(&$data, $route_name) {
 /**
  * Implements hook_user_login().
  */
-function os2loop_user_user_login(UserInterface $account) {
+function os2loop_user_login_user_login(UserInterface $account) {
   Drupal::service('os2loop_user_login.helper')->userLogin($account);
 }
 
