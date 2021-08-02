@@ -34,6 +34,15 @@ function os2loop_user_user_login(UserInterface $account) {
 }
 
 /**
+ * Implements hook_preprocess_block().
+ *
+ * @see \Drupal\os2loop_user_login\Helper\Helper::preprocessBlock()
+ */
+function os2loop_user_login_preprocess_block(array &$variables) {
+  Drupal::service('os2loop_user_login.helper')->preprocessBlock($variables);
+}
+
+/**
  * Implements hook_openid_connect_userinfo_alter().
  */
 function os2loop_user_login_openid_connect_userinfo_alter(array &$userinfo, array $context) {

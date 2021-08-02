@@ -38,3 +38,15 @@
     {{ content|without('user_links') }}
   {% endblock %}
 </div>
+
+{# Check for default login form and submit if found. #}
+{% if default_login_form_id|default(null) %}
+<script>
+  (function() {
+    var form = document.getElementById({{ default_login_form_id|json_encode|raw }});
+    if (form) {
+      form.submit()
+    }
+  })()
+</script>
+{% endif %}
