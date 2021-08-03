@@ -28,6 +28,12 @@ taxonomies containt the terms needed for the content. Users can dynamically
 create new terms in the Tag taxonomy, but any default terms can be added if
 needed.
 
+### Menu items
+
+By default the main menu contains only one item, the user menu, but any new
+items (and sub-items) can be created on Administration > Structure > Menus
+(`/admin/structure/menu`) by editing “Main navigation” and adding menu items.
+
 ## Technical details
 
 Behind the scenes the configuration for all modules is stored in (and may be
