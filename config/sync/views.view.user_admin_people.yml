@@ -2,6 +2,9 @@ uuid: d46bb44b-0491-4788-b6ab-be4ffe6b99f7
 langcode: en
 status: true
 dependencies:
+  config:
+    - field.storage.user.os2loop_user_family_name
+    - field.storage.user.os2loop_user_given_name
   module:
     - csv_serialization
     - rest
@@ -196,15 +199,15 @@ display:
           hide_alter_empty: true
           plugin_id: user_bulk_form
           entity_type: user
-        name:
-          id: name
-          table: users_field_data
-          field: name
+        os2loop_user_given_name:
+          id: os2loop_user_given_name
+          table: user__os2loop_user_given_name
+          field: os2loop_user_given_name
           relationship: none
           group_type: group
           admin_label: ''
-          label: Username
-          exclude: false
+          label: 'First name'
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -244,10 +247,198 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
           plugin_id: field
+        os2loop_user_family_name:
+          id: os2loop_user_family_name
+          table: user__os2loop_user_family_name
+          field: os2loop_user_family_name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 'Last name'
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        name:
+          id: name
+          table: users_field_data
+          field: name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: Username
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
           type: user_name
+          settings:
+            link_to_entity: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
           entity_type: user
           entity_field: name
+        nothing:
+          id: nothing
+          table: views
+          field: nothing
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: Name
+          exclude: false
+          alter:
+            alter_text: true
+            text: '{{ os2loop_user_given_name }} {{ os2loop_user_family_name }} ({{ name }})'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: false
+          plugin_id: custom
         status:
           id: status
           table: users_field_data
@@ -590,7 +781,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          operator: contains
+          operator: word
           value: ''
           group: 1
           exposed: true
@@ -600,6 +791,8 @@ display:
             description: ''
             use_operator: false
             operator: combine_op
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: user
             required: false
             remember: false
@@ -607,9 +800,16 @@ display:
             remember_roles:
               authenticated: authenticated
               anonymous: '0'
-              administrator: '0'
-            operator_limit_selection: false
-            operator_list: {  }
+              os2loop_user_administrator: '0'
+              os2loop_user_documentation_coordinator: '0'
+              os2loop_user_manager: '0'
+              os2loop_user_read_only: '0'
+              os2loop_user_external_sources_editor: '0'
+              os2loop_user_document_author: '0'
+              os2loop_user_document_collection_editor: '0'
+              os2loop_user_post_author: '0'
+              os2loop_user_user_administrator: '0'
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -623,6 +823,8 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           fields:
+            os2loop_user_given_name: os2loop_user_given_name
+            os2loop_user_family_name: os2loop_user_family_name
             name: name
             mail: mail
           plugin_id: combine
@@ -906,7 +1108,9 @@ display:
         - url.query_args
         - user.permissions
       max-age: 0
-      tags: {  }
+      tags:
+        - 'config:field.storage.user.os2loop_user_family_name'
+        - 'config:field.storage.user.os2loop_user_given_name'
   data_export_1:
     display_plugin: data_export
     id: data_export_1
@@ -994,6 +1198,132 @@ display:
           type: user_name
           entity_type: user
           entity_field: name
+        os2loop_user_given_name:
+          id: os2loop_user_given_name
+          table: user__os2loop_user_given_name
+          field: os2loop_user_given_name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 'First name'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        os2loop_user_family_name:
+          id: os2loop_user_family_name
+          table: user__os2loop_user_family_name
+          field: os2loop_user_family_name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 'Last name'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
         status:
           id: status
           table: users_field_data
@@ -1290,7 +1620,9 @@ display:
         - request_format
         - url
         - user.permissions
-      tags: {  }
+      tags:
+        - 'config:field.storage.user.os2loop_user_family_name'
+        - 'config:field.storage.user.os2loop_user_given_name'
   data_export_2:
     display_plugin: data_export
     id: data_export_2
@@ -1390,6 +1722,132 @@ display:
           type: user_name
           entity_type: user
           entity_field: name
+        os2loop_user_given_name:
+          id: os2loop_user_given_name
+          table: user__os2loop_user_given_name
+          field: os2loop_user_given_name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 'First name'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        os2loop_user_family_name:
+          id: os2loop_user_family_name
+          table: user__os2loop_user_family_name
+          field: os2loop_user_family_name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 'Last name'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
         status:
           id: status
           table: users_field_data
@@ -1686,7 +2144,9 @@ display:
         - request_format
         - url
         - user.permissions
-      tags: {  }
+      tags:
+        - 'config:field.storage.user.os2loop_user_family_name'
+        - 'config:field.storage.user.os2loop_user_given_name'
   page_1:
     display_plugin: page
     id: page_1
@@ -1722,4 +2182,6 @@ display:
         - url.query_args
         - user.permissions
       max-age: 0
-      tags: {  }
+      tags:
+        - 'config:field.storage.user.os2loop_user_family_name'
+        - 'config:field.storage.user.os2loop_user_given_name'
