@@ -117,6 +117,20 @@ class NodeHelper {
   }
 
   /**
+   * Implements hook_theme().
+   */
+  public function theme($existing, $type, $theme, $path) {
+    return [
+      'os2loop_documents_pdf_header' => [
+        'variables' => ['node' => NULL],
+      ],
+      'os2loop_documents_pdf_footer' => [
+        'variables' => ['node' => NULL],
+      ],
+    ];
+  }
+
+  /**
    * Invalidate cache for a collection.
    *
    * Display of collection documents depends on the collection so we need to

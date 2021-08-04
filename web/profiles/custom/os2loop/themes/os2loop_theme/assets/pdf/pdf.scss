@@ -1,5 +1,17 @@
+html,
+body,
+.page {
+  margin: 0;
+  padding: 0;
+}
+
 .os2loop-documents--collection-documents {
   .os2loop-documents--document-content {
     // Document rendered as part of collection.
   }
+}
+
+#document-tabs,
+.icon-container {
+  display: none;
 }

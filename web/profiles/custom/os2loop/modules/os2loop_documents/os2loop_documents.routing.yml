@@ -1,0 +1,12 @@
+os2loop_documents.pdf_region:
+  path: '/os2loop_documents/pdf/node/{node}/region/{region}'
+  defaults:
+    _controller: '\Drupal\os2loop_documents\Controller\EntityPrintController::region'
+    _title: 'Entity Print region content'
+  options:
+    parameters:
+      node:
+        type: entity:node
+  requirements:
+    # The header and footer content will be loaded by whhtmltopdf without any user context.
+    _access: 'TRUE'
