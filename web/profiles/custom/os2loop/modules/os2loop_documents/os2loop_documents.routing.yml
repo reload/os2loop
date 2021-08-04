@@ -1,3 +1,11 @@
+os2loop_documents.settings:
+  path: '/admin/config/os2loop/os2loop_documents/settings'
+  defaults:
+    _form: '\Drupal\os2loop_documents\Form\SettingsForm'
+    _title: 'os2loop_documents'
+  requirements:
+    _permission: 'administer os2loop settings'
+
 os2loop_documents.pdf_region:
   path: '/os2loop_documents/pdf/node/{node}/region/{region}'
   defaults:

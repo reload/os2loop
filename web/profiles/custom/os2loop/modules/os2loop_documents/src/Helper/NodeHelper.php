@@ -122,10 +122,16 @@ class NodeHelper {
   public function theme($existing, $type, $theme, $path) {
     return [
       'os2loop_documents_pdf_header' => [
-        'variables' => ['node' => NULL],
+        'variables' => [
+          'node' => NULL,
+          'image' => NULL,
+        ],
       ],
       'os2loop_documents_pdf_footer' => [
-        'variables' => ['node' => NULL],
+        'variables' => [
+          'node' => NULL,
+          'image' => NULL,
+        ],
       ],
     ];
   }

@@ -46,8 +46,8 @@
   <body onload="getPdfInfo()">
     <div class="container">
        <div class="image">
-         {% if image|default(false) %}
-           <img style="height: 2cm" src="<?php echo file_create_url($image->uri); ?>"/>
+         {% if image.url|default(false) %}
+           <img style="height: 2cm" src="{{ image.url }}"/>
          {% endif %}
        </div>
        <div class="page-numbers">

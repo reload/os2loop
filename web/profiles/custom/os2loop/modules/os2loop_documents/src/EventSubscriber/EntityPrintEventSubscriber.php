@@ -19,15 +19,15 @@ class EntityPrintEventSubscriber implements EventSubscriberInterface {
    * Event callback.
    */
   public function preSend(PreSendPrintEvent $event) {
-    $entities = $event->getEntities();
-    $entity = reset($entities);
-    if ($entity instanceof NodeInterface
-      && in_array($entity->bundle(), [
-        NodeHelper::CONTENT_TYPE_COLLECTION,
-        NodeHelper::CONTENT_TYPE_DOCUMENT,
-      ], TRUE)) {
-      $engine = $event->getPrintEngine();
-      if ($engine instanceof PhpWkhtmlToPdf) {
+    $engine = $event->getPrintEngine();
+    if ($engine instanceof PhpWkhtmlToPdf) {
+      $entities = $event->getEntities();
+      $entity = reset($entities);
+      if ($entity instanceof NodeInterface
+        && in_array($entity->bundle(), [
+          NodeHelper::CONTENT_TYPE_COLLECTION,
+          NodeHelper::CONTENT_TYPE_DOCUMENT,
+        ], TRUE)) {
         $url = Url::fromRoute('os2loop_documents.pdf_region', [
           'node' => $entity->id(),
           'region' => 'header',
@@ -43,14 +43,15 @@ class EntityPrintEventSubscriber implements EventSubscriberInterface {
           'absolute' => TRUE,
         ])->toString(FALSE);
         $engine->setFooterText($url, 'html');
-
-        $engine->getPrintObject()->setOptions([
-          'margin-top' => 30,
-          'margin-right' => 20,
-          'margin-bottom' => 30,
-          'margin-left' => 20,
-        ]);
       }
+
+      $engine->getPrintObject()->setOptions([
+        // Match header height (cf. template).
+        'margin-top' => 30,
+        'margin-right' => 20,
+        'margin-bottom' => 20,
+        'margin-left' => 20,
+      ]);
     }
   }
 
