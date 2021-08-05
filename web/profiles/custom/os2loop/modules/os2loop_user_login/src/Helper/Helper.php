@@ -202,6 +202,15 @@ class Helper {
   }
 
   /**
+   * Implements hook_menu_links_discovered_alter().
+   */
+  public function menuLinksDiscoveredAlter(&$links) {
+    if (!empty($this->config->get('hide_logout_menu_item'))) {
+      unset($links['os2loop_user.divider_logout'], $links['os2loop_user.logout']);
+    }
+  }
+
+  /**
    * Check if a user has empty required fields.
    *
    * @param \Drupal\Core\Session\AccountInterface $account
