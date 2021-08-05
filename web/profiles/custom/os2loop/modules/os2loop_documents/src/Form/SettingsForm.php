@@ -3,6 +3,7 @@
 namespace Drupal\os2loop_documents\Form;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\DependencyInjection\DependencySerializationTrait;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -13,13 +14,15 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Settings form.
  */
 class SettingsForm extends ConfigFormBase {
+  // @see https://drupal.stackexchange.com/a/238329
+  use DependencySerializationTrait;
 
   /**
    * Config settings.
    *
    * @var string
    */
-  const SETTINGS_NAME = 'os2loop_content.settings';
+  const SETTINGS_NAME = 'os2loop_documents.settings';
 
   /**
    * The settings.
