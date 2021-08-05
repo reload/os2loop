@@ -48,3 +48,10 @@ function os2loop_user_login_preprocess_block(array &$variables) {
 function os2loop_user_login_openid_connect_userinfo_alter(array &$userinfo, array $context) {
   Drupal::service('os2loop_user_login.helper')->openidConnectUserinfoAlter($userinfo, $context);
 }
+
+/**
+ * Implements hook_menu_links_discovered_alter().
+ */
+function os2loop_user_login_menu_links_discovered_alter(&$links) {
+  Drupal::service('os2loop_user_login.helper')->menuLinksDiscoveredAlter($links);
+}
