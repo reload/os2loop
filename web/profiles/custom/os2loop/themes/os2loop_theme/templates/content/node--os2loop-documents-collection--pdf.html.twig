@@ -78,7 +78,7 @@
       {% for item in items %}
         {% set document = item.document %}
         <li>
-          <a href="{{ path('entity.node.canonical', {node: document.id, collection: collection.id}) }}" class="document-title">{{ document.title.value }}</a>
+          <a href="#node/{{ document.id }}" class="document-title">{{ document.title.value }}</a>
           {{ item.children ? _self.table_of_contents(item.children, collection) }}
         </li>
       {% endfor %}
@@ -91,7 +91,7 @@
     {% for item in items %}
       {% set document = item.document %}
       {% set tag_name = 'h' ~ level %}
-      <article class="os2loop-documents--collection-documents--document">
+      <article class="os2loop-documents--collection-documents--document" id="node/{{ document.id }}">
         <{{ tag_name }}>{{ document.title.value }}</{{ tag_name }}>
 
         {# Render document content (cf. https://www.drupal.org/docs/contributed-modules/twig-tweak-2x/cheat-sheet#s-drupal-entity). #}
