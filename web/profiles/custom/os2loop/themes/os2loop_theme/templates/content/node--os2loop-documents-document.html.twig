@@ -116,9 +116,9 @@
       {{ macros.title("About document"|t, "document", node, content, false) }}
       <div>{{ content.os2loop_documents_document_autho }}</div>
       <div{{ content_attributes.addClass("bg-secondary-loop") }}>
-        <div>{{ content.os2loop_shared_tags }}</div>
         <div>{{ content.os2loop_shared_subject }}</div>
         <div>{{ content.os2loop_shared_profession }}</div>
+        <div>{{ content.os2loop_shared_tags }}</div>
       </div>
     </div>
     {% if os2loop_documents_collection|default(false) %}
