@@ -7,7 +7,8 @@ label: 'User administrator'
 weight: 10
 is_admin: null
 permissions:
+  - 'access media overview'
   - 'access toolbar'
   - 'administer users'
-  - 'view all files in media browser'
+  - 'update any media'
   - 'view the administration theme'

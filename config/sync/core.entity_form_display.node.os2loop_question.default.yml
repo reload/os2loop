@@ -106,6 +106,12 @@ content:
     type: autocomplete_deluxe
     region: content
     weight: 8
+  path:
+    type: path
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   status:
     type: boolean_checkbox
     settings:

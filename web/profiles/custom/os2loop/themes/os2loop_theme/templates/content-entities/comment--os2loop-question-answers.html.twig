@@ -82,10 +82,7 @@
     indicator here would break the render cache.
   #}
   <div class="d-flex align-items-center">
-    <div class="icon-container">
-      {{ content.flag_os2loop_upvote_upvote_button }}
-      {{ content.links }}
-    </div>
+    {% include '@os2loop_theme/navigation/comment-tasks.html.twig' with {node: drupal_entity('node', comment.entity_id.target_id)} %}
     {{ title_prefix }}
     {% if label %}
       <h1{{ title_attributes }}>
@@ -93,14 +90,13 @@
       </h1>
     {% endif %}
     {{ title_suffix }}
-    {% include '@os2loop_theme/field/user-info.html.twig' with {user: drupal_entity('user', comment.uid.target_id)} %}
+    {% include '@os2loop_theme/field/user-info.html.twig' with {user: drupal_entity('user', comment.uid.target_id), date: created} %}
   </div>
   {#
     Indicate the semantic relationship between parent and child comments for
     accessibility. The list is difficult to navigate in a screen reader
     without this information.
   #}
-
   <div{{ content_attributes.addClass(background_class) }}>
     <div class="row">
       <div class="col-12 pb-3">

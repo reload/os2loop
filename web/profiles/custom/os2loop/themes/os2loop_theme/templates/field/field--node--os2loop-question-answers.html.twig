@@ -30,12 +30,12 @@
 <section{{ attributes }}>
   {% if comments and not label_hidden %}
     {{ title_prefix }}
-    <h2{{ title_attributes }}>{{ label }}</h2>
+    <h3{{ title_attributes }}>{{ label }}</h3>
     {{ title_suffix }}
   {% endif %}
   {{ comments }}
   {% if comment_form %}
-    <h2{{ content_attributes }}>{{ 'Add new comment'|t }}</h2>
+    <h3{{ content_attributes }}>{{ 'Add new comment'|t }}</h3>
     {% include '@os2loop_theme/field/user-info.html.twig' with {user: drupal_entity('user', user.account.id)} %}
     <div class="bg-secondary-loop comment-write-reply">
       {{ comment_form }}

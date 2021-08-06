@@ -12,6 +12,8 @@ use Drupal\search_api\Query\Condition;
 use Drupal\search_api\Query\ConditionGroupInterface;
 use Drupal\search_api\Query\QueryInterface;
 use Drupal\search_api_autocomplete\Suggestion\Suggestion;
+use Drupal\Core\Form\FormStateInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Search Api Autocomplete Helper.
@@ -36,11 +38,19 @@ class Helper {
   private $settings;
 
   /**
+   * The request stack.
+   *
+   * @var \Symfony\Component\HttpFoundation\RequestStack
+   */
+  private $requestStack;
+
+  /**
    * Constructor.
    */
-  public function __construct(Settings $settings) {
+  public function __construct(Settings $settings, RequestStack $requestStack) {
     $this->settings = $settings;
     $this->config = $settings->getConfig(SettingsForm::SETTINGS_NAME);
+    $this->requestStack = $requestStack;
   }
 
   /**
@@ -68,8 +78,9 @@ class Helper {
         'os2loop_tag' => 'os2loop_search_db_tags',
         'os2loop_profession' => 'os2loop_search_db_profession',
       ];
+
       foreach ($vocabularyBlocks as $vocabularyName => $blockId) {
-        if ($blockId === $block->id() && !isset($enabledTaxonomyVocabularies[$vocabularyName])) {
+        if ($blockId === $block->id() && !in_array($vocabularyName, $enabledTaxonomyVocabularies)) {
           return AccessResult::forbidden();
         }
       }
@@ -171,6 +182,31 @@ class Helper {
           'os2loop_external',
         ],
       ];
+  }
+
+  /**
+   * Implements hook_form_alter().
+   */
+  public function formAlter(array &$form, FormStateInterface $form_state, $form_id) {
+    if ('views_exposed_form' === $form_id
+      && 'views-exposed-form-os2loop-search-db-page-search' === ($form['#id'] ?? NULL)) {
+      // Add facet filter query to form to keep the filters when submitting
+      // search form.
+      $request = $this->requestStack->getCurrentRequest();
+      $facetFilterName = 'f';
+      $facetFilters = $request->get($facetFilterName);
+      if (!empty($facetFilters) && is_array($facetFilters)) {
+        $form[$facetFilterName] = [
+          '#tree' => TRUE,
+        ];
+        foreach ($facetFilters as $key => $value) {
+          $form[$facetFilterName][$key] = [
+            '#type' => 'hidden',
+            '#value' => $value,
+          ];
+        }
+      }
+    }
   }
 
 }
