@@ -168,7 +168,7 @@ class SubscriptionFlagSubscriber implements EventSubscriberInterface {
     $messages = $this->getReferencedMessages($entity_id);
     foreach ($messages as $id => $message) {
       // Check if the flag has already been set.
-      if (0 < $this->currentUser->id()) {
+      if ($this->currentUser->isAuthenticated()) {
         $entity_message_read = $this->flagService->getFlagging($flag, $message, $this->currentUser);
         if (!$entity_message_read && !in_array($id, $active_messages)) {
           $this->flagService->flag($flag, $message, $this->currentUser);
