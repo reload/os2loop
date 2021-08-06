@@ -10,13 +10,17 @@ module:
   config_translation: 0
   convert_media_tags_to_markup: 0
   csv_serialization: 0
+  ctools: 0
   date_popup: 0
   datetime: 0
   dblog: 0
   dynamic_page_cache: 0
   editor: 0
   entity_print: 0
+  entity_reference_integrity: 0
+  entity_reference_integrity_enforce: 0
   entity_reference_revisions: 0
+  entity_usage: 0
   facets: 0
   field: 0
   field_group: 0
@@ -35,7 +39,6 @@ module:
   message: 0
   node: 0
   openid_connect: 0
-  openid_connect_windows_aad: 0
   options: 0
   os2loop_analytics: 0
   os2loop_cookie_information: 0
@@ -64,6 +67,7 @@ module:
   os2loop_user: 0
   os2loop_user_login: 0
   page_cache: 0
+  path: 0
   path_alias: 0
   rest: 0
   samlauth: 0
@@ -90,6 +94,7 @@ module:
   views_flag_refresh: 0
   viewsreference: 0
   xls_serialization: 0
+  pathauto: 1
   externalauth: 10
   paragraphs: 11
   better_formats: 100

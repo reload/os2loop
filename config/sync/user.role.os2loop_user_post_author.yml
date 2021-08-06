@@ -8,6 +8,7 @@ weight: 9
 is_admin: null
 permissions:
   - 'access content overview'
+  - 'access media overview'
   - 'access toolbar'
   - 'create os2loop_post content'
   - 'delete any os2loop_post content'
@@ -18,7 +19,7 @@ permissions:
   - 'flag os2loop_upvote_correct_answer'
   - 'revert os2loop_post revisions'
   - 'unflag os2loop_upvote_correct_answer'
+  - 'update any media'
   - 'use text format os2loop_post'
-  - 'view all files in media browser'
   - 'view os2loop_post revisions'
   - 'view the administration theme'

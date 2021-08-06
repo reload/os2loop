@@ -108,6 +108,28 @@ class SettingsForm extends ConfigFormBase {
       ),
     ];
 
+    $options = [];
+    $options['oidc'] = $this->t('OpenID Connect');
+    // @todo handle SAML
+    // $options['saml'] = $this->t('SAML');
+    if (!empty($options)) {
+      $form['default_login_method'] = [
+        '#type' => 'select',
+        '#title' => $this->t('Default login method'),
+        '#options' => $options,
+        '#empty_value' => '',
+        '#default_value' => $config->get('default_login_method'),
+        '#description' => $this->t('The default login method to use. If specified, anonymous users will automatically be logged in with this method.'),
+      ];
+    }
+
+    $form['hide_logout_menu_item'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Hide logout menu item'),
+      '#default_value' => $config->get('hide_logout_menu_item'),
+      '#description' => $this->t('If checked, the "Log out" item in the user menu will be hidden.'),
+    ];
+
     return parent::buildForm($form, $form_state);
   }
 
@@ -119,6 +141,8 @@ class SettingsForm extends ConfigFormBase {
       ->set('show_drupal_login', $form_state->getValue('show_drupal_login'))
       ->set('show_oidc_login', $form_state->getValue('show_oidc_login'))
       ->set('show_saml_login', $form_state->getValue('show_saml_login'))
+      ->set('default_login_method', $form_state->getValue('default_login_method'))
+      ->set('hide_logout_menu_item', $form_state->getValue('hide_logout_menu_item'))
       ->save();
 
     drupal_flush_all_caches();

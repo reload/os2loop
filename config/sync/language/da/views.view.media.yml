@@ -1,7 +1,8 @@
 label: Media
+description: 'Find og håndtér mediefiler.'
 display:
   default:
-    display_title: Master
+    display_title: Standard
     display_options:
       exposed_form:
         options:
@@ -50,23 +51,10 @@ display:
         bundle:
           expose:
             label: Type
-        status:
-          expose:
-            label: Sandt
-          group_info:
-            label: Publiceringsstatus
-            group_items:
-              1:
-                title: Udgivet
-              2:
-                title: 'Ikke udgivet'
-        langcode:
-          expose:
-            label: Sprog
       title: Media
       empty:
         area_text_custom:
-          content: 'Ingen tilgængelige media'
+          content: 'Ingen tilgængelige media.'
   media_page_list:
     display_title: Media
     display_options:

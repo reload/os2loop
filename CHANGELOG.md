@@ -19,3 +19,5 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 - [LOOP-874](https://jira.itkdev.dk/browse/LOOP-874): Fine-grained
   administrator permissions.
 - [LOOP-934](https://jira.itkdev.dk/browse/LOOP-934): Several changes to design
+- [LOOP-809](https://jira.itkdev.dk/browse/LOOP-809): Changed search settings, Add tagging to media library, fix bugged file reference in display
+- [LOOP-968](https://jira.itkdev.dk/browse/LOOP-968): Remove Connected accounts tab
