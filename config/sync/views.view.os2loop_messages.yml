@@ -465,6 +465,7 @@ display:
         groups:
           1: AND
           2: OR
+      group_by: true
     cache_metadata:
       max-age: -1
       contexts:
