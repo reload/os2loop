@@ -14,7 +14,7 @@
   <div class="title d-flex justify-content-between my-3">
     <div class="header">
       {{ title_prefix }}
-      <h1{{ title_attributes }} class="{{ class }} h3">
+      <h1{{ title_attributes }} class="{{ class }} h5">
         {% if options.link|default(false) %}
           {% set url = path('entity.node.canonical', {node: node.id}) %}
           <a href="{{ url }}">{{ title }}</a>
