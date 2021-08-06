@@ -122,6 +122,11 @@ $search-highlight-color: $light;
   padding-right: $search-icon-padding;
   padding-top: $spacer/2;
   padding-bottom: $spacer/2;
+
+  .prefix {
+    font-weight: bold;
+    font-style: italic;
+  }
 }
 
 .search-autocomplete {
