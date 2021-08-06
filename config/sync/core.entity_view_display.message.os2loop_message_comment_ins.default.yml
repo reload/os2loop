@@ -13,12 +13,12 @@ mode: default
 content:
   flag_message_read:
     weight: 10
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   os2loop_message_comment_refer:
     weight: 12
-    label: above
+    label: hidden
     settings:
       link: true
     third_party_settings: {  }
@@ -26,7 +26,7 @@ content:
     region: content
   os2loop_message_node_refer:
     weight: 11
-    label: above
+    label: hidden
     settings:
       link: true
     third_party_settings: {  }
@@ -34,9 +34,9 @@ content:
     region: content
   partial_0:
     weight: 0
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
