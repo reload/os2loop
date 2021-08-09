@@ -13057,7 +13057,7 @@
         },
         {
             "name": "os2loop/os2loop_fixtures",
-            "version": "dev-hotfix/d9.2-update-and-contrib",
+            "version": "dev-develop",
             "dist": {
                 "type": "path",
                 "url": "web/profiles/custom/os2loop/modules/os2loop_fixtures",
