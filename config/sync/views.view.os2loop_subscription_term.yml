@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.taxonomy_term.list_display
-    - taxonomy.vocabulary.os2loop_profession
     - taxonomy.vocabulary.os2loop_subject
   module:
     - taxonomy
@@ -207,7 +206,6 @@ display:
           admin_label: ''
           operator: in
           value:
-            os2loop_profession: os2loop_profession
             os2loop_subject: os2loop_subject
           group: 1
           exposed: false
