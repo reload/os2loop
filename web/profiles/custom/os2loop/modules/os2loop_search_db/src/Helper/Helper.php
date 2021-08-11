@@ -14,6 +14,7 @@ use Drupal\search_api\Query\QueryInterface;
 use Drupal\search_api_autocomplete\Suggestion\Suggestion;
 use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Drupal\Core\Url;
 
 /**
  * Search Api Autocomplete Helper.
@@ -193,6 +194,7 @@ class Helper {
       // Add facet filter query to form to keep the filters when submitting
       // search form.
       $request = $this->requestStack->getCurrentRequest();
+      $parameters = $request->query->all();
       $facetFilterName = 'f';
       $facetFilters = $request->get($facetFilterName);
       if (!empty($facetFilters) && is_array($facetFilters)) {
@@ -205,6 +207,57 @@ class Helper {
             '#value' => $value,
           ];
         }
+      }
+
+      // Create links for sorting.
+      $sortLinks = [
+        'sortDefault' => [
+          'label' => $this->t('Best match'),
+          'requestAlters' => [
+            'sort_by' => 'search_api_relevance',
+            'sort_order' => 'DESC',
+          ],
+        ],
+        'sortNewest' => [
+          'label' => $this->t('Newest first'),
+          'requestAlters' => [
+            'sort_by' => 'created',
+            'sort_order' => 'DESC',
+          ],
+        ],
+        'sortOldest' => [
+          'label' => $this->t('Oldest first'),
+          'requestAlters' => [
+            'sort_by' => 'created',
+            'sort_order' => 'ASC',
+          ],
+        ],
+        'sortAlphabetic' => [
+          'label' => $this->t('Alphabetic'),
+          'requestAlters' => [
+            'sort_by' => 'title',
+            'sort_order' => 'ASC',
+          ],
+        ],
+      ];
+
+      $form['#sortLinks'] = [];
+      foreach ($sortLinks as $type => $values) {
+        if (empty($parameters)) {
+          // Set default active.
+          $form['#sortLinks']['sortDefault']['active'] = TRUE;
+        }
+        else {
+          if (empty(array_diff_assoc($values['requestAlters'], $parameters))) {
+            $form['#sortLinks'][$type]['active'] = TRUE;
+          }
+          else {
+            $form['#sortLinks'][$type]['active'] = FALSE;
+          }
+        }
+        $newRequest = array_merge($parameters, $values['requestAlters']);
+        $form['#sortLinks'][$type]['url'] = Url::fromRoute('<current>', $newRequest)->toString();
+        $form['#sortLinks'][$type]['label'] = $values['label'];
       }
     }
   }

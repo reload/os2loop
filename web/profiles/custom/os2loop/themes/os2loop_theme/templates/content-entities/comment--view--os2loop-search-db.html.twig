@@ -12,7 +12,7 @@
         {% endif %}
       </a>
     </h2>
-    <div class="small">{{ 'Posted'|t }}: {{ comment.createdtime|format_date('medium') }}</div>
+    <div class="small">{{ 'Type'|t }}: {{ commented_entity.type.entity.label }} - {{ 'Posted'|t }}: {{ comment.createdtime|format_date('medium') }}</div>
     <div class="search_api_excerpt mb-0">
       {{ elements.search_api_excerpt }}
       <a href="{{ comment_url }}" class="small">{{ 'os2loop_question_answer' == comment.bundle ? 'View answer in context'|t : 'View comment in context'|t }}</a>

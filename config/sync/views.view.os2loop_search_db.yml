@@ -80,13 +80,10 @@ display:
               os2loop_post: search_result
               os2loop_question: search_result
       fields:
-        os2loop_page_content:
+        search_api_rendered_item:
+          id: search_api_rendered_item
           table: search_api_index_os2loop_search_db_index
-          field: os2loop_page_content
-          id: os2loop_page_content
-          entity_type: null
-          entity_field: null
-          plugin_id: search_api_field
+          field: search_api_rendered_item
           relationship: none
           group_type: group
           admin_label: ''
@@ -123,7 +120,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: true
+          element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -131,26 +128,17 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: value
-          type: text_default
-          settings: {  }
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          field_rendering: true
-          fallback_handler: search_api
-          fallback_options:
-            link_to_item: false
-            use_highlighting: false
-            multi_type: separator
-            multi_separator: ', '
+          view_modes:
+            'entity:comment':
+              os2loop_post_comment: search_result
+              os2loop_question_answer: search_result
+            'entity:node':
+              os2loop_documents_collection: search_result
+              os2loop_documents_document: search_result
+              os2loop_external: search_result
+              os2loop_post: search_result
+              os2loop_question: search_result
+          plugin_id: search_api_rendered_item
       filters:
         search_api_fulltext:
           id: search_api_fulltext
@@ -219,18 +207,6 @@ display:
           expose:
             label: Relevance
           plugin_id: search_api
-        changed:
-          id: changed
-          table: search_api_index_os2loop_search_db_index
-          field: changed
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: ASC
-          exposed: true
-          expose:
-            label: Changed
-          plugin_id: search_api
         title:
           id: title
           table: search_api_index_os2loop_search_db_index
@@ -243,29 +219,17 @@ display:
           expose:
             label: Title
           plugin_id: search_api
-        changed_1:
-          id: changed_1
+        created:
+          id: created
           table: search_api_index_os2loop_search_db_index
-          field: changed
+          field: created
           relationship: none
           group_type: group
-          admin_label: 'Changed (fallback)'
-          order: DESC
-          exposed: false
-          expose:
-            label: ''
-          plugin_id: search_api
-        title_1:
-          id: title_1
-          table: search_api_index_os2loop_search_db_index
-          field: title
-          relationship: none
-          group_type: group
-          admin_label: 'Title (fallback)'
+          admin_label: ''
           order: ASC
-          exposed: false
+          exposed: true
           expose:
-            label: ''
+            label: 'Authored on'
           plugin_id: search_api
       title: Search
       header:
