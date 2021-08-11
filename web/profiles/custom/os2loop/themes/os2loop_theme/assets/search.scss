@@ -30,6 +30,10 @@ $search-icon: bg-icon($search-icon-bg, $icon-color);
     display: none;
   }
 
+  .search-sort-btn.active {
+    text-decoration: underline;
+  }
+
   .form-autocomplete {
     @extend .form-control-lg;
     border-radius: 1em;
@@ -122,6 +126,11 @@ $search-highlight-color: $light;
   padding-right: $search-icon-padding;
   padding-top: $spacer/2;
   padding-bottom: $spacer/2;
+
+  .prefix {
+    font-weight: bold;
+    font-style: italic;
+  }
 }
 
 .search-autocomplete {
@@ -218,6 +227,11 @@ input[type="search"]::-webkit-search-results-decoration {
   .facets-checkbox {
     @extend .form-check-input;
   }
+}
+
+// Hide empty facets.
+.facet-empty.facet-hidden {
+  display: none;
 }
 
 .block-facet--checkbox {
