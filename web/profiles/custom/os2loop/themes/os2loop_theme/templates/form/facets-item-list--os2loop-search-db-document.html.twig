@@ -33,7 +33,7 @@
 
 <div class="border-bottom bg-light col mx-4 rounded-bottom facets-widget- {{- facet.widget.type -}}">
   <div class="row">
-    <div class="collapse show col search-filters-collapse" id="searchFilterCollapseFacets">
+    <div class="collapse col search-filters-collapse" id="searchFilterCollapseFacets">
       {% if facet.widget.type %}
         {%- set attributes = attributes.addClass('item-list__' ~ facet.widget.type) %}
       {% endif %}

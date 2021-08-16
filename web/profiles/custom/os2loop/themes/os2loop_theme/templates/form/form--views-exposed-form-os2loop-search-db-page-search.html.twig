@@ -23,19 +23,10 @@
         <h6 class="d-inline align-middle p-0">{{ 'Search filters'|t }}</h6>
       </div>
       <div class="mr-2 border-bottom">
-        <button class="btn btn-sm btn-dark mb-2" type="button" data-toggle="collapse" data-target=".search-filters-collapse" aria-expanded="true"
-                aria-controls="searchFilterCollapseFacets searchFilterCollapseOrder searchFilterCollapseSortBy">
+        <button class="btn btn-sm btn-dark mb-2 collapsed" type="button" data-toggle="collapse" data-target=".search-filters-collapse" aria-expanded="false"
+                aria-controls="searchFilterCollapseFacets searchFilterCollapseOrder">
           <span class="less">{{ 'Hide'|t }}</span><span class="more">{{ 'Show'|t }}</span> {{ 'filters'|t }}
         </button>
-      </div>
-    </div>
-  </div>
-  <div class="col-12">
-    <div class="row justify-content-end">
-      <div class="btn-group my-2 mx-2">
-        {% for sort in element['#sortLinks'] %}
-          <a class="search-sort-btn btn btn-dark {{ sort.active ? 'active' }}" href="{{ sort.url }}">{{ sort.label }}</a>
-        {% endfor %}
       </div>
     </div>
   </div>
