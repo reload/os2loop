@@ -4,8 +4,10 @@ namespace Drupal\os2loop_search_db\Helper;
 
 use Drupal\block\Entity\Block;
 use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\node\Entity\Node;
 use Drupal\os2loop_search_db\Form\SettingsForm;
 use Drupal\os2loop_settings\Settings;
 use Drupal\search_api\Query\Condition;
@@ -46,12 +48,28 @@ class Helper {
   private $requestStack;
 
   /**
+   * The entity type manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
+
+  /**
+   * The node storage.
+   *
+   * @var \Drupal\Core\Entity\EntityStorageInterface
+   */
+  private $commentStorage;
+
+  /**
    * Constructor.
    */
-  public function __construct(Settings $settings, RequestStack $requestStack) {
+  public function __construct(Settings $settings, RequestStack $requestStack, EntityTypeManagerInterface $entityTypeManager) {
     $this->settings = $settings;
     $this->config = $settings->getConfig(SettingsForm::SETTINGS_NAME);
     $this->requestStack = $requestStack;
+    $this->entityTypeManager = $entityTypeManager;
+    $this->commentStorage = $this->entityTypeManager->getStorage('comment');
   }
 
   /**
@@ -124,16 +142,6 @@ class Helper {
             }, $group->getConditions())
           );
         foreach ($types as $type) {
-          switch ($type) {
-            case 'os2loop_post':
-              $group->addCondition('comment_type', 'os2loop_post_comment', '=');
-              break;
-
-            case 'os2loop_question':
-              $group->addCondition('comment_type', 'os2loop_question_answer', '=');
-              break;
-          }
-
           if (isset($contentTypeGroups[$type])) {
             // Include other content types.
             $group->addCondition('type', $contentTypeGroups[$type], 'IN');
@@ -194,7 +202,6 @@ class Helper {
       // Add facet filter query to form to keep the filters when submitting
       // search form.
       $request = $this->requestStack->getCurrentRequest();
-      $parameters = $request->query->all();
       $facetFilterName = 'f';
       $facetFilters = $request->get($facetFilterName);
       if (!empty($facetFilters) && is_array($facetFilters)) {
@@ -208,7 +215,36 @@ class Helper {
           ];
         }
       }
+    }
+  }
 
+  /**
+   * Implements hook_preprocess_node().
+   */
+  public function preprocessNode(&$variables) {
+    if ('search_result' == $variables['view_mode']) {
+      $bundle = $variables['node']->bundle();
+      switch ($bundle) {
+        case 'os2loop_question':
+          $comment = $this->getSearchedComment($variables['node'], 'os2loop_question_answer');
+          $variables['searchedComment'] = $comment;
+          break;
+
+        case 'os2loop_post':
+          $comment = $this->getSearchedComment($variables['node'], 'os2loop_post_comment');
+          $variables['searchedComment'] = $comment;
+          break;
+      }
+    }
+  }
+
+  /**
+   * Implements hook_preprocess().
+   */
+  public function preprocessView(&$variables) {
+    $request = $this->requestStack->getCurrentRequest();
+    $parameters = $request->query->all();
+    if ('os2loop_search_db' == $variables['id']) {
       // Create links for sorting.
       $sortLinks = [
         'sortDefault' => [
@@ -241,25 +277,67 @@ class Helper {
         ],
       ];
 
-      $form['#sortLinks'] = [];
+      $variables['sortLinks'] = [];
       foreach ($sortLinks as $type => $values) {
         if (empty($parameters)) {
           // Set default active.
-          $form['#sortLinks']['sortDefault']['active'] = TRUE;
+          $variables['sortLinks']['sortDefault']['active'] = TRUE;
         }
         else {
           if (empty(array_diff_assoc($values['requestAlters'], $parameters))) {
-            $form['#sortLinks'][$type]['active'] = TRUE;
+            $variables['sortLinks'][$type]['active'] = TRUE;
           }
           else {
-            $form['#sortLinks'][$type]['active'] = FALSE;
+            $variables['sortLinks'][$type]['active'] = FALSE;
           }
         }
         $newRequest = array_merge($parameters, $values['requestAlters']);
-        $form['#sortLinks'][$type]['url'] = Url::fromRoute('<current>', $newRequest)->toString();
-        $form['#sortLinks'][$type]['label'] = $values['label'];
+        $variables['sortLinks'][$type]['url'] = Url::fromRoute('<current>', $newRequest)->toString();
+        $variables['sortLinks'][$type]['label'] = $values['label'];
       }
     }
+  }
+
+  /**
+   * Return the first comment that hits the search string.
+   *
+   * @param \Drupal\node\Entity\Node $node
+   *   A drupal node.
+   * @param string $commentField
+   *   The name of the comment text field on a comment entity.
+   *
+   * @return array|null
+   *   An array containing a comment and text with marked search string.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   */
+  public function getSearchedComment(Node $node, string $commentField) {
+    $request = $this->requestStack->getCurrentRequest();
+    $searchString = $request->query->get('search_api_fulltext');
+
+    $cids = $this->entityTypeManager
+      ->getStorage('comment')
+      ->getQuery('AND')
+      ->condition('entity_id', $node->id())
+      ->condition('entity_type', 'node')
+      ->execute();
+    foreach ($cids as $cid) {
+      $comment = $this->commentStorage->load($cid);
+      /** @var \Drupal\comment\CommentInterface $comment */
+      $commentText = strip_tags($comment->get($commentField)->getValue()[0]['value']);
+      if ($searchString) {
+        $hit = stripos($commentText, $searchString);
+        if (FALSE !== $hit) {
+          return [
+            'comment' => $comment,
+            'comment_text' => str_ireplace($searchString, '<strong>' . $searchString . '</strong>', $commentText),
+          ];
+        }
+      }
+
+    }
+    return NULL;
   }
 
 }
