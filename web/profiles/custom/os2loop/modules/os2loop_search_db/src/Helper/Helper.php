@@ -327,17 +327,35 @@ class Helper {
       /** @var \Drupal\comment\CommentInterface $comment */
       $commentText = strip_tags($comment->get($commentField)->getValue()[0]['value']);
       if ($searchString) {
-        $hit = stripos($commentText, $searchString);
+        $hit = stristr($commentText, $searchString);
         if (FALSE !== $hit) {
+          $hit = $this->truncateText($hit);
           return [
             'comment' => $comment,
-            'comment_text' => str_ireplace($searchString, '<strong>' . $searchString . '</strong>', $commentText),
+            'comment_text' => '...' . str_ireplace($searchString, '<strong>' . $searchString . '</strong>', $hit),
           ];
         }
       }
 
     }
     return NULL;
+  }
+
+  /**
+   * Truncate a text and if so add ellipsis.
+   *
+   * @param string $text
+   *   The text.
+   *
+   * @return string
+   *   The truncated text.
+   */
+  private function truncateText($text): string {
+    $newText = substr($text, 0, 250);
+    if (strlen($newText) < strlen($text)) {
+      $newText = $newText . ' ...';
+    }
+    return $newText;
   }
 
 }
