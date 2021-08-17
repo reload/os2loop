@@ -24,34 +24,28 @@
  * @ingroup themeable
  */
 #}
-{% set list_classes = [
-  'pl-0 pt-3'
-] %}
-{% set list_item_classes = [
-  'form-check form-check-inline'
-] %}
 
 <div class="border-bottom bg-light col mx-4 rounded-bottom facets-widget- {{- facet.widget.type -}}">
   <div class="row">
-    <div class="collapse col search-filters-collapse" id="searchFilterCollapseFacets">
+    <div class="collapse col search-filters-collapse py-3" id="searchFilterCollapseFacets">
       {% if facet.widget.type %}
         {%- set attributes = attributes.addClass('item-list__' ~ facet.widget.type) %}
       {% endif %}
       {% if items or empty %}
-        {%- if title is not empty -%}
-          <h3 class="h5">{{ title }}</h3>
-        {%- endif -%}
+      {%- if title is not empty -%}
+        <h3>{{ title }}</h3>
+      {%- endif -%}
 
-        {%- if items -%}
-          <{{ list_type }}{{ attributes.addClass(list_classes) }}>
-            {%- for item in items -%}
-              <li{{ item.attributes.addClass(list_item_classes) }}>{{ item.value }}</li>
-            {%- endfor -%}
-          </{{ list_type }}>
-        {%- else -%}
-          {{- empty -}}
-        {%- endif -%}
-      {%- endif %}
+      {%- if items -%}
+      <{{ list_type }}{{ attributes.addClass('pl-0 list-unstyled row mb-0') }}>
+      {%- for item in items -%}
+        <li{{ item.attributes.addClass('ml-3 mb-2 mr-4') }}>{{ item.value }}</li>
+      {%- endfor -%}
+    </{{ list_type }}>
+    {%- else -%}
+      {{- empty -}}
+    {%- endif -%}
+    {%- endif %}
 
     {% if facet.widget.type == "dropdown" %}
       <label id="facet_{{ facet.id }}_label">{{ 'Facet'|t }} {{ facet.label }}</label>
