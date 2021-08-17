@@ -12,18 +12,10 @@ bundle: os2loop_message_comment_upd
 mode: default
 content:
   flag_message_read:
-    weight: 10
+    weight: 2
     region: content
     settings: {  }
     third_party_settings: {  }
-  os2loop_message_comment_refer:
-    weight: 11
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
   os2loop_message_node_refer:
     weight: 1
     label: hidden
@@ -41,4 +33,5 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  os2loop_message_comment_refer: true
   search_api_excerpt: true
