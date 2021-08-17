@@ -35,7 +35,7 @@
 
 {% set classes = [
     dom_id ? 'js-view-dom-id-' ~ dom_id,
-    empty ? 'js-view-empty' : 'js-view-not-empty'
+    empty ? 'js-view-empty'
   ] %}
 <div{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
