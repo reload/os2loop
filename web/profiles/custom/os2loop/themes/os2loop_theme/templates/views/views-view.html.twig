@@ -32,8 +32,10 @@
  * @ingroup themeable
  */
 #}
+
 {% set classes = [
     dom_id ? 'js-view-dom-id-' ~ dom_id,
+    empty ? 'js-view-empty' : 'js-view-not-empty'
   ] %}
 <div{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
