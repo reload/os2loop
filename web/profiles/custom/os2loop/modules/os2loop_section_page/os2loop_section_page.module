@@ -34,3 +34,12 @@ function os2loop_section_page_form_alter(&$form, FormStateInterface $form_state,
   // https://www.drupal.org/project/hook_event_dispatcher/issues/3199174
   \Drupal::service('os2loop_section_page.form_helper')->alterForm($form, $form_state, $form_id);
 }
+
+/**
+ * Implements hook_preprocess_node().
+ *
+ * @see \Drupal\os2loop_section_page\Helper\Helper::preprocessNode()
+ */
+function os2loop_section_page_preprocess_node(&$variables) {
+  \Drupal::service('os2loop_section_page.helper')->preprocessNode($variables);
+}
