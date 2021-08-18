@@ -4,3 +4,4 @@ services:
     arguments:
       - '@Drupal\os2loop_settings\Settings'
       - '@request_stack'
+      - '@entity_type.manager'

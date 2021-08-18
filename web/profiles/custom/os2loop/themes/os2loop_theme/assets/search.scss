@@ -30,10 +30,6 @@ $search-icon: bg-icon($search-icon-bg, $icon-color);
     display: none;
   }
 
-  .search-sort-btn.active {
-    text-decoration: underline;
-  }
-
   .form-autocomplete {
     @extend .form-control-lg;
     border-radius: 1em;
@@ -242,4 +238,8 @@ input[type="search"]::-webkit-search-results-decoration {
   .facet-item {
     margin: 0 0.5em;
   }
+}
+
+.search-sort-btn.active {
+  text-decoration: underline;
 }
