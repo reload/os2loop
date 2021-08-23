@@ -7,7 +7,6 @@ dependencies:
     - taxonomy
     - paragraphs
     - search_api
-    - snowball_stemmer
   config:
     - field.storage.node.os2loop_shared_tags
     - field.storage.node.os2loop_documents_dc_content
@@ -313,28 +312,6 @@ processor_settings:
   language_with_fallback: {  }
   rendered_item: {  }
   reverse_entity_references: {  }
-  snowball_stemmer:
-    all_fields: 1
-    fields:
-      - name
-      - os2loop_documents_dc_content
-      - os2loop_documents_description
-      - os2loop_documents_document_body
-      - os2loop_documents_hc_content
-      - os2loop_documents_hc_title
-      - os2loop_documents_step_text
-      - os2loop_documents_tai_text
-      - os2loop_external_descripti
-      - os2loop_post_content
-      - os2loop_question_content
-      - os2loop_shared_subject_name
-      - processed_answer
-      - processed_comment
-      - title
-    exceptions: {  }
-    weights:
-      preprocess_index: 0
-      preprocess_query: 0
   tokenizer:
     all_fields: true
     fields:
