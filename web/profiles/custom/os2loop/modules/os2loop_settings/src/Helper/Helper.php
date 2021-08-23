@@ -99,6 +99,20 @@ class Helper {
   }
 
   /**
+   * Implements hook_preprocess_user().
+   *
+   * Hides disabled taxonomies from a user.
+   */
+  public function preprocessUser(array &$variables) {
+    if (isset($variables['content'])) {
+      $this->hideTaxonomyVocabularies($variables['content']);
+    }
+    if (isset($variables['elements'])) {
+      $this->hideTaxonomyVocabularies($variables['elements']);
+    }
+  }
+
+  /**
    * Check access to a node type.
    *
    * @param string $type
@@ -126,14 +140,22 @@ class Helper {
   private function hideTaxonomyVocabularies(array &$element) {
     // Vocabulary name => Field name.
     $vocabularyFields = [
-      'os2loop_subject' => 'os2loop_shared_subject',
-      'os2loop_tag' => 'os2loop_shared_tags',
-      'os2loop_profession' => 'os2loop_shared_profession',
+      'os2loop_subject' => [
+        'os2loop_shared_subject',
+        'os2loop_user_areas_of_expertise',
+      ],
+      'os2loop_tag' => ['os2loop_shared_tags'],
+      'os2loop_profession' => [
+        'os2loop_user_professions',
+        'os2loop_shared_profession',
+      ],
     ];
 
-    foreach ($vocabularyFields as $vocabularyName => $fieldName) {
-      if (isset($element[$fieldName]) && !$this->settings->isTaxonomyVocabularyEnabled($vocabularyName)) {
-        unset($element[$fieldName]);
+    foreach ($vocabularyFields as $vocabularyName => $fieldNames) {
+      foreach ($fieldNames as $fieldName) {
+        if (isset($element[$fieldName]) && !$this->settings->isTaxonomyVocabularyEnabled($vocabularyName)) {
+          unset($element[$fieldName]);
+        }
       }
     }
   }
