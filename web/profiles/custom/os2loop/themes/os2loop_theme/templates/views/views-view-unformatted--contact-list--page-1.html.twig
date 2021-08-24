@@ -20,9 +20,11 @@
 
 {% for row in rows %}
   {% set row_classes = [
-      'col-md-6 mb-3'
+      'col-lg-6 mb-3 d-flex'
     ] %}
   <div{{ row.attributes.addClass(row_classes) }}>
-    {{- row.content -}}
+    <div class="card bg-light w-100">
+      {{- row.content -}}
+    </div>
   </div>
 {% endfor %}

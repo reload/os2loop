@@ -122,6 +122,11 @@ $search-highlight-color: $light;
   padding-right: $search-icon-padding;
   padding-top: $spacer/2;
   padding-bottom: $spacer/2;
+
+  .prefix {
+    font-weight: bold;
+    font-style: italic;
+  }
 }
 
 .search-autocomplete {
@@ -220,6 +225,11 @@ input[type="search"]::-webkit-search-results-decoration {
   }
 }
 
+// Hide empty facets.
+.facet-empty.facet-hidden {
+  display: none;
+}
+
 .block-facet--checkbox {
   .dropdown-menu {
     min-width: 200px;
@@ -228,4 +238,8 @@ input[type="search"]::-webkit-search-results-decoration {
   .facet-item {
     margin: 0 0.5em;
   }
+}
+
+.search-sort-btn.active {
+  text-decoration: underline;
 }

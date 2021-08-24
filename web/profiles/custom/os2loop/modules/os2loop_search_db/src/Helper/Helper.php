@@ -4,8 +4,10 @@ namespace Drupal\os2loop_search_db\Helper;
 
 use Drupal\block\Entity\Block;
 use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\node\Entity\Node;
 use Drupal\os2loop_search_db\Form\SettingsForm;
 use Drupal\os2loop_settings\Settings;
 use Drupal\search_api\Query\Condition;
@@ -14,6 +16,7 @@ use Drupal\search_api\Query\QueryInterface;
 use Drupal\search_api_autocomplete\Suggestion\Suggestion;
 use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Drupal\Core\Url;
 
 /**
  * Search Api Autocomplete Helper.
@@ -45,12 +48,28 @@ class Helper {
   private $requestStack;
 
   /**
+   * The entity type manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
+
+  /**
+   * The node storage.
+   *
+   * @var \Drupal\Core\Entity\EntityStorageInterface
+   */
+  private $commentStorage;
+
+  /**
    * Constructor.
    */
-  public function __construct(Settings $settings, RequestStack $requestStack) {
+  public function __construct(Settings $settings, RequestStack $requestStack, EntityTypeManagerInterface $entityTypeManager) {
     $this->settings = $settings;
     $this->config = $settings->getConfig(SettingsForm::SETTINGS_NAME);
     $this->requestStack = $requestStack;
+    $this->entityTypeManager = $entityTypeManager;
+    $this->commentStorage = $this->entityTypeManager->getStorage('comment');
   }
 
   /**
@@ -123,16 +142,6 @@ class Helper {
             }, $group->getConditions())
           );
         foreach ($types as $type) {
-          switch ($type) {
-            case 'os2loop_post':
-              $group->addCondition('comment_type', 'os2loop_post_comment', '=');
-              break;
-
-            case 'os2loop_question':
-              $group->addCondition('comment_type', 'os2loop_question_answer', '=');
-              break;
-          }
-
           if (isset($contentTypeGroups[$type])) {
             // Include other content types.
             $group->addCondition('type', $contentTypeGroups[$type], 'IN');
@@ -207,6 +216,146 @@ class Helper {
         }
       }
     }
+  }
+
+  /**
+   * Implements hook_preprocess_node().
+   */
+  public function preprocessNode(&$variables) {
+    if ('search_result' == $variables['view_mode']) {
+      $bundle = $variables['node']->bundle();
+      switch ($bundle) {
+        case 'os2loop_question':
+          $comment = $this->getSearchedComment($variables['node'], 'os2loop_question_answer');
+          $variables['searchedComment'] = $comment;
+          break;
+
+        case 'os2loop_post':
+          $comment = $this->getSearchedComment($variables['node'], 'os2loop_post_comment');
+          $variables['searchedComment'] = $comment;
+          break;
+      }
+    }
+  }
+
+  /**
+   * Implements hook_preprocess().
+   */
+  public function preprocessView(&$variables) {
+    $request = $this->requestStack->getCurrentRequest();
+    $parameters = $request->query->all();
+    if ('os2loop_search_db' == $variables['id']) {
+      // Create links for sorting.
+      $sortLinks = [
+        'sortDefault' => [
+          'label' => $this->t('Best match'),
+          'requestAlters' => [
+            'sort_by' => 'search_api_relevance',
+            'sort_order' => 'DESC',
+          ],
+        ],
+        'sortNewest' => [
+          'label' => $this->t('Newest first'),
+          'requestAlters' => [
+            'sort_by' => 'created',
+            'sort_order' => 'DESC',
+          ],
+        ],
+        'sortOldest' => [
+          'label' => $this->t('Oldest first'),
+          'requestAlters' => [
+            'sort_by' => 'created',
+            'sort_order' => 'ASC',
+          ],
+        ],
+        'sortAlphabetic' => [
+          'label' => $this->t('Alphabetic'),
+          'requestAlters' => [
+            'sort_by' => 'title',
+            'sort_order' => 'ASC',
+          ],
+        ],
+      ];
+
+      $variables['sortLinks'] = [];
+      foreach ($sortLinks as $type => $values) {
+        if (empty($parameters)) {
+          // Set default active.
+          $variables['sortLinks']['sortDefault']['active'] = TRUE;
+        }
+        else {
+          if (empty(array_diff_assoc($values['requestAlters'], $parameters))) {
+            $variables['sortLinks'][$type]['active'] = TRUE;
+          }
+          else {
+            $variables['sortLinks'][$type]['active'] = FALSE;
+          }
+        }
+        $newRequest = array_merge($parameters, $values['requestAlters']);
+        $variables['sortLinks'][$type]['url'] = Url::fromRoute('<current>', $newRequest)->toString();
+        $variables['sortLinks'][$type]['label'] = $values['label'];
+      }
+    }
+  }
+
+  /**
+   * Return the first comment that hits the search string.
+   *
+   * @param \Drupal\node\Entity\Node $node
+   *   A drupal node.
+   * @param string $commentField
+   *   The name of the comment text field on a comment entity.
+   *
+   * @return array|null
+   *   An array containing a comment and text with marked search string.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   */
+  public function getSearchedComment(Node $node, string $commentField) {
+    $request = $this->requestStack->getCurrentRequest();
+    $searchString = $request->query->get('search_api_fulltext');
+
+    $cids = $this->entityTypeManager
+      ->getStorage('comment')
+      ->getQuery('AND')
+      ->condition('entity_id', $node->id())
+      ->condition('entity_type', 'node')
+      ->execute();
+    foreach ($cids as $cid) {
+      $comment = $this->commentStorage->load($cid);
+      /** @var \Drupal\comment\CommentInterface $comment */
+      $commentText = strip_tags($comment->get($commentField)->getValue()[0]['value']);
+      if ($searchString) {
+        $hit = stristr($commentText, $searchString);
+        if (FALSE !== $hit) {
+          $hit = $this->truncateText($hit);
+          return [
+            'comment' => $comment,
+            'comment_text' => '...' . str_ireplace($searchString, '<strong>' . $searchString . '</strong>', $hit),
+          ];
+        }
+      }
+
+    }
+    return NULL;
+  }
+
+  /**
+   * Truncate a text and if so add ellipsis.
+   *
+   * @param string $text
+   *   The text.
+   *
+   * @return string
+   *   The truncated text.
+   */
+  private function truncateText($text): string {
+    $newText = substr($text, 0, 250);
+    if (strlen($newText) < strlen($text)) {
+      $newText = $newText . ' ...';
+    }
+    return $newText;
   }
 
 }

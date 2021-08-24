@@ -12,6 +12,16 @@
 table.loop-documents-table {
   @extend .table, .table-hover, .table-bordered;
 
+  th {
+    background: #ccc;
+    text-align: center;
+  }
+
+  th,
+  td {
+    vertical-align: top;
+  }
+
   p {
     margin-top: 0;
   }
@@ -22,6 +32,7 @@ table.loop-documents-table {
       text-align: center;
     }
   }
+
   img {
     height: auto !important;
     max-width: inherit !important;
