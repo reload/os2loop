@@ -33,14 +33,9 @@
     'media-library-widget'
   ] %}
 <fieldset{{ attributes.addClass(classes) }}>
-  {% set legend_span_classes = [
-      'fieldset-legend',
-      required ? 'js-form-required',
-      required ? 'form-required',
-    ] %}
   {#  Always wrap fieldset legends in a <span> for CSS positioning. #}
   <legend{{ legend.attributes }}>
-    <span{{ legend_span.attributes.addClass(legend_span_classes) }}>{{ legend.title }}</span>
+    {{ 'Attach'|t }}
   </legend>
   <div class="fieldset-wrapper">
     {% if errors %}

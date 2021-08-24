@@ -10,7 +10,6 @@ dependencies:
     - field.storage.user.os2loop_user_phone_number
   module:
     - user
-    - views_autosubmit
 id: contact_list
 label: 'Contact list'
 module: views
@@ -41,7 +40,7 @@ display:
           query_comment: ''
           query_tags: {  }
       exposed_form:
-        type: autosubmit
+        type: basic
         options:
           submit_button: Apply
           reset_button: false
@@ -50,7 +49,6 @@ display:
           expose_sort_order: true
           sort_asc_label: Asc
           sort_desc_label: Desc
-          autosubmit_hide: false
       pager:
         type: mini
         options:

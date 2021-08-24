@@ -72,3 +72,4 @@ debug_log_saml_out: false
 debug_log_saml_in: false
 debug_log_in: false
 debug_phpsaml: false
+langcode: da

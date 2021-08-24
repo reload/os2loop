@@ -63,3 +63,21 @@ function os2loop_search_db_block_access(Block $block, $operation, AccountInterfa
 function os2loop_search_db_form_alter(array &$form, FormStateInterface $form_state, $form_id) {
   return Drupal::service(Helper::class)->formAlter($form, $form_state, $form_id);
 }
+
+/**
+ * Implements hook_preprocess().
+ *
+ * @see \Drupal\os2loop_search_db\Helper\Helper::preprocessNode()
+ */
+function os2loop_search_db_preprocess_node(&$variables) {
+  return Drupal::service(Helper::class)->preprocessNode($variables);
+}
+
+/**
+ * Implements hook_preprocess().
+ *
+ * @see \Drupal\os2loop_search_db\Helper\Helper::preprocessNode()
+ */
+function os2loop_search_db_preprocess_views_view(&$variables) {
+  return Drupal::service(Helper::class)->preprocessView($variables);
+}

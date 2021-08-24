@@ -4,11 +4,9 @@ status: true
 dependencies:
   module:
     - node
-    - comment
     - taxonomy
     - paragraphs
     - search_api
-    - snowball_stemmer
   config:
     - field.storage.node.os2loop_shared_tags
     - field.storage.node.os2loop_documents_dc_content
@@ -20,9 +18,9 @@ dependencies:
     - field.storage.paragraph.os2loop_documents_step_text
     - field.storage.paragraph.os2loop_documents_tai_text
     - field.storage.node.os2loop_external_descripti
-    - field.storage.comment.os2loop_post_comment
+    - field.storage.node.os2loop_post_comments
     - field.storage.node.os2loop_post_content
-    - field.storage.comment.os2loop_question_answer
+    - field.storage.node.os2loop_question_answers
     - field.storage.node.os2loop_question_content
     - field.storage.node.os2loop_shared_profession
     - field.storage.node.os2loop_shared_subject
@@ -40,14 +38,6 @@ field_settings:
     dependencies:
       module:
         - node
-  comment_type:
-    label: 'Comment Type'
-    datasource_id: 'entity:comment'
-    property_path: comment_type
-    type: string
-    dependencies:
-      module:
-        - comment
   created:
     label: 'Authored on'
     datasource_id: 'entity:node'
@@ -145,14 +135,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.os2loop_external_descripti
-  os2loop_post_comment:
-    label: Comment
-    datasource_id: 'entity:comment'
-    property_path: os2loop_post_comment
-    type: text
+  os2loop_post_comments:
+    label: Comments
+    datasource_id: 'entity:node'
+    property_path: os2loop_post_comments
+    type: string
     dependencies:
       config:
-        - field.storage.comment.os2loop_post_comment
+        - field.storage.node.os2loop_post_comments
   os2loop_post_content:
     label: Content
     datasource_id: 'entity:node'
@@ -161,14 +151,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.os2loop_post_content
-  os2loop_question_answer:
-    label: Answer
-    datasource_id: 'entity:comment'
-    property_path: os2loop_question_answer
-    type: text
+  os2loop_question_answers:
+    label: Answers
+    datasource_id: 'entity:node'
+    property_path: os2loop_question_answers
+    type: string
     dependencies:
       config:
-        - field.storage.comment.os2loop_question_answer
+        - field.storage.node.os2loop_question_answers
   os2loop_question_content:
     label: Content
     datasource_id: 'entity:node'
@@ -212,6 +202,16 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.os2loop_shared_tags
+  processed_answer:
+    label: Answer
+    datasource_id: 'entity:node'
+    property_path: 'search_api_reverse_entity_references_comment__entity_id:os2loop_question_answer:processed'
+    type: text
+  processed_comment:
+    label: Comment
+    datasource_id: 'entity:node'
+    property_path: 'search_api_reverse_entity_references_comment__entity_id:os2loop_post_comment:processed'
+    type: text
   title:
     label: Title
     datasource_id: 'entity:node'
@@ -230,13 +230,6 @@ field_settings:
       module:
         - node
 datasource_settings:
-  'entity:comment':
-    bundles:
-      default: true
-      selected: {  }
-    languages:
-      default: true
-      selected: {  }
   'entity:node':
     bundles:
       default: true
@@ -263,7 +256,6 @@ processor_settings:
   html_filter:
     all_fields: true
     fields:
-      - comment_type
       - name
       - os2loop_documents_dc_content
       - os2loop_documents_description
@@ -273,11 +265,13 @@ processor_settings:
       - os2loop_documents_step_text
       - os2loop_documents_tai_text
       - os2loop_external_descripti
-      - os2loop_post_comment
+      - os2loop_post_comments
       - os2loop_post_content
-      - os2loop_question_answer
+      - os2loop_question_answers
       - os2loop_question_content
       - os2loop_shared_subject_name
+      - processed_answer
+      - processed_comment
       - title
       - type
     title: false
@@ -294,7 +288,6 @@ processor_settings:
   ignorecase:
     all_fields: true
     fields:
-      - comment_type
       - name
       - os2loop_documents_dc_content
       - os2loop_documents_description
@@ -304,11 +297,13 @@ processor_settings:
       - os2loop_documents_step_text
       - os2loop_documents_tai_text
       - os2loop_external_descripti
-      - os2loop_post_comment
+      - os2loop_post_comments
       - os2loop_post_content
-      - os2loop_question_answer
+      - os2loop_question_answers
       - os2loop_question_content
       - os2loop_shared_subject_name
+      - processed_answer
+      - processed_comment
       - title
       - type
     weights:
@@ -316,312 +311,7 @@ processor_settings:
       preprocess_query: -20
   language_with_fallback: {  }
   rendered_item: {  }
-  snowball_stemmer:
-    all_fields: 1
-    fields:
-      - name
-      - os2loop_documents_dc_content
-      - os2loop_documents_description
-      - os2loop_documents_document_body
-      - os2loop_documents_hc_content
-      - os2loop_documents_hc_title
-      - os2loop_documents_step_text
-      - os2loop_documents_tai_text
-      - os2loop_external_descripti
-      - os2loop_post_comment
-      - os2loop_post_content
-      - os2loop_question_answer
-      - os2loop_question_content
-      - os2loop_shared_subject_name
-      - title
-    exceptions: {  }
-    weights:
-      preprocess_index: 0
-      preprocess_query: 0
-  stopwords:
-    all_fields: true
-    fields:
-      - name
-      - os2loop_documents_dc_content
-      - os2loop_documents_description
-      - os2loop_documents_document_body
-      - os2loop_documents_hc_content
-      - os2loop_documents_hc_title
-      - os2loop_documents_step_text
-      - os2loop_documents_tai_text
-      - os2loop_external_descripti
-      - os2loop_post_comment
-      - os2loop_post_content
-      - os2loop_question_answer
-      - os2loop_question_content
-      - os2loop_shared_subject_name
-      - title
-    stopwords:
-      - ad
-      - af
-      - aldrig
-      - alene
-      - alle
-      - allerede
-      - alligevel
-      - alt
-      - altid
-      - anden
-      - andet
-      - andre
-      - at
-      - bag
-      - bare
-      - begge
-      - bl.a.
-      - blandt
-      - blev
-      - blive
-      - bliver
-      - burde
-      - bør
-      - ca.
-      - da
-      - de
-      - dem
-      - den
-      - denne
-      - dens
-      - der
-      - derefter
-      - deres
-      - derfor
-      - derfra
-      - deri
-      - dermed
-      - derpå
-      - derved
-      - det
-      - dette
-      - dig
-      - din
-      - dine
-      - disse
-      - dit
-      - dog
-      - du
-      - efter
-      - egen
-      - ej
-      - eller
-      - ellers
-      - en
-      - end
-      - endnu
-      - ene
-      - eneste
-      - enhver
-      - ens
-      - enten
-      - er
-      - et
-      - f.eks.
-      - far
-      - fem
-      - fik
-      - fire
-      - flere
-      - flest
-      - fleste
-      - for
-      - foran
-      - fordi
-      - forrige
-      - fra
-      - fx
-      - få
-      - får
-      - før
-      - først
-      - gennem
-      - gjorde
-      - gjort
-      - god
-      - godt
-      - gør
-      - gøre
-      - gørende
-      - ham
-      - han
-      - hans
-      - har
-      - havde
-      - have
-      - hej
-      - hel
-      - heller
-      - helt
-      - hen
-      - hende
-      - hendes
-      - henover
-      - her
-      - herefter
-      - heri
-      - hermed
-      - herpå
-      - hos
-      - hun
-      - hvad
-      - hvem
-      - hver
-      - hvilke
-      - hvilken
-      - hvilkes
-      - hvis
-      - hvor
-      - hvordan
-      - hvorefter
-      - hvorfor
-      - hvorfra
-      - hvorhen
-      - hvori
-      - hvorimod
-      - hvornår
-      - hvorved
-      - i
-      - igen
-      - igennem
-      - ikke
-      - imellem
-      - imens
-      - imod
-      - ind
-      - indtil
-      - ingen
-      - intet
-      - ja
-      - jeg
-      - jer
-      - jeres
-      - jo
-      - kan
-      - kom
-      - komme
-      - kommer
-      - kun
-      - kunne
-      - lad
-      - langs
-      - lav
-      - lave
-      - lavet
-      - lidt
-      - lige
-      - ligesom
-      - lille
-      - længere
-      - man
-      - mand
-      - mange
-      - med
-      - meget
-      - mellem
-      - men
-      - mens
-      - mere
-      - mest
-      - mig
-      - min
-      - mindre
-      - mindst
-      - mine
-      - mit
-      - mod
-      - må
-      - måske
-      - ned
-      - nej
-      - nemlig
-      - ni
-      - nogen
-      - nogensinde
-      - noget
-      - nogle
-      - nok
-      - nu
-      - ny
-      - nyt
-      - når
-      - nær
-      - næste
-      - næsten
-      - og
-      - også
-      - okay
-      - om
-      - omkring
-      - op
-      - os
-      - otte
-      - over
-      - overalt
-      - pga.
-      - på
-      - samme
-      - sammen
-      - se
-      - seks
-      - selv
-      - selvom
-      - senere
-      - ser
-      - ses
-      - siden
-      - sig
-      - sige
-      - sin
-      - sine
-      - sit
-      - skal
-      - skulle
-      - som
-      - stadig
-      - stor
-      - store
-      - synes
-      - syntes
-      - syv
-      - så
-      - sådan
-      - således
-      - tag
-      - tage
-      - temmelig
-      - thi
-      - ti
-      - tidligere
-      - til
-      - tilbage
-      - tit
-      - to
-      - tre
-      - ud
-      - uden
-      - udover
-      - under
-      - undtagen
-      - var
-      - ved
-      - vi
-      - via
-      - vil
-      - ville
-      - vor
-      - vore
-      - vores
-      - vær
-      - være
-      - været
-      - øvrigt
-    weights:
-      preprocess_index: -5
-      preprocess_query: -2
+  reverse_entity_references: {  }
   tokenizer:
     all_fields: true
     fields:
@@ -634,23 +324,21 @@ processor_settings:
       - os2loop_documents_step_text
       - os2loop_documents_tai_text
       - os2loop_external_descripti
-      - os2loop_post_comment
       - os2loop_post_content
-      - os2loop_question_answer
       - os2loop_question_content
       - os2loop_shared_subject_name
+      - processed_answer
+      - processed_comment
       - title
     ignored: ._-
     spaces: ''
     overlap_cjk: 1
-    minimum_word_size: '3'
+    minimum_word_size: '1'
     weights:
       preprocess_index: -6
       preprocess_query: -6
   type_boost:
     boosts:
-      'entity:comment':
-        datasource_boost: !!float 1
       'entity:node':
         datasource_boost: !!float 1
         bundle_boosts:

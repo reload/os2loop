@@ -45,3 +45,12 @@ function os2loop_settings_form_alter(&$form, FormStateInterface $form_state, $fo
 function os2loop_settings_preprocess_node(array &$variables) {
   return Drupal::service(Helper::class)->preprocessNode($variables);
 }
+
+/**
+ * Implements hook_preprocess_user().
+ *
+ * @see \Drupal\os2loop_settings\Helper\Helper::preprocessUser()
+ */
+function os2loop_settings_preprocess_user(array &$variables) {
+  return Drupal::service(Helper::class)->preprocessUser($variables);
+}
